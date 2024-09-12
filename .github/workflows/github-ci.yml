@@ -3,8 +3,6 @@ name: CI/CD for Angular Project
 # Ausführung bei Pull-Request in dem Main-Branch
 on:
   pull_request:
-    branches:
-      - main
     branches-ignore:
       - 'snyk-upgrade-*'
 
