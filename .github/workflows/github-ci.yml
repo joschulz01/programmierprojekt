@@ -1,0 +1,98 @@
+name: CI/CD for Angular Project
+
+# Ausführung bei Pull-Request in dem Main-Branch
+on:
+  pull_request:
+    branches:
+      - main
+    branches-ignore:
+      - 'snyk-upgrade-*'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  lint:
+    name: Lint der Angular App
+    runs-on: ubuntu-latest
+
+    strategy: &default-strategy
+      matrix:
+        node-version: [22.x]
+
+    steps:
+      # Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Set up Node.js environment
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Install Dependencies
+      - name: Install Dependencies
+        run: npm install -g @angular/cli@18
+
+      # Stage: Linting
+      - name: Install ESLint
+        run: ng add @angular-eslint/schematics --skip-confirmation
+
+      - name: Run Linter
+        run: ng lint
+
+  sca:
+    name: SCA with Snyk
+    runs-on: ubuntu-latest
+
+    strategy: *default-strategy
+
+    steps:
+      # Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        
+      # Set up Node.js environment
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Stage: Install Snyk
+      - name: Install Snyk
+        run: npm install -g snyk
+
+      - name: Authenticate Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      - name: Test configuration
+        run: snyk test
+
+      - name: Code analysis
+        run: snyk code test
+
+      - name: Transfer results
+        run: snyk monitor
+        
+  test:
+    name: Test der Angular App
+    runs-on: ubuntu-latest
+
+    strategy: *default-strategy
+    
+    steps:
+      # Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        
+      # Set up Node.js environment
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      # Stage: Smoke Test
+      - name: Run Headless Test in Chrome
+        run: ng test --watch=false --browsers=ChromeHeadless
