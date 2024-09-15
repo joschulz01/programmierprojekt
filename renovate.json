@@ -2,5 +2,19 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "extends": [
+        "monorepo:angular", "monorepo:angular-cli", "monorepo:angular-eslint"
+      ],
+      "groupName": "angular",
+      "matchUpdateTypes": [
+        "digest",
+        "patch",
+        "minor",
+        "major"
+      ]
+    }
   ]
 }
