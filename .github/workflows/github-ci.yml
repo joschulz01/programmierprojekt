@@ -15,9 +15,9 @@ jobs:
     name: Lint der Angular App
     runs-on: ubuntu-latest
 
-    strategy: &default-strategy
+    strategy:
       matrix:
-        node-version: [22.x]
+        node-version: ${{ variables.NODE_VERSION }}
 
     steps:
       # Checkout Repository
@@ -45,7 +45,9 @@ jobs:
     name: SCA with Snyk
     runs-on: ubuntu-latest
 
-    strategy: *default-strategy
+    strategy:
+      matrix:
+        node-version: ${{ variables.NODE_VERSION }}
 
     steps:
       # Checkout Repository
@@ -78,7 +80,9 @@ jobs:
     name: Test der Angular App
     runs-on: ubuntu-latest
 
-    strategy: *default-strategy
+    strategy:
+      matrix:
+        node-version: ${{ variables.NODE_VERSION }}
     
     steps:
       # Checkout Repository
