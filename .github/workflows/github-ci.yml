@@ -9,6 +9,7 @@ on:
 defaults:
   run:
     shell: bash
+    working-directory: ./programmierprojekt
 
 jobs:
   lint:
@@ -17,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ${{ variables.NODE_VERSION }}
+        node-version: [22.x]
 
     steps:
       # Checkout Repository
@@ -47,7 +48,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ${{ variables.NODE_VERSION }}
+        node-version: [22.x]
 
     steps:
       # Checkout Repository
@@ -82,7 +83,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ${{ variables.NODE_VERSION }}
+        node-version: [22.x]
     
     steps:
       # Checkout Repository
