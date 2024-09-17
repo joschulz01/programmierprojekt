@@ -1,0 +1,54 @@
+<main>
+    <div>
+<h1>Optimierungs-Tool 
+    <div class="help-wrapper">
+      <button class="help-button">?</button> <!-- Hilfebutton oben rechts -->
+    </div>
+  </h1>
+
+  <div class="row">
+    <div class="col-md-12">
+      <textarea id="modelInput" class="form-control" placeholder="Geben Sie hier Ihre Variablen und Zielfunktion ein..."></textarea>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-md-12 text-right">
+      <input type="button" onclick="solve()" value="Solve" class="btn btn-success" title="Lösen">
+      <input type="button" onclick="saveModelToFile('model.txt')" value="Save" class="btn btn-default" title="Speichern">
+      <input type="button" onclick="clearModel()" value="Clear" class="btn btn-danger" title="Bereinigen">
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-md-12" id="msgZone"></div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script>
+  function solve() {
+    // Funktion zum Lösen des Optimierungsproblems
+  }
+
+  function saveModelToFile(filename) {
+    // Funktion zum Speichern der Lösung
+  }
+
+  function clearModel() {
+    $('#modelInput').val('');
+  }
+</script>
+</main>
+
+
+
+<script>
+function solveProblem() {
+  // Hier sollte der Code zum Verarbeiten des Problems eingefügt werden.
+  // Weiterleitung zu einer neuen Seite (zum Beispiel "solution.html").
+  window.location.href = 'solution.html';
+}
+</script>
