@@ -1,0 +1,11 @@
+<div>
+    <h2>GLPK Solver</h2>
+    <textarea (input)="onInputChange($event)" rows="10" cols="30" placeholder="Gib dein Modell hier ein..."></textarea>
+    <br />
+    <button (click)="solve()">Lösen</button>
+  </div>
+  <div *ngIf="result">
+    <h3>Ergebnisse</h3>
+    <pre>{{ result | json }}</pre>
+  </div>
+  
