@@ -148,8 +148,8 @@ jobs:
         run: docker buildx build --platform linux/arm64/v8,linux/amd64 --tag $IMAGE_TAG .
 
       # Stage: Tag the Docker image
-      #- name: Tag the Docker image for ECR
-      #  run: docker tag $IMAGE_TAG:latest ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:0.0.${{ github.event.number }}
+      - name: Tag the Docker image for ECR
+        run: docker tag $IMAGE_TAG:latest ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:0.0.${{ github.event.number }}
 
       # Stage: Push to AWS ECR
       - name: Push Docker image to AWS ECR
