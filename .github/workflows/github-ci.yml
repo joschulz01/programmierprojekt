@@ -129,7 +129,7 @@ jobs:
 
       # Stage: Prerequisits
       - name: Set IMAGE_TAG
-        run: echo "IMAGE_TAG=${{ github.repository }}:0.0.${{ github.event.number }}" >> $GITHUB_ENV
+        run: echo "IMAGE_TAG=${{ github.project }}:0.0.${{ github.event.number }}" >> $GITHUB_ENV
       - name: Authentication on AWS
         uses: aws-actions/configure-aws-credentials@v2
         with:
