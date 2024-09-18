@@ -117,3 +117,40 @@ jobs:
       # Stage: Run Robot Framework tests
       - name: Run Robot Framework tests
         run: robot Test.robot
+
+  build-multiarch-release:
+    name: Erstellung des Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Stage: Prerequisits
+      - name: Set IMAGE_TAG
+        run: echo "IMAGE_TAG=${{ github.repository }}:0.0.${{ github.event.number }}" >> $GITHUB_ENV
+      - name: Authentication on AWS
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+      - name: Authentication on ECR Repo
+        run: aws ecr get-login-password --region eu-central-1 | docker login --username ${{ secrets.DOCKER_ECR_USERNAME }} --password-stdin ${{ secrets.DOCKER_ECR_SECRET }}
+      - name: Wait for Docker Deamon
+        run: until docker info; do sleep 5 && echo "Waiting for docker deamon..." ; done;
+
+      # Stage: Create Docker image
+      - name: Docker build create
+        run: docker buildx create --use
+      - name: Docker build image
+        run: docker buildx build --platform linux/arm64/v8,linux/amd64 --tag $IMAGE_TAG .
+
+      # Stage: Tag the Docker image
+      - name: Tag the Docker image for ECR
+        run: docker tag $IMAGE_TAG:latest ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:0.0.${{ github.event.number }}
+
+      # Stage: Push to AWS ECR
+      - name: Push Docker image to AWS ECR
+        run: docker push ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:0.0.${{ github.event.number }}
