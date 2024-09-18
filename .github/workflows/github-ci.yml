@@ -149,7 +149,7 @@ jobs:
 
       # Stage: Tag the Docker image
       - name: Tag the Docker image for ECR
-        run: docker tag $IMAGE_TAG:latest ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:0.0.${{ github.event.number }}
+        run: docker tag $IMAGE_TAG ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:0.0.${{ github.event.number }}
 
       # Stage: Push to AWS ECR
       - name: Push Docker image to AWS ECR
