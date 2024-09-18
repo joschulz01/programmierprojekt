@@ -1,0 +1,32 @@
+# 1. Stufe: Build-Umgebung
+FROM node:20 AS build
+
+# Setzt das Arbeitsverzeichnis im Container
+WORKDIR /app
+
+# Kopiere package.json und package-lock.json, um Abhängigkeiten zu installieren
+COPY package*.json ./
+
+# Installiere die Abhängigkeiten
+RUN npm install
+
+# Kopiere den Rest der Anwendung
+COPY . .
+
+# Baue die Angular-Anwendung
+RUN npm run build --prod
+
+# 2. Stufe: Production-Umgebung
+FROM nginx:alpine
+
+# Kopiere das erstellte Angular-Build-Verzeichnis in den NGINX-Webserver
+COPY --from=build /app/dist/programmierprojekt /usr/share/nginx/html
+
+# Kopiere die Standard NGINX-Konfigurationsdatei
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Exponiere Port 80
+EXPOSE 443
+
+# Starten des NGINX-Servers
+CMD ["nginx", "-g", "daemon off;"]
