@@ -153,7 +153,8 @@ jobs:
   
       # Stage: Build Docker image and load it into the local Docker daemon
       - name: Docker build image
-        run: docker buildx build --platform linux/arm64/v8,linux/amd64 --tag or_tool:${{ env.IMAGE_TAG }} --load .
+        run: docker buildx build --platform linux/arm64/v8,linux/amd64 --tag or_tool:latest --tag or_tool:${{ env.IMAGE_TAG }} --push .
+
   
       # Stage: Tag the Docker image for ECR
       - name: Tag the Docker image for ECR
