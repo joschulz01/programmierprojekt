@@ -10,7 +10,7 @@ import * as glpk from 'glpk.js';
   styleUrls: ['./solver.component.css'],
 })
 export class SolverComponent {
-  inputText: string = ''; // Textfeld für die Eingabe
+  inputText: string = ''; // Textfeld fÃ¼r die Eingabe
   result: { [key: string]: number } | null = null;
 
   onInputChange(event: Event) {
@@ -37,14 +37,14 @@ export class SolverComponent {
     glpk.glp_set_obj_dir(solver, problem.objective.direction);
     glpk.glp_set_obj_name(solver, problem.objective.name);
 
-    // Hinzufügen von Variablen
+    // HinzufÃ¼gen von Variablen
     problem.bounds.forEach((varData) => {
       const id = glpk.glp_add_cols(solver, 1);
       glpk.glp_set_col_name(solver, id, varData.name);
       glpk.glp_set_col_bnds(solver, id, varData.type, varData.lb, varData.ub);
     });
 
-    // Hinzufügen von Einschränkungen
+    // HinzufÃ¼gen von EinschrÃ¤nkungen
     problem.subjectTo.forEach((constraint) => {
       const id = glpk.glp_add_rows(solver, 1);
       glpk.glp_set_row_name(solver, id, constraint.name);
@@ -60,7 +60,7 @@ export class SolverComponent {
       }
     });
 
-    // Lösen des Problems
+    // LÃ¶sen des Problems
     const lp = glpk.glp_simplex(solver, null);
     this.result = this.extractSolution(solver);
     glpk.glp_delete_prob(solver);
@@ -106,7 +106,7 @@ export class SolverComponent {
             name: constraintName,
             coef: lhsTerms.map((term) => term.coef),
             sense: glpk.GLP_LE,
-            rhs: 15, // Hier müsstest du die RHS auch parsen
+            rhs: 15, // Hier mÃ¼sstest du die RHS auch parsen
           });
         }
       }
@@ -116,7 +116,7 @@ export class SolverComponent {
   }
 
   private extractSolution(solver: any) {
-    const solution: { [key: string]: number } = {};
+    const solution: Record<string, number> = {};
     for (let i = 1; i <= glpk.glp_get_num_cols(solver); i++) {
       const name = glpk.glp_get_col_name(solver, i);
       const value = glpk.glp_get_col_prim(solver, i);
