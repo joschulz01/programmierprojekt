@@ -67,8 +67,8 @@ export class SolverComponent {
   }
 
   private parseInput(input: string) {
-    const variables: unknown[] = [];
-    const constraints: unknown[] = [];
+    const variables: any[] = [];
+    const constraints: any[] = [];
     let objective: number[] = [];
     const lines = input.split('\n');
 
