@@ -140,25 +140,14 @@ jobs:
   
       - name: Authentication on ECR Repo
         run: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin ${{ secrets.ECR_HOST }}
-  
-      - name: Wait for Docker Daemon
+
+      # Stage: Create, build and push Docker image
+      - name: Create, build and push Docker image
         run: |
           until docker info; do
             sleep 5 && echo "Waiting for docker daemon...";
           done;
-  
-      # Stage: Create Docker image
-      - name: Docker build create
-        run: docker buildx create --use
-  
-      # Stage: Build Docker image and load it into the local Docker daemon
-      - name: Docker build image
-        run: docker buildx build --platform linux/arm64/v8,linux/amd64 -t programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} .
-
-      # Stage: Tag the Docker image for ECR
-      - name: Tag the Docker image for ECR
-        run: docker tag programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
-  
-      #Stage: Push to AWS ECR
-      - name: Push Docker image to AWS ECR
-        run: docker build . --push --tag ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
+          docker buildx create --use
+          docker buildx build --platform linux/arm64/v8,linux/amd64 -t programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} .
+          docker tag programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
+          docker build . --push --tag ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
