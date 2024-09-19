@@ -67,8 +67,8 @@ export class SolverComponent {
   }
 
   private parseInput(input: string) {
-    const variables: any[] = [];
-    const constraints: any[] = [];
+    const variables: unknown[] = [];
+    const constraints: unknown[] = [];
     let objective: number[] = [];
     const lines = input.split('\n');
 
@@ -115,7 +115,7 @@ export class SolverComponent {
     return { variables, objective, constraints };
   }
 
-  private extractSolution(solver: any) {
+  private extractSolution(solver: unknown) {
     const solution: Record<string, number> = {};
     for (let i = 1; i <= glpk.glp_get_num_cols(solver); i++) {
       const name = glpk.glp_get_col_name(solver, i);
