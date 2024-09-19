@@ -148,6 +148,6 @@ jobs:
             sleep 5 && echo "Waiting for docker daemon...";
           done;
           docker buildx create --use
-          docker buildx build --platform linux/arm64/v8,linux/amd64 -t programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} .
+          docker buildx build --platform linux/arm64/v8,linux/amd64 -t programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} --load .
           docker tag programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
           docker build . --push --tag ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
