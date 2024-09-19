@@ -153,7 +153,8 @@ jobs:
   
       # Stage: Build Docker image and load it into the local Docker daemon
       - name: Docker build image
-        run: docker buildx build --platform linux/arm64/v8,linux/amd64 --tag or_tool:${{ env.IMAGE_TAG }} --push .
+        #run: docker buildx build --platform linux/arm64/v8,linux/amd64 --tag or_tool:${{ env.IMAGE_TAG }} --push .
+        run: docker buildx build --platform linux/arm64/v8,linux/amd64 --tag ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} --push .
 
   
       # Stage: Tag the Docker image for ECR
@@ -162,6 +163,6 @@ jobs:
       #    docker tag or_tool:${{ env.IMAGE_TAG }} ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
   
       # Stage: Push to AWS ECR
-      - name: Push Docker image to AWS ECR
-        run:
-          docker build . --push --tag ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
+      #- name: Push Docker image to AWS ECR
+      #  run:
+      #    docker build . --push --tag ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
