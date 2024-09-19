@@ -61,7 +61,7 @@ export class SolverComponent {
     });
 
     // Lösen des Problems
-    const lp = glpk.glp_simplex(solver, null);
+    //const lp = glpk.glp_simplex(solver, null);
     this.result = this.extractSolution(solver);
     glpk.glp_delete_prob(solver);
   }
