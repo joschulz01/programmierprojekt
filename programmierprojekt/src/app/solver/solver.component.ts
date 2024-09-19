@@ -2,6 +2,21 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as glpk from 'glpk.js';
 
+
+interface Variable {
+  name: string;
+  type: number;
+  lb: number;
+  ub: number;
+}
+
+interface Constraint {
+  name: string;
+  coef: number[];
+  sense: number;
+  rhs: number;
+}
+
 @Component({
   selector: 'app-solver',
   standalone: true,
@@ -10,8 +25,9 @@ import * as glpk from 'glpk.js';
   styleUrls: ['./solver.component.css'],
 })
 export class SolverComponent {
-  inputText: string = ''; // Textfeld für die Eingabe
-  result: { [key: string]: number } | null = null;
+  inputText= ''; // Textfeld für die Eingabe
+  result: Record<string, number> | null = null;
+
 
   onInputChange(event: Event) {
     const target = event.target as HTMLTextAreaElement;
@@ -67,8 +83,8 @@ export class SolverComponent {
   }
 
   private parseInput(input: string) {
-    const variables: any[] = [];
-    const constraints: any[] = [];
+    const variables: Variable[] = [];
+    const constraints: Constraint[] = [];
     let objective: number[] = [];
     const lines = input.split('\n');
 
