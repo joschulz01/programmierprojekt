@@ -148,13 +148,13 @@ jobs:
           registries: ${{ secrets.AWS_ACCOUNT_ID }}
 
       # Stage: Create, build and push Docker image
-      - name: Create, build and push Docker image
-        run: |
-          until docker info; do
-            sleep 5 && echo "Waiting for docker daemon...";
-          done;
-          docker buildx create --use
-          docker buildx build --platform linux/arm64/v8,linux/amd64 -t ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} --push .
+      #- name: Create, build and push Docker image
+      #  run: |
+      #    until docker info; do
+      #      sleep 5 && echo "Waiting for docker daemon...";
+      #    done;
+      #    docker buildx create --use
+      #    docker buildx build --platform linux/arm64/v8,linux/amd64 -t ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} --push .
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-publish
