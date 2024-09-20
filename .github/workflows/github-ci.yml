@@ -121,6 +121,9 @@ jobs:
   build-multiarch-release:
     name: Erstellung des Docker Image
     runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.build-publish.outputs.image_tag }}
+      full_image: ${{ steps.build-publish.outputs.full_image }}
 
     steps:
       # Checkout Repository
@@ -136,10 +139,13 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1
-  
-      - name: Authentication on ECR Repo
-        run: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin ${{ secrets.ECR_HOST }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ secrets.AWS_ACCOUNT_ID }}
 
       # Stage: Create, build and push Docker image
       - name: Create, build and push Docker image
@@ -149,6 +155,20 @@ jobs:
           done;
           docker buildx create --use
           docker buildx build --platform linux/arm64/v8,linux/amd64 -t ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} --push .
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-publish
+        shell: bash
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ECR_REPO_NAME }}
+          IMAGE_TAG: ${{ inputs.image_tag }}
+        run: |
+          docker build "${{ inputs.docker_build_dir }}" -f "${{ inputs.path_to_dockerfile }}" -t "${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}"
+          docker push "${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}"
+          echo "IMAGE ${{ env.IMAGE_TAG }} is pushed to AWS ECR"
+          echo "image_tag=${{ env.IMAGE_TAG }}" 
+          
 
       #docker tag programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
       #docker build . --push --tag ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
