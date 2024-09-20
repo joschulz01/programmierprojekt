@@ -153,7 +153,7 @@ jobs:
           until docker info; do
             sleep 5 && echo "Waiting for docker daemon...";
           done;
-          docker build-t "${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}"
+          docker build -t "${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}"
           docker push "${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}"
           echo "IMAGE ${{ env.IMAGE_TAG }} is pushed to AWS ECR"
           echo "image_tag=${{ env.IMAGE_TAG }}" 
@@ -169,7 +169,7 @@ jobs:
       #    docker build-t "${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}"
       #    docker push "${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}"
       #    echo "IMAGE ${{ env.IMAGE_TAG }} is pushed to AWS ECR"
-      #    echo "image_tag=${{ env.IMAGE_TAG }}" 
+      #    echo "image_tag=${{ env.IMAGE_TAG }}"
           
 
       #docker tag programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }} ${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}
