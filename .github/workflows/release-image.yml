@@ -1,0 +1,50 @@
+name: CI/CD for automatic creation of a docker image
+
+# Ausführung bei Merge eines Pull-Request in dem Main-Branch
+on:
+  pull_request:
+    types:
+      - closed
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./programmierprojekt
+
+jobs:
+  build-multiarch-release:
+    name: Erstellung des Docker Image
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.build-publish.outputs.image_tag }}
+      full_image: ${{ steps.build-publish.outputs.full_image }}
+
+    steps:
+      # Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Stage: Prerequisits
+      - name: Set IMAGE_TAG
+        run: echo "IMAGE_TAG=0.0.${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Authentication on AWS
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Stage: Create, build and push Docker image
+      - name: Create, build and push Docker image
+        run: |
+          until docker info; do
+            sleep 5 && echo "Waiting for docker daemon...";
+          done;
+          docker build -t "${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}" .
+          docker push "${{ secrets.ECR_HOST }}/programmierprojekt/angular-webpage:${{ env.IMAGE_TAG }}"
