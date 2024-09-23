@@ -1,5 +1,4 @@
 .solver-container {
-<<<<<<< Updated upstream
 margin: 20px;
   text-align: center;
 }
@@ -28,7 +27,6 @@ pre, textarea[readonly] {
   padding: 10px;
   border-radius: 4px;
   text-align: left;
-=======
 margin: 20px;
   text-align: center;
 }
@@ -57,5 +55,4 @@ pre, textarea[readonly] {
   padding: 10px;
   border-radius: 4px;
   text-align: left;
->>>>>>> Stashed changes
 }
