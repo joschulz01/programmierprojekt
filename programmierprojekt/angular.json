@@ -16,7 +16,7 @@
             "customWebpackConfig": {
               "path": "./webpack.config.js"
             },
-            "outputPath": "app/dist/programmierprojekt",
+            "outputPath": "dist/programmierprojekt",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
