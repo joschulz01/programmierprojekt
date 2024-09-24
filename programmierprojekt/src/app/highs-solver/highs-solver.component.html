@@ -1,5 +1,4 @@
 <div class="solver-container">
-  <<<<<<< Updated upstream
   <h2>HiGHS Solver</h2>
 
   <textarea [(ngModel)]="problemInput" placeholder="Geben Sie hier das Optimierungsproblem ein" rows="10" cols="50"></textarea>
@@ -12,18 +11,4 @@
     <h3>Lösung:</h3>
     <textarea readonly rows="10" cols="50">{{ solution }}</textarea>
   </div>
-  =======
-  <h2>HiGHS Solver</h2>
-
-  <textarea [(ngModel)]="problemInput" placeholder="Geben Sie hier das Optimierungsproblem ein" rows="10" cols="50"></textarea>
-
-  <br>
-  <button (click)="solveProblem()">Problem lösen</button>
-
-  <!-- Ausgabe des Ergebnisses als JSON -->
-  <div *ngIf="solution">
-    <h3>Lösung:</h3>
-    <textarea readonly rows="10" cols="50">{{ solution }}</textarea>
-  </div>
-  >>>>>>> Stashed changes
 </div>
