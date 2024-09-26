@@ -5,6 +5,7 @@ import { HeaderComponent } from "./header/header.component";
 import { HighsSolverComponent} from "./highs-solver/highs-solver.component";
 import { MenuComponent } from "./menu/menu.component";
 import { RouterOutlet } from '@angular/router';
+import { ModelComponent } from './model/model.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { RouterOutlet } from '@angular/router';
     RouterOutlet,
     HeaderComponent,
     HighsSolverComponent,
-    MenuComponent
+    MenuComponent,
+    ModelComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
