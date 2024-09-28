@@ -71,7 +71,6 @@ export class HighsSolverComponent {
         const lhs = parts[0].trim();
         const rhs = parts[1].trim();
         const relation = trimmedLine.includes('<=') ? '<=' : trimmedLine.includes('>=') ? '>=' : '=';
-
         constraints.push({
             name: `Constraint ${constraints.length + 1}`, // Benennung der Constraints
             terms: this.parseTerms(lhs),

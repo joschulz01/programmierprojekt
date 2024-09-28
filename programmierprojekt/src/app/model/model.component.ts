@@ -34,15 +34,30 @@ export class ModelComponent implements OnInit {
         this.chart.destroy();
     }
 
+    
+
+
+  
+
     const datasets = this.constraints.map(constraint => {
       const equation = this.constraintsService.convertConstraintToEquation(constraint);
       const constraintData = [];
   
-      for (let x1 = 0; x1 <= 4; x1 += 0.1) {
+      
+      for (let x1 = 0; x1 <= 10; x1 += 0.1) {
+        console.log(constraint);
           const values = { x1 };
           const lhs = equation(values); // Linke Seite der Gleichung
-  
-          if (constraint.relation === '<=') {
+
+          if (constraint.terms.length === 1 && constraint.terms[0].name === 'x1' && constraint.relation === '<=') {
+            const x1 = constraint.rhs; // x1 ist 4
+            // Erstelle eine vertikale Linie bei x1 = 4 und variiere x2 von 0 bis einem Maximalwert
+            for (let x2 = 0; x2 <= 10; x2 += 0.1) {
+                constraintData.push({ x: x1, y: x2 });
+            }
+        }
+          else {
+            if (constraint.relation === '<=') {
               const x2 = (constraint.rhs - lhs) / (constraint.terms.find((term: { name: string; coef: number }) => term.name === 'x2')?.coef || 1);
               if (x2 >= 0) {
                   constraintData.push({ x: x1, y: x2 });
@@ -58,6 +73,7 @@ export class ModelComponent implements OnInit {
                   constraintData.push({ x: x1, y: x2 });
               }
           }
+        }
       }
   
       return {
@@ -69,20 +85,6 @@ export class ModelComponent implements OnInit {
           pointRadius: 0,
       };
   });
-  
-  
-  
-
-    // Füge die x=4 Linie hinzu
-    const x4Data = Array.from({ length: 101 }, (_, i) => ({ x: 4, y: i / 10 }));
-    datasets.push({
-        label: 'x = 4',
-        data: x4Data,
-        borderColor: 'rgba(255, 0, 0, 1)', // Rote Linie für x=4
-        backgroundColor: 'rgba(255, 0, 0, 0.2)',
-        borderWidth: 1,
-        pointRadius: 0,
-    });
 
     this.chart = new Chart(ctx, {
         type: 'line',
@@ -100,7 +102,7 @@ export class ModelComponent implements OnInit {
                 y: {
                     beginAtZero: true,
                     min: 0,
-                    max: 10,
+                    max: 5,
                 }
             }
         }
