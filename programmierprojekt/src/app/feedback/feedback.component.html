@@ -1,0 +1,14 @@
+<p>feedback works!</p>
+<div class="container">
+    <h1>Feedback zur Anwendung</h1>
+    <p>Bitte teilen Sie uns Ihre Gedanken, Vorschläge oder Verbesserungsvorschläge mit. Ihr Feedback ist uns sehr wichtig!</p>
+    <form action="submit_feedback.php" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">E-Mail:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="feedback">Feedback:</label>
+      <textarea id="feedback" name="feedback" rows="4" required></textarea>
+      <button type="submit" class="feedback-button">Absenden</button>
+    </form>
+  </div>

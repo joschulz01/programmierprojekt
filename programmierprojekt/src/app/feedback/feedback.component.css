@@ -1,0 +1,46 @@
+/* Formular- und Feedback-Styling */
+form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form label {
+    margin-top: 10px;
+  }
+  
+  form input, form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f0f0f0;
+    width: 100%;
+     margin-left: auto;
+      margin-right: auto;
+  }
+  
+  form button {
+    margin-top: 10px;
+  }
+  
+  
+  
+  textarea#modelInput {
+    width: 100%; /* oder eine feste Breite, z.B. 600px */
+    height: 300px; /* Die Höhe des Textfeldes */
+    padding: 10px; /* Innenabstand (optional, für besseren Textabstand) */
+    resize: none; /* Verhindert, dass der Benutzer das Textfeld manuell vergrößert/verkleinert */
+    border: 1px solid #ccc; /* Rahmenfarbe */
+    border-radius: 5px; /* Abgerundete Ecken (optional) */
+    font-family: Arial, sans-serif; /* Schriftart */
+    font-size: 16px; /* Schriftgröße */
+  }
