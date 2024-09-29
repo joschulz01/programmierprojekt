@@ -24,12 +24,13 @@ export class HighsSolverComponent {
     };
 
     try {
+      const formattedProblem = this.formatLinearProgram(this.problemInput);
       const highsSolver = await highs(highs_settings);
-      const result = highsSolver.solve(this.problemInput);
+      const result = highsSolver.solve(formattedProblem);
       this.solution = JSON.stringify(result, null, 2);
       
       // Füge die Constraints in den ConstraintsService hinzu
-      const constraints = this.parseConstraints(this.problemInput);
+      const constraints = this.parseConstraints(formattedProblem);
       this.constraintsService.setConstraints(constraints);
       
       // Benachrichtige die Abonnenten
@@ -40,6 +41,42 @@ export class HighsSolverComponent {
     }
   }
 
+  // Methode zum Formatieren des Problems
+  private formatLinearProgram(problem: string): string {
+    const lines = problem.split('\n').filter(line => line.trim() !== '');
+
+    let objective: string = '';
+    const constraints: string[] = [];
+    const bounds: string[] = [];
+
+    let isObjective = true; // Flag zum Erkennen, ob wir im Zielbereich sind
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      if (trimmedLine.startsWith('Maximize')) {
+        isObjective = true;
+        objective = trimmedLine;
+      } else if (trimmedLine.startsWith('Minimize')) {
+        isObjective = true;
+        objective = trimmedLine;
+      } else if (trimmedLine.startsWith('Subject To')) {
+        isObjective = false; // Wechsel zu den Constraints
+      } else if (trimmedLine.startsWith('Bounds')) {
+        break; // Wir haben alle Constraints gelesen
+      } else if (!isObjective) {
+        // Hier wird die Zeile als Constraint geparst
+        const relation = trimmedLine.includes('<=') ? '<=' : trimmedLine.includes('>=') ? '>=' : '=';
+        constraints.push(trimmedLine);
+      }
+    }
+
+    // Placeholder für die Schranken
+    bounds.push('0 <= x1 <= infinity'); // Beispiel Schranke für x1
+    bounds.push('0 <= x2 <= infinity'); // Beispiel Schranke für x2
+
+    // Gesamte Darstellung zusammenfügen
+    return `${objective}\nSubject To\n  ${constraints.join('\n  ')}\nBounds\n  ${bounds.join('\n  ')}\nEnd`;
+  }
+
   // Methode zum Parsen der Constraints aus dem Problemstring
   private parseConstraints(problem: string): any[] {
     const constraints = [];
@@ -47,41 +84,40 @@ export class HighsSolverComponent {
 
     let isObjective = true; // Flag zum Erkennen, ob wir noch im Zielbereich sind
     for (const line of lines) {
-        const trimmedLine = line.trim();
-        if (trimmedLine.startsWith('Maximize') || trimmedLine.startsWith('Minimize')) {
-            isObjective = false; // Wechsel zu den Constraints
-            continue;
-        }
-        if (isObjective) {
-            continue; // Überspringe die Zeilen bis wir die Constraints erreichen
-        }
-        if (trimmedLine.startsWith('Subject To')) {
-            continue; // Überspringe diese Zeile
-        }
-        if (trimmedLine.startsWith('Bounds')) {
-            break; // Wir haben alle Constraints gelesen
-        }
+      const trimmedLine = line.trim();
+      if (trimmedLine.startsWith('Maximize') || trimmedLine.startsWith('Minimize')) {
+        isObjective = false; // Wechsel zu den Constraints
+        continue;
+      }
+      if (isObjective) {
+        continue; // Überspringe die Zeilen bis wir die Constraints erreichen
+      }
+      if (trimmedLine.startsWith('Subject To')) {
+        continue; // Überspringe diese Zeile
+      }
+      if (trimmedLine.startsWith('Bounds')) {
+        break; // Wir haben alle Constraints gelesen
+      }
 
-        // Hier wird die Zeile als Constraint geparst
-        const parts = trimmedLine.split(/<=|>=|=/);
-        if (parts.length < 2) {
-            continue; // Ungültige Zeile, überspringen
-        }
+      // Hier wird die Zeile als Constraint geparst
+      const parts = trimmedLine.split(/<=|>=|=/);
+      if (parts.length < 2) {
+        continue; // Ungültige Zeile, überspringen
+      }
 
-        const lhs = parts[0].trim();
-        const rhs = parts[1].trim();
-        const relation = trimmedLine.includes('<=') ? '<=' : trimmedLine.includes('>=') ? '>=' : '=';
-        constraints.push({
-            name: `Constraint ${constraints.length + 1}`, // Benennung der Constraints
-            terms: this.parseTerms(lhs),
-            relation: relation,
-            rhs: parseFloat(rhs),
-        });
+      const lhs = parts[0].trim();
+      const rhs = parts[1].trim();
+      const relation = trimmedLine.includes('<=') ? '<=' : trimmedLine.includes('>=') ? '>=' : '=';
+      constraints.push({
+        name: `Constraint ${constraints.length + 1}`, // Benennung der Constraints
+        terms: this.parseTerms(lhs),
+        relation: relation,
+        rhs: parseFloat(rhs),
+      });
     }
 
     return constraints;
-}
-
+  }
 
   // Hilfsmethode zum Parsen der Terme einer Constraint
   private parseTerms(lhs: string): { name: string; coef: number }[] {
