@@ -1,28 +1,26 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import highs from 'highs';
 import { ConstraintsService } from '../constraints.service';
 import { UmformungService } from '../umformung.service';
 import { ModelComponent } from '../model/model.component';
-
 
 @Component({
   selector: 'app-highs-solver',
   standalone: true,
   imports: [CommonModule, FormsModule, ModelComponent],
   templateUrl: './highs-solver.component.html',
-  styleUrl: './highs-solver.component.css'
+  styleUrls: ['./highs-solver.component.css']
 })
 export class HighsSolverComponent {
-  problemInput= '';  // Eingabefeld für das Problem, standardmäßig leer
+  problemInput = '';  // Eingabefeld für das Problem, standardmäßig leer
   solution = '';  // Variable zur Anzeige der Lösung
 
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService) {}
 
   // Methode zur Lösung des Benutzerproblems
   async solveProblem(): Promise<void> {
-
     const LP = this.umformungService.umformen(this.problemInput);
 
     // Initialisiere den HiGHS Solver und passe locateFile an
@@ -35,28 +33,25 @@ export class HighsSolverComponent {
       const highsSolver = await highs(highs_settings);
 
       // Lösen des vom Benutzer eingegebenen Problems
-      var result;
-      try{
+      let result;
+      try {
         result = highsSolver.solve(this.problemInput);
-      }
-      catch (error){
+      } catch (error) {
         result = highsSolver.solve(LP);
       }
 
-      
-
-       // Füge die Constraints in den ConstraintsService hinzu
-       var constraints
-       try{
+      // Füge die Constraints in den ConstraintsService hinzu
+      let constraints;
+      try {
         constraints = this.parseConstraints(this.problemInput);
-       }
-       catch(error){
-        constraints = this.parseConstraints(LP);
-       }
-       this.constraintsService.setConstraints(constraints);
+      } catch (error) {
+        constraints = this.parseConstraintsNewFormat(LP);
+      }
+      this.constraintsService.setConstraints(constraints);
+      console.log(constraints);
        
-       // Benachrichtige die Abonnenten
-       this.constraintsService.constraintsUpdated.next();  
+      // Benachrichtige die Abonnenten
+      this.constraintsService.constraintsUpdated.next();  
      
       // Ergebnis als JSON speichern und anzeigen
       this.solution = JSON.stringify(result, null, 2);
@@ -67,9 +62,8 @@ export class HighsSolverComponent {
     }
   }
 
-
-// Methode zum Parsen der Constraints aus dem Problemstring
-private parseConstraints(problem: string): any[] {
+  // Methode zum Parsen der Constraints aus dem Problemstring
+  private parseConstraints(problem: string): any[] {
     const constraints = [];
     const lines = problem.split('\n').filter(line => line.trim() !== '');
 
@@ -109,6 +103,44 @@ private parseConstraints(problem: string): any[] {
 
     return constraints;
   }
+  private parseConstraintsNewFormat(problem: string): any[] {
+    const constraints = [];
+    const lines = problem.split('\n').filter(line => line.trim() !== '');
+
+    let isObjective = true; // Flag zum Erkennen, ob wir noch im Zielbereich sind
+    for (const line of lines) {
+        const trimmedLine = line.trim();
+        
+        // Überprüfe auf die Maximierungs-/Minimierungszeile
+        if (trimmedLine.startsWith('maximize') || trimmedLine.startsWith('maximize') || trimmedLine.startsWith('minimize')) {
+            isObjective = false; // Wechsel zu den Constraints
+            continue;
+        }
+
+        // Identifizieren der Constraints mit 's.t.'
+        if (trimmedLine.startsWith('s.t.')) {
+            // Diese Zeile ist eine Constraint, wir entfernen 's.t.' und verarbeiten den Rest
+            const constraintLine = trimmedLine.substring(4).trim();
+            const parts = constraintLine.split(/<=|>=|=/);
+            if (parts.length < 2) {
+                continue; // Ungültige Zeile, überspringen
+            }
+
+            const lhs = parts[0].trim();
+            const rhs = parts[1].trim();
+            const relation = constraintLine.includes('<=') ? '<=' : constraintLine.includes('>=') ? '>=' : '=';
+
+            constraints.push({
+                name: `Constraint ${constraints.length + 1}`, // Benennung der Constraints
+                terms: this.parseTerms(lhs), // Diese Methode bleibt gleich
+                relation: relation,
+                rhs: parseFloat(rhs),
+            });
+        }
+    }
+
+    return constraints;
+}
 
   // Hilfsmethode zum Parsen der Terme einer Constraint
   private parseTerms(lhs: string): { name: string; coef: number }[] {

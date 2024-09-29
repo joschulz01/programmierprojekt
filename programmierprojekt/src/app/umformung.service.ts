@@ -58,7 +58,8 @@ export class UmformungService {
 
     // Combine everything
     output.push(`End`);
-
+    console.log(output.join('\n'));
+    
     return output.join('\n');
   }
 
