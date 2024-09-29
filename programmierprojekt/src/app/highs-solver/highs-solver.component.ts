@@ -4,12 +4,13 @@ import {FormsModule} from '@angular/forms';
 import highs from 'highs';
 import { ConstraintsService } from '../constraints.service';
 import { UmformungService } from '../umformung.service';
+import { ModelComponent } from '../model/model.component';
 
 
 @Component({
   selector: 'app-highs-solver',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ModelComponent],
   templateUrl: './highs-solver.component.html',
   styleUrl: './highs-solver.component.css'
 })
@@ -22,7 +23,7 @@ export class HighsSolverComponent {
   // Methode zur Lösung des Benutzerproblems
   async solveProblem(): Promise<void> {
 
-    console.log(this.umformungService.umformen(this.problemInput));
+    const LP = this.umformungService.umformen(this.problemInput);
 
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
@@ -34,10 +35,24 @@ export class HighsSolverComponent {
       const highsSolver = await highs(highs_settings);
 
       // Lösen des vom Benutzer eingegebenen Problems
-      const result = highsSolver.solve(this.problemInput);
+      var result;
+      try{
+        result = highsSolver.solve(this.problemInput);
+      }
+      catch (error){
+        result = highsSolver.solve(LP);
+      }
+
+      
 
        // Füge die Constraints in den ConstraintsService hinzu
-       const constraints = this.parseConstraints(this.problemInput);
+       var constraints
+       try{
+        constraints = this.parseConstraints(this.problemInput);
+       }
+       catch(error){
+        constraints = this.parseConstraints(LP);
+       }
        this.constraintsService.setConstraints(constraints);
        
        // Benachrichtige die Abonnenten

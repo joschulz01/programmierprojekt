@@ -8,7 +8,7 @@ import { ConstraintsService } from '../constraints.service';
   templateUrl: './model.component.html',
   styleUrls: ['./model.component.css'],
 })
-export class ModelComponent implements OnInit {
+export class ModelComponent {
   constraints!: any[];
   chart: any;
 
@@ -16,8 +16,13 @@ export class ModelComponent implements OnInit {
 
   ngOnInit() {
     Chart.register(LineController, LinearScale, Title, PointElement, LineElement, Filler);
+    
+    // Abonnieren der constraintsUpdated-Benachrichtigung
     this.constraintsService.constraintsUpdated.subscribe(() => this.onSolve());
-  }
+    
+    // Sofortige Aktualisierung des Charts
+    this.onSolve(); // Aufruf hier, um sofort zu aktualisieren
+}
 
   onSolve() {
     this.constraints = this.constraintsService.getConstraints();
@@ -34,45 +39,42 @@ export class ModelComponent implements OnInit {
         this.chart.destroy();
     }
 
-    
-
-
-  
-
     const datasets = this.constraints.map(constraint => {
       const equation = this.constraintsService.convertConstraintToEquation(constraint);
       const constraintData = [];
   
-      
-      for (let x1 = 0; x1 <= 10; x1 += 0.1) {
-          const values = { x1 };
+      // Dynamische Erkennung von Variablennamen
+      const variableNames = this.getVariableNames(constraint);
+
+      for (let xValue = 0; xValue <= 10; xValue += 0.1) {
+          const values = { [variableNames[0]]: xValue }; // Erstes dynamisches Variable (z.B. x oder x1)
           const lhs = equation(values); // Linke Seite der Gleichung
 
-          if (constraint.terms.length === 1 && constraint.terms[0].name === 'x1' && constraint.relation === '<=') {
-            const x1 = constraint.rhs; // x1 ist 4
-            // Erstelle eine vertikale Linie bei x1 = 4 und variiere x2 von 0 bis einem Maximalwert
-            for (let x2 = 0; x2 <= 10; x2 += 0.1) {
-                constraintData.push({ x: x1, y: x2 });
+          if (constraint.terms.length === 1 && constraint.terms[0].name === variableNames[0] && constraint.relation === '<=') {
+            const x1 = constraint.rhs; // x1 ist ein Wert
+            for (let yValue = 0; yValue <= 10; yValue += 0.1) {
+                constraintData.push({ x: x1, y: yValue });
             }
-        }
-          else {
+          } else {
+            const coefY = constraint.terms.find((term: { name: string; coef: number }) => term.name === variableNames[1])?.coef || 1;
+
             if (constraint.relation === '<=') {
-              const x2 = (constraint.rhs - lhs) / (constraint.terms.find((term: { name: string; coef: number }) => term.name === 'x2')?.coef || 1);
-              if (x2 >= 0) {
-                  constraintData.push({ x: x1, y: x2 });
+              const yValue = (constraint.rhs - lhs) / coefY;
+              if (yValue >= 0) {
+                  constraintData.push({ x: xValue, y: yValue });
               }
-          } else if (constraint.relation === '>=') {
-              const x2 = (lhs - constraint.rhs) / (constraint.terms.find((term: { name: string; coef: number }) => term.name === 'x2')?.coef || 1);
-              if (x2 >= 0) {
-                  constraintData.push({ x: x1, y: x2 });
+            } else if (constraint.relation === '>=') {
+              const yValue = (lhs - constraint.rhs) / coefY;
+              if (yValue >= 0) {
+                  constraintData.push({ x: xValue, y: yValue });
               }
-          } else if (constraint.relation === '=') {
-              const x2 = (constraint.rhs - lhs) / (constraint.terms.find((term: { name: string; coef: number }) => term.name === 'x2')?.coef || 1);
-              if (x2 >= 0) {
-                  constraintData.push({ x: x1, y: x2 });
+            } else if (constraint.relation === '=') {
+              const yValue = (constraint.rhs - lhs) / coefY;
+              if (yValue >= 0) {
+                  constraintData.push({ x: xValue, y: yValue });
               }
+            }
           }
-        }
       }
   
       return {
@@ -106,6 +108,19 @@ export class ModelComponent implements OnInit {
             }
         }
     });
-}
+  }
+
+  // Hilfsmethode zur Erkennung der Variablennamen aus den Constraints
+  getVariableNames(constraint: any): string[] {
+    const variableNames = new Set<string>();
+
+    // Iteriere durch die terms im Constraint und füge die Variablennamen hinzu
+    constraint.terms.forEach((term: { name: string }) => {
+      variableNames.add(term.name);
+    });
+
+    console.log(variableNames);
+    return Array.from(variableNames); // Rückgabe von z.B. ['x', 'y'] oder ['x1', 'x2']
+  }
 
 }
