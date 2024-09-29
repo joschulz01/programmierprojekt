@@ -1,84 +1,60 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import highs from 'highs';
 import { ConstraintsService } from '../constraints.service';
+import { UmformungService } from '../umformung.service';
+
 
 @Component({
   selector: 'app-highs-solver',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './highs-solver.component.html',
-  styleUrls: ['./highs-solver.component.css'],
+  styleUrl: './highs-solver.component.css'
 })
 export class HighsSolverComponent {
-  problemInput = '';  // Eingabefeld für das Problem
+  problemInput= '';  // Eingabefeld für das Problem, standardmäßig leer
   solution = '';  // Variable zur Anzeige der Lösung
 
-  constructor(private constraintsService: ConstraintsService) {}
+  constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService) {}
 
   // Methode zur Lösung des Benutzerproblems
   async solveProblem(): Promise<void> {
+
+    console.log(this.umformungService.umformen(this.problemInput));
+
+    // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
       locateFile: (file: string) => `highs/${file}`  // Zeigt auf den Ordner, wo die WASM-Datei liegt
     };
 
     try {
-      const formattedProblem = this.formatLinearProgram(this.problemInput);
+      // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
-      const result = highsSolver.solve(formattedProblem);
+
+      // Lösen des vom Benutzer eingegebenen Problems
+      const result = highsSolver.solve(this.problemInput);
+
+       // Füge die Constraints in den ConstraintsService hinzu
+       const constraints = this.parseConstraints(this.problemInput);
+       this.constraintsService.setConstraints(constraints);
+       
+       // Benachrichtige die Abonnenten
+       this.constraintsService.constraintsUpdated.next();  
+     
+      // Ergebnis als JSON speichern und anzeigen
       this.solution = JSON.stringify(result, null, 2);
-      
-      // Füge die Constraints in den ConstraintsService hinzu
-      const constraints = this.parseConstraints(formattedProblem);
-      this.constraintsService.setConstraints(constraints);
-      
-      // Benachrichtige die Abonnenten
-      this.constraintsService.constraintsUpdated.next();  
     } catch (error) {
+      // Fehlerbehandlung
       console.error('Fehler beim Lösen des Problems:', error);
       this.solution = 'Fehler beim Lösen des Problems: ' + error;
     }
   }
 
-  // Methode zum Formatieren des Problems
-  private formatLinearProgram(problem: string): string {
-    const lines = problem.split('\n').filter(line => line.trim() !== '');
 
-    let objective: string = '';
-    const constraints: string[] = [];
-    const bounds: string[] = [];
-
-    let isObjective = true; // Flag zum Erkennen, ob wir im Zielbereich sind
-    for (const line of lines) {
-      const trimmedLine = line.trim();
-      if (trimmedLine.startsWith('Maximize')) {
-        isObjective = true;
-        objective = trimmedLine;
-      } else if (trimmedLine.startsWith('Minimize')) {
-        isObjective = true;
-        objective = trimmedLine;
-      } else if (trimmedLine.startsWith('Subject To')) {
-        isObjective = false; // Wechsel zu den Constraints
-      } else if (trimmedLine.startsWith('Bounds')) {
-        break; // Wir haben alle Constraints gelesen
-      } else if (!isObjective) {
-        // Hier wird die Zeile als Constraint geparst
-        const relation = trimmedLine.includes('<=') ? '<=' : trimmedLine.includes('>=') ? '>=' : '=';
-        constraints.push(trimmedLine);
-      }
-    }
-
-    // Placeholder für die Schranken
-    bounds.push('0 <= x1 <= infinity'); // Beispiel Schranke für x1
-    bounds.push('0 <= x2 <= infinity'); // Beispiel Schranke für x2
-
-    // Gesamte Darstellung zusammenfügen
-    return `${objective}\nSubject To\n  ${constraints.join('\n  ')}\nBounds\n  ${bounds.join('\n  ')}\nEnd`;
-  }
-
-  // Methode zum Parsen der Constraints aus dem Problemstring
-  private parseConstraints(problem: string): any[] {
+// Methode zum Parsen der Constraints aus dem Problemstring
+private parseConstraints(problem: string): any[] {
     const constraints = [];
     const lines = problem.split('\n').filter(line => line.trim() !== '');
 

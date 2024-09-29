@@ -45,7 +45,6 @@ export class ModelComponent implements OnInit {
   
       
       for (let x1 = 0; x1 <= 10; x1 += 0.1) {
-        console.log(constraint);
           const values = { x1 };
           const lhs = equation(values); // Linke Seite der Gleichung
 
@@ -97,12 +96,12 @@ export class ModelComponent implements OnInit {
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
-                    max: 5,
+                    max: 25,
                 },
                 y: {
                     beginAtZero: true,
                     min: 0,
-                    max: 5,
+                    max: 25,
                 }
             }
         }
