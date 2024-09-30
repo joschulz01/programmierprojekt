@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Chart, LinearScale, Title, PointElement, LineElement, Filler, LineController } from 'chart.js';
 import { ConstraintsService } from '../constraints.service';
+import { HighsSolverComponent } from '../highs-solver/highs-solver.component';
 
 @Component({
   selector: 'app-model',
@@ -9,6 +10,8 @@ import { ConstraintsService } from '../constraints.service';
   styleUrls: ['./model.component.css'],
 })
 export class ModelComponent {
+    @Input() xWert?: number;  // Input Property für X-Wert
+    @Input() yWert?: number;  // Input Property für X-Wert
   constraints!: any[];
   chart: any;
 
@@ -41,7 +44,7 @@ onSolve() {
 
     const datasets = this.constraints.map(constraint => {
         const equation = this.constraintsService.convertConstraintToEquation(constraint);
-        const constraintData = [];
+        const constraintData: { x: number; y: number }[] = []; // Typ festlegen
         const variableNames = this.getVariableNames(constraint);
 
         for (let xValue = 0; xValue <= 10; xValue += 0.1) {
@@ -56,18 +59,20 @@ onSolve() {
             } else {
                 const coefY = constraint.terms.find((term: { name: string; coef: number }) => term.name === variableNames[1])?.coef || 1;
 
+                let yValue: number; // yValue als number deklarieren
+
                 if (constraint.relation === '<=') {
-                    const yValue = (constraint.rhs - lhs) / coefY;
+                    yValue = (constraint.rhs - lhs) / coefY;
                     if (yValue >= 0) {
                         constraintData.push({ x: xValue, y: yValue });
                     }
                 } else if (constraint.relation === '>=') {
-                    const yValue = (lhs - constraint.rhs) / coefY;
+                    yValue = (lhs - constraint.rhs) / coefY;
                     if (yValue >= 0) {
                         constraintData.push({ x: xValue, y: yValue });
                     }
                 } else if (constraint.relation === '=') {
-                    const yValue = (constraint.rhs - lhs) / coefY;
+                    yValue = (constraint.rhs - lhs) / coefY;
                     if (yValue >= 0) {
                         constraintData.push({ x: xValue, y: yValue });
                     }
@@ -97,7 +102,16 @@ onSolve() {
     this.chart = new Chart(ctx, {
         type: 'line',
         data: {
-            datasets: datasets
+            datasets: [
+                {
+                    data: [
+                        { x: this.xWert, y: this.yWert }, 
+                    ],
+                    borderColor: 'rgba(255, 0, 0, 1)',
+                    fill: false 
+                },
+                ...datasets 
+            ]
         },
         options: {
             scales: {
@@ -107,7 +121,7 @@ onSolve() {
                     min: xMin,
                     max: xMax,
                     ticks: {
-                        stepSize: 1, // Oder eine andere Schrittgröße, um die Lesbarkeit zu verbessern
+                        stepSize: 1,
                     }
                 },
                 y: {
@@ -115,7 +129,7 @@ onSolve() {
                     min: yMin,
                     max: yMax,
                     ticks: {
-                        stepSize: 1, // Oder eine andere Schrittgröße, um die Lesbarkeit zu verbessern
+                        stepSize: 1,
                     }
                 }
             }
