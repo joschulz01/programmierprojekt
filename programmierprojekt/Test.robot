@@ -4,7 +4,7 @@ Library    Browser
 
 *** Variablen ***
 ${BROWSER}    chromium
-${url}    https://google.com
+${url}    https://or-tool.de
 
 *** Testfälle ***
 Öffne Browser
