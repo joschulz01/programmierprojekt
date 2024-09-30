@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Chart, LinearScale, Title, PointElement, LineElement, Filler, LineController } from 'chart.js';
 import { ConstraintsService } from '../constraints.service';
-import { HighsSolverComponent } from '../highs-solver/highs-solver.component';
 
 @Component({
   selector: 'app-model',
@@ -11,7 +10,7 @@ import { HighsSolverComponent } from '../highs-solver/highs-solver.component';
 })
 export class ModelComponent {
     @Input() xWert?: number;  // Input Property für X-Wert
-    @Input() yWert?: number;  // Input Property für X-Wert
+    @Input() yWert?: number;  // Input Property für Y-Wert
   constraints!: any[];
   chart: any;
 
@@ -98,19 +97,22 @@ onSolve() {
     const xMax = Math.max(10, Math.max(...xValues));
     const yMin = Math.min(0, Math.min(...yValues));
     const yMax = Math.max(10, Math.max(...yValues));
+    
 
     this.chart = new Chart(ctx, {
         type: 'line',
         data: {
             datasets: [
                 {
+                    label: 'Maximal/Minimal Punkt',
                     data: [
-                        { x: this.xWert, y: this.yWert }, 
+                        { x: this.xWert , y: this.yWert }, // Setze Default-Werte
                     ],
                     borderColor: 'rgba(255, 0, 0, 1)',
-                    fill: false 
+                    fill: false,
+                    pointRadius: 5, // Erhöhe die Punktgröße, um Sichtbarkeit zu erhöhen
                 },
-                ...datasets 
+                ...datasets // Füge die vorhandenen Datensätze hier hinzu
             ]
         },
         options: {
@@ -121,7 +123,7 @@ onSolve() {
                     min: xMin,
                     max: xMax,
                     ticks: {
-                        stepSize: 1,
+                        stepSize: 1
                     }
                 },
                 y: {
@@ -129,12 +131,14 @@ onSolve() {
                     min: yMin,
                     max: yMax,
                     ticks: {
-                        stepSize: 1,
+                        stepSize: 1
                     }
                 }
             }
         }
     });
+    
+    
 }
 
 

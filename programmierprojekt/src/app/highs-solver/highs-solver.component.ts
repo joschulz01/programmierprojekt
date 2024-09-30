@@ -60,6 +60,7 @@ export class HighsSolverComponent {
       this.solution = JSON.stringify(result, null, 2);
 
       try {
+        console.log(result);
       this.WerteErmitteln(result);
       }
       catch(error){
