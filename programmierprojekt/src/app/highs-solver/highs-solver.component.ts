@@ -17,6 +17,9 @@ export class HighsSolverComponent {
   problemInput = '';  // Eingabefeld für das Problem, standardmäßig leer
   solution = '';  // Variable zur Anzeige der Lösung
 
+  xWert?: number;
+  yWert?: number;
+
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService) {}
 
   // Methode zur Lösung des Benutzerproblems
@@ -55,12 +58,33 @@ export class HighsSolverComponent {
      
       // Ergebnis als JSON speichern und anzeigen
       this.solution = JSON.stringify(result, null, 2);
+
+      try {
+      this.WerteErmitteln(result);
+      }
+      catch(error){
+
+      }
+      
     } catch (error) {
       // Fehlerbehandlung
       console.error('Fehler beim Lösen des Problems:', error);
       this.solution = 'Fehler beim Lösen des Problems: ' + error;
     }
   }
+
+  WerteErmitteln(result: any) {
+    const VariableX = result.Columns['x1'];
+    if ('Primal' in VariableX) {
+        this.xWert = VariableX.Primal; // Setze den Wert für xWert
+    }
+    
+    const VariableY = result.Columns['x2'];
+    if ('Primal' in VariableY) {
+        this.yWert = VariableY.Primal; // Setze den Wert für yWert
+    }
+}
+
 
   // Methode zum Parsen der Constraints aus dem Problemstring
   private parseConstraints(problem: string): any[] {
@@ -129,7 +153,7 @@ export class HighsSolverComponent {
             const lhs = parts[0].trim();
             const rhs = parts[1].trim();
             const relation = constraintLine.includes('<=') ? '<=' : constraintLine.includes('>=') ? '>=' : '=';
-
+            
             constraints.push({
                 name: `Constraint ${constraints.length + 1}`, // Benennung der Constraints
                 terms: this.parseTerms(lhs), // Diese Methode bleibt gleich
