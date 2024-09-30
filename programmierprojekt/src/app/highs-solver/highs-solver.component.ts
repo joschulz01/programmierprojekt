@@ -14,8 +14,8 @@ import { ModelComponent } from '../model/model.component';
   styleUrls: ['./highs-solver.component.css']
 })
 export class HighsSolverComponent {
-  problemInput = '';
-  solution = '';
+  problemInput = '';  // Eingabefeld für das Problem, standardmäßig leer
+  solution = '';  // Variable zur Anzeige der Lösung
   result: { 
     Columns: { 
       [key: string]: { 
@@ -39,18 +39,18 @@ export class HighsSolverComponent {
       Dual: number; 
     }[]; 
     ObjectiveValue: number; 
-  } | null = null; // Füge null als möglichen Wert hinzu
+  } | null = null;
 
   xWert?: number;
   yWert?: number;
 
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService) {}
 
-
   // Methode zur Lösung des Benutzerproblems
   async solveProblem(): Promise<void> {
     const LP = this.umformungService.umformen(this.problemInput);
-    
+   
+
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
       locateFile: (file: string) => `highs/${file}` // Zeigt auf den Ordner, wo die WASM-Datei liegt
@@ -62,14 +62,17 @@ export class HighsSolverComponent {
       let result: any;
 
       // Lösen des vom Benutzer eingegebenen Problems
+      let constraints
       try {
         result = highsSolver.solve(this.problemInput);
+        constraints = this.extractConstraints(this.problemInput);
       } catch (error) {
         result = highsSolver.solve(LP);
+        constraints = this.extractConstraints(LP);
       }
 
       // Füge die Constraints in den ConstraintsService hinzu
-      const constraints = this.extractConstraints(LP);
+      console.log("Hier: ",constraints);
       this.constraintsService.setConstraints(constraints);
       this.constraintsService.constraintsUpdated.next();  
 
@@ -98,11 +101,11 @@ export class HighsSolverComponent {
     }
   }
 
-  // Methode zum Parsen der Constraints aus dem Problemstring
+  // Methode zum Extrahieren der Constraints aus dem Problemstring
   private extractConstraints(problem: string): any[] {
-    const constraints: any[] = []; // Initialisiere ein Array für die Constraints
+    const constraints: any[] = [];
     const lines = problem.split('\n').filter(line => line.trim() !== '');
-    
+
     let isObjective = true; // Flag zum Erkennen, ob wir noch im Zielbereich sind
     for (const line of lines) {
       const trimmedLine = line.trim();
@@ -126,7 +129,7 @@ export class HighsSolverComponent {
         continue; // Ungültige Zeile, überspringen
       }
 
-      const lhs = parts[0].trim();
+      const lhs = this.normalizeVariableNames(parts[0].trim());
       const rhs = parts[1].trim();
       const relation = trimmedLine.includes('<=') ? '<=' : trimmedLine.includes('>=') ? '>=' : '=';
       constraints.push({
@@ -140,6 +143,9 @@ export class HighsSolverComponent {
     return constraints;
   }
 
+  private normalizeVariableNames(expression: string): string {
+    return expression.replace(/\s+(\d+)/g, '$1');  // Entfernt Leerzeichen zwischen Variablen und Zahlen, z.B. "x 1" wird zu "x1"
+  }
   // Hilfsmethode zum Parsen der Terme einer Constraint
   private parseTerms(lhs: string): { name: string; coef: number }[] {
     const terms: { name: string; coef: number }[] = [];

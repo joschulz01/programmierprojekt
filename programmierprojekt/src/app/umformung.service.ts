@@ -21,12 +21,12 @@ export class UmformungService {
       this.extractVariablen(line, variablen);
 
       // Zielfunktion extrahieren
-      if (line.startsWith('maximize')) {
-        zielfunktion = line.replace('maximize Objective:', '').trim();
+      if (line.toLowerCase().startsWith('maximize')) {
+        zielfunktion = line.replace(/maximize\s*Objective:/i, '').trim();
       }
 
       // Nebenbedingungen extrahieren
-      if (line.startsWith('s.t.')) {
+      if (line.toLowerCase().startsWith('s.t.')) {
         if (i + 1 < lines.length) { // Überprüfen, ob es eine nächste Zeile gibt
           const nextLine = lines[i + 1].trim(); // Nächste Zeile als Nebenbedingung holen
           nebenbedingungen.push(nextLine);
@@ -72,7 +72,7 @@ export class UmformungService {
       .replace(';', '')           // Semikolon entfernen
       .replace(/\*/g, ' ')        // '*' durch Leerzeichen ersetzen
       .replace(/\s*\+\s*/g, ' + ')  // Sicherstellen, dass um '+' herum Leerzeichen sind
-      .replace(/([a-zA-Z])(\d*)/g, '$1 $2');  // Leerzeichen zwischen Variablen und Zahlen sicherstellen
+      .replace(/([a-zA-Z])(\d+)/g, '$1$2');  // Entfernt Leerzeichen zwischen Variablen und Zahlen
   }
 
   // Formatierung der Nebenbedingungen
@@ -81,6 +81,6 @@ export class UmformungService {
       .replace(';', '')           // Semikolon entfernen
       .replace(/\*/g, ' ')        // '*' durch Leerzeichen ersetzen
       .replace(/\s*\+\s*/g, ' + ')  // Sicherstellen, dass um '+' herum Leerzeichen sind
-      .replace(/([a-zA-Z])(\d*)/g, '$1 $2');  // Leerzeichen zwischen Variablen und Zahlen sicherstellen
+      .replace(/([a-zA-Z])(\d+)/g, '$1$2');  // Entfernt Leerzeichen zwischen Variablen und Zahlen
   }
 }
