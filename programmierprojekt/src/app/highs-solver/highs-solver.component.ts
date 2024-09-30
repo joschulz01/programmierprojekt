@@ -6,6 +6,7 @@ import { ConstraintsService } from '../constraints.service';
 import { UmformungService } from '../umformung.service';
 import { ModelComponent } from '../model/model.component';
 
+
 @Component({
   selector: 'app-highs-solver',
   standalone: true,
@@ -14,15 +15,15 @@ import { ModelComponent } from '../model/model.component';
   styleUrls: ['./highs-solver.component.css']
 })
 export class HighsSolverComponent {
-  problemInput = '';  // Eingabefeld für das Problem, standardmäßig leer
-  solution = '';  // Variable zur Anzeige der Lösung
+  problemInput = '';  // Eingabefeld fÃ¼r das Problem, standardmÃ¤ÃŸig leer
+  solution = '';  // Variable zur Anzeige der LÃ¶sung
 
   xWert?: number;
   yWert?: number;
 
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService) {}
 
-  // Methode zur Lösung des Benutzerproblems
+  // Methode zur LÃ¶sung des Benutzerproblems
   async solveProblem(): Promise<void> {
     const LP = this.umformungService.umformen(this.problemInput);
 
@@ -35,7 +36,7 @@ export class HighsSolverComponent {
       // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
 
-      // Lösen des vom Benutzer eingegebenen Problems
+      // LÃ¶sen des vom Benutzer eingegebenen Problems
       let result;
       try {
         result = highsSolver.solve(this.problemInput);
@@ -43,7 +44,7 @@ export class HighsSolverComponent {
         result = highsSolver.solve(LP);
       }
 
-      // Füge die Constraints in den ConstraintsService hinzu
+      // FÃ¼ge die Constraints in den ConstraintsService hinzu
       let constraints;
       try {
         constraints = this.parseConstraints(this.problemInput);
@@ -69,20 +70,20 @@ export class HighsSolverComponent {
       
     } catch (error) {
       // Fehlerbehandlung
-      console.error('Fehler beim Lösen des Problems:', error);
-      this.solution = 'Fehler beim Lösen des Problems: ' + error;
+      console.error('Fehler beim LÃ¶sen des Problems:', error);
+      this.solution = 'Fehler beim LÃ¶sen des Problems: ' + error;
     }
   }
 
   WerteErmitteln(result: any) {
-    const VariableX = result.Columns['x1'];
+    const VariableX = result.Columns['x'|| 'x1'];
     if ('Primal' in VariableX) {
-        this.xWert = VariableX.Primal; // Setze den Wert für xWert
+        this.xWert = VariableX.Primal; // Setze den Wert fÃ¼r xWert
     }
     
-    const VariableY = result.Columns['x2'];
+    const VariableY = result.Columns['y'|| 'x2'];
     if ('Primal' in VariableY) {
-        this.yWert = VariableY.Primal; // Setze den Wert für yWert
+        this.yWert = VariableY.Primal; // Setze den Wert fÃ¼r yWert
     }
 }
 
@@ -100,10 +101,10 @@ export class HighsSolverComponent {
         continue;
       }
       if (isObjective) {
-        continue; // Überspringe die Zeilen bis wir die Constraints erreichen
+        continue; // Ãœberspringe die Zeilen bis wir die Constraints erreichen
       }
       if (trimmedLine.startsWith('Subject To')) {
-        continue; // Überspringe diese Zeile
+        continue; // Ãœberspringe diese Zeile
       }
       if (trimmedLine.startsWith('Bounds')) {
         break; // Wir haben alle Constraints gelesen
@@ -112,7 +113,7 @@ export class HighsSolverComponent {
       // Hier wird die Zeile als Constraint geparst
       const parts = trimmedLine.split(/<=|>=|=/);
       if (parts.length < 2) {
-        continue; // Ungültige Zeile, überspringen
+        continue; // UngÃ¼ltige Zeile, Ã¼berspringen
       }
 
       const lhs = parts[0].trim();
@@ -136,7 +137,7 @@ export class HighsSolverComponent {
     for (const line of lines) {
         const trimmedLine = line.trim();
         
-        // Überprüfe auf die Maximierungs-/Minimierungszeile
+        // ÃœberprÃ¼fe auf die Maximierungs-/Minimierungszeile
         if (trimmedLine.startsWith('maximize') || trimmedLine.startsWith('maximize') || trimmedLine.startsWith('minimize')) {
             isObjective = false; // Wechsel zu den Constraints
             continue;
@@ -148,7 +149,7 @@ export class HighsSolverComponent {
             const constraintLine = trimmedLine.substring(4).trim();
             const parts = constraintLine.split(/<=|>=|=/);
             if (parts.length < 2) {
-                continue; // Ungültige Zeile, überspringen
+                continue; // UngÃ¼ltige Zeile, Ã¼berspringen
             }
 
             const lhs = parts[0].trim();
@@ -170,7 +171,7 @@ export class HighsSolverComponent {
   // Hilfsmethode zum Parsen der Terme einer Constraint
   private parseTerms(lhs: string): { name: string; coef: number }[] {
     const terms: { name: string; coef: number }[] = [];
-    const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel für Variablen x1, x2, ...
+    const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel fÃ¼r Variablen x1, x2, ...
     let match: RegExpExecArray | null;
 
     while ((match = termRegex.exec(lhs)) !== null) {
