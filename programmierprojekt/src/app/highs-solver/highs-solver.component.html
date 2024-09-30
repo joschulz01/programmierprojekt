@@ -7,11 +7,72 @@
   <button (click)="solveProblem()">Problem lösen</button>
 
   <!-- Ausgabe des Ergebnisses als JSON -->
-  <div *ngIf="solution">
+  <div *ngIf="result">
     <h3>Lösung:</h3>
-    <textarea readonly rows="10" cols="50">{{ solution }}</textarea>
-    <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
+    <!--<textarea readonly rows="10" cols="50">{{ solution }}</textarea>-->
+    
+    
+
+    <!-- Tabelle für die Variablen (Columns) -->
+    <h3>Variablen (Columns):</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th>Index</th>
+          <th>Status</th>
+          <th>Lower</th>
+          <th>Upper</th>
+          <th>Primal</th>
+          <th>Dual</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let column of result.Columns | keyvalue">
+          <td>{{ column.value.Name }}</td>
+          <td>{{ column.value.Index }}</td>
+          <td>{{ column.value.Status }}</td>
+          <td>{{ column.value.Lower }}</td>
+          <td>{{ column.value.Upper ?? '∞' }}</td>
+          <td>{{ column.value.Primal }}</td>
+          <td>{{ column.value.Dual }}</td>
+          <td>{{ column.value.Type }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Tabelle für die Nebenbedingungen (Rows) -->
+    <h3>Nebenbedingungen (Rows):</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Nebenbedingung</th>
+          <th>Index</th>
+          <th>Status</th>
+          <th>Lower</th>
+          <th>Upper</th>
+          <th>Primal</th>
+          <th>Dual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of result.Rows">
+          <td>{{ row.Name }}</td>
+          <td>{{ row.Index }}</td>
+          <td>{{ row.Status }}</td>
+          <td>{{ row.Lower ?? '-' }}</td>
+          <td>{{ row.Upper }}</td>
+          <td>{{ row.Primal }}</td>
+          <td>{{ row.Dual }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Zielwert (Objective Value) -->
+    <h3>Zielwert (Objective Value):</h3>
+    <p>{{ result.ObjectiveValue }}</p>
+  
+  <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
 </div>
-
-

@@ -79,6 +79,7 @@ onSolve() {
             }
         }
 
+        
         return {
             label: constraint.name,
             data: constraintData,
