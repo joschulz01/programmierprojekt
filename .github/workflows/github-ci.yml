@@ -117,3 +117,20 @@ jobs:
       # Stage: Run Robot Framework tests
       - name: Run Robot Framework tests
         run: robot Test.robot
+
+  build-multiarch-release:
+    name: Erstellung des Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Stage: Create, build and push Docker image
+      - name: Create, build and push Docker image
+        run: |
+          until docker info; do
+          sleep 5 && echo "Waiting for docker daemon...";
+          done;
+          docker build .
