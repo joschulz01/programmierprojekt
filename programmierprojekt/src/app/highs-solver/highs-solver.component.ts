@@ -6,15 +6,15 @@ import { ConstraintsService } from '../constraints.service';
 import { UmformungService } from '../umformung.service';
 import { ModelComponent } from '../model/model.component';
 
-// Definition der Interfaces fÃ¼r den Resultattyp
+// Definition der Interfaces für den Resultattyp
 interface Column {
   Name: string;
   Index: number;
   Status: string;
   Lower: number;
   Upper?: number;
-  Primal: number;
-  Dual: number;
+  Primal?: number; // Optional
+  Dual?: number; // Optional
   Type: string;
 }
 
@@ -22,10 +22,10 @@ interface Row {
   Name: string;
   Index: number;
   Status: string;
-  Lower?: number;
-  Upper: number;
-  Primal: number;
-  Dual: number;
+  Lower?: number; // Optional
+  Upper: number; // Muss vorhanden sein
+  Primal?: number; // Optional
+  Dual?: number; // Optional
 }
 
 interface Result {
@@ -42,8 +42,8 @@ interface Result {
   styleUrls: ['./highs-solver.component.css']
 })
 export class HighsSolverComponent {
-  problemInput = '';  // Eingabefeld fÃ¼r das Problem, standardmÃ¤ÃŸig leer
-  solution = '';  // Variable zur Anzeige der LÃ¶sung
+  problemInput = '';  // Eingabefeld für das Problem, standardmäßig leer
+  solution = '';  // Variable zur Anzeige der Lösung
   result: Result | null = null; // Verwendung des definierten Result Interfaces
 
   xWert?: number;
@@ -51,7 +51,7 @@ export class HighsSolverComponent {
 
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService) {}
 
-  // Methode zur LÃ¶sung des Benutzerproblems
+  // Methode zur Lösung des Benutzerproblems
   async solveProblem(): Promise<void> {
     const LP = this.umformungService.umformen(this.problemInput);
     // Initialisiere den HiGHS Solver und passe locateFile an
@@ -62,15 +62,15 @@ export class HighsSolverComponent {
     try {
       // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
-      let highsResult: HighsSolution; // Typ fÃ¼r das HiGHS-Ergebnis festlegen
+      let highsResult: HighsSolution; // Typ für das HiGHS-Ergebnis festlegen
 
-      // LÃ¶sen des vom Benutzer eingegebenen Problems
+      // Lösen des vom Benutzer eingegebenen Problems
       let constraints;
       try {
         highsResult = await highsSolver.solve(this.problemInput); // Async-Funktion aufrufen
         constraints = this.extractConstraints(this.problemInput);
       } catch (error) {
-        console.log('Fehler beim LÃ¶sen des Problems:', error, "\nMit umgeformtem Input");
+        console.log('Fehler beim Lösen des Problems:', error, "\nMit umgeformtem Input");
         highsResult = await highsSolver.solve(LP); // Async-Funktion aufrufen
         constraints = this.extractConstraints(LP);
       }
@@ -78,68 +78,82 @@ export class HighsSolverComponent {
       // Konvertiere das HiGHS-Ergebnis in dein Result-Format
       this.result = this.convertToResult(highsResult);
       
-      // FÃ¼ge die Constraints in den ConstraintsService hinzu
+      // Füge die Constraints in den ConstraintsService hinzu
       this.constraintsService.setConstraints(constraints);
       this.constraintsService.constraintsUpdated.next();
 
       // Ergebnis als JSON speichern und anzeigen
       this.solution = JSON.stringify(this.result, null, 2);
 
-      // Werte fÃ¼r x und y ermitteln
+      // Werte für x und y ermitteln
       this.WerteErmitteln(this.result);
     } catch (error) {
       // Fehlerbehandlung
-      console.error('Fehler beim LÃ¶sen des Problems:', error);
-      this.solution = 'Fehler beim LÃ¶sen des Problems: ' + error;
+      console.error('Fehler beim Lösen des Problems:', error);
+      this.solution = 'Fehler beim Lösen des Problems: ' + error;
     }
   }
 
-  // Methode zur Konvertierung von HighsSolution zu Result
   private convertToResult(highsResult: HighsSolution): Result {
     const columns: Record<string, Column> = {};
     const rows: Row[] = [];
 
+    // Verarbeitung der Spalten
     for (const [name, column] of Object.entries(highsResult.Columns)) {
-      columns[name] = {
-        Name: name,
-        Index: column.Index,
-        Status: column.Status,
-        Lower: column.Lower,
-        Upper: column.Upper,
-        Primal: column.Primal,
-        Dual: column.Dual,
-        Type: column.Type,
-      };
+        columns[name] = {
+            Name: name,
+            Index: column.Index,
+            Status: column.Status,
+            Lower: column.Lower ?? 0, // Setze einen Standardwert, falls null
+            Upper: column.Upper ?? Infinity, // Setze einen Standardwert, falls null
+            Primal: column.Primal ?? undefined, // Setze auf undefined, wenn null
+            Dual: column.Dual ?? undefined, // Setze auf undefined, wenn null
+            Type: column.Type,
+        };
     }
 
+    // Verarbeitung der Zeilen
     for (const row of highsResult.Rows) {
-      rows.push({
-        Name: row.Name,
-        Index: row.Index,
-        Status: row.Status,
-        Lower: row.Lower,
-        Upper: row.Upper,
-        Primal: row.Primal,
-        Dual: row.Dual,
-      });
+        const newRow: Row = {
+            Name: `Row ${row.Index}`, // Standardname verwenden
+            Index: row.Index,
+            Status: 'Status' in row ? row.Status : 'Unknown', // Setze auf 'Unknown' wenn Status nicht existiert
+            Lower: row.Lower ?? 0, // Setze einen Standardwert, falls null
+            Upper: row.Upper ?? Infinity, // Setze einen Standardwert, falls null
+            Primal: undefined, // Setze auf undefined, weil nicht immer verfügbar
+            Dual: undefined, // Setze auf undefined, weil nicht immer verfügbar
+        };
+
+        // Überprüfung auf die Existenz von Primal und Dual
+        if ('Primal' in row) {
+            newRow.Primal = row.Primal;
+        }
+        if ('Dual' in row) {
+            newRow.Dual = row.Dual;
+        }
+
+        rows.push(newRow);
     }
 
     return {
-      Columns: columns,
-      Rows: rows,
-      ObjectiveValue: highsResult.ObjectiveValue,
+        Columns: columns,
+        Rows: rows,
+        ObjectiveValue: highsResult.ObjectiveValue,
     };
-  }
+}
 
-  WerteErmitteln(result: Result) { // Typ fÃ¼r result festlegen
+
+
+
+  WerteErmitteln(result: Result) { // Typ für result festlegen
     const VariableX = result.Columns['x'] || result.Columns['x1'];
     if (VariableX && 'Primal' in VariableX) {
-      this.xWert = VariableX.Primal; // Setze den Wert fÃ¼r xWert
+      this.xWert = VariableX.Primal; // Setze den Wert für xWert
     }
     
     const VariableY = result.Columns['y'] || result.Columns['x2'];
     if (VariableY && 'Primal' in VariableY) {
-      this.yWert = VariableY.Primal; // Setze den Wert fÃ¼r yWert
+      this.yWert = VariableY.Primal; // Setze den Wert für yWert
     }
   }
 
@@ -156,10 +170,10 @@ export class HighsSolverComponent {
         continue;
       }
       if (isObjective) {
-        continue; // Ãœberspringe die Zeilen bis wir die Constraints erreichen
+        continue; // Überspringe die Zeilen bis wir die Constraints erreichen
       }
       if (trimmedLine.startsWith('Subject To')) {
-        continue; // Ãœberspringe diese Zeile
+        continue; // Überspringe diese Zeile
       }
       if (trimmedLine.startsWith('Bounds')) {
         break; // Wir haben alle Constraints gelesen
@@ -168,7 +182,7 @@ export class HighsSolverComponent {
       // Hier wird die Zeile als Constraint geparst
       const parts = trimmedLine.split(/<=|>=|=/);
       if (parts.length < 2) {
-        continue; // UngÃ¼ltige Zeile, Ã¼berspringen
+        continue; // Ungültige Zeile, überspringen
       }
 
       const lhs = this.normalizeVariableNames(parts[0].trim());
@@ -192,7 +206,7 @@ export class HighsSolverComponent {
   // Hilfsmethode zum Parsen der Terme einer Constraint
   private parseTerms(lhs: string): { name: string; coef: number }[] {
     const terms: { name: string; coef: number }[] = [];
-    const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel fÃ¼r Variablen x1, x2, ...
+    const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel für Variablen x1, x2, ...
     let match: RegExpExecArray | null;
 
     while ((match = termRegex.exec(lhs)) !== null) {
@@ -218,14 +232,14 @@ export class HighsSolverComponent {
     this.downloadFile(mpsData, 'model.mps', 'text/plain');
   }
 
-  // Funktion zum Erstellen einer Download-Datei
-  downloadFile(data: string, filename: string, filetype: string) {
-    const blob = new Blob([data], { type: filetype });
-    const url = window.URL.createObjectURL(blob);
+  // Funktion zum Erstellen einer Datei und Herunterladen
+  private downloadFile(data: string, filename: string, type: string) {
+    const blob = new Blob([data], { type: type });
     const a = document.createElement('a');
-    a.href = url;
+    a.href = window.URL.createObjectURL(blob);
     a.download = filename;
+    document.body.appendChild(a);
     a.click();
-    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
   }
 }
