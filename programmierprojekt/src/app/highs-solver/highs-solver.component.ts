@@ -50,7 +50,6 @@ export class HighsSolverComponent {
   async solveProblem(): Promise<void> {
     const LP = this.umformungService.umformen(this.problemInput);
    
-
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
       locateFile: (file: string) => `highs/${file}` // Zeigt auf den Ordner, wo die WASM-Datei liegt
@@ -62,7 +61,7 @@ export class HighsSolverComponent {
       let result: any;
 
       // Lösen des vom Benutzer eingegebenen Problems
-      let constraints
+      let constraints;
       try {
         result = highsSolver.solve(this.problemInput);
         constraints = this.extractConstraints(this.problemInput);
@@ -72,7 +71,7 @@ export class HighsSolverComponent {
       }
 
       // Füge die Constraints in den ConstraintsService hinzu
-      console.log("Hier: ",constraints);
+      console.log("Hier: ", constraints);
       this.constraintsService.setConstraints(constraints);
       this.constraintsService.constraintsUpdated.next();  
 
@@ -146,6 +145,7 @@ export class HighsSolverComponent {
   private normalizeVariableNames(expression: string): string {
     return expression.replace(/\s+(\d+)/g, '$1');  // Entfernt Leerzeichen zwischen Variablen und Zahlen, z.B. "x 1" wird zu "x1"
   }
+  
   // Hilfsmethode zum Parsen der Terme einer Constraint
   private parseTerms(lhs: string): { name: string; coef: number }[] {
     const terms: { name: string; coef: number }[] = [];
@@ -159,5 +159,30 @@ export class HighsSolverComponent {
     }
 
     return terms;
+  }
+
+  // === EXPORT FUNCTIONALITY ===
+
+  // Exportiere das Modell als LP-Datei basierend auf der Benutzereingabe
+  downloadLP() {
+    const lpData = this.problemInput; // Benutzereingabe verwenden
+    this.downloadFile(lpData, 'model.lp', 'text/plain');
+  }
+
+  // Exportiere das Modell als MPS-Datei basierend auf der Benutzereingabe
+  downloadMPS() {
+    const mpsData = this.problemInput; // Benutzereingabe verwenden
+    this.downloadFile(mpsData, 'model.mps', 'text/plain');
+  }
+
+  // Funktion zum Erstellen einer Download-Datei
+  downloadFile(data: string, filename: string, filetype: string) {
+    const blob = new Blob([data], { type: filetype });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
   }
 }
