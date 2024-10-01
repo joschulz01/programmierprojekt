@@ -72,7 +72,13 @@
     <!-- Zielwert (Objective Value) -->
     <h3>Zielwert (Objective Value):</h3>
     <p>{{ result.ObjectiveValue }}</p>
+
   
   <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
+<div>
+  <button (click)="downloadMPS()">Export als MPS</button>
+  <br>
+  <button (click)="downloadLP()">Export als LP</button>
+</div>
 </div>
