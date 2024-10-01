@@ -1,10 +1,38 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import highs from 'highs';
+import highs, { HighsSolution } from 'highs'; // Importiere HighsSolution
 import { ConstraintsService } from '../constraints.service';
 import { UmformungService } from '../umformung.service';
 import { ModelComponent } from '../model/model.component';
+
+// Definition der Interfaces für den Resultattyp
+interface Column {
+  Name: string;
+  Index: number;
+  Status: string;
+  Lower: number;
+  Upper?: number;
+  Primal: number;
+  Dual: number;
+  Type: string;
+}
+
+interface Row {
+  Name: string;
+  Index: number;
+  Status: string;
+  Lower?: number;
+  Upper: number;
+  Primal: number;
+  Dual: number;
+}
+
+interface Result {
+  Columns: Record<string, Column>; // Verwendung von Record anstelle von Indexsignatur
+  Rows: Row[];
+  ObjectiveValue: number;
+}
 
 @Component({
   selector: 'app-highs-solver',
@@ -16,30 +44,7 @@ import { ModelComponent } from '../model/model.component';
 export class HighsSolverComponent {
   problemInput = '';  // Eingabefeld für das Problem, standardmäßig leer
   solution = '';  // Variable zur Anzeige der Lösung
-  result: { 
-    Columns: { 
-      [key: string]: { 
-        Name: string; 
-        Index: number; 
-        Status: string; 
-        Lower: number; 
-        Upper?: number; 
-        Primal: number; 
-        Dual: number; 
-        Type: string; 
-      }; 
-    }; 
-    Rows: { 
-      Name: string; 
-      Index: number; 
-      Status: string; 
-      Lower?: number; 
-      Upper: number; 
-      Primal: number; 
-      Dual: number; 
-    }[]; 
-    ObjectiveValue: number; 
-  } | null = null;
+  result: Result | null = null; // Verwendung des definierten Result Interfaces
 
   xWert?: number;
   yWert?: number;
@@ -49,7 +54,6 @@ export class HighsSolverComponent {
   // Methode zur Lösung des Benutzerproblems
   async solveProblem(): Promise<void> {
     const LP = this.umformungService.umformen(this.problemInput);
-   
 
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
@@ -59,29 +63,31 @@ export class HighsSolverComponent {
     try {
       // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
-      let result: any;
+      let highsResult: HighsSolution; // Typ für das HiGHS-Ergebnis festlegen
 
       // Lösen des vom Benutzer eingegebenen Problems
-      let constraints
+      let constraints;
       try {
-        result = highsSolver.solve(this.problemInput);
+        highsResult = await highsSolver.solve(this.problemInput); // Async-Funktion aufrufen
         constraints = this.extractConstraints(this.problemInput);
       } catch (error) {
-        result = highsSolver.solve(LP);
+        console.log('Fehler beim Lösen des Problems:', error, "\nMit umgeformtem Input");
+        highsResult = await highsSolver.solve(LP); // Async-Funktion aufrufen
         constraints = this.extractConstraints(LP);
       }
 
+      // Konvertiere das HiGHS-Ergebnis in dein Result-Format
+      this.result = this.convertToResult(highsResult);
+      
       // Füge die Constraints in den ConstraintsService hinzu
-      console.log("Hier: ",constraints);
       this.constraintsService.setConstraints(constraints);
-      this.constraintsService.constraintsUpdated.next();  
+      this.constraintsService.constraintsUpdated.next();
 
       // Ergebnis als JSON speichern und anzeigen
-      this.result = result;
-      this.solution = JSON.stringify(result, null, 2);
+      this.solution = JSON.stringify(this.result, null, 2);
 
       // Werte für x und y ermitteln
-      this.WerteErmitteln(result);
+      this.WerteErmitteln(this.result);
     } catch (error) {
       // Fehlerbehandlung
       console.error('Fehler beim Lösen des Problems:', error);
@@ -89,7 +95,44 @@ export class HighsSolverComponent {
     }
   }
 
-  WerteErmitteln(result: any) {
+  // Methode zur Konvertierung von HighsSolution zu Result
+  private convertToResult(highsResult: HighsSolution): Result {
+    const columns: Record<string, Column> = {};
+    const rows: Row[] = [];
+
+    for (const [name, column] of Object.entries(highsResult.Columns)) {
+      columns[name] = {
+        Name: name,
+        Index: column.Index,
+        Status: column.Status,
+        Lower: column.Lower,
+        Upper: column.Upper,
+        Primal: column.Primal,
+        Dual: column.Dual,
+        Type: column.Type,
+      };
+    }
+
+    for (const row of highsResult.Rows) {
+      rows.push({
+        Name: row.Name,
+        Index: row.Index,
+        Status: row.Status,
+        Lower: row.Lower,
+        Upper: row.Upper,
+        Primal: row.Primal,
+        Dual: row.Dual,
+      });
+    }
+
+    return {
+      Columns: columns,
+      Rows: rows,
+      ObjectiveValue: highsResult.ObjectiveValue,
+    };
+  }
+
+  WerteErmitteln(result: Result) { // Typ für result festlegen
     const VariableX = result.Columns['x'] || result.Columns['x1'];
     if (VariableX && 'Primal' in VariableX) {
       this.xWert = VariableX.Primal; // Setze den Wert für xWert
@@ -102,8 +145,8 @@ export class HighsSolverComponent {
   }
 
   // Methode zum Extrahieren der Constraints aus dem Problemstring
-  private extractConstraints(problem: string): any[] {
-    const constraints: any[] = [];
+  private extractConstraints(problem: string): { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] {
+    const constraints: { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] = [];
     const lines = problem.split('\n').filter(line => line.trim() !== '');
 
     let isObjective = true; // Flag zum Erkennen, ob wir noch im Zielbereich sind
@@ -146,6 +189,7 @@ export class HighsSolverComponent {
   private normalizeVariableNames(expression: string): string {
     return expression.replace(/\s+(\d+)/g, '$1');  // Entfernt Leerzeichen zwischen Variablen und Zahlen, z.B. "x 1" wird zu "x1"
   }
+  
   // Hilfsmethode zum Parsen der Terme einer Constraint
   private parseTerms(lhs: string): { name: string; coef: number }[] {
     const terms: { name: string; coef: number }[] = [];

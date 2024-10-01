@@ -4,20 +4,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UmformungService {
-  constructor (){};  
-
   umformen(LP: string): string {
     // Eingabe-String parsen
     const lines = LP.split('\n').map(line => line.trim()).filter(line => line);
-    let variablen: Set<string> = new Set(); // Speichert die Variablen
-    let zielfunktion: string = '';
-    let nebenbedingungen: string[] = [];
+    const variablen = new Set<string>(); // Speichert die Variablen
+    let zielfunktion = ''; // Zielfunktion als string
+    const nebenbedingungen: string[] = []; // Array von Nebenbedingungen
 
     // Durch die Zeilen iterieren und Informationen extrahieren
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
 
-      // Variablen aus Nebenbedingungen oder Zielfunktion extrahieren (x1, x2, etc.)
+      // Variablen aus Nebenbedingungen oder Zielfunktion extrahieren
       this.extractVariablen(line, variablen);
 
       // Zielfunktion extrahieren
@@ -40,13 +38,13 @@ export class UmformungService {
 
     // Zielfunktion formatieren
     ausgabe.push(`Maximize`);
-    const formatierteZielfunktion = this.formatZielfunktion(zielfunktion, [...variablen]);
+    const formatierteZielfunktion = this.formatZielfunktion(zielfunktion);
     ausgabe.push(`  ${formatierteZielfunktion}`);
 
     // Nebenbedingungen formatieren
     ausgabe.push(`Subject To`);
-    nebenbedingungen.forEach((nb, index) => {
-      const formatierteNB = this.formatNebenbedingung(nb, [...variablen]);
+    nebenbedingungen.forEach(nb => {
+      const formatierteNB = this.formatNebenbedingung(nb);
       ausgabe.push(`  ${formatierteNB}`);
     });
 
@@ -60,27 +58,27 @@ export class UmformungService {
   // Methode zur Extraktion der Variablen aus einer Zeile
   private extractVariablen(line: string, variablen: Set<string>): void {
     const variableRegex = /([a-zA-Z]\d*)/g;
-    let match;
+    let match: RegExpExecArray | null;
     while ((match = variableRegex.exec(line)) !== null) {
       variablen.add(match[1]); // Gefundene Variable zu Set hinzufügen
     }
   }
 
   // Formatierung der Zielfunktion
-  private formatZielfunktion(zielfunktion: string, variablen: string[]): string {
+  private formatZielfunktion(zielfunktion: string): string {
     return zielfunktion
-      .replace(';', '')           // Semikolon entfernen
-      .replace(/\*/g, ' ')        // '*' durch Leerzeichen ersetzen
-      .replace(/\s*\+\s*/g, ' + ')  // Sicherstellen, dass um '+' herum Leerzeichen sind
-      .replace(/([a-zA-Z])(\d+)/g, '$1$2');  // Entfernt Leerzeichen zwischen Variablen und Zahlen
+      .replace(/;/g, '')           // Semikolon entfernen
+      .replace(/\*/g, ' ')         // '*' durch Leerzeichen ersetzen
+      .replace(/\s*\+\s*/g, ' + ') // Sicherstellen, dass um '+' herum Leerzeichen sind
+      .replace(/([a-zA-Z])(\d+)/g, '$1$2'); // Entfernt Leerzeichen zwischen Variablen und Zahlen
   }
 
   // Formatierung der Nebenbedingungen
-  private formatNebenbedingung(nebenbedingung: string, variablen: string[]): string {
+  private formatNebenbedingung(nebenbedingung: string): string {
     return nebenbedingung
-      .replace(';', '')           // Semikolon entfernen
-      .replace(/\*/g, ' ')        // '*' durch Leerzeichen ersetzen
-      .replace(/\s*\+\s*/g, ' + ')  // Sicherstellen, dass um '+' herum Leerzeichen sind
-      .replace(/([a-zA-Z])(\d+)/g, '$1$2');  // Entfernt Leerzeichen zwischen Variablen und Zahlen
+      .replace(/;/g, '')           // Semikolon entfernen
+      .replace(/\*/g, ' ')         // '*' durch Leerzeichen ersetzen
+      .replace(/\s*\+\s*/g, ' + ') // Sicherstellen, dass um '+' herum Leerzeichen sind
+      .replace(/([a-zA-Z])(\d+)/g, '$1$2'); // Entfernt Leerzeichen zwischen Variablen und Zahlen
   }
 }
