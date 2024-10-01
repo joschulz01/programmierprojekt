@@ -1,32 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+interface Constraint {
+  name: string; // Name des Constraints (wird z.B. als Label in den Chart-Datasets verwendet)
+  terms: { name: string; coef: number }[]; // Array von Terme mit Variablenname und Koeffizient
+  relation: string; // Relation des Constraints (z.B. '<=', '>=', '=')
+  rhs: number; // Rechte Seite des Constraints (Wert, mit dem verglichen wird)
+}
+
 @Injectable({
   providedIn: 'root',
 })
+
 export class ConstraintsService {
-  private constraints: any[] = [];  // Internes Array zur Speicherung der Constraints
+  private constraints: Constraint[] = [];  // Internes Array zur Speicherung der Constraints
   constraintsUpdated: Subject<void> = new Subject<void>(); // Subject für Benachrichtigungen
 
-  constructor() {}
-
   // Methode zum Setzen der Constraints
-  setConstraints(newConstraints: any[]): void {
+  setConstraints(newConstraints: Constraint[]): void {
     this.constraints = newConstraints;
     this.constraintsUpdated.next(); // Benachrichtige die Abonnenten über die Änderungen
   }
 
   // Methode zum Abrufen der Constraints
-  getConstraints(): any[] {
+  getConstraints(): Constraint[] {
     return this.constraints;
   }
 
   // Methode zur Konvertierung einer Constraint in eine Gleichung
-  convertConstraintToEquation(constraint: any): (values: { [key: string]: number }) => number {
-    return (values: { [key: string]: number }) => {
-        // Wir berechnen die Gleichung unter Verwendung der Variablenwerte aus dem "values" Objekt
+  convertConstraintToEquation(constraint: Constraint): (values: Record<string, number>) => number {
+    return (values: Record<string, number>) => {
         return constraint.terms.reduce((acc: number, term: { name: string; coef: number }) => {
-            const variableValue = values[term.name] || 0; // Hole den Wert der Variablen
+            const variableValue = values[term.name] || 0; 
             return acc + term.coef * variableValue; 
         }, 0);
     };
