@@ -1,0 +1,64 @@
+{"level":30,"time":"2024-10-02T15:38:43.750Z","pid":28664,"hostname":"Arning_Nadine","msg":"Listening on 50561"}
+(node:28664) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2024-10-02T15:38:43.983Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:43.983Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:43.987Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:43.987Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:43.991Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2024-10-02T15:38:44.271Z","pid":28664,"hostname":"Arning_Nadine","msg":"Adding browser to stack: chromium, version: 129.0.6668.29"}
+{"level":30,"time":"2024-10-02T15:38:44.272Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method newBrowser"}
+{"level":30,"time":"2024-10-02T15:38:44.272Z","pid":28664,"hostname":"Arning_Nadine","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2024-10-02T15:38:44.280Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method newPage"}
+{"level":30,"time":"2024-10-02T15:38:44.281Z","pid":28664,"hostname":"Arning_Nadine","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2024-10-02T15:38:44.305Z","pid":28664,"hostname":"Arning_Nadine","msg":"Changed active context"}
+{"level":30,"time":"2024-10-02T15:38:44.559Z","pid":28664,"hostname":"Arning_Nadine","msg":"Video path: undefined"}
+{"level":30,"time":"2024-10-02T15:38:44.559Z","pid":28664,"hostname":"Arning_Nadine","msg":"Changed active page"}
+{"level":30,"time":"2024-10-02T15:38:44.865Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method newPage"}
+{"level":30,"time":"2024-10-02T15:38:44.871Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method fillText"}
+{"level":30,"time":"2024-10-02T15:38:44.871Z","pid":28664,"hostname":"Arning_Nadine","msg":"Strict mode is enabled, find Locator with id=problemInput in page."}
+{"level":30,"time":"2024-10-02T15:38:44.928Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method fillText"}
+{"level":30,"time":"2024-10-02T15:38:44.932Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method click"}
+{"level":30,"time":"2024-10-02T15:38:44.933Z","pid":28664,"hostname":"Arning_Nadine","msg":"Strict mode is enabled, find Locator with id=problemSolve in page."}
+{"level":30,"time":"2024-10-02T15:38:45.333Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method click"}
+{"level":30,"time":"2024-10-02T15:38:45.337Z","pid":28664,"hostname":"Arning_Nadine","msg":"Strict mode is enabled, find Locator with id=loesungstabelle in page."}
+{"level":30,"time":"2024-10-02T15:38:45.337Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2024-10-02T15:38:45.486Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2024-10-02T15:38:45.491Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2024-10-02T15:38:45.491Z","pid":28664,"hostname":"Arning_Nadine","msg":"Strict mode is enabled, find Locator with id=myChart in page."}
+{"level":30,"time":"2024-10-02T15:38:45.497Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2024-10-02T15:38:45.502Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method getText"}
+{"level":30,"time":"2024-10-02T15:38:45.502Z","pid":28664,"hostname":"Arning_Nadine","msg":"Strict mode is enabled, find Locator with xpath=//td[@id='tabelle_primal_0'] in page."}
+{"level":30,"time":"2024-10-02T15:38:45.533Z","pid":28664,"hostname":"Arning_Nadine","msg":"Retrieved text for element xpath=//td[@id='tabelle_primal_0'] containing 5"}
+{"level":30,"time":"2024-10-02T15:38:45.533Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method getText"}
+{"level":30,"time":"2024-10-02T15:38:45.537Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method getText"}
+{"level":30,"time":"2024-10-02T15:38:45.537Z","pid":28664,"hostname":"Arning_Nadine","msg":"Strict mode is enabled, find Locator with xpath=//td[@id='tabelle_primal_1'] in page."}
+{"level":30,"time":"2024-10-02T15:38:45.560Z","pid":28664,"hostname":"Arning_Nadine","msg":"Retrieved text for element xpath=//td[@id='tabelle_primal_1'] containing 5"}
+{"level":30,"time":"2024-10-02T15:38:45.560Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method getText"}
+{"level":30,"time":"2024-10-02T15:38:48.568Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:48.574Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:48.577Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:48.580Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:48.584Z","pid":28664,"hostname":"Arning_Nadine","msg":"Changed active context"}
+{"level":30,"time":"2024-10-02T15:38:48.584Z","pid":28664,"hostname":"Arning_Nadine","msg":"Changing current active page: page=04d703e2-5a1d-4843-8266-7585a1dd1084"}
+{"level":30,"time":"2024-10-02T15:38:48.584Z","pid":28664,"hostname":"Arning_Nadine","msg":"Changed active page"}
+{"level":30,"time":"2024-10-02T15:38:48.591Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:48.593Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:48.596Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method switchBrowser"}
+{"level":30,"time":"2024-10-02T15:38:48.596Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method switchBrowser"}
+{"level":30,"time":"2024-10-02T15:38:48.599Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method switchBrowser"}
+{"level":30,"time":"2024-10-02T15:38:48.599Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method switchBrowser"}
+{"level":30,"time":"2024-10-02T15:38:48.601Z","pid":28664,"hostname":"Arning_Nadine","msg":"Changing current active page: page=04d703e2-5a1d-4843-8266-7585a1dd1084"}
+{"level":30,"time":"2024-10-02T15:38:48.601Z","pid":28664,"hostname":"Arning_Nadine","msg":"Changed active page"}
+{"level":30,"time":"2024-10-02T15:38:48.606Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:48.608Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:48.611Z","pid":28664,"hostname":"Arning_Nadine","msg":"Changed active context"}
+{"level":30,"time":"2024-10-02T15:38:48.611Z","pid":28664,"hostname":"Arning_Nadine","msg":"Changing current active page: page=04d703e2-5a1d-4843-8266-7585a1dd1084"}
+{"level":30,"time":"2024-10-02T15:38:48.611Z","pid":28664,"hostname":"Arning_Nadine","msg":"Changed active page"}
+{"level":30,"time":"2024-10-02T15:38:48.613Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method closeContext"}
+{"level":30,"time":"2024-10-02T15:38:48.622Z","pid":28664,"hostname":"Arning_Nadine","msg":"Removed page=95f13597-e1bd-4a42-87a8-8ef59dcda3f2 from context=3e6e19d6-c440-4a31-92b6-4b6b09a50147 page stack"}
+{"level":30,"time":"2024-10-02T15:38:48.655Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method closeContext"}
+{"level":30,"time":"2024-10-02T15:38:48.668Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:48.668Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:38:48.730Z","pid":28664,"hostname":"Arning_Nadine","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2024-10-02T15:38:48.928Z","pid":28664,"hostname":"Arning_Nadine","msg":"End of node method closeAllBrowsers"}

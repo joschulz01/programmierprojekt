@@ -1,10 +1,10 @@
 <div class="solver-container">
   <h2>HiGHS Solver</h2>
 
-  <textarea [(ngModel)]="problemInput" placeholder="Geben Sie hier das Optimierungsproblem ein" rows="10" cols="50"></textarea>
+  <textarea id="problemInput" [(ngModel)]="problemInput" placeholder="Geben Sie hier das Optimierungsproblem ein" rows="10" cols="50"></textarea>
 
   <br>
-  <button (click)="solveProblem()">Problem lösen</button>
+  <button id="problemSolve" (click)="solveProblem()">Problem lösen</button>
 
   <!-- Ausgabe des Ergebnisses als JSON -->
   <div *ngIf="result">
@@ -15,7 +15,7 @@
 
     <!-- Tabelle für die Variablen (Columns) -->
     <h3>Variablen (Columns):</h3>
-    <table>
+    <<table id="loesungstabelle">
       <thead>
         <tr>
           <th>Variable</th>
@@ -29,45 +29,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let column of result.Columns | keyvalue">
-          <td>{{ column.value.Name }}</td>
-          <td>{{ column.value.Index }}</td>
-          <td>{{ column.value.Status }}</td>
-          <td>{{ column.value.Lower }}</td>
-          <td>{{ column.value.Upper ?? '∞' }}</td>
-          <td>{{ column.value.Primal }}</td>
-          <td>{{ column.value.Dual }}</td>
-          <td>{{ column.value.Type }}</td>
+        <tr *ngFor="let column of result.Columns | keyvalue; let i = index">
+          <td [id]="'tabelle_name_' + i">{{ column.value.Name }}</td>
+          <td [id]="'tabelle_index_' + i">{{ column.value.Index }}</td>
+          <td [id]="'tabelle_status_' + i">{{ column.value.Status }}</td>
+          <td [id]="'tabelle_Lower_' + i">{{ column.value.Lower }}</td>
+          <td [id]="'tabelle_upper_' + i">{{ column.value.Upper ?? '∞' }}</td>
+          <td [id]="'tabelle_primal_' + i">{{ column.value.Primal }}</td>
+          <td [id]="'tabelle_dual_' + i">{{ column.value.Dual }}</td>
+          <td [id]="'tabelle_type_' + i">{{ column.value.Type }}</td>
         </tr>
       </tbody>
     </table>
-
-    <!-- Tabelle für die Nebenbedingungen (Rows) -->
-    <h3>Nebenbedingungen (Rows):</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Nebenbedingung</th>
-          <th>Index</th>
-          <th>Status</th>
-          <th>Lower</th>
-          <th>Upper</th>
-          <th>Primal</th>
-          <th>Dual</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of result.Rows">
-          <td>{{ row.Name }}</td>
-          <td>{{ row.Index }}</td>
-          <td>{{ row.Status }}</td>
-          <td>{{ row.Lower ?? '-' }}</td>
-          <td>{{ row.Upper }}</td>
-          <td>{{ row.Primal }}</td>
-          <td>{{ row.Dual }}</td>
-        </tr>
-      </tbody>
-    </table>
+    
 
     <!-- Zielwert (Objective Value) -->
     <h3>Zielwert (Objective Value):</h3>
@@ -77,8 +51,8 @@
   <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
 <div>
-  <button (click)="downloadMPS()">Export als MPS</button>
+  <button id="export_MPS" (click)="downloadMPS()">Export als MPS</button>
   <br>
-  <button (click)="downloadLP()">Export als LP</button>
+  <button id="export_LP" (click)="downloadLP()">Export als LP</button>
 </div>
 </div>

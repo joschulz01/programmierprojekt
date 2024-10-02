@@ -1,9 +1,9 @@
 <header>
-  <img src="logo.png" alt="OR Logo"/>
+  <img id="logo_header" src="logo.png" alt="OR Logo"/>
   <div>
     <h1>{{ translationService.getTranslations().title }}</h1>
     <p>{{ translationService.getTranslations().subtitle }}</p>
-    <button (click)="switchLanguage()">
+    <button id="spracheÄndern" (click)="switchLanguage()">
       {{ translationService.getTranslations().switchLanguage }}
     </button>
   </div>
