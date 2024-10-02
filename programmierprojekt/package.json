@@ -19,11 +19,13 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "chart.js": "^4.4.4",
-    "crypto-browserify": "^3.12.0",
     "highs": "^1.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "vm-browserify": "^1.1.2",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
@@ -34,6 +36,7 @@
     "@types/chart.js": "^2.9.41",
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "18.3.1",
+    "crypto-browserify": "^3.12.0",
     "eslint": "^9.9.1",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
@@ -41,6 +44,9 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0",
     "typescript": "~5.5.2",
     "typescript-eslint": "8.2.0"
   }
