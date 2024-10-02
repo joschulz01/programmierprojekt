@@ -5,7 +5,7 @@ Library    XML
 
 *** Variablen ***
 ${BROWSER}    chromium
-${url}        http://localhost:4200/    #https://or-tool.de
+${url}        https://or-tool.de
 ${Testdatei1}    var x1>=0;\nvar x2>=0;\nmaximize Objective: x1+x2;\ns.t. Constraint1:\nx1 + 2*x2 <= 15;\ns.t. Constraint2:\n3*x1 + x2 <= 20;
 *** Testfälle ***
 Öffne Browser
@@ -19,7 +19,7 @@ ${Testdatei1}    var x1>=0;\nvar x2>=0;\nmaximize Objective: x1+x2;\ns.t. Constr
 *** Schlüsselwörter ***
 Öffne OR-Webseite
     [Dokumentation]     Öffnet die OR-Webseite
-    New Browser    ${BROWSER}    ${False}
+    New Browser    ${BROWSER}    ${True}    #${False}
     New Page    ${url}
 
 Testproblem lösen
