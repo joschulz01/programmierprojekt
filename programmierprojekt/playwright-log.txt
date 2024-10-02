@@ -1,52 +1,50 @@
-{"level":30,"time":"2024-10-01T16:56:31.547Z","pid":18512,"hostname":"Arning_Nadine","msg":"Listening on 58494"}
-(node:18512) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+{"level":30,"time":"2024-10-02T15:23:51.796Z","pid":4928,"hostname":"Arning_Nadine","msg":"Listening on 49730"}
+(node:4928) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-{"level":30,"time":"2024-10-01T16:56:31.685Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
-{"level":30,"time":"2024-10-01T16:56:31.686Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
-{"level":30,"time":"2024-10-01T16:56:31.689Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
-{"level":30,"time":"2024-10-01T16:56:31.689Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
-{"level":30,"time":"2024-10-01T16:56:31.694Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method newBrowser"}
-{"level":30,"time":"2024-10-01T16:56:31.955Z","pid":18512,"hostname":"Arning_Nadine","msg":"Adding browser to stack: chromium, version: 129.0.6668.29"}
-{"level":30,"time":"2024-10-01T16:56:31.956Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method newBrowser"}
-{"level":30,"time":"2024-10-01T16:56:31.955Z","pid":18512,"hostname":"Arning_Nadine","msg":"Adding 0 contexts to browser"}
-{"level":30,"time":"2024-10-01T16:56:31.963Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method newPage"}
-{"level":30,"time":"2024-10-01T16:56:31.964Z","pid":18512,"hostname":"Arning_Nadine","msg":"currentBrowser: [object Object]"}
-{"level":30,"time":"2024-10-01T16:56:31.985Z","pid":18512,"hostname":"Arning_Nadine","msg":"Changed active context"}
-{"level":30,"time":"2024-10-01T16:56:32.317Z","pid":18512,"hostname":"Arning_Nadine","msg":"Video path: undefined"}
-{"level":30,"time":"2024-10-01T16:56:32.317Z","pid":18512,"hostname":"Arning_Nadine","msg":"Changed active page"}
-{"level":30,"time":"2024-10-01T16:56:33.191Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method newPage"}
-{"level":30,"time":"2024-10-01T16:56:36.198Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method closeBrowser"}
-{"level":30,"time":"2024-10-01T16:56:36.232Z","pid":18512,"hostname":"Arning_Nadine","msg":"Removed page=e21cfc08-6209-4e93-8aae-65ae2cf92fed from context=e9847f6e-b976-4e78-a23c-a8acdd0ceb58 page stack"}
-{"level":30,"time":"2024-10-01T16:56:36.519Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method closeBrowser"}
-================= Original suppressed error =================
-Error: Browser has been closed.
-    at PlaywrightState.getActiveBrowser (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:10748:15)
-    at PlaywrightServer.getActiveBrowser (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11364:59)
-    at PlaywrightServer.setTimeout (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11603:57)
-    at Object.onReceiveHalfClose (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1425:25)
-    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:569:31)
-    at BaseServerInterceptingCall.handleEndEvent (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:609:14)
-    at ServerHttp2Stream.<anonymous> (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:376:18)
-    at ServerHttp2Stream.emit (node:events:531:35)
-    at endReadableNT (node:internal/streams/readable:1696:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
-=============================================================
-{"level":30,"time":"2024-10-01T16:56:36.565Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
-{"level":30,"time":"2024-10-01T16:56:36.566Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
-================= Original suppressed error =================
-Error: Browser has been closed.
-    at PlaywrightState.getActiveBrowser (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:10748:15)
-    at PlaywrightServer.getActiveBrowser (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11364:59)
-    at PlaywrightServer.setTimeout (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11603:57)
-    at Object.onReceiveHalfClose (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1425:25)
-    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:569:31)
-    at BaseServerInterceptingCall.handleEndEvent (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:609:14)
-    at ServerHttp2Stream.<anonymous> (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:376:18)
-    at ServerHttp2Stream.emit (node:events:531:35)
-    at endReadableNT (node:internal/streams/readable:1696:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
-=============================================================
-{"level":30,"time":"2024-10-01T16:56:36.602Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
-{"level":30,"time":"2024-10-01T16:56:36.603Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
-{"level":30,"time":"2024-10-01T16:56:36.657Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method closeAllBrowsers"}
-{"level":30,"time":"2024-10-01T16:56:36.657Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method closeAllBrowsers"}
+{"level":30,"time":"2024-10-02T15:23:51.973Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:51.974Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:51.978Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:51.978Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:51.984Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2024-10-02T15:23:52.230Z","pid":4928,"hostname":"Arning_Nadine","msg":"Adding browser to stack: chromium, version: 129.0.6668.29"}
+{"level":30,"time":"2024-10-02T15:23:52.232Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method newBrowser"}
+{"level":30,"time":"2024-10-02T15:23:52.231Z","pid":4928,"hostname":"Arning_Nadine","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2024-10-02T15:23:52.240Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method newPage"}
+{"level":30,"time":"2024-10-02T15:23:52.241Z","pid":4928,"hostname":"Arning_Nadine","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2024-10-02T15:23:52.264Z","pid":4928,"hostname":"Arning_Nadine","msg":"Changed active context"}
+{"level":30,"time":"2024-10-02T15:23:52.477Z","pid":4928,"hostname":"Arning_Nadine","msg":"Video path: undefined"}
+{"level":30,"time":"2024-10-02T15:23:52.477Z","pid":4928,"hostname":"Arning_Nadine","msg":"Changed active page"}
+{"level":30,"time":"2024-10-02T15:23:53.115Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method newPage"}
+{"level":30,"time":"2024-10-02T15:23:53.121Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method fillText"}
+{"level":30,"time":"2024-10-02T15:23:53.121Z","pid":4928,"hostname":"Arning_Nadine","msg":"Strict mode is enabled, find Locator with id=problemInput in page."}
+{"level":30,"time":"2024-10-02T15:23:53.181Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method fillText"}
+{"level":30,"time":"2024-10-02T15:23:53.186Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method click"}
+{"level":30,"time":"2024-10-02T15:23:53.186Z","pid":4928,"hostname":"Arning_Nadine","msg":"Strict mode is enabled, find Locator with id=problemSolve in page."}
+{"level":30,"time":"2024-10-02T15:23:53.592Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method click"}
+{"level":30,"time":"2024-10-02T15:23:53.606Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:53.736Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:53.740Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:53.744Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:53.747Z","pid":4928,"hostname":"Arning_Nadine","msg":"Changed active context"}
+{"level":30,"time":"2024-10-02T15:23:53.747Z","pid":4928,"hostname":"Arning_Nadine","msg":"Changing current active page: page=852432d2-eee9-4946-8c92-fd57e93feb0f"}
+{"level":30,"time":"2024-10-02T15:23:53.747Z","pid":4928,"hostname":"Arning_Nadine","msg":"Changed active page"}
+{"level":30,"time":"2024-10-02T15:23:53.752Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:53.754Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:53.756Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method switchBrowser"}
+{"level":30,"time":"2024-10-02T15:23:53.757Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method switchBrowser"}
+{"level":30,"time":"2024-10-02T15:23:53.759Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method switchBrowser"}
+{"level":30,"time":"2024-10-02T15:23:53.760Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method switchBrowser"}
+{"level":30,"time":"2024-10-02T15:23:53.762Z","pid":4928,"hostname":"Arning_Nadine","msg":"Changing current active page: page=852432d2-eee9-4946-8c92-fd57e93feb0f"}
+{"level":30,"time":"2024-10-02T15:23:53.762Z","pid":4928,"hostname":"Arning_Nadine","msg":"Changed active page"}
+{"level":30,"time":"2024-10-02T15:23:53.766Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:53.768Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:53.771Z","pid":4928,"hostname":"Arning_Nadine","msg":"Changed active context"}
+{"level":30,"time":"2024-10-02T15:23:53.771Z","pid":4928,"hostname":"Arning_Nadine","msg":"Changing current active page: page=852432d2-eee9-4946-8c92-fd57e93feb0f"}
+{"level":30,"time":"2024-10-02T15:23:53.771Z","pid":4928,"hostname":"Arning_Nadine","msg":"Changed active page"}
+{"level":30,"time":"2024-10-02T15:23:53.773Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method closeContext"}
+{"level":30,"time":"2024-10-02T15:23:53.784Z","pid":4928,"hostname":"Arning_Nadine","msg":"Removed page=40d50779-054a-4b62-8009-207e2a855820 from context=889e4eec-5c28-4e42-8cab-38527c3748bc page stack"}
+{"level":30,"time":"2024-10-02T15:23:53.823Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method closeContext"}
+{"level":30,"time":"2024-10-02T15:23:53.836Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:53.836Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-02T15:23:53.899Z","pid":4928,"hostname":"Arning_Nadine","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2024-10-02T15:23:54.062Z","pid":4928,"hostname":"Arning_Nadine","msg":"End of node method closeAllBrowsers"}
