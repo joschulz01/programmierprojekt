@@ -13,7 +13,7 @@ ${Testdatei1}    var x1>=0;\nvar x2>=0;\nmaximize Objective: x1+x2;\ns.t. Constr
     Öffne OR-Webseite
     Testproblem lösen
     Lösung anzeigen Prüfen
-    Sleep    5s
+    Sleep    3s
 
 
 *** Schlüsselwörter ***
@@ -29,5 +29,9 @@ Testproblem lösen
 
 Lösung anzeigen Prüfen
     [Dokumentation]
-    Element Should Exist    id=loesungstabelle
-    Element Should Exist    id=myChart
+    Wait For Elements State    id=loesungstabelle
+    Wait For Elements State    id=myChart
+    ${primal_value0}=    Get Text    xpath=//td[@id='tabelle_primal_0']
+    ${primal_value1}=    Get Text    xpath=//td[@id='tabelle_primal_1']
+    Should Be Equal As Numbers    ${primal_value0}    5
+    Should Be Equal As Numbers    ${primal_value1}    5
