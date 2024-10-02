@@ -21,10 +21,10 @@ interface ChartDataPoint {
   styleUrls: ['./model.component.css'],
 })
 export class ModelComponent implements OnInit { // Implementiere OnInit
-  @Input() xWert?: number;  // Input Property für X-Wert
-  @Input() yWert?: number;  // Input Property für Y-Wert
+  @Input() xWert?: number;  // Input Property fï¿½r X-Wert
+  @Input() yWert?: number;  // Input Property fï¿½r Y-Wert
   constraints!: Constraint[];
-  chart!: Chart; // Typ für das Chart hinzufügen
+  chart!: Chart; // Typ fï¿½r das Chart hinzufï¿½gen
 
   constructor(private constraintsService: ConstraintsService) {}
 
@@ -50,7 +50,7 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
     }
 
     if (this.chart) {
-      this.chart.destroy(); // Das vorhandene Chart wird zerstört
+      this.chart.destroy(); // Das vorhandene Chart wird zerstï¿½rt
     }
 
     const datasets: ChartDataset<'line'>[] = this.constraints.map(constraint => {
@@ -101,10 +101,10 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
       };
     });
 
-    // Dynamisch Min/Max für die Achsen berechnen
+    // Dynamisch Min/Max fï¿½r die Achsen berechnen
     const xValues = datasets.flatMap(dataset => 
       dataset.data.map(point => {
-        if (point) { // Überprüfen, ob point nicht null ist
+        if (point) { // ï¿½berprï¿½fen, ob point nicht null ist
           return (point as ChartDataPoint).x; // Typassertion verwenden
         }
         return 0; // Standardwert falls null
@@ -113,7 +113,7 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
 
     const yValues = datasets.flatMap(dataset => 
       dataset.data.map(point => {
-        if (point) { // Überprüfen, ob point nicht null ist
+        if (point) { // ï¿½berprï¿½fen, ob point nicht null ist
           return (point as ChartDataPoint).y; // Typassertion verwenden
         }
         return 0; // Standardwert falls null
@@ -136,9 +136,9 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
               : [],
             borderColor: 'rgba(255, 0, 0, 1)',
             fill: false,
-            pointRadius: 7.5, // Erhöhe die Punktgröße für bessere Sichtbarkeit
+            pointRadius: 7.5, // Erhï¿½he die Punktgrï¿½ï¿½e fï¿½r bessere Sichtbarkeit
           },
-          ...datasets // Hier kommen die Constraints-Datensätze hinzu
+          ...datasets // Hier kommen die Constraints-Datensï¿½tze hinzu
         ]
       },
       options: {
@@ -169,12 +169,12 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
   getVariableNames(constraint: Constraint): string[] {
     const variableNames = new Set<string>();
 
-    // Iteriere durch die terms im Constraint und füge die Variablennamen hinzu
+    // Iteriere durch die terms im Constraint und fï¿½ge die Variablennamen hinzu
     constraint.terms.forEach(term => {
       variableNames.add(term.name);
     });
 
     console.log(variableNames);
-    return Array.from(variableNames); // Rückgabe von z.B. ['x', 'y'] oder ['x1', 'x2']
+    return Array.from(variableNames); // Rï¿½ckgabe von z.B. ['x', 'y'] oder ['x1', 'x2']
   }
 }
