@@ -14,12 +14,12 @@ interface Constraint {
 
 export class ConstraintsService {
   private constraints: Constraint[] = [];  // Internes Array zur Speicherung der Constraints
-  constraintsUpdated: Subject<void> = new Subject<void>(); // Subject für Benachrichtigungen
+  constraintsUpdated: Subject<void> = new Subject<void>(); // Subject fï¿½r Benachrichtigungen
 
   // Methode zum Setzen der Constraints
   setConstraints(newConstraints: Constraint[]): void {
     this.constraints = newConstraints;
-    this.constraintsUpdated.next(); // Benachrichtige die Abonnenten über die Änderungen
+    this.constraintsUpdated.next(); // Benachrichtige die Abonnenten ï¿½ber die ï¿½nderungen
   }
 
   // Methode zum Abrufen der Constraints

@@ -1,7 +1,18 @@
 <header>
   <img src="logo.png" alt="OR Logo"/>
   <div>
-    <h1>Operations Research Tool</h1>
-    <p>Programmierprojekt 2024</p>
+    <h1>{{ translations.title }}</h1>
+    <p>{{ translations.subtitle }}</p>
+    
+    <!-- Weltkugel mit Dropdown -->
+    <div class="language-dropdown">
+      <button class="language-btn">
+        🌐
+      </button>
+      <div class="dropdown-content">
+        <a (click)="switchLanguage('de')">Deutsch</a>
+        <a (click)="switchLanguage('en')">English</a>
+      </div>
+    </div>
   </div>
 </header>

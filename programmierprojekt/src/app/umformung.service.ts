@@ -25,10 +25,10 @@ export class UmformungService {
 
       // Nebenbedingungen extrahieren
       if (line.toLowerCase().startsWith('s.t.')) {
-        if (i + 1 < lines.length) { // Überprüfen, ob es eine nächste Zeile gibt
-          const nextLine = lines[i + 1].trim(); // Nächste Zeile als Nebenbedingung holen
+        if (i + 1 < lines.length) { // ï¿½berprï¿½fen, ob es eine nï¿½chste Zeile gibt
+          const nextLine = lines[i + 1].trim(); // Nï¿½chste Zeile als Nebenbedingung holen
           nebenbedingungen.push(nextLine);
-          i++; // Nächste Zeile überspringen, da sie bereits verwendet wurde
+          i++; // Nï¿½chste Zeile ï¿½berspringen, da sie bereits verwendet wurde
         }
       }
     }
@@ -48,7 +48,7 @@ export class UmformungService {
       ausgabe.push(`  ${formatierteNB}`);
     });
 
-    // Alles zusammenfügen
+    // Alles zusammenfï¿½gen
     ausgabe.push(`End`);
     console.log(ausgabe.join('\n'));
 
@@ -60,7 +60,7 @@ export class UmformungService {
     const variableRegex = /([a-zA-Z]\d*)/g;
     let match: RegExpExecArray | null;
     while ((match = variableRegex.exec(line)) !== null) {
-      variablen.add(match[1]); // Gefundene Variable zu Set hinzufügen
+      variablen.add(match[1]); // Gefundene Variable zu Set hinzufï¿½gen
     }
   }
 

@@ -6,7 +6,7 @@ import { ConstraintsService } from '../constraints.service';
 import { UmformungService } from '../umformung.service';
 import { ModelComponent } from '../model/model.component';
 
-// Definition der Interfaces für den Resultattyp
+// Definition der Interfaces fï¿½r den Resultattyp
 interface Column {
   Name: string;
   Index: number;
@@ -42,8 +42,8 @@ interface Result {
   styleUrls: ['./highs-solver.component.css']
 })
 export class HighsSolverComponent {
-  problemInput = '';  // Eingabefeld für das Problem, standardmäßig leer
-  solution = '';  // Variable zur Anzeige der Lösung
+  problemInput = '';  // Eingabefeld fï¿½r das Problem, standardmï¿½ï¿½ig leer
+  solution = '';  // Variable zur Anzeige der Lï¿½sung
   result: Result | null = null; // Verwendung des definierten Result Interfaces
 
   xWert?: number;
@@ -51,7 +51,7 @@ export class HighsSolverComponent {
 
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService) {}
 
-  // Methode zur Lösung des Benutzerproblems
+  // Methode zur Lï¿½sung des Benutzerproblems
   async solveProblem(): Promise<void> {
     const LP = this.umformungService.umformen(this.problemInput);
     // Initialisiere den HiGHS Solver und passe locateFile an
@@ -62,15 +62,15 @@ export class HighsSolverComponent {
     try {
       // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
-      let highsResult: HighsSolution; // Typ für das HiGHS-Ergebnis festlegen
+      let highsResult: HighsSolution; // Typ fï¿½r das HiGHS-Ergebnis festlegen
 
-      // Lösen des vom Benutzer eingegebenen Problems
+      // Lï¿½sen des vom Benutzer eingegebenen Problems
       let constraints;
       try {
         highsResult = await highsSolver.solve(this.problemInput); // Async-Funktion aufrufen
         constraints = this.extractConstraints(this.problemInput);
       } catch (error) {
-        console.log('Fehler beim Lösen des Problems:', error, "\nMit umgeformtem Input");
+        console.log('Fehler beim Lï¿½sen des Problems:', error, "\nMit umgeformtem Input");
         highsResult = await highsSolver.solve(LP); // Async-Funktion aufrufen
         constraints = this.extractConstraints(LP);
       }
@@ -78,19 +78,19 @@ export class HighsSolverComponent {
       // Konvertiere das HiGHS-Ergebnis in dein Result-Format
       this.result = this.convertToResult(highsResult);
       
-      // Füge die Constraints in den ConstraintsService hinzu
+      // Fï¿½ge die Constraints in den ConstraintsService hinzu
       this.constraintsService.setConstraints(constraints);
       this.constraintsService.constraintsUpdated.next();
 
       // Ergebnis als JSON speichern und anzeigen
       this.solution = JSON.stringify(this.result, null, 2);
 
-      // Werte für x und y ermitteln
+      // Werte fï¿½r x und y ermitteln
       this.WerteErmitteln(this.result);
     } catch (error) {
       // Fehlerbehandlung
-      console.error('Fehler beim Lösen des Problems:', error);
-      this.solution = 'Fehler beim Lösen des Problems: ' + error;
+      console.error('Fehler beim Lï¿½sen des Problems:', error);
+      this.solution = 'Fehler beim Lï¿½sen des Problems: ' + error;
     }
   }
 
@@ -120,11 +120,11 @@ export class HighsSolverComponent {
             Status: 'Status' in row ? row.Status : 'Unknown', // Setze auf 'Unknown' wenn Status nicht existiert
             Lower: row.Lower ?? 0, // Setze einen Standardwert, falls null
             Upper: row.Upper ?? Infinity, // Setze einen Standardwert, falls null
-            Primal: undefined, // Setze auf undefined, weil nicht immer verfügbar
-            Dual: undefined, // Setze auf undefined, weil nicht immer verfügbar
+            Primal: undefined, // Setze auf undefined, weil nicht immer verfï¿½gbar
+            Dual: undefined, // Setze auf undefined, weil nicht immer verfï¿½gbar
         };
 
-        // Überprüfung auf die Existenz von Primal und Dual
+        // ï¿½berprï¿½fung auf die Existenz von Primal und Dual
         if ('Primal' in row) {
             newRow.Primal = row.Primal;
         }
@@ -145,15 +145,15 @@ export class HighsSolverComponent {
 
 
 
-  WerteErmitteln(result: Result) { // Typ für result festlegen
+  WerteErmitteln(result: Result) { // Typ fï¿½r result festlegen
     const VariableX = result.Columns['x'] || result.Columns['x1'];
     if (VariableX && 'Primal' in VariableX) {
-      this.xWert = VariableX.Primal; // Setze den Wert für xWert
+      this.xWert = VariableX.Primal; // Setze den Wert fï¿½r xWert
     }
     
     const VariableY = result.Columns['y'] || result.Columns['x2'];
     if (VariableY && 'Primal' in VariableY) {
-      this.yWert = VariableY.Primal; // Setze den Wert für yWert
+      this.yWert = VariableY.Primal; // Setze den Wert fï¿½r yWert
     }
   }
 
@@ -170,10 +170,10 @@ export class HighsSolverComponent {
         continue;
       }
       if (isObjective) {
-        continue; // Überspringe die Zeilen bis wir die Constraints erreichen
+        continue; // ï¿½berspringe die Zeilen bis wir die Constraints erreichen
       }
       if (trimmedLine.startsWith('Subject To')) {
-        continue; // Überspringe diese Zeile
+        continue; // ï¿½berspringe diese Zeile
       }
       if (trimmedLine.startsWith('Bounds')) {
         break; // Wir haben alle Constraints gelesen
@@ -182,7 +182,7 @@ export class HighsSolverComponent {
       // Hier wird die Zeile als Constraint geparst
       const parts = trimmedLine.split(/<=|>=|=/);
       if (parts.length < 2) {
-        continue; // Ungültige Zeile, überspringen
+        continue; // Ungï¿½ltige Zeile, ï¿½berspringen
       }
 
       const lhs = this.normalizeVariableNames(parts[0].trim());
@@ -206,7 +206,7 @@ export class HighsSolverComponent {
   // Hilfsmethode zum Parsen der Terme einer Constraint
   private parseTerms(lhs: string): { name: string; coef: number }[] {
     const terms: { name: string; coef: number }[] = [];
-    const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel für Variablen x1, x2, ...
+    const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel fï¿½r Variablen x1, x2, ...
     let match: RegExpExecArray | null;
 
     while ((match = termRegex.exec(lhs)) !== null) {
