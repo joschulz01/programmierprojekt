@@ -1,0 +1,52 @@
+{"level":30,"time":"2024-10-01T16:56:31.547Z","pid":18512,"hostname":"Arning_Nadine","msg":"Listening on 58494"}
+(node:18512) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2024-10-01T16:56:31.685Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-01T16:56:31.686Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-01T16:56:31.689Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-01T16:56:31.689Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-01T16:56:31.694Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2024-10-01T16:56:31.955Z","pid":18512,"hostname":"Arning_Nadine","msg":"Adding browser to stack: chromium, version: 129.0.6668.29"}
+{"level":30,"time":"2024-10-01T16:56:31.956Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method newBrowser"}
+{"level":30,"time":"2024-10-01T16:56:31.955Z","pid":18512,"hostname":"Arning_Nadine","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2024-10-01T16:56:31.963Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method newPage"}
+{"level":30,"time":"2024-10-01T16:56:31.964Z","pid":18512,"hostname":"Arning_Nadine","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2024-10-01T16:56:31.985Z","pid":18512,"hostname":"Arning_Nadine","msg":"Changed active context"}
+{"level":30,"time":"2024-10-01T16:56:32.317Z","pid":18512,"hostname":"Arning_Nadine","msg":"Video path: undefined"}
+{"level":30,"time":"2024-10-01T16:56:32.317Z","pid":18512,"hostname":"Arning_Nadine","msg":"Changed active page"}
+{"level":30,"time":"2024-10-01T16:56:33.191Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method newPage"}
+{"level":30,"time":"2024-10-01T16:56:36.198Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method closeBrowser"}
+{"level":30,"time":"2024-10-01T16:56:36.232Z","pid":18512,"hostname":"Arning_Nadine","msg":"Removed page=e21cfc08-6209-4e93-8aae-65ae2cf92fed from context=e9847f6e-b976-4e78-a23c-a8acdd0ceb58 page stack"}
+{"level":30,"time":"2024-10-01T16:56:36.519Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method closeBrowser"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:10748:15)
+    at PlaywrightServer.getActiveBrowser (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11364:59)
+    at PlaywrightServer.setTimeout (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11603:57)
+    at Object.onReceiveHalfClose (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1425:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:569:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:609:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:376:18)
+    at ServerHttp2Stream.emit (node:events:531:35)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+=============================================================
+{"level":30,"time":"2024-10-01T16:56:36.565Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-01T16:56:36.566Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:10748:15)
+    at PlaywrightServer.getActiveBrowser (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11364:59)
+    at PlaywrightServer.setTimeout (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:11603:57)
+    at Object.onReceiveHalfClose (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1425:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:569:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:609:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\Nadine\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:376:18)
+    at ServerHttp2Stream.emit (node:events:531:35)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+=============================================================
+{"level":30,"time":"2024-10-01T16:56:36.602Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-01T16:56:36.603Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-10-01T16:56:36.657Z","pid":18512,"hostname":"Arning_Nadine","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2024-10-01T16:56:36.657Z","pid":18512,"hostname":"Arning_Nadine","msg":"End of node method closeAllBrowsers"}

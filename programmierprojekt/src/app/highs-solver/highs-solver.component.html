@@ -1,10 +1,10 @@
 <div class="solver-container">
   <h2>HiGHS Solver</h2>
 
-  <textarea [(ngModel)]="problemInput" placeholder="Geben Sie hier das Optimierungsproblem ein" rows="10" cols="50"></textarea>
+  <textarea id="problemInput" [(ngModel)]="problemInput" placeholder="Geben Sie hier das Optimierungsproblem ein" rows="10" cols="50"></textarea>
 
   <br>
-  <button (click)="solveProblem()">Problem lösen</button>
+  <button id="problemSolve" (click)="solveProblem()">Problem lösen</button>
 
   <!-- Ausgabe des Ergebnisses als JSON -->
   <div *ngIf="result">
@@ -15,7 +15,7 @@
 
     <!-- Tabelle für die Variablen (Columns) -->
     <h3>Variablen (Columns):</h3>
-    <table>
+    <table id= "l�sungstabelle"> 
       <thead>
         <tr>
           <th>Variable</th>
@@ -42,33 +42,6 @@
       </tbody>
     </table>
 
-    <!-- Tabelle für die Nebenbedingungen (Rows) -->
-    <h3>Nebenbedingungen (Rows):</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Nebenbedingung</th>
-          <th>Index</th>
-          <th>Status</th>
-          <th>Lower</th>
-          <th>Upper</th>
-          <th>Primal</th>
-          <th>Dual</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of result.Rows">
-          <td>{{ row.Name }}</td>
-          <td>{{ row.Index }}</td>
-          <td>{{ row.Status }}</td>
-          <td>{{ row.Lower ?? '-' }}</td>
-          <td>{{ row.Upper }}</td>
-          <td>{{ row.Primal }}</td>
-          <td>{{ row.Dual }}</td>
-        </tr>
-      </tbody>
-    </table>
-
     <!-- Zielwert (Objective Value) -->
     <h3>Zielwert (Objective Value):</h3>
     <p>{{ result.ObjectiveValue }}</p>
@@ -77,8 +50,8 @@
   <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
 <div>
-  <button (click)="downloadMPS()">Export als MPS</button>
+  <button id="export_MPS" (click)="downloadMPS()">Export als MPS</button>
   <br>
-  <button (click)="downloadLP()">Export als LP</button>
+  <button id="export_LP" (click)="downloadLP()">Export als LP</button>
 </div>
 </div>
