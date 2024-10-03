@@ -1,0 +1,48 @@
+h1 {
+    font-size: 2.5em;
+    color: #2c3e50;
+    text-align: center; /* Zentriert den Haupttitel */
+    margin: 20px 0;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin: 20px 0 10px;
+    color: #2980b9;
+    text-align: center; /* Zentriert die Untertitel */
+}
+
+h3 {
+    font-size: 1.5em;
+    margin: 15px 0 5px;
+    text-align: center; /* Zentriert die h3-Überschriften */
+}
+
+p {
+    margin-bottom: 15px;
+    text-align: center; /* Zentriert den Text in den Absätzen */
+}
+
+address {
+    text-align: center; /* Zentriert die Anschrift */
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: center; /* Zentriert die Liste */
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
