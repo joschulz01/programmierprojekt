@@ -1,0 +1,32 @@
+h1 {
+    font-size: 2.5em;
+    color: #2c3e50;
+    text-align: center; /* Zentriert den Haupttitel */
+    margin: 20px 0;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin: 20px 0 10px;
+    color: #2980b9;
+    text-align: center; /* Zentriert die Untertitel */
+}
+
+p {
+    margin-bottom: 15px;
+    text-align: center; /* Zentriert den Text in den Absätzen */
+}
+
+address {
+    text-align: center; /* Zentriert die Anschrift */
+    margin-bottom: 15px;
+}
+
+a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

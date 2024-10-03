@@ -12,18 +12,18 @@ textarea {
 button {
   margin-top: 10px;
   padding: 10px 20px;
-  background-color: #4CAF50; /* Grüner Hintergrund */
-  color: white; /* Weißer Text */
+  background-color: #45a049; /* Grï¿½ner Hintergrund */
+  color: white; /* Weiï¿½er Text */
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #45a049; /* Dunkler Grüner Hintergrund bei Hover */
+  background-color: #45a049; /* Dunkler Grï¿½ner Hintergrund bei Hover */
 }
 
 pre, textarea[readonly] {
-  background-color: #f4f4f4; /* Heller Hintergrund für readonly Textarea */
+  background-color: #f4f4f4; /* Heller Hintergrund fï¿½r readonly Textarea */
   padding: 10px;
   border-radius: 4px;
   text-align: left;
@@ -34,22 +34,22 @@ table {
   width: 100%;
   max-width: 800px; /* Maximale Breite der Tabelle */
   margin: 20px auto; /* Zentriert die Tabelle */
-  border-collapse: collapse; /* Verhindert doppelte Ränder */
+  border-collapse: collapse; /* Verhindert doppelte Rï¿½nder */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Leichte Schatten */
 }
 
 th, td {
-  padding: 12px 15px; /* Innenabstand für Zellen */
-  text-align: left; /* Linksbündig */
+  padding: 12px 15px; /* Innenabstand fï¿½r Zellen */
+  text-align: left; /* Linksbï¿½ndig */
 }
 
 thead {
-  background-color: #778899; /* Dunkelblauer Hintergrund für den Header */
-  color: white; /* Weißer Text für den Header */
+  background-color: #778899; /* Dunkelblauer Hintergrund fï¿½r den Header */
+  color: white; /* Weiï¿½er Text fï¿½r den Header */
 }
 
 tbody tr {
-  background-color: #f9f9f9; /* Heller Hintergrund für die Zeilen */
+  background-color: #f9f9f9; /* Heller Hintergrund fï¿½r die Zeilen */
 }
 
 tbody tr:hover {
@@ -61,9 +61,9 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #fff; /* Normale weiße Zeilen */
+  background-color: #fff; /* Normale weiï¿½e Zeilen */
 }
 
 h3 {
-  color: #181023; /* Blaue Farbe für die Überschrift */
+  color: #181023; /* Blaue Farbe fï¿½r die ï¿½berschrift */
 }

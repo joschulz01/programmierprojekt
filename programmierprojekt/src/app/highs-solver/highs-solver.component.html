@@ -1,6 +1,10 @@
 <div class="solver-container">
   <h2>HiGHS Solver</h2>
 
+  <div>
+    <button (click)="importFile()">Datei importieren</button>
+  </div>
+
   <textarea id="problemInput" [(ngModel)]="problemInput" placeholder="Geben Sie hier das Optimierungsproblem ein" rows="10" cols="50"></textarea>
 
   <br>
@@ -56,3 +60,5 @@
   <button id="export_LP" (click)="downloadLP()">Export als LP</button>
 </div>
 </div>
+
+

@@ -1,0 +1,37 @@
+  /* Dein existierender Footer */
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 90%;
+    max-width: 50rem;
+    margin: 0 auto 2rem auto;
+    text-align: center;
+    background: linear-gradient(
+      to bottom,
+      #708090,
+      #778899
+    );
+    padding: 1rem;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* Footer-Button */
+  .footer-button {
+    padding: 0.5rem 1rem;
+    background-color: #708090;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .footer-button:hover {
+    background-color: #c0c0c0;
+    color: black;
+  }
+  
