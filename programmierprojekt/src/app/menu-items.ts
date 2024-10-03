@@ -5,7 +5,7 @@ export const MENU_ITEMS = [
   },
   {
     id: 'menu2',
-    name: 'Über uns',
+    name: 'Highs',
   },
   {
     id: 'menu3',
