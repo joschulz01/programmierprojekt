@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.1 (Python 3.12.6 on win32)" generated="2024-10-02T17:38:43.083146" rpa="false" schemaversion="5">
+<robot generator="Robot 7.1 (Python 3.12.6 on win32)" generated="2024-10-04T13:39:41.932672" rpa="false" schemaversion="5">
 <suite id="s1" name="Test" source="C:\Users\Nadine\OneDrive - Provinzial\Dokumente\Hochschule\Programmierprojekt\programmierprojekt\programmierprojekt\Test.robot">
-<test id="s1-t1" name="Öffne Browser" line="11">
+<test id="s1-t1" name="OR Problem lösen" line="11">
 <kw name="Öffne OR-Webseite">
 <kw name="New Browser" owner="Browser">
-<msg time="2024-10-02T17:38:43.992980" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\Nadine\\OneDrive - Provinzial\\Dokumente\\Hochschule\\Programmierprojekt\\programmierprojekt\\programmierprojekt\\browser\\traces\\99b8d1e6-04fb-4e23-9fc5-42094a32280e"}</msg>
-<msg time="2024-10-02T17:38:44.278116" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\Nadine\\OneDrive - Provinzial\\Dokumente\\Hochschule\\Programmierprojekt\\programmierprojekt\\programmierprojekt\\browser\\traces\\99b8d1e6-04fb-4e23-9fc5-42094a32280e"}</msg>
+<msg time="2024-10-04T13:39:43.422370" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\Nadine\\OneDrive - Provinzial\\Dokumente\\Hochschule\\Programmierprojekt\\programmierprojekt\\programmierprojekt\\browser\\traces\\29978794-050e-4705-bac3-d2f814716f9b"}</msg>
+<msg time="2024-10-04T13:39:43.700487" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\Nadine\\OneDrive - Provinzial\\Dokumente\\Hochschule\\Programmierprojekt\\programmierprojekt\\programmierprojekt\\browser\\traces\\29978794-050e-4705-bac3-d2f814716f9b"}</msg>
 <arg>${BROWSER}</arg>
 <arg>${False}</arg>
 <tag>BrowserControl</tag>
 <tag>Setter</tag>
 <doc>Create a new playwright Browser with specified options.</doc>
-<status status="PASS" start="2024-10-02T17:38:43.991976" elapsed="0.286140"/>
+<status status="PASS" start="2024-10-04T13:39:43.421251" elapsed="0.279236"/>
 </kw>
 <kw name="New Page" owner="Browser">
-<msg time="2024-10-02T17:38:44.869915" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200/</msg>
-<msg time="2024-10-02T17:38:44.869915" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<msg time="2024-10-04T13:39:44.866899" level="INFO">Successfully initialized new page object and opened url: https://or-tool.de/</msg>
+<msg time="2024-10-04T13:39:44.867645" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
 <arg>${url}</arg>
 <tag>BrowserControl</tag>
 <tag>Setter</tag>
 <doc>Open a new Page.</doc>
-<status status="PASS" start="2024-10-02T17:38:44.278116" elapsed="0.591799"/>
+<status status="PASS" start="2024-10-04T13:39:43.702406" elapsed="1.165239"/>
 </kw>
 <doc>Öffnet die OR-Webseite</doc>
-<status status="PASS" start="2024-10-02T17:38:43.990919" elapsed="0.879992"/>
+<status status="PASS" start="2024-10-04T13:39:43.419165" elapsed="1.448480"/>
 </kw>
 <kw name="Testproblem lösen">
 <kw name="Fill Text" owner="Browser">
-<msg time="2024-10-02T17:38:44.871908" level="INFO">Fills the text 'var x1&gt;=0;
+<msg time="2024-10-04T13:39:44.869795" level="INFO">Fills the text 'var x1&gt;=0;
 var x2&gt;=0;
 maximize Objective: x1+x2;
 s.t. Constraint1:
@@ -39,91 +39,172 @@ s.t. Constraint2:
 <tag>PageContent</tag>
 <tag>Setter</tag>
 <doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
-<status status="PASS" start="2024-10-02T17:38:44.870911" elapsed="0.061233"/>
+<status status="PASS" start="2024-10-04T13:39:44.868654" elapsed="2.969895"/>
 </kw>
 <kw name="Click" owner="Browser">
-<msg time="2024-10-02T17:38:44.933179" level="INFO">Clicks the element 'id=problemSolve'.</msg>
+<msg time="2024-10-04T13:39:47.838549" level="INFO">Clicks the element 'id=problemSolve'.</msg>
 <arg>id=problemSolve</arg>
 <tag>PageContent</tag>
 <tag>Setter</tag>
 <doc>Simulates mouse click on the element found by ``selector``.</doc>
-<status status="PASS" start="2024-10-02T17:38:44.932144" elapsed="0.404053"/>
+<status status="PASS" start="2024-10-04T13:39:47.838549" elapsed="0.149385"/>
 </kw>
 <doc>Löst die Testdatei</doc>
-<status status="PASS" start="2024-10-02T17:38:44.870911" elapsed="0.466659"/>
+<status status="PASS" start="2024-10-04T13:39:44.868654" elapsed="3.119280"/>
 </kw>
-<kw name="Lösung anzeigen Prüfen">
+<kw name="Lösung Prüfen">
 <kw name="Wait For Elements State" owner="Browser">
-<msg time="2024-10-02T17:38:45.487576" level="INFO">Waited for Element with selector id=loesungstabelle at state visible</msg>
+<msg time="2024-10-04T13:39:48.885245" level="INFO">Waited for Element with selector id=loesungstabelle at state visible</msg>
 <arg>id=loesungstabelle</arg>
 <tag>PageContent</tag>
 <tag>Wait</tag>
 <doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
-<status status="PASS" start="2024-10-02T17:38:45.337570" elapsed="0.150006"/>
+<status status="PASS" start="2024-10-04T13:39:47.987934" elapsed="0.897311"/>
 </kw>
 <kw name="Wait For Elements State" owner="Browser">
-<msg time="2024-10-02T17:38:45.501406" level="INFO">Waited for Element with selector id=myChart at state visible</msg>
+<msg time="2024-10-04T13:39:48.894963" level="INFO">Waited for Element with selector id=myChart at state visible</msg>
 <arg>id=myChart</arg>
 <tag>PageContent</tag>
 <tag>Wait</tag>
 <doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
-<status status="PASS" start="2024-10-02T17:38:45.487576" elapsed="0.013830"/>
+<status status="PASS" start="2024-10-04T13:39:48.885245" elapsed="0.009718"/>
 </kw>
 <kw name="Get Text" owner="Browser">
-<msg time="2024-10-02T17:38:45.536674" level="INFO">Text: '5'</msg>
-<msg time="2024-10-02T17:38:45.536674" level="INFO">${primal_value0} = 5</msg>
+<msg time="2024-10-04T13:39:48.942050" level="INFO">Text: '5'</msg>
+<msg time="2024-10-04T13:39:48.942050" level="INFO">${primal_value0} = 5</msg>
 <var>${primal_value0}</var>
 <arg>xpath=//td[@id='tabelle_primal_0']</arg>
 <tag>Assertion</tag>
 <tag>Getter</tag>
 <tag>PageContent</tag>
 <doc>Returns text attribute of the element found by ``selector``.</doc>
-<status status="PASS" start="2024-10-02T17:38:45.502406" elapsed="0.034268"/>
+<status status="PASS" start="2024-10-04T13:39:48.894963" elapsed="0.047087"/>
 </kw>
 <kw name="Get Text" owner="Browser">
-<msg time="2024-10-02T17:38:45.562059" level="INFO">Text: '5'</msg>
-<msg time="2024-10-02T17:38:45.562059" level="INFO">${primal_value1} = 5</msg>
+<msg time="2024-10-04T13:39:48.964076" level="INFO">Text: '5'</msg>
+<msg time="2024-10-04T13:39:48.968017" level="INFO">${primal_value1} = 5</msg>
 <var>${primal_value1}</var>
 <arg>xpath=//td[@id='tabelle_primal_1']</arg>
 <tag>Assertion</tag>
 <tag>Getter</tag>
 <tag>PageContent</tag>
 <doc>Returns text attribute of the element found by ``selector``.</doc>
-<status status="PASS" start="2024-10-02T17:38:45.536674" elapsed="0.025385"/>
+<status status="PASS" start="2024-10-04T13:39:48.942050" elapsed="0.025967"/>
 </kw>
 <kw name="Should Be Equal As Numbers" owner="BuiltIn">
 <arg>${primal_value0}</arg>
 <arg>5</arg>
 <doc>Fails if objects are unequal after converting them to real numbers.</doc>
-<status status="PASS" start="2024-10-02T17:38:45.562059" elapsed="0.000000"/>
+<status status="PASS" start="2024-10-04T13:39:48.968017" elapsed="0.000507"/>
 </kw>
 <kw name="Should Be Equal As Numbers" owner="BuiltIn">
 <arg>${primal_value1}</arg>
 <arg>5</arg>
 <doc>Fails if objects are unequal after converting them to real numbers.</doc>
-<status status="PASS" start="2024-10-02T17:38:45.562059" elapsed="0.000000"/>
+<status status="PASS" start="2024-10-04T13:39:48.968524" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2024-10-02T17:38:45.337570" elapsed="0.224489"/>
+<kw name="Click" owner="Browser">
+<msg time="2024-10-04T13:39:48.968524" level="INFO">Clicks the element 'id=export_MPS'.</msg>
+<arg>id=export_MPS</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2024-10-04T13:39:48.968524" elapsed="0.053324"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2024-10-04T13:39:49.021848" level="INFO">Clicks the element 'id=export_LP'.</msg>
+<arg>id=export_LP</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2024-10-04T13:39:49.021848" elapsed="0.049960"/>
+</kw>
+<doc>Überprüft, ob de Lösungstabelle und das Koordinatensystem vorhanden sind und überprüft in der Tabelle die Primal Werte</doc>
+<status status="PASS" start="2024-10-04T13:39:47.987934" elapsed="1.085383"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2024-10-02T17:38:48.562567" level="INFO">Slept 3 seconds.</msg>
+<msg time="2024-10-04T13:39:52.073749" level="INFO">Slept 3 seconds.</msg>
 <arg>3s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2024-10-02T17:38:45.562059" elapsed="3.000508"/>
+<status status="PASS" start="2024-10-04T13:39:49.073317" elapsed="3.000432"/>
 </kw>
 <doc>Erster Testfall</doc>
-<status status="PASS" start="2024-10-02T17:38:43.986226" elapsed="4.576341"/>
+<status status="PASS" start="2024-10-04T13:39:43.411583" elapsed="8.664058"/>
 </test>
-<status status="PASS" start="2024-10-02T17:38:43.085148" elapsed="5.576863"/>
+<test id="s1-t2" name="Seiten Wechseln" line="18">
+<kw name="Öffne OR-Webseite">
+<kw name="New Browser" owner="Browser">
+<msg time="2024-10-04T13:39:52.248306" level="INFO">Switching browser to browser=4369f317-ee9a-48ae-b2e4-7cf814dbff7a</msg>
+<msg time="2024-10-04T13:39:52.251779" level="INFO">Successfully changed active browser: browser=4369f317-ee9a-48ae-b2e4-7cf814dbff7a</msg>
+<msg time="2024-10-04T13:39:52.251779" level="INFO">Reusing existing browser with id: browser=4369f317-ee9a-48ae-b2e4-7cf814dbff7a</msg>
+<arg>${BROWSER}</arg>
+<arg>${False}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2024-10-04T13:39:52.245931" elapsed="0.006860"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2024-10-04T13:39:53.130404" level="INFO">Successfully initialized new page object and opened url: https://or-tool.de/</msg>
+<msg time="2024-10-04T13:39:53.130404" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${url}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2024-10-04T13:39:52.252791" elapsed="0.877613"/>
+</kw>
+<doc>Öffnet die OR-Webseite</doc>
+<status status="PASS" start="2024-10-04T13:39:52.245931" elapsed="0.884979"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2024-10-04T13:39:53.130910" level="INFO">Clicks the element 'id=Datenschutz'.</msg>
+<msg time="2024-10-04T13:40:03.778849" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/fail-screenshot-1.png" target="_blank"&gt;&lt;img src="browser/screenshot/fail-screenshot-1.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<msg time="2024-10-04T13:40:03.778849" level="INFO">See also file:///C:/Users/Nadine/OneDrive%20-%20Provinzial/Dokumente/Hochschule/Programmierprojekt/programmierprojekt/programmierprojekt/playwright-log.txt for additional details.</msg>
+<msg time="2024-10-04T13:40:03.778849" level="FAIL">TimeoutError: locator.click: Timeout 10000ms exceeded.
+Call log:
+  [2m- waiting for locator('id=Datenschutz')[22m
+
+Tip: Use "Set Browser Timeout" for increasing the timeout or double check your locator as the targeted element(s) couldn't be found.</msg>
+<arg>id=Datenschutz</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="FAIL" start="2024-10-04T13:39:53.130910" elapsed="10.647939">TimeoutError: locator.click: Timeout 10000ms exceeded.
+Call log:
+  [2m- waiting for locator('id=Datenschutz')[22m
+
+Tip: Use "Set Browser Timeout" for increasing the timeout or double check your locator as the targeted element(s) couldn't be found.</status>
+</kw>
+<kw name="Click" owner="Browser">
+<arg>id=impressum</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="NOT RUN" start="2024-10-04T13:40:03.778849" elapsed="0.000000"/>
+</kw>
+<kw name="Click" owner="Browser">
+<arg>id=ueberUns</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="NOT RUN" start="2024-10-04T13:40:03.784589" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2024-10-04T13:39:52.241528" elapsed="11.543061">TimeoutError: locator.click: Timeout 10000ms exceeded.
+Call log:
+  [2m- waiting for locator('id=Datenschutz')[22m
+
+Tip: Use "Set Browser Timeout" for increasing the timeout or double check your locator as the targeted element(s) couldn't be found.</status>
+</test>
+<status status="FAIL" start="2024-10-04T13:39:41.938942" elapsed="21.926402"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="1" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Test">Test</stat>
+<stat pass="1" fail="1" skip="0" id="s1" name="Test">Test</stat>
 </suite>
 </statistics>
 <errors>

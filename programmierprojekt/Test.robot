@@ -5,19 +5,19 @@ Library    XML
 
 *** Variablen ***
 ${BROWSER}    chromium
-${url}        https://or-tool.de
+${url}        https://or-tool.de/
 ${Testdatei1}    var x1>=0;\nvar x2>=0;\nmaximize Objective: x1+x2;\ns.t. Constraint1:\nx1 + 2*x2 <= 15;\ns.t. Constraint2:\n3*x1 + x2 <= 20;
 *** Testfälle ***
 OR Problem lösen
     [Dokumentation]    Erster Testfall
     Öffne OR-Webseite
+    Öffne Highs-Seite
     Testproblem lösen
     Lösung Prüfen
-    Sleep    3s
 
 Seiten Wechseln
     Öffne OR-Webseite
-    Click    id=Datenschutz
+    Click    id=datenschutz
     Click    id=impressum
     Click    id=ueberUns
 
@@ -27,8 +27,12 @@ Seiten Wechseln
 *** Schlüsselwörter ***
 Öffne OR-Webseite
     [Dokumentation]     Öffnet die OR-Webseite
-    New Browser    ${BROWSER}    ${True}    #${False}
+    New Browser    ${BROWSER}    ${True} 
     New Page    ${url}
+
+Öffne Highs-Seite
+    [Dokumentation]
+    Click    id=menue_HiGHS
 
 Testproblem lösen
     [Dokumentation]    Löst die Testdatei
@@ -44,4 +48,4 @@ Lösung Prüfen
     Should Be Equal As Numbers    ${primal_value0}    5
     Should Be Equal As Numbers    ${primal_value1}    5
     Click    id=export_MPS
-    Click    id=export=LP
+    Click    id=export_LP
