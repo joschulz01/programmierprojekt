@@ -7,7 +7,7 @@ import { EN_TRANSLATIONS } from './language/language-en';
 })
 export class TranslationService {
   currentLanguage = 'de';  // Standardmäßig Deutsch
-  translations: { [key: string]: string } = DE_TRANSLATIONS; // Hier den Typ festlegen
+  translations: Record<string, string> = DE_TRANSLATIONS; // Hier den Typ festlegen
 
   switchLanguage() {
     if (this.currentLanguage === 'de') {
