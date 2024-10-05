@@ -1,35 +1,32 @@
 <div class="solver-container">
-  <h2>HiGHS Solver</h2>
+  <h2>{{ translationService.getTranslation('highsSolver') }}</h2>
 
   <div>
-    <button (click)="importFile()">Datei importieren</button>
+    <button (click)="importFile()">{{ translationService.getTranslation('importFile') }}</button>
   </div>
 
-  <textarea id="problemInput" [(ngModel)]="problemInput" placeholder="Geben Sie hier das Optimierungsproblem ein" rows="10" cols="50"></textarea>
+  <textarea id="problemInput" [(ngModel)]="problemInput" placeholder="{{ translationService.getTranslation('inputPlaceholder') }}" rows="10" cols="50"></textarea>
 
   <br>
-  <button id="problemSolve" (click)="solveProblem()">Problem lösen</button>
+  <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
 
   <!-- Ausgabe des Ergebnisses als JSON -->
   <div *ngIf="result">
-    <h3>Lösung:</h3>
-    <!--<textarea readonly rows="10" cols="50">{{ solution }}</textarea>-->
+    <h3>{{ translationService.getTranslation('solution') }}</h3>
     
-    
-
     <!-- Tabelle für die Variablen (Columns) -->
-    <h3>Variablen (Columns):</h3>
-    <<table id="loesungstabelle">
+    <h3>{{ translationService.getTranslation('variables') }}</h3>
+    <table id="loesungstabelle">
       <thead>
         <tr>
-          <th>Variable</th>
-          <th>Index</th>
-          <th>Status</th>
-          <th>Lower</th>
-          <th>Upper</th>
-          <th>Primal</th>
-          <th>Dual</th>
-          <th>Type</th>
+          <th>{{ translationService.getTranslation('variable') }}</th>
+          <th>{{ translationService.getTranslation('index') }}</th>
+          <th>{{ translationService.getTranslation('status') }}</th>
+          <th>{{ translationService.getTranslation('lowerBound') }}</th>
+          <th>{{ translationService.getTranslation('upperBound') }}</th>
+          <th>{{ translationService.getTranslation('primal') }}</th>
+          <th>{{ translationService.getTranslation('dual') }}</th>
+          <th>{{ translationService.getTranslation('type') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -46,19 +43,16 @@
       </tbody>
     </table>
     
-
     <!-- Zielwert (Objective Value) -->
-    <h3>Zielwert (Objective Value):</h3>
+    <h3>{{ translationService.getTranslation('objectiveValue') }}</h3>
     <p>{{ result.ObjectiveValue }}</p>
 
-  
-  <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
+    <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
-<div>
-  <button id="export_MPS" (click)="downloadMPS()">Export als MPS</button>
-  <br>
-  <button id="export_LP" (click)="downloadLP()">Export als LP</button>
-</div>
-</div>
 
-
+  <div>
+    <button id="export_MPS" (click)="downloadMPS()">{{ translationService.getTranslation('exportMPS') }}</button>
+    <br>
+    <button id="export_LP" (click)="downloadLP()">{{ translationService.getTranslation('exportLP') }}</button>
+  </div>
+</div>

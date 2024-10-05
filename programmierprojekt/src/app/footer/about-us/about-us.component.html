@@ -1,20 +1,25 @@
-<h2>Über uns</h2>
-<h3>Unser Projekt</h3>
-<p>Willkommen bei unserem Projekt zur Entwicklung eines Operations Research Tools! Im Rahmen unseres Studiums an der Fachhochschule Osnabrück haben wir dieses innovative Werkzeug zur Lösung von allgemeinen und gemischt-ganzzahligen Optimierungsproblemen entwickelt. Unser Ziel ist es, komplexe Entscheidungen zu vereinfachen und die Benutzerfreundlichkeit bei der Anwendung von Operations Research Techniken zu erhöhen.</p>
-<h3>Was wir entwickelt haben</h3>
-<p>Unser Operations Research Tool bietet eine benutzerfreundliche Plattform zur Analyse und Lösung verschiedener Optimierungsprobleme. Die Hauptfunktionen umfassen</p>
+<h2>{{ translationService.getTranslation('aboutUsTitle') }}</h2>
+
+<h3>{{ translationService.getTranslation('ourProjectTitle') }}</h3>
+<p>{{ translationService.getTranslation('ourProjectDescription') }}</p>
+
+<h3>{{ translationService.getTranslation('whatWeDevelopedTitle') }}</h3>
+<p>{{ translationService.getTranslation('whatWeDevelopedDescription') }}</p>
+
 <ul>
-    <li>Integration von Lösern: Das Tool verwendet verschiedene Löser, um genaue und effiziente Lösungen für spezifische Optimierungsprobleme zu finden.</li>
-    <li>Visuelle Darstellung der Ergebnisse: Die Ergebnisse können in einer übersichtlichen Tabelle oder in einem grafischen Modell dargestellt werden, was die Interpretation der Daten erleichtert.</li>
-    <li>Download-Optionen: Die Ergebnisse können im LP- oder MPS-Format heruntergeladen werden, um eine nahtlose Integration in bestehende Workflows zu ermöglichen.</li>
-</ul>
-<h3>Unser Ansatz</h3>
-<p>In diesem Projekt haben wir uns auf die folgenden Aspekte konzentriert:</p>
-<ul>
-    <li>Benutzerfreundlichkeit: Wir haben unser Tool so gestaltet, dass es auch für Benutzer ohne tiefere Vorkenntnisse im Bereich Operations Research leicht verständlich ist.</li>
-    <li>Zusammenarbeit: Durch die enge Zusammenarbeit im Team konnten wir verschiedene Perspektiven und Ideen integrieren, um das Tool kontinuierlich zu verbessern.</li>
-    <li>Praktische Anwendung: Unser Ziel ist es, theoretische Konzepte aus dem Operations Research in ein praktisches, funktionales Tool zu übersetzen.</li>
+  <div class="container">
+    <li>{{ translationService.getTranslation('featureSolverIntegration') }}</li>
+    <li>{{ translationService.getTranslation('featureVisualRepresentation') }}</li>
+    <li>{{ translationService.getTranslation('featureDownloadOptions') }}</li>
+  </div>
 </ul>
 
-
-    
+<div class="container">
+  <h3>{{ translationService.getTranslation('ourApproachTitle') }}</h3>
+  <p>{{ translationService.getTranslation('ourApproachDescription') }}</p>
+  <ul>
+    <li>{{ translationService.getTranslation('focusUsability') }}</li>
+    <li>{{ translationService.getTranslation('focusCollaboration') }}</li>
+    <li>{{ translationService.getTranslation('focusPracticalApplication') }}</li>
+  </ul>
+</div>

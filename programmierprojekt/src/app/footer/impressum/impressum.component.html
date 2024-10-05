@@ -1,26 +1,31 @@
 <div class="impressum-container">
-    <h1>Impressum</h1>
+    <h1>{{ translationService.getTranslation('imprintTitle') }}</h1>
+
     <section class="contact-info">
-        <h2>Hochschule Osnabrück</h2>
+        <h2>{{ translationService.getTranslation('universityName') }}</h2>
         <address>
-            Kaiserstraße 10C<br>
-            49809 Lingen (Ems)<br>
-            Telefon: <a href="tel:+4959180098402">0591 80098402</a><br>
-            Mail: <a href="mailto:christian.voss.1&#64;hs-osnabrueck.de">christian.voss.1&#64;hs-osnabrueck.de</a>
+            {{ translationService.getTranslation('universityAddress') }}<br>
+            {{ translationService.getTranslation('universityPostalCode') }}<br>
+            {{ translationService.getTranslation('phoneLabel') }}: <a href="tel:+4959180098402">0591 80098402</a><br>
+            {{ translationService.getTranslation('emailLabel') }}: <a href="mailto:christian.voss.1&#64;hs-osnabrueck.de">christian.voss.1&#64;hs-osnabrueck.de</a>
         </address>
     </section>
+
     <section class="legal-info">
-        <p>Die Hochschule Osnabrück ist eine Körperschaft öffentlichen Rechts in der Trägerschaft einer Stiftung öffentlichen Rechts. Sie wird durch den Präsidenten <strong>Prof. Dr. Andreas Bertram</strong> gesetzlich vertreten.</p>
-        <p>Zuständige Aufsichtsbehörde ist gem. §§ 59 Abs. 1, 60 Abs. 2 NHG der Stiftungsrat der Stiftung Fachhochschule Osnabrück, Albrechtstraße 30, 49076 Osnabrück.</p>
-        <p>Umsatzsteueridentifikationsnummer: <strong>DE 812 619 579</strong></p>
+        <p>{{ translationService.getTranslation('institutionLegalDescription') }}</p>
+        <p>{{ translationService.getTranslation('supervisoryAuthorityDescription') }}</p>
+        <p>{{ translationService.getTranslation('taxIdLabel') }}: <strong>DE 812 619 579</strong></p>
     </section>
+
     <section class="website-development">
-        <h2>Entwicklung der Website</h2>
-        <p>Die Website zum Operations Research Tool wurde im Rahmen des dualen Studiengangs Wirtschaftsinformatik im Modul "Programmierprojekt" entwickelt.</p>
-        <p>Verantwortlicher Professor in dem Modul ist <strong>Dr. Stefan Guericke</strong></p>
-        <h3>Projektleitung:</h3>
+        <h2>{{ translationService.getTranslation('websiteDevelopmentTitle') }}</h2>
+        <p>{{ translationService.getTranslation('websiteDevelopmentDescription') }}</p>
+        <p>{{ translationService.getTranslation('responsibleProfessor') }}: <strong>Dr. Stefan Guericke</strong></p>
+
+        <h3>{{ translationService.getTranslation('projectLead') }}:</h3>
         <p><strong>Jhamina Kutzek</strong></p>
-        <h3>Team:</h3>
+
+        <h3>{{ translationService.getTranslation('team') }}:</h3>
         <ul>
             <li>Nadine Arning</li>
             <li>Fabienne Priemer</li>

@@ -1,7 +1,13 @@
 <footer>
-    <div class="footer-container">
-        <button id="datenschutz" class="footer-button" routerLink="/datenschutz">Datenschutz</button>
-        <button id="impressum" class="footer-button" routerLink="/impressum">Impressum</button>
-        <button id="ueberUns" class="footer-button" routerLink="/about-us">Über Uns</button>
-      </div>
+  <div class="footer-container">
+    <button id="datenschutz" class="footer-button" routerLink="/datenschutz">
+      {{ translationService.getTranslation('footerDatenschutz') }}
+    </button>
+    <button id="impressum" class="footer-button" routerLink="/impressum">
+      {{ translationService.getTranslation('footerImpressum') }}
+    </button>
+    <button id="ueberUns" class="footer-button" routerLink="/about-us">
+      {{ translationService.getTranslation('footerUeberUns') }}
+    </button>
+  </div>
 </footer>
