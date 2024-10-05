@@ -1,14 +1,14 @@
 <div>
-  <button id="menue_startseite" routerLink = ''>
-    <span>{{ Menu1.name }}</span>
+  <button id="menue_startseite" routerLink=''>
+    <span>{{ translationService.getTranslation('menuHome') }}</span>
   </button>
-  <button id="menue_HiGHS" routerLink = '/highs'>
-    <span>{{ Menu2.name }}</span>
+  <button id="menue_HiGHS" routerLink='/highs'>
+    <span>{{ translationService.getTranslation('menuHiGHS') }}</span>
   </button>
   <button id="menue_GLPK">
-    <span>{{ Menu3.name }}</span>
+    <span>{{ translationService.getTranslation('menuGLPK') }}</span>
   </button>
-  <button id="menue_Feedback" routerLink = '/feedback'>
-    <span>{{ Menu4.name }}</span>
+  <button id="menue_Feedback" routerLink='/feedback'>
+    <span>{{ translationService.getTranslation('menuFeedback') }}</span>
   </button>
 </div>

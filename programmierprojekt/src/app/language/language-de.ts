@@ -84,6 +84,10 @@ websiteDevelopmentTitle: "Entwicklung der Website",
 websiteDevelopmentDescription: "Die Website zum Operations Research Tool wurde im Rahmen des dualen Studiengangs Wirtschaftsinformatik im Modul 'Programmierprojekt' entwickelt.",
 responsibleProfessor: "Verantwortlicher Professor",
 projectLead: "Projektleitung",
-team: "Team"
+team: "Team",
+menuHome: "Startseite",
+menuHiGHS: "HiGHS",
+menuGLPK: "GLPK",
+menuFeedback: "Feedback"
 
 };
