@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslationService } from '../translationservice';
 
@@ -7,13 +7,13 @@ import { TranslationService } from '../translationservice';
   selector: 'app-home',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl:'./home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent { 
+  currentSlide = 0; // Start bei der ersten Folie
+  interval: any;
+
   constructor(public translationService: TranslationService) {}
 
-  switchLanguage() {
-    this.translationService.switchLanguage();
-  }
 }

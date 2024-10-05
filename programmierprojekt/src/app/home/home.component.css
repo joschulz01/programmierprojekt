@@ -2,14 +2,14 @@
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px 20px 0 20px; 
 }
 
 /* Überschrift */
 h1.page-title {
     text-align: center; /* Text zentrieren */
     color: #2c3e50; /* Dunkles Blau für den Text */
-    margin: 50px 0; /* Abstand oben und unten */
+    margin: 0 0 10px 0; /* Abstand oben und unten */
     font-size: 3em; /* Schriftgröße anpassen für mehr Sichtbarkeit */
     line-height: 1.2; /* Zeilenhöhe anpassen */
     animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
@@ -127,3 +127,36 @@ p {
     transform: scale(1.05); /* Leichte Vergrößerung bei Hover */
     color: black; /* Textfarbe bei Hover */
 }
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden; /* Versteckt alles außerhalb des Containers */
+  }
+  
+  .slider {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .slider.active {
+    opacity: 1; /* Nur das aktive Slide wird sichtbar */
+    transition: opacity 1s ease-in-out;
+  }
+  
+  h3 {
+    font-size: 2rem;
+    color: #2c3e50;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
