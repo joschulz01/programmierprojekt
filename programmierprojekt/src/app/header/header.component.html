@@ -1,10 +1,10 @@
 <header>
-  <img id="logo_header" src="logo.png" alt="OR Logo" routerLink = ''/>
+  <img id="logo_header" src="logo.png" alt="OR Logo" routerLink=''/>
   <div>
-    <h1>{{ translationService.getTranslations().title }}</h1>
-    <p>{{ translationService.getTranslations().subtitle }}</p>
-    <button id="sprache�ndern" (click)="switchLanguage()">
-      {{ translationService.getTranslations().switchLanguage }}
+    <h1>{{ translationService.getTranslation('title') }}</h1>
+    <p>{{ translationService.getTranslation('subtitle') }}</p>
+    <button id="sprache-aendern" (click)="switchLanguage()">
+      {{ translationService.getTranslation('switchLanguage') }}
     </button>
   </div>
 </header>

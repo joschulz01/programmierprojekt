@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router'
-
-import { TranslationService } from '../translationservice';  // Dein Pfad
+import { TranslationService } from '../translationservice';
 
 @Component({
-  standalone: true,
   selector: 'app-header',
-  imports: [RouterLink],
+  standalone: true,
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  // Ändere hier die Sichtbarkeit
   constructor(public translationService: TranslationService) {}
 
   switchLanguage() {
