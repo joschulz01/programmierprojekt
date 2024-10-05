@@ -1,4 +1,4 @@
-export const DE_TRANSLATIONS = {
+export const DE_TRANSLATIONS: Record<string, string>  = {
   title: 'Operations Research Tool',
   subtitle: 'Programmierprojekt 2024',
   switchLanguage: 'Sprache wechseln',
