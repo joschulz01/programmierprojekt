@@ -1,4 +1,5 @@
 header {
+  justify-content: space-between; /* Platz zwischen Header-Elementen */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,8 +53,8 @@ p {
 }
 
 #sprache-aendern {
-  background: linear-gradient(to bottom, #6a5acd, #483d8b); /* Farbverlauf passend zu deinem Header */
-  color: white; /* Weißer Text für guten Kontrast */
+  background: linear-gradient(to bottom, #c0c0c0, #c0c0c0); /* Farbverlauf passend zu deinem Header */
+  color: black; /* Weißer Text für guten Kontrast */
   border: none; /* Kein Rahmen */
   padding: 10px 15px; /* Innenabstand */
   font-size: 1rem; /* Schriftgröße */
@@ -69,7 +70,7 @@ p {
 }
 
 #sprache-aendern:hover {
-  background: linear-gradient(to bottom, #7b68ee, #5c4d9c); /* Dunklerer Farbverlauf bei Hover */
+  background: linear-gradient(to bottom, #c0c0c0, #c0c0c0); /* Dunklerer Farbverlauf bei Hover */
   transform: scale(1.05); /* Leichte Vergrößerung bei Hover */
 }
 
@@ -86,12 +87,12 @@ header {
   bottom: 10px; /* Abstand vom unteren Rand */
   left: 10px; /* Abstand vom linken Rand */
   font-size: 1.5rem; /* Größe des Icons */
-  color: #333; /* Farbe des Icons */
+  color: #c0c0c0; /* Farbe des Icons */
   transition: color 0.3s; /* Übergangseffekt für Hover */
 }
 
 #home-icon:hover {
-  color: #007BFF; /* Farbe beim Hover */
+  color: #c0c0c0; /* Farbe beim Hover */
 }
 
 

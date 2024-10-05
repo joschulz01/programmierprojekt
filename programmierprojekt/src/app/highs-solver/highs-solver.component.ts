@@ -47,7 +47,8 @@ export class HighsSolverComponent {
   solution = '';  // Variable zur Anzeige der L�sung
   result: Result | null = null; // Verwendung des definierten Result Interfaces
   selectedFile: File | null = null; // Hier wird die ausgewählte Datei 
-  
+  showInfo = false; //Kontrolliert das Anzeigen des Tooltips
+
   switchLanguage() {
     this.translationService.switchLanguage();
   }
