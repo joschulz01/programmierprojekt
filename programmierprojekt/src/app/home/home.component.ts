@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router'
+import { RouterLink } from '@angular/router';
+import { TranslationService } from '../translationservice';
+
 
 @Component({
   selector: 'app-home',
@@ -9,5 +11,9 @@ import { RouterLink } from '@angular/router'
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  constructor(public translationService: TranslationService) {}
 
+  switchLanguage() {
+    this.translationService.switchLanguage();
+  }
 }

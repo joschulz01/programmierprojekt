@@ -5,6 +5,7 @@ import highs, { HighsSolution } from 'highs'; // Importiere HighsSolution
 import { ConstraintsService } from '../constraints.service';
 import { UmformungService } from '../umformung.service';
 import { ModelComponent } from '../model/model.component';
+import { TranslationService } from '../translationservice';
 
 // Definition der Interfaces f�r den Resultattyp
 interface Column {
@@ -45,12 +46,16 @@ export class HighsSolverComponent {
   problemInput = '';  // Eingabefeld f�r das Problem, standardm��ig leer
   solution = '';  // Variable zur Anzeige der L�sung
   result: Result | null = null; // Verwendung des definierten Result Interfaces
-  selectedFile: File | null = null; // Hier wird die ausgewählte Datei deklariert
+  selectedFile: File | null = null; // Hier wird die ausgewählte Datei 
+  
+  switchLanguage() {
+    this.translationService.switchLanguage();
+  }
 
   xWert?: number;
   yWert?: number;
 
-  constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService) {}
+  constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
 
   // Methode zur L�sung des Benutzerproblems
   async solveProblem(): Promise<void> {
@@ -263,5 +268,6 @@ importFile(): void {
     }
   };
   input.click(); // Öffne den Dateiauswahldialog
+  
 }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslationService } from '../../translationservice';
 
 @Component({
   selector: 'app-datenschutz',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './datenschutz.component.css'
 })
 export class DatenschutzComponent {
+  constructor(public translationService: TranslationService) {}
 
+  switchLanguage() {
+    this.translationService.switchLanguage();
+  }
 }
