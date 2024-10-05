@@ -84,6 +84,10 @@ websiteDevelopmentTitle: "Website Development",
 websiteDevelopmentDescription: "The website for the Operations Research Tool was developed as part of the dual study program in Business Informatics in the 'Programming Project' module.",
 responsibleProfessor: "Responsible Professor",
 projectLead: "Project Lead",
-team: "Team"  
+team: "Team",
+menuHome: "Home",
+menuHiGHS: "HiGHS",
+menuGLPK: "GLPK",
+menuFeedback: "Feedback"  
 
 };
