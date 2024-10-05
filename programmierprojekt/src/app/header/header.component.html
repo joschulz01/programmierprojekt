@@ -1,10 +1,15 @@
 <header>
   <img id="logo_header" src="logo.png" alt="OR Logo" routerLink=''/>
-  <div>
+  <div>    
     <h1>{{ translationService.getTranslation('title') }}</h1>
     <p>{{ translationService.getTranslation('subtitle') }}</p>
-    <button id="sprache-aendern" (click)="switchLanguage()">
-      {{ translationService.getTranslation('switchLanguage') }}
-    </button>
+
+   
   </div>
+  <a href="/" aria-label="Home">
+    <i class="fas fa-home" id="home-icon"></i>
+  </a>
+  <button id="sprache-aendern" (click)="switchLanguage()">
+    {{ translationService.getTranslation('switchLanguage') }}
+  </button>
 </header>
