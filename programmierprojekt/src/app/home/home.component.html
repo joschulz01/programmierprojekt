@@ -19,10 +19,14 @@
       </div>
   
   <div class="dot-container">
-    <span *ngFor="let value of values; let i = index" 
-          class="dot" 
-          [ngClass]="{'active': currentSlide === i}" 
-          (click)="goToSlide(i)">
+    <span *ngFor="let value of values; let i = index"
+        class="dot"
+        [ngClass]="{'active': currentSlide === i}"
+        (click)="goToSlide(i)"
+        (keydown.enter)="goToSlide(i)"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="'Go to slide ' + (i + 1)"> 
     </span>
   </div>   
 
