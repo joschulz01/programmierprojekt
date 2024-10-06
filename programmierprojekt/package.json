@@ -48,7 +48,7 @@
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0",
-    "typescript": "~5.5.2",
+    "typescript": "~5.6.0",
     "typescript-eslint": "8.8.0"
   }
 }
