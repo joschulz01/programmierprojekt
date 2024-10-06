@@ -9,22 +9,21 @@
 
     <h2>{{ translationService.getTranslation('ourCoreValues') }}</h2>
     <p>{{ translationService.getTranslation('ourCoreValuesDescription') }}</p>
-    
-    <div class="value-container">
-        <div class="value-box">
-            <h3>{{ translationService.getTranslation('intuitiveInterface') }}</h3>
-            <p>{{ translationService.getTranslation('intuitiveInterfaceDescription') }}</p>
-        </div>
-        <div class="value-box">
-            <h3>{{ translationService.getTranslation('optimalEfficiency') }}</h3>
-            <p>{{ translationService.getTranslation('optimalEfficiencyDescription') }}</p>
-        </div>
-        <div class="value-box">
-            <h3>{{ translationService.getTranslation('practicalExperience') }}</h3>
-            <p>{{ translationService.getTranslation('practicalExperienceDescription') }}</p>
-        </div>
+
+<div class="slider-container">
+    <div class="value-box" *ngFor="let value of values; let i = index" [ngClass]="{'active': currentSlide === i}">
+      <h3>{{ value.title }}</h3>
+      <p>{{ value.description }}</p>
     </div>
-</div>
+  </div>
+  
+  <div class="dot-container">
+    <span *ngFor="let value of values; let i = index" 
+          class="dot" 
+          [ngClass]="{'active': currentSlide === i}" 
+          (click)="goToSlide(i)">
+    </span>
+  </div>   
 
 <div class="container">
 <!-- Hero Section -->
