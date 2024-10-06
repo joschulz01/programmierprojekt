@@ -1,60 +1,82 @@
 /* Container Styling */
 .container {
-  max-width: 800px;
-  margin: 1rem auto;
-  padding: 20px;
+  max-width: 800px; /* Maximalbreite anpassen */
+  margin: 0 auto; /* Zentriert den Container */
+  padding: 20px; /* Innenabstand */
 }
 
 /* Sektionen */
-  h2, h3 {
-    color: #2c3e50; /* Dunkles Blau für Überschriften */
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-align: center;
-    margin-top: 2rem;
-    position: relative;
-    animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
-  }
-  
-  h2::after, h3::after {
-    content: '';
-    width: 60px;
-    height: 4px;
-    background-color: #708090; /* Blaue Linie unter Überschrift */
-    display: block;
-    margin: 1rem auto;
-  }
-  
-  /* Parallax-Effekt für Absätze */
-  p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    text-align: justify;
-    padding: 0 10%;
-    margin: 1rem 0;
-    animation: fadeInUp 1s ease-out; /* Sanfter Fade-Up */
-  }
-
-  /* Entfernt die Punkte vor den Listenelementen */
-ul {
-    list-style-type: none;
-    padding-left: 0; /* Entfernt den Standard-Einzug */
+h1 {
+  text-align: center; /* Text zentrieren */
+  color: #2c3e50; /* Dunkles Blau für den Text */
+  margin: -200px 0 0 0; /* Abstand oben und unten */
+  font-size: 3em; /* Schriftgröße anpassen */
+  line-height: 1.2; /* Zeilenhöhe anpassen */
+  animation: fadeInDown 1s ease-out; /* Fade-In-Effekt */
+  position: relative; /* Für die Positionierung des Unterstrichs */
 }
-  
-  /* Listen-Items mit Icons */
-  ul li {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin: 1rem 0;
-    position: relative;
-    padding-left: 2rem;
-  }
-  
-  ul li::before {
-    content: "✔"; /* Häkchen-Icon */
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 1.2rem;
-    color: #708090;
-  }
+
+h1::after {
+  content: '';
+  display: block;
+  width: 60px; /* Breite der Linie unter dem H1 */
+  height: 4px; /* Höhe der Linie */
+  background-color: #708090; /* Farbe der Linie */
+  margin: 0.25rem auto; /* Abstand um die Linie */
+}
+
+h2, h3 {
+  color: #2c3e50; /* Dunkles Blau für Überschriften */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center; /* Zentriert die Überschriften */
+  margin-top: 0 px auto;
+  position: relative;
+  animation: fadeInDown 1s ease-out; /* Fade-In-Effekt */
+}
+
+h2::after, h3::after {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background-color: #708090; /* Blaue Linie unter Überschrift */
+  display: block;
+  margin: 1rem auto; /* Abstand um die Linie */
+}
+
+/* Parallax-Effekt für Absätze */
+p {
+  font-size: 1.1rem; /* Schriftgröße */
+  line-height: 1.6; /* Zeilenhöhe für bessere Lesbarkeit */
+  text-align: justify; /* Text zentrieren */
+  margin: 20px 0; /* Einheitlicher Abstand oben und unten */
+  animation: fadeInUp 1s ease-out; /* Sanfter Fade-Up */
+  max-width: 800px; /* Maximale Breite des Absatzes auf 800px setzen */
+  margin-left: auto; /* Zentriert den Absatz */
+  margin-right: auto; /* Zentriert den Absatz */
+}
+
+/* Entfernt die Punkte vor den Listenelementen */
+ul {
+  list-style-type: none; /* Entfernt die Standardpunkte */
+  padding-left: 0; /* Entfernt den Standard-Einzug */
+  max-width: 100%; /* Maximale Breite auf 100% setzen */
+}
+
+/* Listen-Items mit Icons */
+ul li {
+  font-size: 1.1rem; /* Schriftgröße */
+  line-height: 1.8; /* Zeilenhöhe */
+  margin: 1rem 0; /* Abstand oben und unten */
+  position: relative;
+  padding-left: 2rem; /* Abstand für das Häkchen */
+}
+
+ul li::before {
+  content: "✔"; /* Häkchen-Icon */
+  position: absolute;
+  left: 0; /* Positionierung des Häkchens */
+  top: 0;
+  font-size: 1.2rem; /* Häkchen-Größe */
+  color: #708090; /* Häkchen-Farbe */
+}

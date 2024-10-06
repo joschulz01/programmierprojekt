@@ -8,23 +8,27 @@
     <p>{{ translationService.getTranslation('whyOurToolDescription3') }}</p>
 
     <h2>{{ translationService.getTranslation('ourCoreValues') }}</h2>
-    <p>{{ translationService.getTranslation('ourCoreValuesDescription') }}</p>    
+    <p>{{ translationService.getTranslation('ourCoreValuesDescription') }}</p>
 
-    <div class="value-container">
-        <div class="value-box">
-            <h3>{{ translationService.getTranslation('intuitiveInterface') }}</h3>
-            <p>{{ translationService.getTranslation('intuitiveInterfaceDescription') }}</p>
+    <div class="slider-container">
+        <!-- Slide-Boxen -->
+        <div class="value-box" *ngFor="let value of values; let i = index" [ngClass]="{'active': currentSlide === i}">
+          <h3>{{ value.title }}</h3>
+          <p>{{ value.description }}</p>
         </div>
-        <div class="value-box">
-            <h3>{{ translationService.getTranslation('optimalEfficiency') }}</h3>
-            <p>{{ translationService.getTranslation('optimalEfficiencyDescription') }}</p>
-        </div>
-        <div class="value-box">
-            <h3>{{ translationService.getTranslation('practicalExperience') }}</h3>
-            <p>{{ translationService.getTranslation('practicalExperienceDescription') }}</p>
-        </div>
-    </div>
-</div>
+      </div>
+  
+  <div class="dot-container">
+    <span *ngFor="let value of values; let i = index"
+        class="dot"
+        [ngClass]="{'active': currentSlide === i}"
+        (click)="goToSlide(i)"
+        (keydown.enter)="goToSlide(i)"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="'Go to slide ' + (i + 1)"> 
+    </span>
+  </div>   
 
 <div class="container">
 <!-- Hero Section -->

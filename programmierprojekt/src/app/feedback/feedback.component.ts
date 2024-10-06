@@ -10,7 +10,6 @@ import { TranslationService } from '../translationservice';
 })
 export class FeedbackComponent {
   constructor(public translationService: TranslationService) {}
-
   switchLanguage() {
     this.translationService.switchLanguage();
   }

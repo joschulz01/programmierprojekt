@@ -68,10 +68,13 @@
 
     <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
+</div>
 
-  <div>
-    <button id="export_MPS" (click)="downloadMPS()">{{ translationService.getTranslation('exportMPS') }}</button>
-    <br>
-    <button id="export_LP" (click)="downloadLP()">{{ translationService.getTranslation('exportLP') }}</button>
-  </div>
+<div class="export-buttons-container">
+  <button id="export_MPS" (click)="downloadMPS()">
+      {{ translationService.getTranslation('exportMPS') }}
+  </button>
+  <button id="export_LP" (click)="downloadLP()">
+      {{ translationService.getTranslation('exportLP') }}
+  </button>
 </div>
