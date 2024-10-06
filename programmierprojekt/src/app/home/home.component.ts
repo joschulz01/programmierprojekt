@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 
   export class HomeComponent implements OnInit, OnDestroy {
-    public currentSlide: number = 0;
+    public currentSlide = 0;
     private slideInterval: number | undefined;
   
     public values = [
