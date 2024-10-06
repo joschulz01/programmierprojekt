@@ -125,7 +125,7 @@ jobs:
     steps:
       # Checkout Repository
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Stage: Create, build and push Docker image
       - name: Create, build and push Docker image

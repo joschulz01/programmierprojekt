@@ -23,7 +23,7 @@ jobs:
     steps:
       # Checkout Repository
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Stage: Prerequisits
       - name: Set IMAGE_TAG
