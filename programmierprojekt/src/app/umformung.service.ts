@@ -50,7 +50,6 @@ export class UmformungService {
 
     // Alles zusammenfügen
     ausgabe.push(`End`);
-    console.log(ausgabe.join('\n'));
 
     return ausgabe.join('\n');
   }
