@@ -34,6 +34,10 @@ Seiten Wechseln
     [Dokumentation]
     Click    id=menue_HiGHS
 
+Öffne GLPK-Seite
+    [Dokumentation]
+    Click   id=menue_parameter
+
 Testproblem lösen
     [Dokumentation]    Löst die Testdatei
     Fill Text    id=problemInput    ${Testdatei1}
