@@ -27,7 +27,7 @@ Seiten Wechseln
 *** Schlüsselwörter ***
 Öffne OR-Webseite
     [Dokumentation]     Öffnet die OR-Webseite
-    New Browser    ${BROWSER}    headless=True 
+    New Browser    ${BROWSER}    ${True} 
     New Page    ${url}
 
 Öffne Highs-Seite
