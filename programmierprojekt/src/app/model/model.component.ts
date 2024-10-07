@@ -40,7 +40,6 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
 
   onSolve() {
     this.constraints = this.constraintsService.getConstraints();
-    console.log('Constraints:', this.constraints);
 
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
 
@@ -174,7 +173,6 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
       variableNames.add(term.name);
     });
 
-    console.log(variableNames);
     return Array.from(variableNames); // Rückgabe von z.B. ['x', 'y'] oder ['x1', 'x2']
   }
 }
