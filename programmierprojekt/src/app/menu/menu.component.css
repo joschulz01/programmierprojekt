@@ -43,37 +43,88 @@ span {
   font-weight: bold;
 }
 
-/* Media Query für kleinere Bildschirme */
+/* Media Query für Zoom 200% (ca. bis 1280px Bildschirmbreite) */
+@media (max-width: 1280px) {
+  .menu-container {
+    width: 90%; /* Breite des Containers für hohe Zoomstufen */
+  }
+
+  .menu-container button {
+    padding: 1vh 2.5vw; /* Innenabstände anpassen für bessere Sichtbarkeit */
+    font-size: 2.5vw; /* Schriftgröße anpassen, um sie bei 200% Zoom lesbar zu halten */
+  }
+}
+
+/* Media Query für Zoom 300% (ca. bis 850px Bildschirmbreite) */
+@media (max-width: 850px) {
+  .menu-container {
+    width: 95%; /* Container breiter machen für noch kleinere Viewports */
+  }
+
+  .menu-container button {
+    padding: 1vh 2vw; /* Weitere Reduktion der Innenabstände */
+    font-size: 2vw; /* Schriftgröße anpassen, um sie bei 300% Zoom lesbar zu machen */
+  }
+}
+
+/* Media Query für sehr kleine Bildschirme (bis zu 480px Breite) */
 @media (max-width: 480px) {
   .menu-container {
     width: 90%; /* Breite für kleine Bildschirme */
   }
   
   .menu-container button {
-    padding: 0.5vh 2vw; /* Kleinere Innenabstände */
-    font-size: 3vw; /* Kleinere Schriftgröße */
+    padding: 1vh 3vw; /* Kleinere Innenabstände für besseren Platz auf kleinen Bildschirmen */
+    font-size: 2.5vw; /* Größere Schriftgröße für bessere Lesbarkeit auf kleinen Geräten */
   }
 }
 
-/* Zusätzliche Media Queries für hohe Zoomstufen */
-@media (min-width: 2000px) { /* Ab einer Breite von 2000px */
+/* Media Query für mittlere bis kleine Bildschirme (bis zu 800px Breite, simuliert auch 300% Zoom) */
+@media (max-width: 800px) {
   .menu-container {
-    width: 50%; /* Verkleinern des Containers */
+    width: 90%; /* Vergrößern des Containers für kleinere Bildschirme oder hohen Zoom */
   }
 
   .menu-container button {
-    padding: 0.8vh 1.5vw; /* Anpassung der Innenabstände */
-    font-size: 1.2vw; /* Schriftgröße anpassen */
+    padding: 1vh 2.5vw; /* Button-Größe vergrößern für bessere Bedienbarkeit */
+    font-size: 2vw; /* Schriftgröße vergrößern, um sie bei starkem Zoom lesbar zu machen */
   }
 }
 
-@media (min-width: 2500px) { /* Ab einer Breite von 2500px */
+/* Media Query für größere Bildschirme (ab 1500px) */
+@media (min-width: 1500px) {
+  .menu-container {
+    width: 60%; /* Container verkleinern auf größeren Bildschirmen */
+  }
+
+  .menu-container button {
+    padding: 0.6vh 1.8vw; /* Anpassung der Innenabstände */
+    font-size: 1.4vw; /* Schriftgröße leicht reduzieren, aber weiterhin gut sichtbar */
+  }
+}
+
+/* Media Query für sehr große Bildschirme (ab 2000px) */
+@media (min-width: 2000px) {
+  .menu-container {
+    width: 50%; /* Weiteres Verkleinern des Containers */
+  }
+
+  .menu-container button {
+    padding: 0.8vh 1.6vw; /* Anpassung der Innenabstände */
+    font-size: 1.2vw; /* Schriftgröße anpassen für große Bildschirme */
+  }
+}
+
+/* Media Query für extrem große Bildschirme (ab 2500px) */
+@media (min-width: 2500px) {
   .menu-container {
     width: 40%; /* Weiter reduzieren des Containers */
   }
 
   .menu-container button {
-    padding: 0.5vh 1.2vw; /* Weiter reduzieren */
-    font-size: 1vw; /* Weiter verkleinern */
+    padding: 1vh 1.5vw; /* Weitere Reduktion der Button-Größe */
+    font-size: 1vw; /* Schriftgröße anpassen, um proportional zu bleiben */
   }
 }
+
+
