@@ -8,11 +8,7 @@ header {
   max-width: 50rem;
   margin: 0 auto 2rem auto;
   text-align: center;
-  background: linear-gradient(
-    to bottom,
-    #708090,
-    #778899
-  );
+  background: linear-gradient(to bottom, #708090, #778899);
   padding: 1rem;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
@@ -36,39 +32,23 @@ p {
   text-wrap: balance;
 }
 
-@media (min-width: 768px) {
-  header {
-    padding: 2rem;
-  }
-
-  img {
-    width: 4.5rem;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-    margin: 0;
-    padding: 0;
-  }
-}
-
+/* Button für Sprachwechsel */
 #sprache-aendern {
   background: linear-gradient(to bottom, #c0c0c0, #c0c0c0); /* Farbverlauf passend zu deinem Header */
   color: black; /* Weißer Text für guten Kontrast */
   border: none; /* Kein Rahmen */
-  padding: 10px 15px; /* Innenabstand */
-  font-size: 1rem; /* Schriftgröße */
-  border-radius: 8px; /* Abgerundete Ecken */
+  padding: 0.8vh 1.8vw; /* Kleinere Innenabstände in Viewport-Einheiten */
+  font-size: 1.0vw; /* Kleinere Schriftgröße in Viewport-Einheiten */
+  border-radius: 5px; /* Abgerundete Ecken */
   cursor: pointer; /* Zeigeranzeige bei Hover */
   transition: background 0.3s ease, transform 0.2s ease; /* Sanfter Übergang für Hover-Effekte */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Leichter Schatten für 3D-Effekt */
-    position: absolute; /* Macht die Positionierung relativ zum Header */
-    bottom: 10px; /* Abstand vom unteren Rand */
-    right: 10px; /* Abstand vom rechten Rand */
-    font-size: 1rem; /* Größe des Textes */
-  
+  position: absolute; /* Macht die Positionierung relativ zum Header */
+  bottom: 10px; /* Abstand vom unteren Rand */
+  right: 10px; /* Abstand vom rechten Rand */
 }
 
+/* Hover-Effekte */
 #sprache-aendern:hover {
   background: linear-gradient(to bottom, #c0c0c0, #c0c0c0); /* Dunklerer Farbverlauf bei Hover */
   transform: scale(1.05); /* Leichte Vergrößerung bei Hover */
@@ -95,4 +75,25 @@ header {
   color: #c0c0c0; /* Farbe beim Hover */
 }
 
+/* Media Query für kleinere Bildschirme */
+@media (max-width: 480px) {
+  #sprache-aendern {
+    padding: 0.5vh 3vw; /* Kleinere Innenabstände */
+    font-size: 3vw; /* Kleinere Schriftgröße */
+  }
+}
 
+/* Zusätzliche Media Queries für hohe Zoomstufen */
+@media (min-width: 2000px) { /* Ab einer Breite von 2000px */
+  #sprache-aendern {
+    padding: 1vh 1.5vw; /* Weitere Anpassung der Innenabstände */
+    font-size: 1.5vw; /* Schriftgröße anpassen */
+  }
+}
+
+@media (min-width: 2500px) { /* Ab einer Breite von 2500px */
+  #sprache-aendern {
+    padding: 1vh 1.2vw; /* Weiter reduzieren */
+    font-size: 1.2vw; /* Weiter verkleinern */
+  }
+}
