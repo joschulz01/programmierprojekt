@@ -1,32 +1,50 @@
+/* Container für Datenschutztext */
+.privacy-container {
+    max-width: 800px; /* Maximale Breite anpassen, um der Header-Breite zu entsprechen */
+    margin: 0 auto; /* Zentriert den Container */
+    padding: 0 20px; /* Innenabstand hinzufügen, um den Text vom Rand abzusetzen */
+}
+
+/* Datenschutzüberschrift */
 h1 {
-    font-size: 2.5em;
-    color: #2c3e50;
+    font-size: 2.5em; /* Schriftgröße */
+    color: #2c3e50; /* Textfarbe */
     text-align: center; /* Zentriert den Haupttitel */
-    margin: 20px 0;
+    margin: -20px 0 0 0; /* Abstand oben und unten zurücksetzen */
+    line-height: 1.2; /* Zeilenhöhe anpassen */
+    animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
 }
 
 h2 {
-    font-size: 1.8em;
-    margin: 20px 0 10px;
-    color: #2980b9;
+    font-size: 1.8em; /* Schriftgröße */
+    margin: 20px 0 10px; /* Abstand zwischen der Überschrift und dem nächsten Element */
+    color: #2980b9; /* Textfarbe */
     text-align: center; /* Zentriert die Untertitel */
 }
 
+/* Absätze */
 p {
-    margin-bottom: 15px;
-    text-align: center; /* Zentriert den Text in den Absätzen */
+    margin-bottom: 15px; /* Abstand zwischen den Absätzen */
+    text-align: justify; /* Textbegründung */
+    line-height: 1.6; /* Zeilenhöhe für bessere Lesbarkeit */
+    font-size: 1.1rem; /* Schriftgröße */
+    animation: fadeInUp 1s ease-out; /* Sanfter Fade-Up */
+    max-width: 800px; /* Maximale Breite des Absatzes auf 800px setzen */
+    margin-left: auto; /* Zentriert den Absatz */
+    margin-right: auto; /* Zentriert den Absatz */
 }
 
 address {
     text-align: center; /* Zentriert die Anschrift */
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Abstand unten */
 }
 
+/* Links */
 a {
-    color: #2980b9;
-    text-decoration: none;
+    color: #2980b9; /* Linkfarbe */
+    text-decoration: none; /* Unterstreichung entfernen */
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Unterstreichung bei Hover */
 }

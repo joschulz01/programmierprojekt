@@ -2,7 +2,7 @@ h1 {
     font-size: 2.5em;
     color: #2c3e50;
     text-align: center; /* Zentriert den Haupttitel */
-    margin: 20px 0;
+    margin: -20px 0 0 0;
 }
 
 h2 {
@@ -18,9 +18,22 @@ h3 {
     text-align: center; /* Zentriert die h3-Überschriften */
 }
 
+h6{
+    font-size: 1.1em;
+    margin: 15px 0 5px;
+    text-align: center; /* Zentriert die h3-Überschriften */
+}
+
+
 p {
-    margin-bottom: 15px;
-    text-align: center; /* Zentriert den Text in den Absätzen */
+    margin-bottom: 15px; /* Abstand zwischen den Absätzen */
+    text-align: justify; /* Textbegründung */
+    line-height: 1.6; /* Zeilenhöhe für bessere Lesbarkeit */
+    font-size: 1.1rem; /* Schriftgröße */
+    animation: fadeInUp 1s ease-out; /* Sanfter Fade-Up */
+    max-width: 800px; /* Maximale Breite des Absatzes auf 800px setzen */
+    margin-left: auto; /* Zentriert den Absatz */
+    margin-right: auto; /* Zentriert den Absatz */
 }
 
 address {

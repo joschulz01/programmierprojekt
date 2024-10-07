@@ -1,5 +1,5 @@
 .solver-container {
-  margin: 20px;
+  margin: -20px 0 0 0;
   text-align: center;
 }
 
@@ -13,6 +13,7 @@ textarea {
 /* Button-Styling */
 button {
   margin-top: 10px;
+  bottom: 20px;
   padding: 10px 20px;
   background-color: #708090; /* Angepasste Hintergrundfarbe für Buttons */
   color: white; /* Weißer Text */
@@ -72,17 +73,17 @@ tbody tr:nth-child(odd) {
 }
 
 /* Hauptüberschrift für Highs Solver */
-h1.page-title {
+h1 {
   text-align: center; /* Text zentrieren */
-  color: #2c3e50; /* Dunkles Blau für den Text */
-  margin: 0 0 10px 0; /* Abstand oben auf 0 gesetzt */
+  color: #2c3e50; /* Die Farbe hier auf die gewünschte Farbe ändern, z.B. von der Startseite */
+  margin: 0 0 20px 0; /* Abstand unter der Überschrift erhöht (von 10px auf 20px) */
   font-size: 3em; /* Schriftgröße anpassen für mehr Sichtbarkeit */
   line-height: 1.2; /* Zeilenhöhe anpassen */
   animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
   position: relative; /* Für die Positionierung des Unterstrichs */
 }
 
-h1.page-title::after {
+h1::after {
   content: '';
   display: block;
   width: 60px; /* Breite der Linie unter dem H1 */
@@ -105,7 +106,6 @@ h3 {
 }
 
 /* Info-Button Styling */
-/* Info-Button Styling */
 .info-button {
   background-color: #708090; /* Hintergrundfarbe angepasst an das Thema */
   color: white; /* Weißer Text für besseren Kontrast */
@@ -113,12 +113,14 @@ h3 {
   cursor: pointer; /* Zeiger-Cursor */
   font-size: 18px; /* Einheitliche Schriftgröße */
   border-radius: 50%; /* Runde Form */
-  width: 25px; /* Breite des Buttons */
-  height: 25px; /* Höhe des Buttons */
+  width: 40px; /* Breite des Buttons */
+  height: 40px; /* Höhe des Buttons */
   text-align: center; /* Text zentrieren */
   padding: 0; /* Kein zusätzliches Padding */
-  margin-left: 10px; /* Abstand zum vorherigen Element */
   transition: background-color 0.3s; /* Sanfter Übergang für Hover-Effekte */
+  position: relative; /* Position relativ zu seinem aktuellen Standort */
+  top: -11px; /* Verschiebt den Button nach oben */
+  right: 5px;
 }
 
 .info-button:hover {
@@ -136,10 +138,12 @@ h3 {
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: absolute;
-  top: 350px; /* Passen Sie dies je nach Layout an */
-  left: 1075px; /* Positionieren Sie den Tooltip direkt neben dem Button */
+  top: 40%; /* Positioniere den Tooltip direkt unter dem Button */
+  left: 75%; /* Zentriere den Tooltip relativ zum Button */
+  transform: translateX(-50%); /* Verschiebe den Tooltip nach links, um ihn zu zentrieren */
   z-index: 1000;
-  width: 350px; /* Breitere Box für den Hilfstext */
+  width: auto; /* Dynamische Breite */
+  max-width: 300px; /* Maximalbreite für den Tooltip */
   text-align: left;
   font-size: 14px; /* Einheitliche Schriftgröße */
 }
@@ -156,4 +160,20 @@ pre {
   border-radius: 4px;
   font-size: 12px;
   white-space: pre-wrap; /* Zeilenumbruch bei Bedarf */
+}
+
+.export-buttons-container {
+  display: flex; /* Setzt die Buttons in eine Zeile */
+  justify-content: center; /* Zentriert die Buttons */
+  gap: 10px; /* Fügt Abstand zwischen den Buttons hinzu */
+  margin-bottom: 20px; /* Abstand zum nächsten Element */
+}
+
+/* Medienabfragen für responsive Design */
+@media (max-width: 768px) {
+  .tooltip {
+    max-width: 60%; /* Tooltip auf 80% der Bildschirmbreite bei kleineren Bildschirmen */
+    left: 85%; /* Bleibe zentriert */
+    transform: translateX(-50%); /* Zentrierung beibehalten */
+  }
 }
