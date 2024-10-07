@@ -12,7 +12,7 @@
 h1 {
     text-align: center; /* Text zentrieren */
     color: #2c3e50; /* Dunkles Blau für den Text */
-    margin: -200px 0 0 0; /* Abstand oben verringert, unten ggf. erhöhen */
+    margin: -20px 0 0 0; /* Abstand oben verringert, unten ggf. erhöhen */
     font-size: 3em; /* Schriftgröße anpassen für mehr Sichtbarkeit */
     line-height: 1.2; /* Zeilenhöhe anpassen */
     animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
@@ -28,15 +28,16 @@ h1::after {
     margin: 0.25rem auto; /* Abstand um die Linie (z.B. 15px oben und unten) */
 }
 
+/* Formular Styling */
 form {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Vertikale Anordnung der Formularelemente */
 }
 
 form button {
     align-self: flex-end; /* Platziert den Button rechts */
     padding: 10px 20px;
-    background-color: #708090;
+    background: linear-gradient(135deg, #708090, #778899);
     color: white;
     border: none;
     border-radius: 5px;
@@ -46,14 +47,49 @@ form button {
 
 form button:hover {
     background-color: #c0c0c0;
-    color:black;
+    color: black;
 }
 
 textarea {
-    width: 100%;
+    width: 100%; /* Vollständig breite auf kleinen Bildschirmen */
     height: 200px;
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 16px;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5em; /* Schriftgröße verringern für kleinere Bildschirme */
+        margin: -100px 0 20px 0; /* Abstand oben und unten anpassen */
+    }
+
+    form {
+        padding: 0 10px; /* Innenabstand hinzufügen für bessere Lesbarkeit */
+    }
+
+    form button {
+        width: 100%; /* Schaltfläche auf volle Breite auf kleineren Bildschirmen */
+        margin: 5px 0; /* Abstand zwischen den Schaltflächen */
+    }
+
+    textarea {
+        height: 150px; /* Höhe des Textbereichs verringern */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2em; /* Weitere Reduzierung der Schriftgröße */
+    }
+
+    form button {
+        padding: 10px; /* Padding für Schaltflächen reduzieren */
+    }
+
+    textarea {
+        height: 120px; /* Weitere Reduzierung der Höhe des Textbereichs */
+    }
 }

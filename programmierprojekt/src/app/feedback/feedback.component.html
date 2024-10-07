@@ -1,8 +1,8 @@
 <div class="container">
     <h1>{{ translationService.getTranslation('feedbackTitle') }}</h1>
     <p>{{ translationService.getTranslation('feedbackDescription') }}</p>
-    <form action="submit_feedback.php" method="post">
-        <textarea id="feedback" name="feedback" rows="10" placeholder="{{ translationService.getTranslation('feedbackPlaceholder') }}" required></textarea>
+    <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
+        <textarea id="feedback" name="feedback" [(ngModel)]="feedback" rows="10" placeholder="{{ translationService.getTranslation('feedbackPlaceholder') }}" required></textarea>
         <button type="submit" class="feedback-button">{{ translationService.getTranslation('submitFeedback') }}</button>
     </form>
 </div>

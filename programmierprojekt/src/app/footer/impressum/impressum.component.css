@@ -1,61 +1,112 @@
+/* Überschrift */
 h1 {
-    font-size: 2.5em;
+    font-size: 2.5em; /* Größe für große Bildschirme */
     color: #2c3e50;
     text-align: center; /* Zentriert den Haupttitel */
-    margin: -200px 0 0 0;
+    margin: -20px 0 0 0; 
 }
 
 h2 {
-    font-size: 1.8em;
+    font-size: 1.8em; /* Größe für große Bildschirme */
     margin: 20px 0 10px;
     color: #2980b9;
     text-align: center; /* Zentriert die Untertitel */
 }
 
 h3 {
-    font-size: 1.5em;
+    font-size: 1.5em; /* Größe für große Bildschirme */
     margin: 15px 0 5px;
     text-align: center; /* Zentriert die h3-Überschriften */
 }
 
-h6{
-    font-size: 1.1em;
+h6 {
+    font-size: 1.1em; /* Größe für große Bildschirme */
     margin: 15px 0 5px;
-    text-align: center; /* Zentriert die h3-Überschriften */
+    text-align: center; /* Zentriert die h6-Überschriften */
 }
 
-
+/* Absätze */
 p {
     margin-bottom: 15px; /* Abstand zwischen den Absätzen */
     text-align: justify; /* Textbegründung */
     line-height: 1.6; /* Zeilenhöhe für bessere Lesbarkeit */
-    font-size: 1.1rem; /* Schriftgröße */
+    font-size: 1.1rem; /* Größe für große Bildschirme */
     animation: fadeInUp 1s ease-out; /* Sanfter Fade-Up */
-    max-width: 800px; /* Maximale Breite des Absatzes auf 800px setzen */
+    max-width: 800px; /* Maximale Breite des Absatzes */
     margin-left: auto; /* Zentriert den Absatz */
     margin-right: auto; /* Zentriert den Absatz */
 }
 
+/* Adressen */
 address {
     text-align: center; /* Zentriert die Anschrift */
     margin-bottom: 15px;
 }
 
+/* Listen */
 ul {
-    list-style-type: none;
-    padding-left: 0;
+    list-style-type: none; /* Entfernt die Standardpunkte */
+    padding-left: 0; /* Entfernt den Standard-Einzug */
     text-align: center; /* Zentriert die Liste */
 }
 
 ul li {
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* Abstand zwischen den Listenpunkten */
 }
 
+/* Links */
 a {
-    color: #2980b9;
-    text-decoration: none;
+    color: #2980b9; /* Linkfarbe */
+    text-decoration: none; /* Unterstreichung entfernen */
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Unterstreichung bei Hover */
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2em; /* Kleinere Schriftgröße für h1 */
+        margin: -150px 0 0 0; /* Angepasster Abstand oben */
+    }
+
+    h2 {
+        font-size: 1.6em; /* Kleinere Schriftgröße für h2 */
+    }
+
+    h3 {
+        font-size: 1.3em; /* Kleinere Schriftgröße für h3 */
+    }
+
+    h6 {
+        font-size: 1em; /* Kleinere Schriftgröße für h6 */
+    }
+
+    p {
+        font-size: 1rem; /* Kleinere Schriftgröße für Absätze */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em; /* Weitere Anpassung der Schriftgröße für h1 */
+        margin: -100px 0 0 0; /* Angepasster Abstand */
+    }
+
+    h2 {
+        font-size: 1.4em; /* Weitere Anpassung der Schriftgröße für h2 */
+    }
+
+    h3 {
+        font-size: 1.2em; /* Weitere Anpassung der Schriftgröße für h3 */
+    }
+
+    h6 {
+        font-size: 0.9em; /* Weitere Anpassung der Schriftgröße für h6 */
+    }
+
+    p {
+        font-size: 0.9rem; /* Weitere Anpassung der Schriftgröße für Absätze */
+    }
 }

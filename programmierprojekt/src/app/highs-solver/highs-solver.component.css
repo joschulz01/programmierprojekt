@@ -1,19 +1,21 @@
 .solver-container {
-  margin: -200px 0 0 0;
+  margin: -20px 0 0 0;
   text-align: center;
 }
 
 /* Allgemeine Textarea-Stile */
 textarea {
   width: 100%;
-  max-width: 600px;
+  max-width: 600px; /* Maximale Breite für größere Bildschirme */
   margin-top: 10px;
+  padding: 10px; /* Innenabstand hinzufügen */
+  border: 1px solid #ccc; /* Rahmen für die Textarea */
+  border-radius: 4px; /* Runde Ecken */
 }
 
 /* Button-Styling */
 button {
   margin-top: 10px;
-  bottom: 20px;
   padding: 10px 20px;
   background-color: #708090; /* Angepasste Hintergrundfarbe für Buttons */
   color: white; /* Weißer Text */
@@ -29,7 +31,8 @@ button:hover {
 }
 
 /* Stil für readonly Textareas und Pre-Elemente */
-pre, textarea[readonly] {
+pre,
+textarea[readonly] {
   background-color: #f4f4f4; /* Heller Hintergrund für readonly Textarea */
   padding: 10px;
   border-radius: 4px;
@@ -45,7 +48,8 @@ table {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Leichte Schatten */
 }
 
-th, td {
+th,
+td {
   padding: 12px 15px; /* Innenabstand für Zellen */
   text-align: left; /* Linksbündig */
   font-family: Arial, sans-serif; /* Einheitliche Schriftart */
@@ -91,7 +95,6 @@ h1::after {
   background-color: #708090; /* Farbe der Linie */
   margin: 1rem auto; /* Zentriert die Linie */
 }
-
 
 /* Unterüberschrift */
 h3 {
@@ -159,9 +162,58 @@ pre {
   white-space: pre-wrap; /* Zeilenumbruch bei Bedarf */
 }
 
+/* Container für Export-Buttons */
 .export-buttons-container {
   display: flex; /* Setzt die Buttons in eine Zeile */
   justify-content: center; /* Zentriert die Buttons */
   gap: 10px; /* Fügt Abstand zwischen den Buttons hinzu */
   margin-bottom: 20px; /* Abstand zum nächsten Element */
+}
+
+/* Medienanpassungen für verschiedene Bildschirmgrößen */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em; /* Kleinere Schriftgröße für h1 */
+  }
+
+  textarea {
+    max-width: 100%; /* Volle Breite für kleinere Bildschirme */
+  }
+
+  button {
+    width: 100%; /* Knöpfe auf volle Breite setzen */
+    font-size: 14px; /* Kleinere Schriftgröße für Buttons */
+  }
+
+  .export-buttons-container {
+    flex-direction: column; /* Buttons untereinander anordnen */
+    gap: 5px; /* Kleineren Abstand zwischen Buttons */
+  }
+
+  .tooltip {
+    width: 90%; /* Breitere Box für Tooltip auf kleineren Bildschirmen */
+    left: auto; /* Verhindert Überlappung auf kleinen Bildschirmen */
+    right: 0; /* Positioniert den Tooltip rechts */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5em; /* Noch kleinere Schriftgröße für mobile Geräte */
+  }
+
+  button {
+    padding: 8px 12px; /* Kleinere Innenabstände für den Button */
+    font-size: 12px; /* Kleinere Schriftgröße für Buttons */
+  }
+
+  .info-button {
+    width: 35px; /* Kleinere Breite für den Info-Button */
+    height: 35px; /* Kleinere Höhe für den Info-Button */
+    font-size: 16px; /* Kleinere Schriftgröße */
+  }
+
+  .tooltip {
+    font-size: 12px; /* Kleinere Schriftgröße im Tooltip */
+  }
 }

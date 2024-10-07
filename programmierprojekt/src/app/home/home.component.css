@@ -12,7 +12,7 @@
 h1.page-title {
     text-align: center; /* Text zentrieren */
     color: #2c3e50; /* Dunkles Blau für den Text */
-    margin: -200px 0 0 0; /* Abstand oben verringert, unten ggf. erhöhen */
+    margin: -20px 0 0 0; /* Abstand oben verringert, unten ggf. erhöhen */
     font-size: 3em; /* Schriftgröße anpassen für mehr Sichtbarkeit */
     line-height: 1.2; /* Zeilenhöhe anpassen */
     animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
@@ -60,12 +60,13 @@ p {
 /* Zentrale Mehrwerte */
 .value-container {
     display: flex; /* Flexbox aktivieren für die Wertboxen */
+    flex-wrap: wrap; /* Ermöglicht das Umfließen der Boxen */
     justify-content: space-between; /* Abstand zwischen den Boxen */
     margin-top: 20px; /* Abstand oben verringert */
 }
 
 .value-box {
-    flex: 1; /* Gleiche Breite für alle Boxen */
+    flex: 1 1 calc(33.333% - 10px); /* Gleiche Breite für alle Boxen, mit Abstand */
     margin: 0 5px; /* Abstand zwischen den Boxen verringert */
     padding: 20px; /* Innenabstand */
     background-color: #c0c0c0; /* Helle Hintergrundfarbe */
@@ -74,13 +75,17 @@ p {
     text-align: center; /* Text zentrieren */
 }
 
-.value-box h3 {
-    color: #333; /* Dunkle Farbe für die Überschrift der Box */
-    margin-bottom: 5px; /* Abstand nach unten verringert */
+/* Responsive Anpassung für Wertboxen */
+@media (max-width: 768px) {
+    .value-box {
+        flex: 1 1 calc(50% - 10px); /* Zwei Boxen pro Zeile auf mittleren Bildschirmen */
+    }
 }
 
-.value-box p {
-    color: #555; /* Helle Farbe für den Text in den Boxen */
+@media (max-width: 480px) {
+    .value-box {
+        flex: 1 1 100%; /* Eine Box pro Zeile auf kleinen Bildschirmen */
+    }
 }
 
 /* Slider-Container */
@@ -168,6 +173,7 @@ p {
     gap: 30px; /* Abstand zwischen den Buttons verringert */
     margin-top: 20px; /* Abstand nach oben verringert */
     padding-left: 40px; /* Linke Auffüllung verringert */
+    flex-wrap: wrap; /* Ermöglicht das Umfließen der Buttons */
 }
 
 /* Button-Styling */
@@ -180,6 +186,7 @@ p {
     cursor: pointer; /* Zeiger-Cursor */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Leichter Schatten für den Button */
     margin: 5px; /* Horizontale Margen für Abstand verringert */
+    font-size: 1em; /* Einheitliche Schriftgröße */
 }
 
 /* Hover-Effekt für den Button */
@@ -187,4 +194,42 @@ p {
     background-color: #c0c0c0; /* Hintergrundfarbe bei Hover */
     transform: scale(1.05); /* Leichte Vergrößerung bei Hover */
     color: black; /* Textfarbe bei Hover */
+}
+
+/* Medienabfragen für responsives Design */
+@media (max-width: 768px) {
+    h1.page-title {
+        font-size: 2.5em; /* Kleinere Schriftgröße auf mittleren Bildschirmen */
+    }
+
+    p {
+        font-size: 1rem; /* Kleinere Schriftgröße auf mittleren Bildschirmen */
+    }
+
+    .hero-title {
+        font-size: 2em; /* Kleinere Schriftgröße in der Hero Section */
+    }
+
+    .cta-button {
+        padding: 8px 16px; /* Weniger Padding auf mittleren Bildschirmen */
+    }
+}
+
+@media (max-width: 480px) {
+    h1.page-title {
+        font-size: 2em; /* Kleinere Schriftgröße auf kleinen Bildschirmen */
+    }
+
+    p {
+        font-size: 0.9rem; /* Kleinere Schriftgröße auf kleinen Bildschirmen */
+    }
+
+    .hero-title {
+        font-size: 1.5em; /* Kleinere Schriftgröße in der Hero Section */
+    }
+
+    .button-container {
+        flex-direction: column; /* Buttons untereinander auf kleinen Bildschirmen */
+        padding-left: 0; /* Linke Auffüllung zurücksetzen */
+    }
 }

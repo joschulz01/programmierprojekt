@@ -6,12 +6,13 @@ footer {
   width: 100%; /* Volle Breite */
   text-align: center;
   background: linear-gradient(to bottom, #708090, #778899);
-  padding: 1rem;
+  padding: 1rem; /* Innenabstand */
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
   position: relative;
   bottom: 0;
 }
 
+/* Schaltflächen im Footer */
 .footer-button {
   padding: 0.5rem 1rem;
   background-color: #708090;
@@ -20,9 +21,35 @@ footer {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 1rem; /* Standard Schriftgröße */
 }
 
 .footer-button:hover {
   background-color: #c0c0c0;
   color: black;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+  footer {
+    padding: 0.5rem; /* Reduziere den Innenabstand auf kleineren Bildschirmen */
+  }
+
+  .footer-button {
+    font-size: 0.9rem; /* Kleinere Schriftgröße für Schaltflächen */
+    padding: 0.4rem 0.8rem; /* Reduziere das Padding der Schaltflächen */
+    width: 100%; /* Schaltflächen auf volle Breite */
+    margin: 0.5rem 0; /* Abstand zwischen den Schaltflächen */
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    padding: 0.3rem; /* Weiteren Innenabstand reduzieren */
+  }
+
+  .footer-button {
+    font-size: 0.8rem; /* Weiteres Verkleinern der Schriftgröße */
+    padding: 0.3rem 0.6rem; /* Weiteres Verkleinern des Paddings */
+  }
 }

@@ -10,7 +10,7 @@ h1 {
     font-size: 2.5em; /* Schriftgröße */
     color: #2c3e50; /* Textfarbe */
     text-align: center; /* Zentriert den Haupttitel */
-    margin: -200px 0 0 0; /* Abstand oben und unten zurücksetzen */
+    margin: -20px 0 0 0; /* Abstand oben verringert, unten ggf. erhöhen */
     line-height: 1.2; /* Zeilenhöhe anpassen */
     animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
 }
@@ -47,4 +47,39 @@ a {
 
 a:hover {
     text-decoration: underline; /* Unterstreichung bei Hover */
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2em; /* Kleinere Schriftgröße für h1 */
+        margin: -150px 0 0 0; /* Angepasster Abstand oben */
+    }
+
+    h2 {
+        font-size: 1.6em; /* Kleinere Schriftgröße für h2 */
+    }
+
+    p {
+        font-size: 1rem; /* Kleinere Schriftgröße für Absätze */
+    }
+
+    .privacy-container {
+        padding: 0 10px; /* Innenabstand verringern für kleinere Bildschirme */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em; /* Weitere Anpassung der Schriftgröße für h1 */
+        margin: -100px 0 0 0; /* Angepasster Abstand */
+    }
+
+    h2 {
+        font-size: 1.4em; /* Weitere Anpassung der Schriftgröße für h2 */
+    }
+
+    p {
+        font-size: 0.9rem; /* Weitere Anpassung der Schriftgröße für Absätze */
+    }
 }

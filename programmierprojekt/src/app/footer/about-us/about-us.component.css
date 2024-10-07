@@ -9,7 +9,7 @@
 h1 {
   text-align: center; /* Text zentrieren */
   color: #2c3e50; /* Dunkles Blau für den Text */
-  margin: -200px 0 0 0; /* Abstand oben und unten */
+  margin: -20px 0 0 0; /* Abstand oben verringert, unten ggf. erhöhen */
   font-size: 3em; /* Schriftgröße anpassen */
   line-height: 1.2; /* Zeilenhöhe anpassen */
   animation: fadeInDown 1s ease-out; /* Fade-In-Effekt */
@@ -30,7 +30,7 @@ h2, h3 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   text-align: center; /* Zentriert die Überschriften */
-  margin-top: 0 px auto;
+  margin-top: 20px; /* Einheitlicher Abstand oben */
   position: relative;
   animation: fadeInDown 1s ease-out; /* Fade-In-Effekt */
 }
@@ -79,4 +79,44 @@ ul li::before {
   top: 0;
   font-size: 1.2rem; /* Häkchen-Größe */
   color: #708090; /* Häkchen-Farbe */
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5em; /* Kleinere Schriftgröße für h1 */
+    margin: -150px 0 0 0; /* Angepasster Abstand oben */
+  }
+
+  h2, h3 {
+    font-size: 1.5em; /* Kleinere Schriftgröße für h2 und h3 */
+    margin-top: 15px; /* Angepasster Abstand */
+  }
+
+  p {
+    font-size: 1rem; /* Kleinere Schriftgröße für Absätze */
+  }
+
+  ul li {
+    font-size: 1rem; /* Kleinere Schriftgröße für Listen-Items */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2em; /* Weitere Anpassung der Schriftgröße für h1 */
+    margin: -100px 0 0 0; /* Angepasster Abstand */
+  }
+
+  h2, h3 {
+    font-size: 1.2em; /* Weitere Anpassung der Schriftgröße für h2 und h3 */
+  }
+
+  p {
+    font-size: 0.9rem; /* Weitere Anpassung der Schriftgröße für Absätze */
+  }
+
+  ul li {
+    font-size: 0.9rem; /* Weitere Anpassung der Schriftgröße für Listen-Items */
+  }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router'
+import { RouterLink } from '@angular/router';
 
 import { MENU_ITEMS } from "../menu-items";
 import { TranslationService } from '../translationservice';
@@ -22,4 +22,5 @@ export class MenuComponent {
   switchLanguage() {
     this.translationService.switchLanguage();
   }
+
 }

@@ -1,43 +1,51 @@
-div {
-  border-radius: 6px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width: auto;
-  max-width: 15rem; 
+.menu-container {
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
+  position: absolute;
+  top: 250px; /* Anpassen, um die vertikale Position zu ändern */
+  right: 50%; /* Zentriert die rechte Kante des Containers */
+  transform: translateX(50%); /* Verschiebt den Container nach rechts */
 }
 
+.menu-container button {
+  flex: 1;
+  margin: 0 5px;
+}
+
+/* Button-Styling */
 button {
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.5rem;
+  padding: 0.5rem 1rem;
   background-color: #708090;
-  color: #fff;
+  color: white;
   border: none;
-  font: inherit;
+  border-radius: 8px;
+  font-size: 1rem; /* Feste Schriftgröße */
   cursor: pointer;
-  width: 100%;
-  min-width: 10rem;
-  text-align: left;
+  min-width: 150px;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Hover- und Aktive-States */
 button:hover,
 button:active,
 .active {
-  background-color: #c0c0c0;
+  background-color: #c0c0c0; /* Dunklere Farbe bei Hover */
   color: black;
+  transform: translateY(-2px); /* Leichter "Lift"-Effekt bei Hover */
 }
 
-img {
-  width: 2rem;
-  object-fit: contain;
-  border-radius: 50%;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-}
-
+/* Text-Styling */
 span {
   margin: 0;
   padding: 0;
-  font-size: 0.8rem;
-  font-weight: normal;
+  font-size: 1rem; /* Feste Textgröße */
+  font-weight: bold;
 }
