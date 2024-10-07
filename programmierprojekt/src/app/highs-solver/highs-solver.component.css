@@ -120,6 +120,7 @@ h3 {
   transition: background-color 0.3s; /* Sanfter Übergang für Hover-Effekte */
   position: relative; /* Position relativ zu seinem aktuellen Standort */
   top: -11px; /* Verschiebt den Button nach oben */
+  right: 5px;
 }
 
 .info-button:hover {
@@ -137,10 +138,12 @@ h3 {
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: absolute;
-  top: 250px; /* Passen Sie dies je nach Layout an */
-  left: 1060px; /* Positionieren Sie den Tooltip direkt neben dem Button */
+  top: 40%; /* Positioniere den Tooltip direkt unter dem Button */
+  left: 75%; /* Zentriere den Tooltip relativ zum Button */
+  transform: translateX(-50%); /* Verschiebe den Tooltip nach links, um ihn zu zentrieren */
   z-index: 1000;
-  width: 350px; /* Breitere Box für den Hilfstext */
+  width: auto; /* Dynamische Breite */
+  max-width: 300px; /* Maximalbreite für den Tooltip */
   text-align: left;
   font-size: 14px; /* Einheitliche Schriftgröße */
 }
@@ -164,4 +167,13 @@ pre {
   justify-content: center; /* Zentriert die Buttons */
   gap: 10px; /* Fügt Abstand zwischen den Buttons hinzu */
   margin-bottom: 20px; /* Abstand zum nächsten Element */
+}
+
+/* Medienabfragen für responsive Design */
+@media (max-width: 768px) {
+  .tooltip {
+    max-width: 60%; /* Tooltip auf 80% der Bildschirmbreite bei kleineren Bildschirmen */
+    left: 85%; /* Bleibe zentriert */
+    transform: translateX(-50%); /* Zentrierung beibehalten */
+  }
 }
