@@ -73,6 +73,7 @@ Menüleiste Prüfen
 Öffne Highs-Seite
     [Dokumentation]
     Click    id=menue_HiGHS
+    
 
 Testproblem lösen
     [Dokumentation]    Löst die Testdatei

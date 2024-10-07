@@ -50,6 +50,7 @@ export class HighsSolverComponent {
   showInfo = false; //Kontrolliert das Anzeigen des Tooltips
   elapsedTime: number | null = null;
   preparationTime: number | null = null;
+  errorMessage: string | null = null;  // Fehlernachricht
 
   switchLanguage() {
     this.translationService.switchLanguage();
@@ -109,8 +110,16 @@ export class HighsSolverComponent {
     } catch (error) {
       // Fehlerbehandlung
       console.error('Fehler beim L�sen des Problems:', error);
-      this.solution = 'Fehler beim L�sen des Problems: ' + error;
+      this.errorMessage = this.handleError(error);
+      return; // Sofort zurückgeben, wenn ein Fehler auftritt
     }
+  }
+
+  private handleError(error: unknown): string {
+    if (error instanceof Error) {
+        return `Fehler beim Lösen des Problems: ${error.message}`;
+    }
+    return 'Unbekannter Fehler. Bitte versuchen Sie es erneut.';
   }
 
   private convertToResult(highsResult: HighsSolution): Result {
@@ -282,5 +291,5 @@ importFile(): void {
   };
   input.click(); // Öffne den Dateiauswahldialog
   
-}
+ }
 }

@@ -18,7 +18,7 @@
       s.t. Constraint2:
         3*x1 + x2 <= 20;
     </pre>
-</div>
+  </div>
 
   <div>
     <button (click)="importFile()">{{ translationService.getTranslation('importFile') }}</button>
@@ -29,10 +29,14 @@
   <br>
   <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
 
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
   <!-- Ausgabe des Ergebnisses als JSON -->
   <div *ngIf="result">
     <h3>{{ translationService.getTranslation('solution') }}</h3>
-    
+
     <!-- Tabelle für die Variablen (Columns) -->
     <h3>{{ translationService.getTranslation('variables') }}</h3>
     <table id="loesungstabelle">
@@ -61,16 +65,15 @@
         </tr>
       </tbody>
     </table>
-    
+
     <!-- Zielwert (Objective Value) -->
     <h3>{{ translationService.getTranslation('objectiveValue') }}</h3>
     <p>{{ result.ObjectiveValue }}</p>
 
     <!-- Laufzeitanalyse -->
- <h3>Laufzeitanalyse</h3>
- <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
-<p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
-
+    <h3>Laufzeitanalyse</h3>
+    <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
+    <p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
 
     <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
@@ -84,5 +87,3 @@
       {{ translationService.getTranslation('exportLP') }}
   </button>
 </div>
-
- 
