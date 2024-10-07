@@ -5,9 +5,9 @@
 
   <!-- Tooltip-Information wird bei Hover angezeigt -->
   <div *ngIf="showInfo" class="tooltip">
-    <strong>Weitere Informationen:</strong>
+    <strong>{{ translationService.getTranslation('furtherInfos') }}</strong>
     <p>
-      Beispiel für ein Optimierungsproblem:
+      {{ translationService.getTranslation('example') }}
     </p>
     <pre>
       var x1 >= 0;

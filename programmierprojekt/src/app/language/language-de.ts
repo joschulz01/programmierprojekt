@@ -88,6 +88,9 @@ team: "Team",
 menuHome: "Startseite",
 menuHiGHS: "HiGHS",
 menuGLPK: "GLPK",
-menuFeedback: "Feedback"
+menuFeedback: "Feedback",
+license: "Lizenz GMPL",
+example: "Beispiel für ein Optimierungsproblem:",
+furtherInfos: "Weitere Informationen:"
 
 };

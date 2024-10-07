@@ -88,6 +88,10 @@ team: "Team",
 menuHome: "Home",
 menuHiGHS: "HiGHS",
 menuGLPK: "GLPK",
-menuFeedback: "Feedback"  
+menuFeedback: "Feedback",
+license: "License GMPL:",
+example: "Example of an optimization problem:",
+furtherInfos: "Further information:"
+
 
 };
