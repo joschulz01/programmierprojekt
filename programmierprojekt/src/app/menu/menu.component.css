@@ -1,33 +1,26 @@
 .menu-container {
   display: flex;
   justify-content: space-between;
-  width: 800px;
+  width: 70%; /* Startbreite des Containers */
+  max-width: 800px; /* Maximale Breite */
   position: absolute;
-  top: 250px; /* Anpassen, um die vertikale Position zu ändern */
+  top: 200px; /* Anpassen, um die vertikale Position zu ändern */
   right: 50%; /* Zentriert die rechte Kante des Containers */
   transform: translateX(50%); /* Verschiebt den Container nach rechts */
 }
 
+/* Button-Styling */
 .menu-container button {
   flex: 1;
   margin: 0 5px;
-}
-
-/* Button-Styling */
-button {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 1vh 2vw; /* Standard Innenabstand */
   background-color: #708090;
   color: white;
   border: none;
   border-radius: 8px;
-  font-size: 1rem; /* Feste Schriftgröße */
+  font-size: 1.5vw; /* Kleinere Schriftgröße für 100% Zoom */
   cursor: pointer;
-  min-width: 150px;
+  min-width: 100px; /* Minimale Breite anpassen */
   text-align: center;
   transition: background-color 0.3s, transform 0.3s;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -50,3 +43,37 @@ span {
   font-weight: bold;
 }
 
+/* Media Query für kleinere Bildschirme */
+@media (max-width: 480px) {
+  .menu-container {
+    width: 90%; /* Breite für kleine Bildschirme */
+  }
+  
+  .menu-container button {
+    padding: 0.5vh 2vw; /* Kleinere Innenabstände */
+    font-size: 3vw; /* Kleinere Schriftgröße */
+  }
+}
+
+/* Zusätzliche Media Queries für hohe Zoomstufen */
+@media (min-width: 2000px) { /* Ab einer Breite von 2000px */
+  .menu-container {
+    width: 50%; /* Verkleinern des Containers */
+  }
+
+  .menu-container button {
+    padding: 0.8vh 1.5vw; /* Anpassung der Innenabstände */
+    font-size: 1.2vw; /* Schriftgröße anpassen */
+  }
+}
+
+@media (min-width: 2500px) { /* Ab einer Breite von 2500px */
+  .menu-container {
+    width: 40%; /* Weiter reduzieren des Containers */
+  }
+
+  .menu-container button {
+    padding: 0.5vh 1.2vw; /* Weiter reduzieren */
+    font-size: 1vw; /* Weiter verkleinern */
+  }
+}

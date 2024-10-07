@@ -66,6 +66,12 @@
     <h3>{{ translationService.getTranslation('objectiveValue') }}</h3>
     <p>{{ result.ObjectiveValue }}</p>
 
+    <!-- Laufzeitanalyse -->
+ <h3>Laufzeitanalyse</h3>
+ <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
+<p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
+
+
     <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
 </div>
@@ -78,3 +84,5 @@
       {{ translationService.getTranslation('exportLP') }}
   </button>
 </div>
+
+ 
