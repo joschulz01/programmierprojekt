@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import highs, { HighsSolution } from 'highs'; 
 import { ConstraintsService } from '../constraints.service';
 import { UmformungService } from '../umformung.service';
 import { ModelComponent } from '../model/model.component';
@@ -17,13 +16,13 @@ import { TranslationService } from '../translationservice';
 export class ParameterComponent {
 
   errorMessage: string | null = null;  // Fehlernachricht
-  numVariables: number = 0;
+  numVariables = 0;
   variables: string[] = [];
-  objectiveFunction: string = '';
+  objectiveFunction = '';
   constraints: string[] = [];
 
   switchLanguage() {
-    this.translationService.switchLanguage();
+    this.translationService.switchLanguage(); 
   }
 
   generateVariableInputs() {
