@@ -48,6 +48,8 @@ export class HighsSolverComponent {
   result: Result | null = null; // Verwendung des definierten Result Interfaces
   selectedFile: File | null = null; // Hier wird die ausgewählte Datei 
   showInfo = false; //Kontrolliert das Anzeigen des Tooltips
+  elapsedTime: number | null = null;
+  preparationTime: number | null = null;
 
   switchLanguage() {
     this.translationService.switchLanguage();
@@ -65,6 +67,13 @@ export class HighsSolverComponent {
     const highs_settings = {
       locateFile: (file: string) => `highs/${file}` // Zeigt auf den Ordner, wo die WASM-Datei liegt
     };
+
+    const preparationStartTime = performance.now();
+    const preparationEndTime = performance.now();
+    this.preparationTime = preparationEndTime - preparationStartTime;
+
+    const startTime = performance.now();
+    let highsResult: HighsSolution | null = null;
 
     try {
       // HiGHS-Solver mit den definierten Einstellungen laden
@@ -92,6 +101,10 @@ export class HighsSolverComponent {
       // Ergebnis als JSON speichern und anzeigen
       this.solution = JSON.stringify(this.result, null, 2);
 
+ // Laufzeitanalyse
+ const endTime = performance.now(); // Endzeit für die Laufzeitanalyse
+ this.elapsedTime = endTime - startTime; // Berechne die Laufzeit
+ 
       // Werte f�r x und y ermitteln
       this.WerteErmitteln(this.result);
     } catch (error) {
