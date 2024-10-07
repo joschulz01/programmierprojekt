@@ -45,21 +45,29 @@ ${Testdatei1}    var x1>=0;\nvar x2>=0;\nmaximize Objective: x1+x2;\ns.t. Constr
 #     Should Be Equal As Strings    ${ueberUns}    Über Uns
     
 
-Menüleiste Prüfen
-    [Tags]    PP2024-125
+# Menüleiste Prüfen
+#     [Tags]    PP2024-125
+#     Öffne OR-Webseite
+#     Click    id=menue_startseite
+#     ${URL}=     Get Url
+#     Should Be Equal    ${URL}    https://or-tool.de/
+#     Click    id=menue_HiGHS
+#     ${URL}=     Get Url
+#     Should Be Equal    ${URL}    https://or-tool.de/highs
+#     #Click    id=menue_GLPK
+#     #${URL}=     Get Url
+#     #Should Be Equal    ${URL}    https://or-tool.de/glpk
+#     Click    id=menue_Feedback
+#     ${URL}=     Get Url
+#     Should Be Equal    ${URL}    https://or-tool.de/feedback
+
+Hilfe Button Prüfen
+    [Tags]     PP2024-130
     Öffne OR-Webseite
-    Click    id=menue_startseite
-    ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/
-    Click    id=menue_HiGHS
-    ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/highs
-    #Click    id=menue_GLPK
-    #${URL}=     Get Url
-    #Should Be Equal    ${URL}    https://or-tool.de/glpk
-    Click    id=menue_Feedback
-    ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/feedback
+    Öffne Highs-Seite
+    Click    id=info-button
+    Highlight Elements    id=hilfeInformation
+
 
 
 
