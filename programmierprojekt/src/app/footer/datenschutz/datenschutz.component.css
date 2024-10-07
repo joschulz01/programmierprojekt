@@ -10,7 +10,7 @@ h1 {
     font-size: 2.5em; /* Schriftgröße */
     color: #2c3e50; /* Textfarbe */
     text-align: center; /* Zentriert den Haupttitel */
-    margin: -200px 0 0 0; /* Abstand oben und unten zurücksetzen */
+    margin: -20px 0 0 0; /* Abstand oben und unten zurücksetzen */
     line-height: 1.2; /* Zeilenhöhe anpassen */
     animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
 }
