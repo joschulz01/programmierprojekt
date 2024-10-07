@@ -27,16 +27,13 @@ Seiten Wechseln
 *** Schlüsselwörter ***
 Öffne OR-Webseite
     [Dokumentation]     Öffnet die OR-Webseite
-    New Browser    ${BROWSER}    ${True} 
+    New Browser    ${BROWSER}    headless=True 
     New Page    ${url}
 
 Öffne Highs-Seite
     [Dokumentation]
     Click    id=menue_HiGHS
-
-Öffne GLPK-Seite
-    [Dokumentation]
-    Click   id=menue_parameter
+    
 
 Testproblem lösen
     [Dokumentation]    Löst die Testdatei
