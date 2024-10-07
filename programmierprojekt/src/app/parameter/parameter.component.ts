@@ -13,6 +13,7 @@ import { TranslationService } from '../translationservice';
   templateUrl: './parameter.component.html',
   styleUrls: ['./parameter.component.css']
 })
+
 export class ParameterComponent {
 
   errorMessage: string | null = null;  // Fehlernachricht
