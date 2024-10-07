@@ -73,8 +73,7 @@ export class HighsSolverComponent {
     this.preparationTime = preparationEndTime - preparationStartTime;
 
     const startTime = performance.now();
-    let highsResult: HighsSolution | null = null;
-
+    
     try {
       // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
