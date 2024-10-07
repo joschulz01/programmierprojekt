@@ -57,6 +57,8 @@ export class HighsSolverComponent {
 
   xWert?: number;
   yWert?: number;
+  
+ 
 
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
 
@@ -282,5 +284,14 @@ importFile(): void {
   };
   input.click(); // Ã–ffne den Dateiauswahldialog
   
+}
+isValidInput(): boolean {
+  const Reihe = this.result?.Rows.length || 0;  // Anzahl der Rows in das Variable Reihe speichern
+  
+  if (Reihe <= 2) {
+    return true;  // Gültig, wenn 2 oder weniger Reihen vorhanden sind
+  } else {
+    return false; // Ungültig, wenn mehr als 2 Reihen vorhanden sind
+  }
 }
 }

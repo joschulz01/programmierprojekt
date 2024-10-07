@@ -72,7 +72,7 @@
 <p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
 
 
-    <app-model [xWert]="xWert" [yWert]="yWert"></app-model>
+    <app-model *ngIf="isValidInput()" [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
 </div>
 

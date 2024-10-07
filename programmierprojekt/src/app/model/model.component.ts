@@ -38,7 +38,25 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
     this.onSolve(); // Aufruf hier, um sofort zu aktualisieren
   }
 
+  // Methode zur Überprüfung der Anzahl der übergebenen Input-Variablen
+  checkInputCount(): boolean {
+    const inputs = [this.xWert, this.yWert];
+    const definedInputs = inputs.filter(input => input !== undefined);
+    
+    if (definedInputs.length > 2) {
+      console.error('Mehr als 2 Eingabewerte übergeben.');
+      return false; // Mehr als 2 Variablen, also nicht ausführen
+    }
+    
+    return true; // Weniger oder genau 2 Variablen, also ausführen
+  }
+
   onSolve() {
+    // Überprüfe die Anzahl der Input-Variablen
+    if (!this.checkInputCount()) {
+      return; // Falls mehr als 2 Eingabewerte übergeben wurden, Abbruch
+    }
+
     this.constraints = this.constraintsService.getConstraints();
 
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
