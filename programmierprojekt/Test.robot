@@ -49,18 +49,7 @@ Sprache Wechseln
 Menüleiste Prüfen
     [Tags]    PP2024-125
     Öffne OR-Webseite
-    Click    id=menue_startseite
-    ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/
-    Click    id=menue_HiGHS
-    ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/highs
-    #Click    id=menue_GLPK
-    #${URL}=     Get Url
-    #Should Be Equal    ${URL}    https://or-tool.de/glpk
-    Click    id=menue_Feedback
-    ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/feedback
+    Menüleiste Prüfen
 
 Hilfe Button Prüfen
     [Tags]     PP2024-130
@@ -76,7 +65,17 @@ Export LP Prüfen
     Testproblem lösen
     Click    id=export_LP
 
+Feedback testen
+    [Tags]    PP2024-132
+    Öffne OR-Webseite
+    Click    id=menue_Feedback
+    Fill Text    id=feedback    Automatischer Test\nNächste Zeile!\n\nLG Robot Testing
 
+Routing testen
+    [Tags]    PP2024-133
+    Öffne OR-Webseite
+    Menüleiste Prüfen
+    Footer prüfen
 
 
 
@@ -105,3 +104,29 @@ Lösung Prüfen
     Should Be Equal As Numbers    ${primal_value1}    5
     Click    id=export_MPS
     Click    id=export_LP
+
+Menüleiste Prüfen
+    Click    id=menue_startseite
+    ${URL}=     Get Url
+    Should Be Equal    ${URL}    https://or-tool.de/
+    Click    id=menue_HiGHS
+    ${URL}=     Get Url
+    Should Be Equal    ${URL}    https://or-tool.de/highs
+    #Click    id=menue_GLPK
+    #${URL}=     Get Url
+    #Should Be Equal    ${URL}    https://or-tool.de/glpk
+    Click    id=menue_Feedback
+    ${URL}=     Get Url
+    Should Be Equal    ${URL}    https://or-tool.de/feedback
+
+Footer Prüfen
+    [Documentation]    Testet, ob alle Footer Routing Seiten vorhanden sind
+    Click    id=datenschutz
+    ${URL}=     Get Url
+    Should Be Equal    ${URL}    https://or-tool.de/datenschutz
+    Click    id=impressum
+    ${URL}=     Get Url
+    Should Be Equal    ${URL}    https://or-tool.de/impressum
+    Click    id=ueberUns
+    ${URL}=     Get Url
+    Should Be Equal    ${URL}    https://or-tool.de/about-us
