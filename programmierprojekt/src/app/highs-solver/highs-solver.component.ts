@@ -261,7 +261,7 @@ export class HighsSolverComponent {
     a.download = filename;
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
+    document.body.removeChild(a); 
   }
 
 //Import
@@ -289,9 +289,9 @@ isValidInput(): boolean {
   const Reihe = this.result?.Rows.length || 0;  // Anzahl der Rows in das Variable Reihe speichern
   
   if (Reihe <= 2) {
-    return true;  // Gültig, wenn 2 oder weniger Reihen vorhanden sind
+    return true;  // Gï¿½ltig, wenn 2 oder weniger Reihen vorhanden sind
   } else {
-    return false; // Ungültig, wenn mehr als 2 Reihen vorhanden sind
+    return false; // Ungï¿½ltig, wenn mehr als 2 Reihen vorhanden sind
   }
 }
 }
