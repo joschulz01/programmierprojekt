@@ -1,0 +1,179 @@
+.solver-container {
+    margin: -20px 0 0 0;
+    text-align: center;
+  }
+  
+  /* Allgemeine Textarea-Stile */
+  textarea {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 10px;
+  }
+  
+  /* Button-Styling */
+  button {
+    margin-top: 10px;
+    bottom: 20px;
+    padding: 10px 20px;
+    background-color: #708090; /* Angepasste Hintergrundfarbe für Buttons */
+    color: white; /* Weißer Text */
+    border: none;
+    border-radius: 6px; /* Runde Ecken */
+    font-size: 16px; /* Einheitliche Schriftgröße */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Sanfter Übergang für Hover-Effekte */
+  }
+  
+  button:hover {
+    background-color: #c0c0c0; /* Dunklerer Farbton bei Hover */
+  }
+  
+  /* Stil für readonly Textareas und Pre-Elemente */
+  pre, textarea[readonly] {
+    background-color: #f4f4f4; /* Heller Hintergrund für readonly Textarea */
+    padding: 10px;
+    border-radius: 4px;
+    text-align: left;
+  }
+  
+  /* Tabelle Styling */
+  table {
+    width: 100%;
+    max-width: 800px; /* Maximale Breite der Tabelle */
+    margin: 20px auto; /* Zentriert die Tabelle */
+    border-collapse: collapse; /* Verhindert doppelte Ränder */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Leichte Schatten */
+  }
+  
+  th, td {
+    padding: 12px 15px; /* Innenabstand für Zellen */
+    text-align: left; /* Linksbündig */
+    font-family: Arial, sans-serif; /* Einheitliche Schriftart */
+  }
+  
+  thead {
+    background-color: #778899; /* Dunkelblauer Hintergrund für den Header */
+    color: white; /* Weißer Text für den Header */
+  }
+  
+  tbody tr {
+    background-color: #f9f9f9; /* Heller Hintergrund für die Zeilen */
+  }
+  
+  tbody tr:hover {
+    background-color: #e7f1ff; /* Heller blauer Hintergrund bei Hover */
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Abwechselnd helle Zeilen */
+  }
+  
+  tbody tr:nth-child(odd) {
+    background-color: #fff; /* Normale weiße Zeilen */
+  }
+  
+  /* Hauptüberschrift für Highs Solver */
+  h1 {
+    text-align: center; /* Text zentrieren */
+    color: #2c3e50; /* Die Farbe hier auf die gewünschte Farbe ändern, z.B. von der Startseite */
+    margin: 0 0 20px 0; /* Abstand unter der Überschrift erhöht (von 10px auf 20px) */
+    font-size: 3em; /* Schriftgröße anpassen für mehr Sichtbarkeit */
+    line-height: 1.2; /* Zeilenhöhe anpassen */
+    animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
+    position: relative; /* Für die Positionierung des Unterstrichs */
+  }
+  
+  h1::after {
+    content: '';
+    display: block;
+    width: 60px; /* Breite der Linie unter dem H1 */
+    height: 4px; /* Höhe der Linie */
+    background-color: #708090; /* Farbe der Linie */
+    margin: 1rem auto; /* Zentriert die Linie */
+  }
+  
+  
+  /* Unterüberschrift */
+  h3 {
+    color: #181023; /* Dunkle Farbe für die Überschrift */
+    font-family: Arial, sans-serif; /* Einheitliche Schriftart */
+  }
+  
+  /* Container für Info-Button und Tooltip */
+  .info-container {
+    display: inline-block;
+    position: relative; /* Verhindert, dass Tooltip außerhalb des Containers positioniert wird */
+  }
+  
+  /* Info-Button Styling */
+  .info-button {
+    background-color: #708090; /* Hintergrundfarbe angepasst an das Thema */
+    color: white; /* Weißer Text für besseren Kontrast */
+    border: none; /* Kein Rahmen */
+    cursor: pointer; /* Zeiger-Cursor */
+    font-size: 18px; /* Einheitliche Schriftgröße */
+    border-radius: 50%; /* Runde Form */
+    width: 40px; /* Breite des Buttons */
+    height: 40px; /* Höhe des Buttons */
+    text-align: center; /* Text zentrieren */
+    padding: 0; /* Kein zusätzliches Padding */
+    transition: background-color 0.3s; /* Sanfter Übergang für Hover-Effekte */
+    position: relative; /* Position relativ zu seinem aktuellen Standort */
+    top: -11px; /* Verschiebt den Button nach oben */
+    right: 5px;
+  }
+  
+  .info-button:hover {
+    background-color: #c0c0c0; /* Hellere Farbe bei Hover */
+    color: black; /* Textfarbe bei Hover */
+  }
+  
+  /* Tooltip Styling */
+  .tooltip {
+    display: inline-block;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 40%; /* Positioniere den Tooltip direkt unter dem Button */
+    left: 75%; /* Zentriere den Tooltip relativ zum Button */
+    transform: translateX(-50%); /* Verschiebe den Tooltip nach links, um ihn zu zentrieren */
+    z-index: 1000;
+    width: auto; /* Dynamische Breite */
+    max-width: 300px; /* Maximalbreite für den Tooltip */
+    text-align: left;
+    font-size: 14px; /* Einheitliche Schriftgröße */
+  }
+  
+  /* Tooltip-Hover-Bereich größer, sodass der Tooltip bleibt */
+  .tooltip:hover {
+    background-color: #f4f4f4;
+  }
+  
+  /* Formatierung für den Hilfstext */
+  pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: pre-wrap; /* Zeilenumbruch bei Bedarf */
+  }
+  
+  .export-buttons-container {
+    display: flex; /* Setzt die Buttons in eine Zeile */
+    justify-content: center; /* Zentriert die Buttons */
+    gap: 10px; /* Fügt Abstand zwischen den Buttons hinzu */
+    margin-bottom: 20px; /* Abstand zum nächsten Element */
+  }
+  
+  /* Medienabfragen für responsive Design */
+  @media (max-width: 768px) {
+    .tooltip {
+      max-width: 60%; /* Tooltip auf 80% der Bildschirmbreite bei kleineren Bildschirmen */
+      left: 85%; /* Bleibe zentriert */
+      transform: translateX(-50%); /* Zentrierung beibehalten */
+    }
+  }
