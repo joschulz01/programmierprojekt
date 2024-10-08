@@ -6,6 +6,7 @@ import { FeedbackComponent } from "./feedback/feedback.component";
 import { HighsSolverComponent} from "./highs-solver/highs-solver.component";
 import { HomeComponent } from './home/home.component';
 import { ImpressumComponent } from "./footer/impressum/impressum.component";
+import { ParameterComponent } from './parameter/parameter.component';
 
 
 
@@ -34,5 +35,9 @@ export const routes: Routes = [
   {
     path: 'feedback', //or-tool.de/feedback
     component: FeedbackComponent
-  }
+  },
+  {
+    path: 'parameter', //or-tool.de/parameter
+    component: ParameterComponent
+  } 
 ];

@@ -9,7 +9,7 @@
 h1 {
   text-align: center; /* Text zentrieren */
   color: #2c3e50; /* Dunkles Blau für den Text */
-  margin: -20px 0 0 0; /* Abstand oben verringert, unten ggf. erhöhen */
+  margin: -20px 0 0 0; /* Abstand oben und unten */
   font-size: 3em; /* Schriftgröße anpassen */
   line-height: 1.2; /* Zeilenhöhe anpassen */
   animation: fadeInDown 1s ease-out; /* Fade-In-Effekt */

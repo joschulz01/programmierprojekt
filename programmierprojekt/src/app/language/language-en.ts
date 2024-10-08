@@ -87,7 +87,11 @@ projectLead: "Project Lead",
 team: "Team",
 menuHome: "Home",
 menuHiGHS: "HiGHS",
-menuGLPK: "GLPK",
-menuFeedback: "Feedback"  
+menuGLPK: "GLPK/Parameter",
+menuFeedback: "Feedback",
+license: "License GMPL:",
+example: "Example of an optimization problem:",
+furtherInfos: "Further information:"
+
 
 };

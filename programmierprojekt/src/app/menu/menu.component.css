@@ -1,33 +1,26 @@
 .menu-container {
   display: flex;
   justify-content: space-between;
-  width: 800px;
+  width: 70%; /* Startbreite des Containers */
+  max-width: 800px; /* Maximale Breite */
   position: absolute;
-  top: 250px; /* Anpassen, um die vertikale Position zu ändern */
+  top: 200px; /* Anpassen, um die vertikale Position zu ändern */
   right: 50%; /* Zentriert die rechte Kante des Containers */
   transform: translateX(50%); /* Verschiebt den Container nach rechts */
 }
 
+/* Button-Styling */
 .menu-container button {
   flex: 1;
   margin: 0 5px;
-}
-
-/* Button-Styling */
-button {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 1vh 2vw; /* Standard Innenabstand */
   background-color: #708090;
   color: white;
   border: none;
   border-radius: 8px;
-  font-size: 1rem; /* Feste Schriftgröße */
+  font-size: 1.5vw; /* Kleinere Schriftgröße für 100% Zoom */
   cursor: pointer;
-  min-width: 150px;
+  min-width: 100px; /* Minimale Breite anpassen */
   text-align: center;
   transition: background-color 0.3s, transform 0.3s;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -48,4 +41,114 @@ span {
   padding: 0;
   font-size: 1rem; /* Feste Textgröße */
   font-weight: bold;
+}
+
+/* Media Query für Zoom 500% (ca. bis 510px Bildschirmbreite) */
+@media (max-width: 510px) {
+  .menu-container {
+    width: 100%; /* Container auf volle Breite des Bildschirms einstellen */
+  }
+
+  .menu-container button {
+    padding: 3vh 12vw; /* Deutlich größeres Padding für bessere Bedienbarkeit */
+    font-size: 12vw; /* Erhöhte Schriftgröße für gute Lesbarkeit bei 500% Zoom */
+  }
+}
+
+
+/* Media Query für Zoom 400% (ca. bis 640px Bildschirmbreite) */
+@media (max-width: 640px) {
+  .menu-container {
+    width: 100%; /* Breiterer Container für kleinere Viewports */
+  }
+
+  .menu-container button {
+    padding: 1vh 2vw; /* Größere Innenabstände für bessere Sichtbarkeit */
+    font-size: 1vw; /* Schriftgröße anpassen für 400% Zoom */
+  }
+}
+
+/* Media Query für sehr kleine Bildschirme (bis zu 480px Breite) */
+@media (max-width: 480px) {
+  .menu-container {
+    width: 90%; /* Breite für kleine Bildschirme */
+  }
+  
+  .menu-container button {
+    padding: 0.5vh 2vw; /* Kleinere Innenabstände für besseren Platz auf kleinen Bildschirmen */
+    font-size: 2vw; /* Größere Schriftgröße für bessere Lesbarkeit auf kleinen Geräten */
+  }
+}
+
+/* Media Query für mittlere bis kleine Bildschirme (bis zu 800px Breite, simuliert auch 300% Zoom) */
+@media (max-width: 800px) {
+  .menu-container {
+    width: 90%; /* Vergrößern des Containers für kleinere Bildschirme oder hohen Zoom */
+  }
+
+  .menu-container button {
+    padding: 1vh 2.5vw; /* Button-Größe vergrößern für bessere Bedienbarkeit */
+    font-size: 2vw; /* Schriftgröße vergrößern, um sie bei starkem Zoom lesbar zu machen */
+  }
+}
+
+/* Media Query für Zoom 300% (ca. bis 850px Bildschirmbreite) */
+@media (max-width: 850px) {
+  .menu-container {
+    width: 88%; /* Container breiter machen für noch kleinere Viewports */
+  }
+
+  .menu-container button {
+    padding: 1vh 2.3vw; /* Weitere Reduktion der Innenabstände */
+    font-size: 2vw; /* Schriftgröße anpassen, um sie bei 300% Zoom lesbar zu machen */
+  }
+}
+
+/* Media Query für Zoom 200% (ca. bis 1280px Bildschirmbreite) */
+@media (max-width: 1280px) {
+  .menu-container {
+    width: 90%; /* Breite des Containers für hohe Zoomstufen */
+  }
+
+  .menu-container button {
+    padding: 1vh 2vw; /* Innenabstände anpassen für bessere Sichtbarkeit */
+    font-size: 2vw; /* Schriftgröße anpassen, um sie bei 200% Zoom lesbar zu halten */
+  }
+}
+
+
+/* Media Query für größere Bildschirme (ab 1500px) */
+@media (min-width: 1500px) {
+  .menu-container {
+    width: 60%; /* Container verkleinern auf größeren Bildschirmen */
+  }
+
+  .menu-container button {
+    padding: 0.6vh 1.8vw; /* Anpassung der Innenabstände */
+    font-size: 1.4vw; /* Schriftgröße leicht reduzieren, aber weiterhin gut sichtbar */
+  }
+}
+
+/* Media Query für sehr große Bildschirme (ab 2000px) */
+@media (min-width: 2000px) {
+  .menu-container {
+    width: 50%; /* Weiteres Verkleinern des Containers */
+  }
+
+  .menu-container button {
+    padding: 0.8vh 1.6vw; /* Anpassung der Innenabstände */
+    font-size: 1.2vw; /* Schriftgröße anpassen für große Bildschirme */
+  }
+}
+
+/* Media Query für extrem große Bildschirme (ab 2500px) */
+@media (min-width: 2500px) {
+  .menu-container {
+    width: 40%; /* Weiter reduzieren des Containers */
+  }
+
+  .menu-container button {
+    padding: 1vh 1.4vw; /* Weitere Reduktion der Button-Größe */
+    font-size: 1vw; /* Schriftgröße anpassen, um proportional zu bleiben */
+  }
 }
