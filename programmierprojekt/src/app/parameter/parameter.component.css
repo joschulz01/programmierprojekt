@@ -177,3 +177,10 @@
       transform: translateX(-50%); /* Zentrierung beibehalten */
     }
   }
+
+  .error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+  }
+  
