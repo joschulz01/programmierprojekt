@@ -81,6 +81,11 @@ export class ParameterComponent {
         return;
     }
 
+    if (!this.numVariables || this.variables.some(v => !v) || !this.objectiveFunction || this.constraints.some(c => !c)) {
+      alert('Bitte alle Felder ausfüllen!');
+      return;
+    }
+
     const LP = this.umformungService.umformen(this.problemInput);
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
