@@ -177,3 +177,63 @@ pre {
     transform: translateX(-50%); /* Zentrierung beibehalten */
   }
 }
+
+/* Medienabfrage für Zoom 100% (Standard) */
+@media (max-width: 1200px) {
+  .tooltip {
+    max-width: 60%; /* Normale Breite für Standardansicht */
+    left: 85%;
+    transform: translateX(-50%);
+  }
+}
+
+/* Medienabfrage für Zoom 110% (ca. bis 1090px Bildschirmbreite) */
+@media (max-width: 1090px) {
+  .tooltip {
+    max-width: 60%; /* Breite leicht erhöhen bei 110% Zoom */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* Medienabfrage für Zoom 125% (ca. bis 960px Bildschirmbreite) */
+@media (max-width: 960px) {
+  .tooltip {
+    max-width: 60%; /* Breite bei 125% Zoom weiter erhöhen */
+    left: 45%;
+    top: 50%;
+    transform: translateX(-50%);
+    font-size: 1.1rem; /* Schriftgröße leicht anpassen */
+  }
+}
+/* Medienabfrage für Zoom 250% (ca. bis 512px Bildschirmbreite) */
+@media (max-width: 512px) {
+  .tooltip {
+    max-width: 30%; /* Breite bei 250% Zoom weiter vergrößern */
+    right: 10%;
+    transform: translateX(-50%);
+    font-size: 1rem; /* Schriftgröße weiter erhöhen */
+  }
+}
+
+/* Medienabfrage für Zoom 300% (ca. bis 850px Bildschirmbreite) */
+@media (max-width: 850px) {
+  .tooltip {
+    max-width: 50%; /* Vergrößern des Tooltips für bessere Sichtbarkeit bei hohem Zoom */
+    left: 50%; /* Tooltip zentrieren */
+    top: 80%;
+    transform: translateX(-50%);
+    font-size: 1.2rem; /* Schriftgröße erhöhen für bessere Lesbarkeit */
+  }
+}
+
+/* Medienabfrage für Zoom 400% (ca. bis 640px Bildschirmbreite) */
+@media (max-width: 640px) {
+  .tooltip {
+    max-width: 50%; /* Vergrößern des Tooltips für bessere Sichtbarkeit bei hohem Zoom */
+    left: 50%; /* Tooltip zentrieren */
+    top: 80%;
+    transform: translateX(-50%); /* Zentrierung sicherstellen */
+    font-size: 0.4rem;
+  }
+}

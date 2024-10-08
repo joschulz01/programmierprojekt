@@ -43,27 +43,28 @@ span {
   font-weight: bold;
 }
 
-/* Media Query für Zoom 200% (ca. bis 1280px Bildschirmbreite) */
-@media (max-width: 1280px) {
+/* Media Query für Zoom 500% (ca. bis 510px Bildschirmbreite) */
+@media (max-width: 510px) {
   .menu-container {
-    width: 90%; /* Breite des Containers für hohe Zoomstufen */
+    width: 100%; /* Container auf volle Breite des Bildschirms einstellen */
   }
 
   .menu-container button {
-    padding: 1vh 2.5vw; /* Innenabstände anpassen für bessere Sichtbarkeit */
-    font-size: 2.5vw; /* Schriftgröße anpassen, um sie bei 200% Zoom lesbar zu halten */
+    padding: 3vh 12vw; /* Deutlich größeres Padding für bessere Bedienbarkeit */
+    font-size: 12vw; /* Erhöhte Schriftgröße für gute Lesbarkeit bei 500% Zoom */
   }
 }
 
-/* Media Query für Zoom 300% (ca. bis 850px Bildschirmbreite) */
-@media (max-width: 850px) {
+
+/* Media Query für Zoom 400% (ca. bis 640px Bildschirmbreite) */
+@media (max-width: 640px) {
   .menu-container {
-    width: 95%; /* Container breiter machen für noch kleinere Viewports */
+    width: 100%; /* Breiterer Container für kleinere Viewports */
   }
 
   .menu-container button {
-    padding: 1vh 2vw; /* Weitere Reduktion der Innenabstände */
-    font-size: 2vw; /* Schriftgröße anpassen, um sie bei 300% Zoom lesbar zu machen */
+    padding: 1vh 2vw; /* Größere Innenabstände für bessere Sichtbarkeit */
+    font-size: 1vw; /* Schriftgröße anpassen für 400% Zoom */
   }
 }
 
@@ -74,8 +75,8 @@ span {
   }
   
   .menu-container button {
-    padding: 1vh 3vw; /* Kleinere Innenabstände für besseren Platz auf kleinen Bildschirmen */
-    font-size: 2.5vw; /* Größere Schriftgröße für bessere Lesbarkeit auf kleinen Geräten */
+    padding: 0.5vh 2vw; /* Kleinere Innenabstände für besseren Platz auf kleinen Bildschirmen */
+    font-size: 2vw; /* Größere Schriftgröße für bessere Lesbarkeit auf kleinen Geräten */
   }
 }
 
@@ -90,6 +91,31 @@ span {
     font-size: 2vw; /* Schriftgröße vergrößern, um sie bei starkem Zoom lesbar zu machen */
   }
 }
+
+/* Media Query für Zoom 300% (ca. bis 850px Bildschirmbreite) */
+@media (max-width: 850px) {
+  .menu-container {
+    width: 88%; /* Container breiter machen für noch kleinere Viewports */
+  }
+
+  .menu-container button {
+    padding: 1vh 2.3vw; /* Weitere Reduktion der Innenabstände */
+    font-size: 2vw; /* Schriftgröße anpassen, um sie bei 300% Zoom lesbar zu machen */
+  }
+}
+
+/* Media Query für Zoom 200% (ca. bis 1280px Bildschirmbreite) */
+@media (max-width: 1280px) {
+  .menu-container {
+    width: 90%; /* Breite des Containers für hohe Zoomstufen */
+  }
+
+  .menu-container button {
+    padding: 1vh 2vw; /* Innenabstände anpassen für bessere Sichtbarkeit */
+    font-size: 2vw; /* Schriftgröße anpassen, um sie bei 200% Zoom lesbar zu halten */
+  }
+}
+
 
 /* Media Query für größere Bildschirme (ab 1500px) */
 @media (min-width: 1500px) {
@@ -122,9 +148,7 @@ span {
   }
 
   .menu-container button {
-    padding: 1vh 1.5vw; /* Weitere Reduktion der Button-Größe */
+    padding: 1vh 1.4vw; /* Weitere Reduktion der Button-Größe */
     font-size: 1vw; /* Schriftgröße anpassen, um proportional zu bleiben */
   }
 }
-
-
