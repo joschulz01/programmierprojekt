@@ -25,3 +25,62 @@
       </div>
       <button (click)="addConstraint()">Weitere Nebenbedingung hinzufügen</button>
     </div>
+
+    <br>
+    <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
+
+     <!-- Ausgabe des Ergebnisses als JSON -->
+  <div *ngIf="result">
+    <h3>{{ translationService.getTranslation('solution') }}</h3>
+    
+    <!-- Tabelle für die Variablen (Columns) -->
+    <h3>{{ translationService.getTranslation('variables') }}</h3>
+    <table id="loesungstabelle">
+      <thead>
+        <tr>
+          <th>{{ translationService.getTranslation('variable') }}</th>
+          <th>{{ translationService.getTranslation('index') }}</th>
+          <th>{{ translationService.getTranslation('status') }}</th>
+          <th>{{ translationService.getTranslation('lowerBound') }}</th>
+          <th>{{ translationService.getTranslation('upperBound') }}</th>
+          <th>{{ translationService.getTranslation('primal') }}</th>
+          <th>{{ translationService.getTranslation('dual') }}</th>
+          <th>{{ translationService.getTranslation('type') }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let column of result.Columns | keyvalue; let i = index">
+          <td [id]="'tabelle_name_' + i">{{ column.value.Name }}</td>
+          <td [id]="'tabelle_index_' + i">{{ column.value.Index }}</td>
+          <td [id]="'tabelle_status_' + i">{{ column.value.Status }}</td>
+          <td [id]="'tabelle_Lower_' + i">{{ column.value.Lower }}</td>
+          <td [id]="'tabelle_upper_' + i">{{ column.value.Upper ?? '∞' }}</td>
+          <td [id]="'tabelle_primal_' + i">{{ column.value.Primal }}</td>
+          <td [id]="'tabelle_dual_' + i">{{ column.value.Dual }}</td>
+          <td [id]="'tabelle_type_' + i">{{ column.value.Type }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- Zielwert (Objective Value) -->
+    <h3>{{ translationService.getTranslation('objectiveValue') }}</h3>
+    <p>{{ result.ObjectiveValue }}</p>
+
+    <!-- Laufzeitanalyse -->
+ <h3>Laufzeitanalyse</h3>
+ <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
+<p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
+
+
+    <app-model *ngIf="isValidInput()" [xWert]="xWert" [yWert]="yWert"></app-model>
+  </div>
+</div>
+
+<div class="export-buttons-container">
+  <button id="export_MPS" (click)="downloadMPS()">
+      {{ translationService.getTranslation('exportMPS') }}
+  </button>
+  <button id="export_LP" (click)="downloadLP()">
+      {{ translationService.getTranslation('exportLP') }}
+  </button>
+</div>
