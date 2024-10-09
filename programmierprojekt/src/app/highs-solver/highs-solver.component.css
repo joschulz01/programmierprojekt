@@ -8,6 +8,7 @@ textarea {
   width: 100%;
   max-width: 600px;
   margin-top: 10px;
+  height: 340px;
 }
 
 /* Button-Styling */
@@ -138,8 +139,8 @@ h3 {
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: absolute;
-  top: 40%; /* Positioniere den Tooltip direkt unter dem Button */
-  left: 75%; /* Zentriere den Tooltip relativ zum Button */
+  top: 30%; /* Positioniere den Tooltip direkt unter dem Button */
+  left: 67%; /* Zentriere den Tooltip relativ zum Button */
   transform: translateX(-50%); /* Verschiebe den Tooltip nach links, um ihn zu zentrieren */
   z-index: 1000;
   width: auto; /* Dynamische Breite */
@@ -169,71 +170,44 @@ pre {
   margin-bottom: 20px; /* Abstand zum nächsten Element */
 }
 
-/* Medienabfragen für responsive Design */
-@media (max-width: 768px) {
-  .tooltip {
-    max-width: 60%; /* Tooltip auf 80% der Bildschirmbreite bei kleineren Bildschirmen */
-    left: 85%; /* Bleibe zentriert */
-    transform: translateX(-50%); /* Zentrierung beibehalten */
-  }
-}
-
-/* Medienabfrage für Zoom 100% (Standard) */
-@media (max-width: 1200px) {
-  .tooltip {
-    max-width: 60%; /* Normale Breite für Standardansicht */
-    left: 85%;
-    transform: translateX(-50%);
-  }
-}
-
-/* Medienabfrage für Zoom 110% (ca. bis 1090px Bildschirmbreite) */
-@media (max-width: 1090px) {
-  .tooltip {
-    max-width: 60%; /* Breite leicht erhöhen bei 110% Zoom */
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-/* Medienabfrage für Zoom 125% (ca. bis 960px Bildschirmbreite) */
+/* Anpassung für kleinere Bildschirmgrößen */
 @media (max-width: 960px) {
   .tooltip {
-    max-width: 60%; /* Breite bei 125% Zoom weiter erhöhen */
-    left: 45%;
-    top: 50%;
-    transform: translateX(-50%);
-    font-size: 1.1rem; /* Schriftgröße leicht anpassen */
-  }
-}
-/* Medienabfrage für Zoom 250% (ca. bis 512px Bildschirmbreite) */
-@media (max-width: 512px) {
-  .tooltip {
-    max-width: 30%; /* Breite bei 250% Zoom weiter vergrößern */
-    right: 10%;
-    transform: translateX(-50%);
-    font-size: 1rem; /* Schriftgröße weiter erhöhen */
+    top: 60px; /* Position weiter unter dem Button */
+    left: 50%;
+    max-width: 240px;
+    font-size: 11px;
+    padding: 8px;
   }
 }
 
-/* Medienabfrage für Zoom 300% (ca. bis 850px Bildschirmbreite) */
-@media (max-width: 850px) {
+@media (max-width: 600px) {
   .tooltip {
-    max-width: 50%; /* Vergrößern des Tooltips für bessere Sichtbarkeit bei hohem Zoom */
-    left: 50%; /* Tooltip zentrieren */
-    top: 80%;
-    transform: translateX(-50%);
-    font-size: 1.2rem; /* Schriftgröße erhöhen für bessere Lesbarkeit */
+    top: 70px; /* Position weiter unter dem Button */
+    left: 50%;
+    max-width: 200px;
+    font-size: 10px;
+    padding: 6px;
   }
 }
 
-/* Medienabfrage für Zoom 400% (ca. bis 640px Bildschirmbreite) */
-@media (max-width: 640px) {
+@media (max-width: 360px) {
   .tooltip {
-    max-width: 50%; /* Vergrößern des Tooltips für bessere Sichtbarkeit bei hohem Zoom */
-    left: 50%; /* Tooltip zentrieren */
-    top: 80%;
-    transform: translateX(-50%); /* Zentrierung sicherstellen */
-    font-size: 0.4rem;
+    top: 80px; /* Position weiter unter dem Button */
+    left: 50%;
+    max-width: 160px;
+    font-size: 9px;
+    padding: 4px;
   }
 }
+
+/* Anpassung für Zoom-Stufen 110% bis 175% */
+@media (min-resolution: 105dpi) and (max-resolution: 175dpi) {
+  .tooltip {
+    top: 90px; /* Position unter dem Button */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 220px;
+    font-size: 11px;
+    padding: 6px;
+  }}
