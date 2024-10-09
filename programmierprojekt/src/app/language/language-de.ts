@@ -91,6 +91,12 @@ menuGLPK: "GLPK/Parameter",
 menuFeedback: "Feedback",
 license: "Lizenz GMPL",
 example: "Beispiel für ein Optimierungsproblem:",
-furtherInfos: "Weitere Informationen:"
+furtherInfos: "Weitere Informationen:",
+numbervariables: "Anzahl der Variablen:",
+objectivefunction: "Zielfunktion:",
+constraints: "Nebenbedingungen",
+constraint: "Nebenbedingung",
+addadditionalconstraints: "Weitere Nebenbedingungen hinzufügen",
+removeconstraint: "Nebenbedingung entfernen"
 
 };
