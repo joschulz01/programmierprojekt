@@ -76,6 +76,10 @@
   </div>
 </div>
 
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
 <div class="export-buttons-container">
   <button id="export_MPS" (click)="downloadMPS()">
       {{ translationService.getTranslation('exportMPS') }}
@@ -84,5 +88,6 @@
       {{ translationService.getTranslation('exportLP') }}
   </button>
 </div>
+
 
  
