@@ -12,9 +12,22 @@
       <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="z.B. x{{i + 1}}" />
     </div>
   
+    <div class="optimization-type-container">
+      <label>{{ translationService.getTranslation('optimizationType') }}</label>
+      <br>
+      <label>
+        <input type="radio" name="optimizationType" [(ngModel)]="optimizationType" value="Maximize" />
+        {{ translationService.getTranslation('maximize') }}
+      </label>
+      <label>
+        <input type="radio" name="optimizationType" [(ngModel)]="optimizationType" value="Minimize" />
+        {{ translationService.getTranslation('minimize') }}
+      </label>
+    </div>
+
     <div class="objective-function-container">
       <label for="objectiveFunction">{{ translationService.getTranslation('objectivefunction') }}</label>
-      <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="z.B. maximize x1 + 2*x2" />
+      <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="z.B. x1 + 2*x2" />
     </div>
   
     <div class="constraints-container">
@@ -75,9 +88,6 @@
  <h3>Laufzeitanalyse</h3>
  <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
 <p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
-
-
-    <app-model *ngIf="isValidInput()" [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
 </div>
 

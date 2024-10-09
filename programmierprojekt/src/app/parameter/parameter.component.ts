@@ -57,6 +57,8 @@ export class ParameterComponent {
   showInfo = false; //Kontrolliert das Anzeigen des Tooltips
   elapsedTime: number | null = null;
   preparationTime: number | null = null;
+  optimizationType: 'Maximize' | 'Minimize' = 'Maximize';
+
 
   switchLanguage() {
     this.translationService.switchLanguage(); 
@@ -85,15 +87,17 @@ export class ParameterComponent {
 
   async solveProblem(): Promise<void> {
     if (!this.objectiveFunction || this.constraints.length === 0) {
-        this.errorMessage = 'Bitte geben Sie eine Zielfunktion und mindestens eine Nebenbedingung ein.';
-        return;
+      this.errorMessage = 'Bitte geben Sie eine Zielfunktion und mindestens eine Nebenbedingung ein.';
+      return;
     }
-
+  
     if (!this.numVariables || this.variables.some(v => !v) || !this.objectiveFunction || this.constraints.some(c => !c)) {
       this.errorMessage = 'Bitte alle Felder ausfüllen';
       return;
     }
 
+    const formattedObjective = `${this.optimizationType} ${this.objectiveFunction}`;
+    const constraintsFormatted = this.constraints.join('\n');
     const LP = this.umformungService.umformen(this.problemInput);
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
@@ -126,7 +130,7 @@ export class ParameterComponent {
       this.result = this.convertToResult(highsResult);
       
       // F�ge die Constraints in den ConstraintsService hinzu
-      this.constraintsService.setConstraints(constraints);
+      this.constraintsService.setConstraints(this.extractConstraints(LP));
       this.constraintsService.constraintsUpdated.next();
 
       // Ergebnis als JSON speichern und anzeigen
