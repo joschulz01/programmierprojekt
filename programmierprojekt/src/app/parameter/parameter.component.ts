@@ -74,6 +74,10 @@ export class ParameterComponent {
     this.constraints.splice(index, 1); // Entfernt die Nebenbedingung an der gegebenen Position
   }
 
+  trackByIndex(index: number): number {
+    return index;
+  }
+
   xWert?: number;
   yWert?: number;
 
@@ -86,7 +90,7 @@ export class ParameterComponent {
     }
 
     if (!this.numVariables || this.variables.some(v => !v) || !this.objectiveFunction || this.constraints.some(c => !c)) {
-      alert('Bitte alle Felder ausfüllen!');
+      this.errorMessage = 'Bitte alle Felder ausfüllen';
       return;
     }
 

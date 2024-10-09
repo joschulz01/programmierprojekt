@@ -6,7 +6,7 @@
       <input type="number" id="numVariables" [(ngModel)]="numVariables" (change)="generateVariableInputs()" min="1" />
     </div>
   
-    <div *ngFor="let variable of variables; let i = index">
+    <div *ngFor="let variable of variables; let i = index; trackBy: trackByIndex">
       <label for="variable{{i}}"> Variable {{i + 1}}:</label>
   
       <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="z.B. x{{i + 1}}" />
@@ -19,7 +19,7 @@
   
     <div class="constraints-container">
       <h3>{{ translationService.getTranslation('constraints') }}</h3>
-      <div *ngFor="let constraint of constraints; let j = index">
+      <div *ngFor="let constraint of constraints; let j = index trackBy: trackByIndex">
         <label for="constraint{{j}}">{{ translationService.getTranslation('constraint') }}  {{j + 1}}:</label>
         <input type="text" id="constraint{{j}}" [(ngModel)]="constraints[j]" placeholder="z.B. x1 + 2*x2 <= 15" />
         <button (click)="removeConstraint(j)" class="remove-button" [attr.title]="translationService.getTranslation('removeconstraint')">
