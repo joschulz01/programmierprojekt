@@ -70,6 +70,10 @@ export class ParameterComponent {
     this.constraints.push(''); // Leeres Feld für die neue Nebenbedingung
   }
 
+  removeConstraint(index: number) {
+    this.constraints.splice(index, 1); // Entfernt die Nebenbedingung an der gegebenen Position
+  }
+
   xWert?: number;
   yWert?: number;
 
