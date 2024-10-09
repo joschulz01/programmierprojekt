@@ -91,7 +91,12 @@ menuGLPK: "GLPK/Parameter",
 menuFeedback: "Feedback",
 license: "License GMPL:",
 example: "Example of an optimization problem:",
-furtherInfos: "Further information:"
-
+furtherInfos: "Further information:",
+numbervariables: "Number of Variables:",
+objectivefunction: "Objective Function",
+constraints: "Constraints",
+constraint: "Constraint",
+addadditionalconstraints: "Add additional Constraints",
+removeconstraint: "Remove Constraint"
 
 };
