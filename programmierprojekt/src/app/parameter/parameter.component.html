@@ -1,93 +1,89 @@
 <div class="solver-container">
-  
-    <div class="input-container">
+  <div class="input-container">
       <label for="numVariables">{{ translationService.getTranslation('numbervariables') }}</label>
       <br>
       <input type="number" id="numVariables" [(ngModel)]="numVariables" (change)="generateVariableInputs()" min="1" />
-    </div>
-  
-    <div *ngFor="let variable of variables; let i = index; trackBy: trackByIndex">
-      <label for="variable{{i}}"> Variable {{i + 1}}:</label>
-  
+  </div>
+
+  <div *ngFor="let variable of variables; let i = index; trackBy: trackByIndex">
+      <label for="variable{{i}}">Variable {{i + 1}}:</label>
       <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="z.B. x{{i + 1}}" />
-    </div>
-  
-    <div class="optimization-type-container">
+  </div>
+
+  <div class="optimization-type-container">
       <label>{{ translationService.getTranslation('optimizationType') }}</label>
       <br>
       <label>
-        <input type="radio" name="optimizationType" [(ngModel)]="optimizationType" value="Maximize" />
-        {{ translationService.getTranslation('maximize') }}
+          <input type="radio" name="optimizationType" [(ngModel)]="optimizationType" value="Maximize" />
+          {{ translationService.getTranslation('maximize') }}
       </label>
       <label>
-        <input type="radio" name="optimizationType" [(ngModel)]="optimizationType" value="Minimize" />
-        {{ translationService.getTranslation('minimize') }}
+          <input type="radio" name="optimizationType" [(ngModel)]="optimizationType" value="Minimize" />
+          {{ translationService.getTranslation('minimize') }}
       </label>
-    </div>
+  </div>
 
-    <div class="objective-function-container">
+  <div class="objective-function-container">
       <label for="objectiveFunction">{{ translationService.getTranslation('objectivefunction') }}</label>
       <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="z.B. x1 + 2*x2" />
-    </div>
-  
-    <div class="constraints-container">
+  </div>
+
+  <div class="constraints-container">
       <h3>{{ translationService.getTranslation('constraints') }}</h3>
-      <div *ngFor="let constraint of constraints; let j = index trackBy: trackByIndex">
-        <label for="constraint{{j}}">{{ translationService.getTranslation('constraint') }}  {{j + 1}}:</label>
-        <input type="text" id="constraint{{j}}" [(ngModel)]="constraints[j]" placeholder="z.B. x1 + 2*x2 <= 15" />
-        <button (click)="removeConstraint(j)" class="remove-button" [attr.title]="translationService.getTranslation('removeconstraint')">
-          <i class="fas fa-trash"></i> <!-- Mülltonnen-Icon -->
-        </button>
-        
+      <div *ngFor="let constraint of constraints; let j = index; trackBy: trackByIndex">
+          <label for="constraint{{j}}">{{ translationService.getTranslation('constraint') }} {{j + 1}}:</label>
+          <input type="text" id="constraint{{j}}" [(ngModel)]="constraints[j]" placeholder="z.B. x1 + 2*x2 <= 15" />
+          <button (click)="removeConstraint(j)" class="remove-button" [attr.title]="translationService.getTranslation('removeconstraint')">
+              <i class="fas fa-trash"></i> <!-- Mülltonnen-Icon -->
+          </button>
       </div>
       <button (click)="addConstraint()">{{ translationService.getTranslation('addadditionalconstraints') }}</button>
-    </div>
-    
+  </div>
 
-    <br>
-    <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
+  <br>
+  <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
 
-     <!-- Ausgabe des Ergebnisses als JSON -->
+  <!-- Ausgabe des Ergebnisses als JSON -->
   <div *ngIf="result">
-    <h3>{{ translationService.getTranslation('solution') }}</h3>
-    
-    <!-- Tabelle für die Variablen (Columns) -->
-    <h3>{{ translationService.getTranslation('variables') }}</h3>
-    <table id="loesungstabelle">
-      <thead>
-        <tr>
-          <th>{{ translationService.getTranslation('variable') }}</th>
-          <th>{{ translationService.getTranslation('index') }}</th>
-          <th>{{ translationService.getTranslation('status') }}</th>
-          <th>{{ translationService.getTranslation('lowerBound') }}</th>
-          <th>{{ translationService.getTranslation('upperBound') }}</th>
-          <th>{{ translationService.getTranslation('primal') }}</th>
-          <th>{{ translationService.getTranslation('dual') }}</th>
-          <th>{{ translationService.getTranslation('type') }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let column of result.Columns | keyvalue; let i = index">
-          <td [id]="'tabelle_name_' + i">{{ column.value.Name }}</td>
-          <td [id]="'tabelle_index_' + i">{{ column.value.Index }}</td>
-          <td [id]="'tabelle_status_' + i">{{ column.value.Status }}</td>
-          <td [id]="'tabelle_Lower_' + i">{{ column.value.Lower }}</td>
-          <td [id]="'tabelle_upper_' + i">{{ column.value.Upper ?? '∞' }}</td>
-          <td [id]="'tabelle_primal_' + i">{{ column.value.Primal }}</td>
-          <td [id]="'tabelle_dual_' + i">{{ column.value.Dual }}</td>
-          <td [id]="'tabelle_type_' + i">{{ column.value.Type }}</td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <!-- Zielwert (Objective Value) -->
-    <h3>{{ translationService.getTranslation('objectiveValue') }}</h3>
-    <p>{{ result.ObjectiveValue }}</p>
+      <h3>{{ translationService.getTranslation('solution') }}</h3>
 
-    <!-- Laufzeitanalyse -->
- <h3>Laufzeitanalyse</h3>
- <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
-<p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
+      <!-- Tabelle für die Variablen (Columns) -->
+      <h3>{{ translationService.getTranslation('variables') }}</h3>
+      <table id="loesungstabelle">
+          <thead>
+              <tr>
+                  <th>{{ translationService.getTranslation('variable') }}</th>
+                  <th>{{ translationService.getTranslation('index') }}</th>
+                  <th>{{ translationService.getTranslation('status') }}</th>
+                  <th>{{ translationService.getTranslation('lowerBound') }}</th>
+                  <th>{{ translationService.getTranslation('upperBound') }}</th>
+                  <th>{{ translationService.getTranslation('primal') }}</th>
+                  <th>{{ translationService.getTranslation('dual') }}</th>
+                  <th>{{ translationService.getTranslation('type') }}</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let column of result.Columns | keyvalue; let i = index">
+                  <td [id]="'tabelle_name_' + i">{{ column.value.Name }}</td>
+                  <td [id]="'tabelle_index_' + i">{{ column.value.Index }}</td>
+                  <td [id]="'tabelle_status_' + i">{{ column.value.Status }}</td>
+                  <td [id]="'tabelle_Lower_' + i">{{ column.value.Lower }}</td>
+                  <td [id]="'tabelle_upper_' + i">{{ column.value.Upper ?? '∞' }}</td>
+                  <td [id]="'tabelle_primal_' + i">{{ column.value.Primal }}</td>
+                  <td [id]="'tabelle_dual_' + i">{{ column.value.Dual }}</td>
+                  <td [id]="'tabelle_type_' + i">{{ column.value.Type }}</td>
+              </tr>
+          </tbody>
+      </table>
+
+      <!-- Zielwert (Objective Value) -->
+      <h3>{{ translationService.getTranslation('objectiveValue') }}</h3>
+      <p>{{ result.ObjectiveValue }}</p>
+
+      <!-- Laufzeitanalyse -->
+      <h3>Laufzeitanalyse</h3>
+      <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
+      <p>Vorbereitungszeit (Preparation time): {{ preparationTime | number: '1.0-2' }} ms</p>
   </div>
 </div>
 
@@ -103,5 +99,3 @@
       {{ translationService.getTranslation('exportLP') }}
   </button>
 </div>
-
-
