@@ -97,6 +97,9 @@ objectivefunction: "Zielfunktion:",
 constraints: "Nebenbedingungen",
 constraint: "Nebenbedingung",
 addadditionalconstraints: "Weitere Nebenbedingungen hinzufügen",
-removeconstraint: "Nebenbedingung entfernen"
+removeconstraint: "Nebenbedingung entfernen",
+runtimeanalysis: "Laufzeitanalyse",
+elapsedtime: "Gesamtzeit:",
+preparationtime:"Vorbereitungszeit:"
 
 };
