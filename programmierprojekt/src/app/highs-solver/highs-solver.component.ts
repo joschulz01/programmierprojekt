@@ -11,7 +11,7 @@ import { TranslationService } from '../translationservice';
 interface Column {
   Name: string;
   Index: number;
-  Status: string;
+  Status: string; 
   Lower: number;
   Upper?: number;
   Primal?: number; // Optional
@@ -50,6 +50,12 @@ export class HighsSolverComponent {
   showInfo = false; //Kontrolliert das Anzeigen des Tooltips
   elapsedTime: number | null = null;
   preparationTime: number | null = null;
+  errorMessage: string | null = null;  // Fehlernachricht
+  numVariables = 0;
+  variables: string[] = [];
+  objectiveFunction = '';
+  constraints: string[] = [];
+
 
   switchLanguage() {
     this.translationService.switchLanguage();
@@ -68,7 +74,16 @@ export class HighsSolverComponent {
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
       locateFile: (file: string) => `highs/${file}` // Zeigt auf den Ordner, wo die WASM-Datei liegt
-    };
+    }
+    if (!this.objectiveFunction || this.constraints.length === 0) {
+      this.errorMessage = 'Bitte geben Sie das Optimierungsproblem ein/Please enter the optimization problem';
+      return;
+  };
+
+  if (!this.numVariables || this.variables.some(v => !v) || !this.objectiveFunction || this.constraints.some(c => !c)) {
+    this.errorMessage = 'Bitte alle Felder ausfüllen/Please fill out all fields';
+    return;
+  }
 
     const preparationStartTime = performance.now();
     const preparationEndTime = performance.now();

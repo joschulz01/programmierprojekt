@@ -100,6 +100,7 @@ addadditionalconstraints: "Add additional Constraints",
 removeconstraint: "Remove Constraint",
 runtimeanalysis: "Runtime Analysis",
 elapsedtime: "Elapsed Time:",
-preparationtime:"Preparationtime:"
+preparationtime:"Preparationtime:",
+allfields: "Please fill out all fields",
 
 };

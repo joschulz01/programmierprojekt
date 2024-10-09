@@ -211,3 +211,10 @@ pre {
     font-size: 11px;
     padding: 6px;
   }}
+
+  /* Fehlermeldungen */
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}

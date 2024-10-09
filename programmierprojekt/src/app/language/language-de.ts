@@ -100,6 +100,6 @@ addadditionalconstraints: "Weitere Nebenbedingungen hinzufügen",
 removeconstraint: "Nebenbedingung entfernen",
 runtimeanalysis: "Laufzeitanalyse",
 elapsedtime: "Gesamtzeit:",
-preparationtime:"Vorbereitungszeit:"
+preparationtime:"Vorbereitungszeit:",
 
 };
