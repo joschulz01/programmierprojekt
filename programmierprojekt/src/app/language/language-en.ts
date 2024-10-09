@@ -97,6 +97,9 @@ objectivefunction: "Objective Function",
 constraints: "Constraints",
 constraint: "Constraint",
 addadditionalconstraints: "Add additional Constraints",
-removeconstraint: "Remove Constraint"
+removeconstraint: "Remove Constraint",
+runtimeanalysis: "Runtime Analysis",
+elapsedtime: "Elapsed Time:",
+preparationtime:"Preparationtime:"
 
 };

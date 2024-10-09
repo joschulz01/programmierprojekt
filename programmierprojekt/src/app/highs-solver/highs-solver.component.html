@@ -67,9 +67,9 @@
     <p>{{ result.ObjectiveValue }}</p>
 
     <!-- Laufzeitanalyse -->
- <h3>Laufzeitanalyse</h3>
- <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
-<p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
+ <h3>{{ translationService.getTranslation('runtimeanalysis') }}</h3>
+ <p>{{ translationService.getTranslation('elapsedtime') }} {{ elapsedTime | number: '1.0-2' }} ms</p>
+ <p>{{ translationService.getTranslation('preparationtime') }} {{ preparationTime | number: '1.0-2' }} ms</p>
 
 
     <app-model *ngIf="isValidInput()" [xWert]="xWert" [yWert]="yWert"></app-model>
