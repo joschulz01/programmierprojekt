@@ -74,7 +74,7 @@ export class ParameterComponent {
     this.constraints.splice(index, 1); // Entfernt die Nebenbedingung an der gegebenen Position
   }
 
-  trackByIndex(index: number, obj: any): any {
+  trackByIndex(index: number): number {
     return index;
   }
 
