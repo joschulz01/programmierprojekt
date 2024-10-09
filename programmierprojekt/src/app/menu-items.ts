@@ -9,7 +9,7 @@ export const MENU_ITEMS = [
   },
   {
     id: 'menu3',
-    name: 'GLPK',
+    name: 'Parameter',
   },
   {
     id: 'menu4',
