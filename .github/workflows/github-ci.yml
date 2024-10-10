@@ -110,9 +110,21 @@ jobs:
       - name: Install Robot Framework browser libary
         run: pip install robotframework-browser
 
+      # Install Dependencies
+      - name: Install Dependencies
+        run: npm install && npm install -g @angular/cli@18
+
+      # Stage: Serve localhost
+      - name: Serve website
+        run: ng serve &
+
       # Stage: Init Robot Framework
+
       - name: Init Robot Framework
-        run: rfbrowser init
+        run: |
+          echo "waiting 30 seconds..."
+          sleep 30
+          rfbrowser init
 
       # Stage: Run Robot Framework tests
       - name: Run Robot Framework tests
