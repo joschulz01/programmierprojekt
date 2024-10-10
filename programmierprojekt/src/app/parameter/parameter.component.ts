@@ -52,7 +52,7 @@ export class ParameterComponent {
   problemInput = '';  // Eingabefeld für das Problem, standardmäßig leer
   solution = '';  // Variable zur Anzeige der Lösung
   result: Result | null = null; // Verwendung des definierten Result Interfaces
-  selectedFile: File | null = null; // Hier wird die ausgewählte Datei 
+  selectedFile: File | null = null; // Hier wird die ausgewählte Datei
   showInfo = false; // Kontrolliert das Anzeigen des Tooltips
   elapsedTime: number | null = null;
   preparationTime: number | null = null;
@@ -60,7 +60,7 @@ export class ParameterComponent {
 
 
   switchLanguage() {
-    this.translationService.switchLanguage(); 
+    this.translationService.switchLanguage();
   }
 
   generateVariableInputs() {
@@ -83,8 +83,8 @@ export class ParameterComponent {
   yWert?: number;
 
   constructor(
-    private constraintsService: ConstraintsService, 
-    private umformungService: UmformungService, 
+    private constraintsService: ConstraintsService,
+    private umformungService: UmformungService,
     public translationService: TranslationService
   ) {}
 
@@ -93,7 +93,7 @@ export class ParameterComponent {
       this.errorMessage = 'Bitte geben Sie eine Zielfunktion und mindestens eine Nebenbedingung ein.';
       return;
     }
-  
+
     if (!this.numVariables || this.variables.some(v => !v) || !this.objectiveFunction || this.constraints.some(c => !c)) {
       this.errorMessage = 'Bitte alle Felder ausfüllen';
       return;
@@ -110,7 +110,7 @@ export class ParameterComponent {
     this.preparationTime = preparationEndTime - preparationStartTime;
 
     const startTime = performance.now();
-    
+
     try {
       // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
@@ -129,7 +129,7 @@ export class ParameterComponent {
 
       // Konvertiere das HiGHS-Ergebnis in dein Result-Format
       this.result = this.convertToResult(highsResult);
-      
+
       // Füge die Constraints in den ConstraintsService hinzu
       this.constraintsService.setConstraints(parsedConstraints);
       this.constraintsService.constraintsUpdated.next();
@@ -140,7 +140,7 @@ export class ParameterComponent {
       // Laufzeitanalyse
       const endTime = performance.now(); // Endzeit für die Laufzeitanalyse
       this.elapsedTime = endTime - startTime; // Berechne die Laufzeit
- 
+
       // Werte für x und y ermitteln
       this.WerteErmitteln(this.result);
     } catch (error) {
@@ -203,7 +203,7 @@ export class ParameterComponent {
     if (VariableX && 'Primal' in VariableX) {
       this.xWert = VariableX.Primal; // Setze den Wert für xWert
     }
-    
+
     const VariableY = result.Columns['y'] || result.Columns['x2'];
     if (VariableY && 'Primal' in VariableY) {
       this.yWert = VariableY.Primal; // Setze den Wert für yWert
@@ -249,11 +249,11 @@ export class ParameterComponent {
         return { name: name.trim(), coef: isNaN(coef) ? 1 : coef }; // Verwende 1, falls der Koeffizient nicht angegeben ist
       });
 
-      constraintsParsed.push({ 
-        name: `Constraint ${constraintsParsed.length + 1}`, 
-        terms, 
-        relation, 
-        rhs 
+      constraintsParsed.push({
+        name: `Constraint ${constraintsParsed.length + 1}`,
+        terms,
+        relation,
+        rhs
       });
     }
 
@@ -301,6 +301,6 @@ export class ParameterComponent {
     a.download = filename;
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a); 
+    document.body.removeChild(a);
   }
 }

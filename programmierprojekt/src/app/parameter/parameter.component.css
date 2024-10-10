@@ -146,6 +146,7 @@ h3 {
 .optimization-type-container {
   margin-bottom: 15px;
   padding: 5px;
+  border: none;
 }
 
 .optimization-type-container label {
