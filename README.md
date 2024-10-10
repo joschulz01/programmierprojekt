@@ -11,105 +11,104 @@ The HiGHS Solver was integrated into the Single Page Application (SPA) to solve 
 - [@NadineArning](https://github.com/NadineArning)
 - [@Christianvoss2002](https://github.com/Christianvoss2002)
 
+## Demo
+
+If you would like to take a look at the entire project, you can do so on our website [or-tool.de](or-tool.de)
 
 ## Run Locally (Angular CLI)
+To use the website locally, make sure that [Node.JS](https://nodejs.org/en) is installed and the [Angular CLI](https://www.npmjs.com/package/@angular/cli) is installed
 
-Clone the project
+1. Clone the project
 
 ```bash
   https://github.com/joschulz01/programmierprojekt
 ```
 
-Go to the project directory
+2. Go to the project directory
 
 ```bash
   cd programmierprojekt
 ```
 
-Install dependencies
+3. Install dependencies
 
 ```bash
   npm install
 ```
 
-Start the server
+4. Start the server
 
 ```bash
   ng serve
 ```
 
 ## Run Locally (Docker)
-Alternatively, docker can also be operated locally to run the Angular project
-\
-\
-Clone the project
+Alternatively, Docker can also be operated locally to run the Angular project. Please make sure that [Docker](https://www.docker.com/) is installed
+
+1. Clone the project
 ```bash
   https://github.com/joschulz01/programmierprojekt
 ```
 
-Go to the project directory
+2. Go to the project directory
 
 ```bash
   cd programmierprojekt
 ```
 
-Build docker container
+3. Build Docker container
 
 ```bash
   docker build -t or-tool .
 ```
 
-Run docker container
+4. Run Docker container
 
 ```bash
   docker run -p 8080:80 or-tool
 ```
 ## Run Test Local
 
-Clone the project
+The Robot Framework was used for testing. If you are interested, this can also be executed locally. Make sure that [Python](https://www.python.org/) is installed
+
+1. Clone the project
 
 ```bash
   https://github.com/joschulz01/programmierprojekt
 ```
 
-Go to the project directory
+2. Go to the project directory
 
 ```bash
   cd programmierprojekt
 ```
 
-Install Robot Framework
+3. Install Robot Framework
 
 ```bash
   pip install robotframework
 ```
 
-Install Robot Framework Browser Library
+4. Install Robot Framework Browser Library
 ```bash
 pip install robotframework-browser
 ```
 
-Init Robot Framework
+5. Init Robot Framework
 ```bash
 rfbrowser init
 ```
 
-Go to the project directory
-
-```bash
-  cd programmierprojekt
-```
-
-Run Robot Framework Local
+6. Run Robot Framework Local
 ```bash
 robot Test.robot
 ```
 
 ## Tech Stack
 
-**Client:** Angular
+**Client:** Angular, Docker, Python
 
-**Server:** Node
+**Server:** Node.JS
 
 
 ## License
