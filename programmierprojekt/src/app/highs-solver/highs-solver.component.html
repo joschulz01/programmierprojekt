@@ -21,7 +21,7 @@
 </div>
 
   <div>
-    <button (click)="importFile()">{{ translationService.getTranslation('importFile') }}</button>
+    <button id="importFile" (click)="importFile()">{{ translationService.getTranslation('importFile') }}</button>
   </div>
 
   <textarea id="problemInput" [(ngModel)]="problemInput" placeholder="{{ translationService.getTranslation('inputPlaceholder') }}" rows="10" cols="50"></textarea>
