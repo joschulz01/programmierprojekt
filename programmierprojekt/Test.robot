@@ -6,7 +6,7 @@ Library    Dialogs
 
 *** Variablen ***
 ${BROWSER}    chromium
-${url}        https://or-tool.de/
+${url}        http://localhost:4200/
 ${Testdatei1}    var x1>=0;\nvar x2>=0;\nmaximize Objective: x1+x2;\ns.t. Constraint1:\nx1 + 2*x2 <= 15;\ns.t. Constraint2:\n3*x1 + x2 <= 20;
 ${DOWNLOAD_DIR}    
 ${EXPECTED_FILE}
