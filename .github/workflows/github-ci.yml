@@ -119,8 +119,12 @@ jobs:
         run: ng serve &
 
       # Stage: Init Robot Framework
+
       - name: Init Robot Framework
-        run: rfbrowser init
+        run: |
+          echo "waiting 30 seconds..."
+          sleep 30
+          rfbrowser init
 
       # Stage: Run Robot Framework tests
       - name: Run Robot Framework tests
