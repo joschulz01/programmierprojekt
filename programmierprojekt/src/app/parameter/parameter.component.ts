@@ -107,21 +107,23 @@ export class ParameterComponent {
 
     // Constraints
     problemStr += 'Subject To\n';
-    for (let i = 0; i < this.constraints.length; i++) {
-      let constraint = this.constraints[i].trim();
+    // Anpassung der Schleife: Verwenden von 'for-of' mit 'entries()' um Index und Wert zu erhalten
+    for (const [index, constraintRaw] of this.constraints.entries()) {
+      let constraint = constraintRaw.trim();
       // Entferne '*' Zeichen
       constraint = constraint.replace(/\*/g, '');
       // Entferne Leerzeichen zwischen Zahlen und Variablen
       constraint = constraint.replace(/(\d)\s*([a-zA-Z])/g, '$1$2');
       // Entferne doppelte Leerzeichen
       constraint = constraint.replace(/\s+/g, ' ').trim();
-      problemStr += ' c' + (i + 1) + ': ' + constraint + '\n';
+      problemStr += ' c' + (index + 1) + ': ' + constraint + '\n';
     }
 
     // Bounds
     problemStr += 'Bounds\n';
-    for (let i = 0; i < this.variables.length; i++) {
-      const varName = this.variables[i].trim();
+    // Anpassung der Schleife: Verwenden von 'for-of'
+    for (const variable of this.variables) {
+      const varName = variable.trim();
       if (varName) {
         problemStr += ' ' + varName + ' >= 0\n';
       }
