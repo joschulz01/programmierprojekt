@@ -7,7 +7,7 @@ import { UmformungService } from '../umformung.service';
 import { ModelComponent } from '../model/model.component';
 import { TranslationService } from '../translationservice';
 
-// Definition der Interfaces f�r den Resultattyp
+// Definition der Interfaces für den Resultattyp
 interface Column {
   Name: string;
   Index: number;
@@ -42,7 +42,6 @@ interface Result {
   templateUrl: './parameter.component.html',
   styleUrls: ['./parameter.component.css']
 })
-
 export class ParameterComponent {
 
   errorMessage: string | null = null;  // Fehlernachricht
@@ -50,8 +49,8 @@ export class ParameterComponent {
   variables: string[] = [];
   objectiveFunction = '';
   constraints: string[] = [];
-  problemInput = '';  // Eingabefeld f�r das Problem, standardm��ig leer
-  solution = '';  // Variable zur Anzeige der L�sung
+  problemInput = '';  // Eingabefeld für das Problem, standardmäßig leer
+  solution = '';  // Variable zur Anzeige der Lösung
   result: Result | null = null; // Verwendung des definierten Result Interfaces
   selectedFile: File | null = null; // Hier wird die ausgewählte Datei 
   showInfo = false; //Kontrolliert das Anzeigen des Tooltips
@@ -96,8 +95,6 @@ export class ParameterComponent {
       return;
     }
 
-    const formattedObjective = `${this.optimizationType} ${this.objectiveFunction}`;
-    const constraintsFormatted = this.constraints.join('\n');
     const LP = this.umformungService.umformen(this.problemInput);
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
@@ -113,15 +110,15 @@ export class ParameterComponent {
     try {
       // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
-      let highsResult: HighsSolution; // Typ f�r das HiGHS-Ergebnis festlegen
+      let highsResult: HighsSolution; // Typ für das HiGHS-Ergebnis festlegen
 
-      // L�sen des vom Benutzer eingegebenen Problems
+      // Lösen des vom Benutzer eingegebenen Problems
       let constraints;
       try {
         highsResult = await highsSolver.solve(this.problemInput); // Async-Funktion aufrufen
         constraints = this.extractConstraints(this.problemInput);
       } catch (error) {
-        console.log('Fehler beim L�sen des Problems:', error, "\nMit umgeformtem Input");
+        console.log('Fehler beim Lösen des Problems:', error, "\nMit umgeformtem Input");
         highsResult = await highsSolver.solve(LP); // Async-Funktion aufrufen
         constraints = this.extractConstraints(LP);
       }
@@ -129,25 +126,24 @@ export class ParameterComponent {
       // Konvertiere das HiGHS-Ergebnis in dein Result-Format
       this.result = this.convertToResult(highsResult);
       
-      // F�ge die Constraints in den ConstraintsService hinzu
+      // Füge die Constraints in den ConstraintsService hinzu
       this.constraintsService.setConstraints(this.extractConstraints(LP));
       this.constraintsService.constraintsUpdated.next();
 
       // Ergebnis als JSON speichern und anzeigen
       this.solution = JSON.stringify(this.result, null, 2);
 
- // Laufzeitanalyse
- const endTime = performance.now(); // Endzeit für die Laufzeitanalyse
- this.elapsedTime = endTime - startTime; // Berechne die Laufzeit
+      // Laufzeitanalyse
+      const endTime = performance.now(); // Endzeit für die Laufzeitanalyse
+      this.elapsedTime = endTime - startTime; // Berechne die Laufzeit
  
-      // Werte f�r x und y ermitteln
+      // Werte für x und y ermitteln
       this.WerteErmitteln(this.result);
     } catch (error) {
       // Fehlerbehandlung
-      console.error('Fehler beim L�sen des Problems:', error);
-      this.solution = 'Fehler beim L�sen des Problems: ' + error;
+      console.error('Fehler beim Lösen des Problems:', error);
+      this.solution = 'Fehler beim Lösen des Problems: ' + error;
     }
-
 }
 
 private convertToResult(highsResult: HighsSolution): Result {
@@ -176,11 +172,11 @@ private convertToResult(highsResult: HighsSolution): Result {
           Status: 'Status' in row ? row.Status : 'Unknown', // Setze auf 'Unknown' wenn Status nicht existiert
           Lower: row.Lower ?? 0, // Setze einen Standardwert, falls null
           Upper: row.Upper ?? Infinity, // Setze einen Standardwert, falls null
-          Primal: undefined, // Setze auf undefined, weil nicht immer verf�gbar
-          Dual: undefined, // Setze auf undefined, weil nicht immer verf�gbar
+          Primal: undefined, // Setze auf undefined, weil nicht immer verfügbar
+          Dual: undefined, // Setze auf undefined, weil nicht immer verfügbar
       };
 
-      // �berpr�fung auf die Existenz von Primal und Dual
+      // Überprüfung auf die Existenz von Primal und Dual
       if ('Primal' in row) {
           newRow.Primal = row.Primal;
       }
@@ -198,18 +194,15 @@ private convertToResult(highsResult: HighsSolution): Result {
   };
 }
 
-
-
-
-WerteErmitteln(result: Result) { // Typ f�r result festlegen
+WerteErmitteln(result: Result) { // Typ für result festlegen
   const VariableX = result.Columns['x'] || result.Columns['x1'];
   if (VariableX && 'Primal' in VariableX) {
-    this.xWert = VariableX.Primal; // Setze den Wert f�r xWert
+    this.xWert = VariableX.Primal; // Setze den Wert für xWert
   }
   
   const VariableY = result.Columns['y'] || result.Columns['x2'];
   if (VariableY && 'Primal' in VariableY) {
-    this.yWert = VariableY.Primal; // Setze den Wert f�r yWert
+    this.yWert = VariableY.Primal; // Setze den Wert für yWert
   }
 }
 
@@ -226,10 +219,10 @@ private extractConstraints(problem: string): { name: string; terms: { name: stri
       continue;
     }
     if (isObjective) {
-      continue; // �berspringe die Zeilen bis wir die Constraints erreichen
+      continue; // Überspringe die Zeilen bis wir die Constraints erreichen
     }
     if (trimmedLine.startsWith('Subject To')) {
-      continue; // �berspringe diese Zeile
+      continue; // Überspringe diese Zeile
     }
     if (trimmedLine.startsWith('Bounds')) {
       break; // Wir haben alle Constraints gelesen
@@ -238,46 +231,50 @@ private extractConstraints(problem: string): { name: string; terms: { name: stri
     // Hier wird die Zeile als Constraint geparst
     const parts = trimmedLine.split(/<=|>=|=/);
     if (parts.length < 2) {
-      continue; // Ung�ltige Zeile, �berspringen
+      continue; // Ungültige Zeile überspringen
     }
 
-    const lhs = this.normalizeVariableNames(parts[0].trim());
-    const rhs = parts[1].trim();
-    const relation = trimmedLine.includes('<=') ? '<=' : trimmedLine.includes('>=') ? '>=' : '=';
-    constraints.push({
-      name: `Constraint ${constraints.length + 1}`, // Benennung der Constraints
-      terms: this.parseTerms(lhs),
-      relation: relation,
-      rhs: parseFloat(rhs),
+    const lhs = parts[0].trim();
+    const rhs = parseFloat(parts[1].trim());
+    const relationMatch = trimmedLine.match(/(<=|>=|=)/);
+    const relation = relationMatch ? relationMatch[0] : '=';
+
+    const terms = lhs.split('+').map(term => {
+      const [coefStr, name] = term.trim().split(' ');
+      const coef = parseFloat(coefStr);
+      return { name: name.trim(), coef: isNaN(coef) ? 1 : coef }; // Verwende 1, falls der Koeffizient nicht angegeben ist
     });
+
+    constraints.push({ name: `Constraint ${constraints.length + 1}`, terms, relation, rhs });
   }
 
   return constraints;
 }
-
-private normalizeVariableNames(expression: string): string {
-  return expression.replace(/\s+(\d+)/g, '$1');  // Entfernt Leerzeichen zwischen Variablen und Zahlen, z.B. "x 1" wird zu "x1"
 }
+
+
+//private normalizeVariableNames(expression: string): string {
+//  return expression.replace(/\s+(\d+)/g, '$1');  // Entfernt Leerzeichen zwischen Variablen und Zahlen, z.B. "x 1" wird zu "x1"}
 
 // Hilfsmethode zum Parsen der Terme einer Constraint
-private parseTerms(lhs: string): { name: string; coef: number }[] {
-  const terms: { name: string; coef: number }[] = [];
-  const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel f�r Variablen x1, x2, ...
-  let match: RegExpExecArray | null;
+//private parseTerms(lhs: string): { name: string; coef: number }[] {
+ // const terms: { name: string; coef: number }[] = [];
+ // const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel f�r Variablen x1, x2, ...
+ // let match: RegExpExecArray | null;
 
-  while ((match = termRegex.exec(lhs)) !== null) {
-    const coef = match[1] ? parseFloat(match[1]) : 1; // Falls kein Koeffizient angegeben ist, nehme 1
-    const variable = match[2];
-    terms.push({ name: variable, coef: coef });
-  }
+//  while ((match = termRegex.exec(lhs)) !== null) {
+//    const coef = match[1] ? parseFloat(match[1]) : 1; // Falls kein Koeffizient angegeben ist, nehme 1
+//    const variable = match[2];
+//    terms.push({ name: variable, coef: coef });
+//  }
 
-  return terms;
-}
+//  return terms;
+//}
 
 // === EXPORT FUNCTIONALITY ===
 
 // Exportiere das Modell als LP-Datei basierend auf der Benutzereingabe
-downloadLP() {
+/*downloadLP() {
   const lpData = this.problemInput; // Benutzereingabe verwenden
   this.downloadFile(lpData, 'model.lp', 'text/plain');
 }
@@ -297,5 +294,4 @@ private downloadFile(data: string, filename: string, type: string) {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a); 
-}
-}
+}*/
