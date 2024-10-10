@@ -70,12 +70,19 @@ Feedback testen
     Öffne OR-Webseite
     Click    id=menue_Feedback
     Fill Text    id=feedback    Automatischer Test\nNächste Zeile!\n\nLG Robot Testing
+    Click    class=feedback-button
 
 Routing testen
     [Tags]    PP2024-133
     Öffne OR-Webseite
     Menüleiste Prüfen
     Footer prüfen
+
+Modelle importieren
+    [Tags]
+    Öffne OR-Webseite
+    Öffne Highs-Seite
+    Upload File By Selector    id=inputFile    ../model.mps
 
 
 
