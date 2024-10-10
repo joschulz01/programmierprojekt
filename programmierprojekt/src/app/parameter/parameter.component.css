@@ -1,21 +1,20 @@
 .solver-container {
-  margin: 20px auto; /* Zentriert den Container und fügt oberen und unteren Abstand hinzu */
+  margin: 20px auto;
   text-align: center;
-  max-width: 1000px; /* Maximalbreite für große Bildschirme */
-  padding: 10px; /* Innerer Abstand des Containers */
+  max-width: 1000px;
+  padding: 10px;
 }
 
 /* Input-Container für die Anzahl der Variablen */
 .input-container {
-  margin-bottom: 30px; /* Abstand zwischen der Anzahl der Variablen und der Zielfunktion */
+  margin-bottom: 30px;
 }
 
 /* Abstand für die Zielfunktion */
 .objective-function-container {
-  margin-top: 30px; /* Abstand oberhalb der Zielfunktion */
-  margin-bottom: 30px; /* Abstand unterhalb der Zielfunktion */
-    padding: 5px;
-    width: 600px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 5px;
 }
 
 /* Allgemeine Textarea-Stile */
@@ -130,24 +129,25 @@ h3 {
 }
 
 .remove-button {
-  background: none; /* Kein Hintergrund */
-  border: none; /* Kein Rahmen */
-  cursor: pointer; /* Zeiger-Cursor */
-  color: #708090; /* Icon-Farbe */
-  padding: 0; /* Kein Padding */
-  font-size: 20px; /* Größe des Icons */
-  margin-left: 10px; /* Abstand links vom Icon */
-  transition: color 0.3s; /* Farbe bei Hover */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #708090;
+  padding: 0;
+  font-size: 20px;
+  margin-left: 10px;
+  transition: color 0.3s;
 }
 
 .remove-button:hover {
-  color: #c0c0c0; /* Farbänderung beim Hover */
+  color: #c0c0c0;
 }
 
+/* Aktualisierte Klasse für das Fieldset */
 .optimization-type-container {
   margin-bottom: 15px;
   padding: 5px;
-  border: none;
+  border: none; /* Diese Zeile entfernt die Umrandung */
 }
 
 .optimization-type-container label {
@@ -175,6 +175,6 @@ h3 {
 
   .input-container,
   .objective-function-container {
-    margin-bottom: 20px; /* Weniger Abstand bei kleineren Bildschirmen */
+    margin-bottom: 20px;
   }
 }

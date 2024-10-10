@@ -2,20 +2,19 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ConstraintsService } from '../constraints.service';
-import highs, { HighsSolution } from 'highs'; // Importiere HighsSolution
+import highs, { HighsSolution } from 'highs';
 import { UmformungService } from '../umformung.service';
 import { ModelComponent } from '../model/model.component';
 import { TranslationService } from '../translationservice';
 
-// Definition der Interfaces für den Resultattyp
 interface Column {
   Name: string;
   Index: number;
   Status: string;
   Lower: number;
   Upper?: number;
-  Primal?: number; // Optional
-  Dual?: number; // Optional
+  Primal?: number;
+  Dual?: number;
   Type: string;
 }
 
@@ -23,14 +22,14 @@ interface Row {
   Name: string;
   Index: number;
   Status: string;
-  Lower?: number; // Optional
-  Upper: number; // Muss vorhanden sein
-  Primal?: number; // Optional
-  Dual?: number; // Optional
+  Lower?: number;
+  Upper: number;
+  Primal?: number;
+  Dual?: number;
 }
 
 interface Result {
-  Columns: Record<string, Column>; // Verwendung von Record anstelle von Indexsignatur
+  Columns: Record<string, Column>;
   Rows: Row[];
   ObjectiveValue: number;
 }
@@ -42,22 +41,28 @@ interface Result {
   templateUrl: './parameter.component.html',
   styleUrls: ['./parameter.component.css']
 })
+
 export class ParameterComponent {
 
-  errorMessage: string | null = null;  // Fehlernachricht
+  errorMessage: string | null = null;
   numVariables = 0;
   variables: string[] = [];
   objectiveFunction = '';
   constraints: string[] = [];
-  problemInput = '';  // Eingabefeld für das Problem, standardmäßig leer
-  solution = '';  // Variable zur Anzeige der Lösung
-  result: Result | null = null; // Verwendung des definierten Result Interfaces
-  selectedFile: File | null = null; // Hier wird die ausgewählte Datei
-  showInfo = false; // Kontrolliert das Anzeigen des Tooltips
+  problemInput = '';
+  solution = '';
+  result: Result | null = null;
+  selectedFile: File | null = null;
+  showInfo = false;
   elapsedTime: number | null = null;
   preparationTime: number | null = null;
-  optimizationType: 'Maximize' | 'Minimize' = 'Maximize';
 
+  optimizationType = 'Maximize';
+
+  xWert?: number;
+  yWert?: number;
+
+  constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
 
   switchLanguage() {
     this.translationService.switchLanguage();
@@ -68,25 +73,65 @@ export class ParameterComponent {
   }
 
   addConstraint() {
-    this.constraints.push(''); // Leeres Feld für die neue Nebenbedingung
+    this.constraints.push('');
   }
 
   removeConstraint(index: number) {
-    this.constraints.splice(index, 1); // Entfernt die Nebenbedingung an der gegebenen Position
+    this.constraints.splice(index, 1);
   }
 
   trackByIndex(index: number): number {
     return index;
   }
 
-  xWert?: number;
-  yWert?: number;
+  // Angepasste Methode zum Erstellen der Problemdefinition
+  private buildProblemInput() {
+    let problemStr = '';
 
-  constructor(
-    private constraintsService: ConstraintsService,
-    private umformungService: UmformungService,
-    public translationService: TranslationService
-  ) {}
+    // Bereinige die Zielfunktion
+    let cleanedObjective = this.objectiveFunction.trim();
+
+    // Entferne 'maximize', 'minimize' und 'Objective:' aus der Zielfunktion
+    cleanedObjective = cleanedObjective.replace(/(maximize|minimize)/i, '');
+    cleanedObjective = cleanedObjective.replace(/Objective:/i, '');
+    // Entferne alle '*' Zeichen
+    cleanedObjective = cleanedObjective.replace(/\*/g, '');
+    // Entferne Leerzeichen zwischen Zahlen und Variablen
+    cleanedObjective = cleanedObjective.replace(/(\d)\s+([a-zA-Z])/g, '$1$2');
+    // Entferne doppelte Leerzeichen
+    cleanedObjective = cleanedObjective.replace(/\s+/g, ' ').trim();
+
+    // Füge den Optimierungstyp hinzu ('Maximize' oder 'Minimize')
+    problemStr += this.optimizationType + '\n';
+    problemStr += ' obj: ' + cleanedObjective + '\n';
+
+    // Constraints
+    problemStr += 'Subject To\n';
+    for (let i = 0; i < this.constraints.length; i++) {
+      let constraint = this.constraints[i].trim();
+      // Entferne '*' Zeichen
+      constraint = constraint.replace(/\*/g, '');
+      // Entferne Leerzeichen zwischen Zahlen und Variablen
+      constraint = constraint.replace(/(\d)\s*([a-zA-Z])/g, '$1$2');
+      // Entferne doppelte Leerzeichen
+      constraint = constraint.replace(/\s+/g, ' ').trim();
+      problemStr += ' c' + (i + 1) + ': ' + constraint + '\n';
+    }
+
+    // Bounds
+    problemStr += 'Bounds\n';
+    for (let i = 0; i < this.variables.length; i++) {
+      const varName = this.variables[i].trim();
+      if (varName) {
+        problemStr += ' ' + varName + ' >= 0\n';
+      }
+    }
+
+    // End
+    problemStr += 'End\n';
+
+    this.problemInput = problemStr;
+  }
 
   async solveProblem(): Promise<void> {
     if (!this.objectiveFunction || this.constraints.length === 0) {
@@ -94,15 +139,20 @@ export class ParameterComponent {
       return;
     }
 
-    if (!this.numVariables || this.variables.some(v => !v) || !this.objectiveFunction || this.constraints.some(c => !c)) {
+    if (!this.numVariables || this.variables.some(v => !v.trim()) || !this.objectiveFunction || this.constraints.some(c => !c.trim())) {
       this.errorMessage = 'Bitte alle Felder ausfüllen';
       return;
     }
 
-    const LP = this.umformungService.umformen(this.problemInput);
+    // Erstelle die Problemdefinition basierend auf den Benutzereingaben
+    this.buildProblemInput();
+
+    // Hier können Sie die Problemdefinition prüfen
+    console.log('Erstellte Problemdefinition:', this.problemInput);
+
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
-      locateFile: (file: string) => `highs/${file}` // Zeigt auf den Ordner, wo die WASM-Datei liegt
+      locateFile: (file: string) => `highs/${file}`
     };
 
     const preparationStartTime = performance.now();
@@ -114,37 +164,41 @@ export class ParameterComponent {
     try {
       // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
-      let highsResult: HighsSolution; // Typ für das HiGHS-Ergebnis festlegen
+      console.log("HiGHS initialisiert");
+      let highsResult: HighsSolution;
 
       // Lösen des vom Benutzer eingegebenen Problems
-      let parsedConstraints;
+      let constraints;
       try {
-        highsResult = await highsSolver.solve(this.problemInput); // Async-Funktion aufrufen
-        parsedConstraints = this.extractConstraints(this.problemInput);
+        console.log("Probleminput:", this.problemInput);
+        highsResult = await highsSolver.solve(this.problemInput);
+        constraints = this.extractConstraints(this.problemInput);
+        console.log("Problem gelöst");
       } catch (error) {
         console.log('Fehler beim Lösen des Problems:', error, "\nMit umgeformtem Input");
-        highsResult = await highsSolver.solve(LP); // Async-Funktion aufrufen
-        parsedConstraints = this.extractConstraints(LP);
+        const LP = this.umformungService.umformen(this.problemInput);
+        highsResult = await highsSolver.solve(LP);
+        constraints = this.extractConstraints(LP);
       }
 
       // Konvertiere das HiGHS-Ergebnis in dein Result-Format
       this.result = this.convertToResult(highsResult);
+      console.log("Ergebnis in Result konvertieren");
 
       // Füge die Constraints in den ConstraintsService hinzu
-      this.constraintsService.setConstraints(parsedConstraints);
+      this.constraintsService.setConstraints(constraints);
       this.constraintsService.constraintsUpdated.next();
 
       // Ergebnis als JSON speichern und anzeigen
       this.solution = JSON.stringify(this.result, null, 2);
 
       // Laufzeitanalyse
-      const endTime = performance.now(); // Endzeit für die Laufzeitanalyse
-      this.elapsedTime = endTime - startTime; // Berechne die Laufzeit
+      const endTime = performance.now();
+      this.elapsedTime = endTime - startTime;
 
       // Werte für x und y ermitteln
       this.WerteErmitteln(this.result);
     } catch (error) {
-      // Fehlerbehandlung
       console.error('Fehler beim Lösen des Problems:', error);
       this.solution = 'Fehler beim Lösen des Problems: ' + error;
     }
@@ -160,10 +214,10 @@ export class ParameterComponent {
         Name: name,
         Index: column.Index,
         Status: column.Status,
-        Lower: column.Lower ?? 0, // Setze einen Standardwert, falls null
-        Upper: column.Upper ?? Infinity, // Setze einen Standardwert, falls null
-        Primal: column.Primal ?? undefined, // Setze auf undefined, wenn null
-        Dual: column.Dual ?? undefined, // Setze auf undefined, wenn null
+        Lower: column.Lower ?? 0,
+        Upper: column.Upper ?? Infinity,
+        Primal: column.Primal ?? undefined,
+        Dual: column.Dual ?? undefined,
         Type: column.Type,
       };
     }
@@ -171,16 +225,15 @@ export class ParameterComponent {
     // Verarbeitung der Zeilen
     for (const row of highsResult.Rows) {
       const newRow: Row = {
-        Name: `Row ${row.Index}`, // Standardname verwenden
+        Name: `Row ${row.Index}`,
         Index: row.Index,
-        Status: 'Status' in row ? row.Status : 'Unknown', // Setze auf 'Unknown' wenn Status nicht existiert
-        Lower: row.Lower ?? 0, // Setze einen Standardwert, falls null
-        Upper: row.Upper ?? Infinity, // Setze einen Standardwert, falls null
-        Primal: undefined, // Setze auf undefined, weil nicht immer verfügbar
-        Dual: undefined, // Setze auf undefined, weil nicht immer verfügbar
+        Status: 'Status' in row ? row.Status : 'Unknown',
+        Lower: row.Lower ?? 0,
+        Upper: row.Upper ?? Infinity,
+        Primal: undefined,
+        Dual: undefined,
       };
 
-      // Überprüfung auf die Existenz von Primal und Dual
       if ('Primal' in row) {
         newRow.Primal = row.Primal;
       }
@@ -198,102 +251,96 @@ export class ParameterComponent {
     };
   }
 
-  WerteErmitteln(result: Result) { // Typ für result festlegen
+  WerteErmitteln(result: Result) {
     const VariableX = result.Columns['x'] || result.Columns['x1'];
     if (VariableX && 'Primal' in VariableX) {
-      this.xWert = VariableX.Primal; // Setze den Wert für xWert
+      this.xWert = VariableX.Primal;
     }
 
     const VariableY = result.Columns['y'] || result.Columns['x2'];
     if (VariableY && 'Primal' in VariableY) {
-      this.yWert = VariableY.Primal; // Setze den Wert für yWert
+      this.yWert = VariableY.Primal;
     }
   }
 
   // Methode zum Extrahieren der Constraints aus dem Problemstring
   private extractConstraints(problem: string): { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] {
-    const constraintsParsed: { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] = [];
+    const constraints: { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] = [];
     const lines = problem.split('\n').filter(line => line.trim() !== '');
 
-    let isObjective = true; // Flag zum Erkennen, ob wir noch im Zielbereich sind
+    let isObjective = true;
     for (const line of lines) {
       const trimmedLine = line.trim();
       if (trimmedLine.startsWith('Maximize') || trimmedLine.startsWith('Minimize')) {
-        isObjective = false; // Wechsel zu den Constraints
+        isObjective = false;
         continue;
       }
       if (isObjective) {
-        continue; // Überspringe die Zeilen bis wir die Constraints erreichen
+        continue;
       }
       if (trimmedLine.startsWith('Subject To')) {
-        continue; // Überspringe diese Zeile
+        continue;
       }
       if (trimmedLine.startsWith('Bounds')) {
-        break; // Wir haben alle Constraints gelesen
+        break;
       }
 
-      // Hier wird die Zeile als Constraint geparst
       const parts = trimmedLine.split(/<=|>=|=/);
       if (parts.length < 2) {
-        continue; // Ungültige Zeile überspringen
+        continue;
       }
 
-      const lhs = parts[0].trim();
-      const rhs = parseFloat(parts[1].trim());
-      const relationMatch = trimmedLine.match(/(<=|>=|=)/);
-      const relation = relationMatch ? relationMatch[0] : '=';
-
-      const terms = lhs.split('+').map(term => {
-        const [coefStr, name] = term.trim().split(' ');
-        const coef = parseFloat(coefStr);
-        return { name: name.trim(), coef: isNaN(coef) ? 1 : coef }; // Verwende 1, falls der Koeffizient nicht angegeben ist
-      });
-
-      constraintsParsed.push({
-        name: `Constraint ${constraintsParsed.length + 1}`,
-        terms,
-        relation,
-        rhs
+      const lhs = this.normalizeVariableNames(parts[0].trim());
+      const rhs = parts[1].trim();
+      const relation = trimmedLine.includes('<=') ? '<=' : trimmedLine.includes('>=') ? '>=' : '=';
+      constraints.push({
+        name: `Constraint ${constraints.length + 1}`,
+        terms: this.parseTerms(lhs),
+        relation: relation,
+        rhs: parseFloat(rhs),
       });
     }
 
-    return constraintsParsed;
+    return constraints;
   }
 
-  //private normalizeVariableNames(expression: string): string {
-  //  return expression.replace(/\s+(\d+)/g, '$1');  // Entfernt Leerzeichen zwischen Variablen und Zahlen, z.B. "x 1" wird zu "x1"
-  //}
+  private normalizeVariableNames(expression: string): string {
+    return expression.replace(/\s+(\d+)/g, '$1');
+  }
 
-  // Hilfsmethode zum Parsen der Terme einer Constraint
-  //private parseTerms(lhs: string): { name: string; coef: number }[] {
-  //  const terms: { name: string; coef: number }[] = [];
-  //  const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel für Variablen x1, x2, ...
-  //  let match: RegExpExecArray | null;
+  // Angepasste Methode zum Parsen der Terme einer Constraint
+  private parseTerms(lhs: string): { name: string; coef: number }[] {
+    const terms: { name: string; coef: number }[] = [];
+    const termRegex = /([-+]?\d*\.?\d*)([a-zA-Z]\w*)/g;
+    let match: RegExpExecArray | null;
 
-  //  while ((match = termRegex.exec(lhs)) !== null) {
-  //    const coef = match[1] ? parseFloat(match[1]) : 1; // Falls kein Koeffizient angegeben ist, nehme 1
-  //    const variable = match[2];
-  //    terms.push({ name: variable, coef: coef });
-  //  }
+    while ((match = termRegex.exec(lhs)) !== null) {
+      const coef = match[1] ? parseFloat(match[1]) : 1;
+      const variable = match[2];
+      terms.push({ name: variable, coef: coef });
+    }
 
-  //  return terms;
-  //}
+    return terms;
+  }
 
   // === EXPORT FUNCTIONALITY ===
 
-  // Exportiere das Modell als LP-Datei basierend auf der Benutzereingabe
   downloadLP() {
-    const lpData = this.problemInput; // Benutzereingabe verwenden
+    if (!this.problemInput) {
+      this.buildProblemInput();
+    }
+    const lpData = this.problemInput;
     this.downloadFile(lpData, 'model.lp', 'text/plain');
   }
 
-  // Exportiere das Modell als MPS-Datei basierend auf der Benutzereingabe
   downloadMPS() {
-    const mpsData = this.problemInput; // Benutzereingabe verwenden
+    if (!this.problemInput) {
+      this.buildProblemInput();
+    }
+    const mpsData = this.problemInput;
     this.downloadFile(mpsData, 'model.mps', 'text/plain');
   }
 
-  // Funktion zum Erstellen einer Datei und Herunterladen
   private downloadFile(data: string, filename: string, type: string) {
     const blob = new Blob([data], { type: type });
     const a = document.createElement('a');
