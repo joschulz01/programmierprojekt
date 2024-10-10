@@ -13,7 +13,7 @@ The HiGHS Solver was integrated into the Single Page Application (SPA) to solve 
 
 ## Demo
 
-If you would like to take a look at the entire project, you can do so on our website [or-tool.de](or-tool.de)
+If you would like to take a look at the entire project, you can do so on our website [or-tool.de](https://or-tool.de)
 
 ## Run Locally (Angular CLI)
 To use the website locally, make sure that [Node.JS](https://nodejs.org/en) is installed and the [Angular CLI](https://www.npmjs.com/package/@angular/cli) is installed
@@ -69,7 +69,7 @@ Alternatively, Docker can also be operated locally to run the Angular project. P
 ```
 ## Run Test Local
 
-The Robot Framework was used for testing. If you are interested, this can also be executed locally. Make sure that [Python](https://www.python.org/) is installed
+The Robot Framework was used for testing. If you are interested, this can also be executed locally. Make sure that [Python](https://www.python.org/) is installed. The Python package “Tkinter” is normally installed by default. However, if error messages still occur, the package must be installed later using the command ```sudo apt-get install python3-tk```
 
 1. Clone the project
 
