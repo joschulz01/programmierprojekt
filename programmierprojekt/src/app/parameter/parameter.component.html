@@ -13,18 +13,17 @@
   </div>
 
   <!-- Container for optimization type (radio buttons) -->
-  <div class="optimization-type-container">
-    <label>{{ translationService.getTranslation('optimizationType') }}</label>
-    <br>
-    <label for="optimizeMaximize">
+  <fieldset class="optimization-type-container">
+    <legend>{{ translationService.getTranslation('optimizationType') }}</legend>
+    <label>
       <input type="radio" id="optimizeMaximize" name="optimizationType" [(ngModel)]="optimizationType" value="Maximize" />
       {{ translationService.getTranslation('maximize') }}
     </label>
-    <label for="optimizeMinimize">
+    <label>
       <input type="radio" id="optimizeMinimize" name="optimizationType" [(ngModel)]="optimizationType" value="Minimize" />
       {{ translationService.getTranslation('minimize') }}
     </label>
-  </div>
+  </fieldset>
 
   <!-- Container for objective function input -->
   <div class="objective-function-container">

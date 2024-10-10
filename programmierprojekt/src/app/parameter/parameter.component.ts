@@ -53,7 +53,7 @@ export class ParameterComponent {
   solution = '';  // Variable zur Anzeige der Lösung
   result: Result | null = null; // Verwendung des definierten Result Interfaces
   selectedFile: File | null = null; // Hier wird die ausgewählte Datei 
-  showInfo = false; //Kontrolliert das Anzeigen des Tooltips
+  showInfo = false; // Kontrolliert das Anzeigen des Tooltips
   elapsedTime: number | null = null;
   preparationTime: number | null = null;
   optimizationType: 'Maximize' | 'Minimize' = 'Maximize';
@@ -82,7 +82,11 @@ export class ParameterComponent {
   xWert?: number;
   yWert?: number;
 
-  constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
+  constructor(
+    private constraintsService: ConstraintsService, 
+    private umformungService: UmformungService, 
+    public translationService: TranslationService
+  ) {}
 
   async solveProblem(): Promise<void> {
     if (!this.objectiveFunction || this.constraints.length === 0) {
@@ -113,21 +117,21 @@ export class ParameterComponent {
       let highsResult: HighsSolution; // Typ für das HiGHS-Ergebnis festlegen
 
       // Lösen des vom Benutzer eingegebenen Problems
-      let constraints;
+      let parsedConstraints;
       try {
         highsResult = await highsSolver.solve(this.problemInput); // Async-Funktion aufrufen
-        constraints = this.extractConstraints(this.problemInput);
+        parsedConstraints = this.extractConstraints(this.problemInput);
       } catch (error) {
         console.log('Fehler beim Lösen des Problems:', error, "\nMit umgeformtem Input");
         highsResult = await highsSolver.solve(LP); // Async-Funktion aufrufen
-        constraints = this.extractConstraints(LP);
+        parsedConstraints = this.extractConstraints(LP);
       }
 
       // Konvertiere das HiGHS-Ergebnis in dein Result-Format
       this.result = this.convertToResult(highsResult);
       
       // Füge die Constraints in den ConstraintsService hinzu
-      this.constraintsService.setConstraints(this.extractConstraints(LP));
+      this.constraintsService.setConstraints(parsedConstraints);
       this.constraintsService.constraintsUpdated.next();
 
       // Ergebnis als JSON speichern und anzeigen
@@ -144,154 +148,159 @@ export class ParameterComponent {
       console.error('Fehler beim Lösen des Problems:', error);
       this.solution = 'Fehler beim Lösen des Problems: ' + error;
     }
-}
-
-private convertToResult(highsResult: HighsSolution): Result {
-  const columns: Record<string, Column> = {};
-  const rows: Row[] = [];
-
-  // Verarbeitung der Spalten
-  for (const [name, column] of Object.entries(highsResult.Columns)) {
-      columns[name] = {
-          Name: name,
-          Index: column.Index,
-          Status: column.Status,
-          Lower: column.Lower ?? 0, // Setze einen Standardwert, falls null
-          Upper: column.Upper ?? Infinity, // Setze einen Standardwert, falls null
-          Primal: column.Primal ?? undefined, // Setze auf undefined, wenn null
-          Dual: column.Dual ?? undefined, // Setze auf undefined, wenn null
-          Type: column.Type,
-      };
   }
 
-  // Verarbeitung der Zeilen
-  for (const row of highsResult.Rows) {
+  private convertToResult(highsResult: HighsSolution): Result {
+    const columns: Record<string, Column> = {};
+    const rows: Row[] = [];
+
+    // Verarbeitung der Spalten
+    for (const [name, column] of Object.entries(highsResult.Columns)) {
+      columns[name] = {
+        Name: name,
+        Index: column.Index,
+        Status: column.Status,
+        Lower: column.Lower ?? 0, // Setze einen Standardwert, falls null
+        Upper: column.Upper ?? Infinity, // Setze einen Standardwert, falls null
+        Primal: column.Primal ?? undefined, // Setze auf undefined, wenn null
+        Dual: column.Dual ?? undefined, // Setze auf undefined, wenn null
+        Type: column.Type,
+      };
+    }
+
+    // Verarbeitung der Zeilen
+    for (const row of highsResult.Rows) {
       const newRow: Row = {
-          Name: `Row ${row.Index}`, // Standardname verwenden
-          Index: row.Index,
-          Status: 'Status' in row ? row.Status : 'Unknown', // Setze auf 'Unknown' wenn Status nicht existiert
-          Lower: row.Lower ?? 0, // Setze einen Standardwert, falls null
-          Upper: row.Upper ?? Infinity, // Setze einen Standardwert, falls null
-          Primal: undefined, // Setze auf undefined, weil nicht immer verfügbar
-          Dual: undefined, // Setze auf undefined, weil nicht immer verfügbar
+        Name: `Row ${row.Index}`, // Standardname verwenden
+        Index: row.Index,
+        Status: 'Status' in row ? row.Status : 'Unknown', // Setze auf 'Unknown' wenn Status nicht existiert
+        Lower: row.Lower ?? 0, // Setze einen Standardwert, falls null
+        Upper: row.Upper ?? Infinity, // Setze einen Standardwert, falls null
+        Primal: undefined, // Setze auf undefined, weil nicht immer verfügbar
+        Dual: undefined, // Setze auf undefined, weil nicht immer verfügbar
       };
 
       // Überprüfung auf die Existenz von Primal und Dual
       if ('Primal' in row) {
-          newRow.Primal = row.Primal;
+        newRow.Primal = row.Primal;
       }
       if ('Dual' in row) {
-          newRow.Dual = row.Dual;
+        newRow.Dual = row.Dual;
       }
 
       rows.push(newRow);
-  }
+    }
 
-  return {
+    return {
       Columns: columns,
       Rows: rows,
       ObjectiveValue: highsResult.ObjectiveValue,
-  };
-}
-
-WerteErmitteln(result: Result) { // Typ für result festlegen
-  const VariableX = result.Columns['x'] || result.Columns['x1'];
-  if (VariableX && 'Primal' in VariableX) {
-    this.xWert = VariableX.Primal; // Setze den Wert für xWert
-  }
-  
-  const VariableY = result.Columns['y'] || result.Columns['x2'];
-  if (VariableY && 'Primal' in VariableY) {
-    this.yWert = VariableY.Primal; // Setze den Wert für yWert
-  }
-}
-
-// Methode zum Extrahieren der Constraints aus dem Problemstring
-private extractConstraints(problem: string): { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] {
-  const constraints: { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] = [];
-  const lines = problem.split('\n').filter(line => line.trim() !== '');
-
-  let isObjective = true; // Flag zum Erkennen, ob wir noch im Zielbereich sind
-  for (const line of lines) {
-    const trimmedLine = line.trim();
-    if (trimmedLine.startsWith('Maximize') || trimmedLine.startsWith('Minimize')) {
-      isObjective = false; // Wechsel zu den Constraints
-      continue;
-    }
-    if (isObjective) {
-      continue; // Überspringe die Zeilen bis wir die Constraints erreichen
-    }
-    if (trimmedLine.startsWith('Subject To')) {
-      continue; // Überspringe diese Zeile
-    }
-    if (trimmedLine.startsWith('Bounds')) {
-      break; // Wir haben alle Constraints gelesen
-    }
-
-    // Hier wird die Zeile als Constraint geparst
-    const parts = trimmedLine.split(/<=|>=|=/);
-    if (parts.length < 2) {
-      continue; // Ungültige Zeile überspringen
-    }
-
-    const lhs = parts[0].trim();
-    const rhs = parseFloat(parts[1].trim());
-    const relationMatch = trimmedLine.match(/(<=|>=|=)/);
-    const relation = relationMatch ? relationMatch[0] : '=';
-
-    const terms = lhs.split('+').map(term => {
-      const [coefStr, name] = term.trim().split(' ');
-      const coef = parseFloat(coefStr);
-      return { name: name.trim(), coef: isNaN(coef) ? 1 : coef }; // Verwende 1, falls der Koeffizient nicht angegeben ist
-    });
-
-    constraints.push({ name: `Constraint ${constraints.length + 1}`, terms, relation, rhs });
+    };
   }
 
-  return constraints;
+  WerteErmitteln(result: Result) { // Typ für result festlegen
+    const VariableX = result.Columns['x'] || result.Columns['x1'];
+    if (VariableX && 'Primal' in VariableX) {
+      this.xWert = VariableX.Primal; // Setze den Wert für xWert
+    }
+    
+    const VariableY = result.Columns['y'] || result.Columns['x2'];
+    if (VariableY && 'Primal' in VariableY) {
+      this.yWert = VariableY.Primal; // Setze den Wert für yWert
+    }
+  }
+
+  // Methode zum Extrahieren der Constraints aus dem Problemstring
+  private extractConstraints(problem: string): { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] {
+    const constraintsParsed: { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] = [];
+    const lines = problem.split('\n').filter(line => line.trim() !== '');
+
+    let isObjective = true; // Flag zum Erkennen, ob wir noch im Zielbereich sind
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      if (trimmedLine.startsWith('Maximize') || trimmedLine.startsWith('Minimize')) {
+        isObjective = false; // Wechsel zu den Constraints
+        continue;
+      }
+      if (isObjective) {
+        continue; // Überspringe die Zeilen bis wir die Constraints erreichen
+      }
+      if (trimmedLine.startsWith('Subject To')) {
+        continue; // Überspringe diese Zeile
+      }
+      if (trimmedLine.startsWith('Bounds')) {
+        break; // Wir haben alle Constraints gelesen
+      }
+
+      // Hier wird die Zeile als Constraint geparst
+      const parts = trimmedLine.split(/<=|>=|=/);
+      if (parts.length < 2) {
+        continue; // Ungültige Zeile überspringen
+      }
+
+      const lhs = parts[0].trim();
+      const rhs = parseFloat(parts[1].trim());
+      const relationMatch = trimmedLine.match(/(<=|>=|=)/);
+      const relation = relationMatch ? relationMatch[0] : '=';
+
+      const terms = lhs.split('+').map(term => {
+        const [coefStr, name] = term.trim().split(' ');
+        const coef = parseFloat(coefStr);
+        return { name: name.trim(), coef: isNaN(coef) ? 1 : coef }; // Verwende 1, falls der Koeffizient nicht angegeben ist
+      });
+
+      constraintsParsed.push({ 
+        name: `Constraint ${constraintsParsed.length + 1}`, 
+        terms, 
+        relation, 
+        rhs 
+      });
+    }
+
+    return constraintsParsed;
+  }
+
+  //private normalizeVariableNames(expression: string): string {
+  //  return expression.replace(/\s+(\d+)/g, '$1');  // Entfernt Leerzeichen zwischen Variablen und Zahlen, z.B. "x 1" wird zu "x1"
+  //}
+
+  // Hilfsmethode zum Parsen der Terme einer Constraint
+  //private parseTerms(lhs: string): { name: string; coef: number }[] {
+  //  const terms: { name: string; coef: number }[] = [];
+  //  const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel für Variablen x1, x2, ...
+  //  let match: RegExpExecArray | null;
+
+  //  while ((match = termRegex.exec(lhs)) !== null) {
+  //    const coef = match[1] ? parseFloat(match[1]) : 1; // Falls kein Koeffizient angegeben ist, nehme 1
+  //    const variable = match[2];
+  //    terms.push({ name: variable, coef: coef });
+  //  }
+
+  //  return terms;
+  //}
+
+  // === EXPORT FUNCTIONALITY ===
+
+  // Exportiere das Modell als LP-Datei basierend auf der Benutzereingabe
+  downloadLP() {
+    const lpData = this.problemInput; // Benutzereingabe verwenden
+    this.downloadFile(lpData, 'model.lp', 'text/plain');
+  }
+
+  // Exportiere das Modell als MPS-Datei basierend auf der Benutzereingabe
+  downloadMPS() {
+    const mpsData = this.problemInput; // Benutzereingabe verwenden
+    this.downloadFile(mpsData, 'model.mps', 'text/plain');
+  }
+
+  // Funktion zum Erstellen einer Datei und Herunterladen
+  private downloadFile(data: string, filename: string, type: string) {
+    const blob = new Blob([data], { type: type });
+    const a = document.createElement('a');
+    a.href = window.URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a); 
+  }
 }
-}
-
-
-//private normalizeVariableNames(expression: string): string {
-//  return expression.replace(/\s+(\d+)/g, '$1');  // Entfernt Leerzeichen zwischen Variablen und Zahlen, z.B. "x 1" wird zu "x1"}
-
-// Hilfsmethode zum Parsen der Terme einer Constraint
-//private parseTerms(lhs: string): { name: string; coef: number }[] {
- // const terms: { name: string; coef: number }[] = [];
- // const termRegex = /([-+]?\d*\.?\d+)?\s*([xy]\d+)/g; // Beispiel f�r Variablen x1, x2, ...
- // let match: RegExpExecArray | null;
-
-//  while ((match = termRegex.exec(lhs)) !== null) {
-//    const coef = match[1] ? parseFloat(match[1]) : 1; // Falls kein Koeffizient angegeben ist, nehme 1
-//    const variable = match[2];
-//    terms.push({ name: variable, coef: coef });
-//  }
-
-//  return terms;
-//}
-
-// === EXPORT FUNCTIONALITY ===
-
-// Exportiere das Modell als LP-Datei basierend auf der Benutzereingabe
-/*downloadLP() {
-  const lpData = this.problemInput; // Benutzereingabe verwenden
-  this.downloadFile(lpData, 'model.lp', 'text/plain');
-}
-
-// Exportiere das Modell als MPS-Datei basierend auf der Benutzereingabe
-downloadMPS() {
-  const mpsData = this.problemInput; // Benutzereingabe verwenden
-  this.downloadFile(mpsData, 'model.mps', 'text/plain');
-}
-
-// Funktion zum Erstellen einer Datei und Herunterladen
-private downloadFile(data: string, filename: string, type: string) {
-  const blob = new Blob([data], { type: type });
-  const a = document.createElement('a');
-  a.href = window.URL.createObjectURL(blob);
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a); 
-}*/
