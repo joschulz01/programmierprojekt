@@ -1,17 +1,4 @@
 <div class="solver-container">
-  <!-- Input container for number of variables -->
-  <div class="input-container">
-    <label for="numVariables">{{ translationService.getTranslation('numbervariables') }}</label>
-    <br>
-    <input type="number" id="numVariables" [(ngModel)]="numVariables" (change)="generateVariableInputs()" min="1" />
-  </div>
-
-  <!-- Loop to create inputs for variables -->
-  <div *ngFor="let variable of variables; let i = index; trackBy: trackByIndex">
-    <label for="variable{{i}}"> Variable {{i + 1}}:</label>
-    <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="z.B. x{{i + 1}}" />
-  </div>
-
   <!-- Container for optimization type (radio buttons) -->
   <fieldset class="optimization-type-container">
     <legend>{{ translationService.getTranslation('optimizationType') }}</legend>
@@ -24,6 +11,19 @@
       {{ translationService.getTranslation('minimize') }}
     </label>
   </fieldset>
+
+  <!-- Input container for number of variables -->
+  <div class="input-container">
+    <label for="numVariables">{{ translationService.getTranslation('numbervariables') }}</label>
+    <br>
+    <input type="number" id="numVariables" [(ngModel)]="numVariables" (change)="generateVariableInputs()" min="1" />
+  </div>
+
+  <!-- Loop to create inputs for variables -->
+  <div *ngFor="let variable of variables; let i = index; trackBy: trackByIndex">
+    <label for="variable{{i}}"> Variable {{i + 1}}:</label>
+    <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="z.B. x{{i + 1}}" />
+  </div>
 
   <!-- Container for objective function input -->
   <div class="objective-function-container">
@@ -57,28 +57,28 @@
     <h3>{{ translationService.getTranslation('variables') }}</h3>
     <table id="loesungstabelle">
       <thead>
-        <tr>
-          <th>{{ translationService.getTranslation('variable') }}</th>
-          <th>{{ translationService.getTranslation('index') }}</th>
-          <th>{{ translationService.getTranslation('status') }}</th>
-          <th>{{ translationService.getTranslation('lowerBound') }}</th>
-          <th>{{ translationService.getTranslation('upperBound') }}</th>
-          <th>{{ translationService.getTranslation('primal') }}</th>
-          <th>{{ translationService.getTranslation('dual') }}</th>
-          <th>{{ translationService.getTranslation('type') }}</th>
-        </tr>
+      <tr>
+        <th>{{ translationService.getTranslation('variable') }}</th>
+        <th>{{ translationService.getTranslation('index') }}</th>
+        <th>{{ translationService.getTranslation('status') }}</th>
+        <th>{{ translationService.getTranslation('lowerBound') }}</th>
+        <th>{{ translationService.getTranslation('upperBound') }}</th>
+        <th>{{ translationService.getTranslation('primal') }}</th>
+        <th>{{ translationService.getTranslation('dual') }}</th>
+        <th>{{ translationService.getTranslation('type') }}</th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let column of result.Columns | keyvalue; let i = index">
-          <td [id]="'tabelle_name_' + i">{{ column.value.Name }}</td>
-          <td [id]="'tabelle_index_' + i">{{ column.value.Index }}</td>
-          <td [id]="'tabelle_status_' + i">{{ column.value.Status }}</td>
-          <td [id]="'tabelle_Lower_' + i">{{ column.value.Lower }}</td>
-          <td [id]="'tabelle_upper_' + i">{{ column.value.Upper ?? '∞' }}</td>
-          <td [id]="'tabelle_primal_' + i">{{ column.value.Primal }}</td>
-          <td [id]="'tabelle_dual_' + i">{{ column.value.Dual }}</td>
-          <td [id]="'tabelle_type_' + i">{{ column.value.Type }}</td>
-        </tr>
+      <tr *ngFor="let column of result.Columns | keyvalue; let i = index">
+        <td [id]="'tabelle_name_' + i">{{ column.value.Name }}</td>
+        <td [id]="'tabelle_index_' + i">{{ column.value.Index }}</td>
+        <td [id]="'tabelle_status_' + i">{{ column.value.Status }}</td>
+        <td [id]="'tabelle_Lower_' + i">{{ column.value.Lower }}</td>
+        <td [id]="'tabelle_upper_' + i">{{ column.value.Upper ?? '∞' }}</td>
+        <td [id]="'tabelle_primal_' + i">{{ column.value.Primal }}</td>
+        <td [id]="'tabelle_dual_' + i">{{ column.value.Dual }}</td>
+        <td [id]="'tabelle_type_' + i">{{ column.value.Type }}</td>
+      </tr>
       </tbody>
     </table>
 
