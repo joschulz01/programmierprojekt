@@ -51,10 +51,6 @@ export class HighsSolverComponent {
   elapsedTime: number | null = null;
   preparationTime: number | null = null;
   errorMessage: string | null = null;  // Fehlernachricht
-  numVariables = 0;
-  variables: string[] = [];
-  objectiveFunction = '';
-  constraints: string[] = [];
 
 
   switchLanguage() {
