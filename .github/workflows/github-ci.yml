@@ -112,7 +112,7 @@ jobs:
 
       # Install Dependencies
       - name: Install Dependencies
-        run: npm install -g @angular/cli@18
+        run: npm install
 
       # Stage: Serve localhost
       - name: Serve website
