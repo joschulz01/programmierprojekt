@@ -6,7 +6,7 @@
       <input type="radio" id="optimizeMaximize" name="optimizationType" [(ngModel)]="optimizationType" value="Maximize" />
       {{ translationService.getTranslation('maximize') }}
     </label>
-    <label>
+    <label>Fx
       <input type="radio" id="optimizeMinimize" name="optimizationType" [(ngModel)]="optimizationType" value="Minimize" />
       {{ translationService.getTranslation('minimize') }}
     </label>
@@ -21,13 +21,13 @@
   <!-- Loop to create inputs for variables -->
   <div *ngFor="let variable of variables; let i = index; trackBy: trackByIndex">
     <label for="variable{{i}}"> Variable {{i + 1}}:</label>
-    <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="z.B. x{{i + 1}}" />
+    <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="x{{i + 1}}" />
   </div>
 
   <!-- Container for objective function input -->
   <div class="objective-function-container">
     <label for="objectiveFunction">{{ translationService.getTranslation('objectivefunction') }}</label>
-    <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="z.B. x1 + 2*x2" />
+    <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="x1 + 2*x2" />
   </div>
 
   <!-- Constraints container -->
@@ -35,7 +35,7 @@
     <h3>{{ translationService.getTranslation('constraints') }}</h3>
     <div *ngFor="let constraint of constraints; let j = index; trackBy: trackByIndex">
       <label for="constraint{{j}}">{{ translationService.getTranslation('constraint') }} {{j + 1}}:</label>
-      <input type="text" id="constraint{{j}}" [(ngModel)]="constraints[j]" placeholder="z.B. x1 + 2*x2 <= 15" />
+      <input type="text" id="constraint{{j}}" [(ngModel)]="constraints[j]" placeholder="x{{j + 1}} + {{j + 1}}*x{{j + 2}} <= {{j + 3}}" />
       <button (click)="removeConstraint(j)" class="remove-button" [attr.title]="translationService.getTranslation('removeconstraint')">
         <i class="fas fa-trash"></i>
       </button>
