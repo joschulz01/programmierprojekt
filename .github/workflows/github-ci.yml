@@ -116,7 +116,7 @@ jobs:
 
       # Stage: Serve localhost
       - name: Serve website
-        run: ng serve
+        run: ng serve &
 
       # Stage: Init Robot Framework
       - name: Init Robot Framework
