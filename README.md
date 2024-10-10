@@ -64,8 +64,46 @@ Run docker container
 ```bash
   docker run -p 8080:80 or-tool
 ```
+## Run Test Local
 
+Clone the project
 
+```bash
+  https://github.com/joschulz01/programmierprojekt
+```
+
+Go to the project directory
+
+```bash
+  cd programmierprojekt
+```
+
+Install Robot Framework
+
+```bash
+  pip install robotframework
+```
+
+Install Robot Framework Browser Library
+```bash
+pip install robotframework-browser
+```
+
+Init Robot Framework
+```bash
+rfbrowser init
+```
+
+Go to the project directory
+
+```bash
+  cd programmierprojekt
+```
+
+Run Robot Framework Local
+```bash
+robot Test.robot
+```
 
 ## Tech Stack
 
