@@ -14,6 +14,7 @@
 .objective-function-container {
   margin-top: 30px; /* Abstand oberhalb der Zielfunktion */
   margin-bottom: 30px; /* Abstand unterhalb der Zielfunktion */
+    padding: 5px;
 }
 
 /* Allgemeine Textarea-Stile */
@@ -117,7 +118,7 @@ h3 {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 133px;
+  margin-bottom: 116px;
 }
 
 /* Fehlermeldungen */
@@ -141,6 +142,20 @@ h3 {
 .remove-button:hover {
   color: #c0c0c0; /* Farbänderung beim Hover */
 }
+
+.optimization-type-container {
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+.optimization-type-container label {
+  margin-right: 10px;
+}
+
+.optimization-type-container input[type="radio"] {
+  margin-right: 5px;
+}
+
 
 /* Responsive Anpassungen */
 @media (max-width: 768px) {

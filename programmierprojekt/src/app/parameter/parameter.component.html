@@ -1,44 +1,59 @@
 <div class="solver-container">
-  
-    <div class="input-container">
-      <label for="numVariables">{{ translationService.getTranslation('numbervariables') }}</label>
-      <br>
-      <input type="number" id="numVariables" [(ngModel)]="numVariables" (change)="generateVariableInputs()" min="1" />
-    </div>
-  
-    <div *ngFor="let variable of variables; let i = index; trackBy: trackByIndex">
-      <label for="variable{{i}}"> Variable {{i + 1}}:</label>
-  
-      <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="z.B. x{{i + 1}}" />
-    </div>
-  
-    <div class="objective-function-container">
-      <label for="objectiveFunction">{{ translationService.getTranslation('objectivefunction') }}</label>
-      <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="z.B. maximize x1 + 2*x2" />
-    </div>
-  
-    <div class="constraints-container">
-      <h3>{{ translationService.getTranslation('constraints') }}</h3>
-      <div *ngFor="let constraint of constraints; let j = index trackBy: trackByIndex">
-        <label for="constraint{{j}}">{{ translationService.getTranslation('constraint') }}  {{j + 1}}:</label>
-        <input type="text" id="constraint{{j}}" [(ngModel)]="constraints[j]" placeholder="z.B. x1 + 2*x2 <= 15" />
-        <button (click)="removeConstraint(j)" class="remove-button" [attr.title]="translationService.getTranslation('removeconstraint')">
-          <i class="fas fa-trash"></i> <!-- Mülltonnen-Icon -->
-        </button>
-        
-      </div>
-      <button (click)="addConstraint()">{{ translationService.getTranslation('addadditionalconstraints') }}</button>
-    </div>
-    
-
+  <!-- Input container for number of variables -->
+  <div class="input-container">
+    <label for="numVariables">{{ translationService.getTranslation('numbervariables') }}</label>
     <br>
-    <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
+    <input type="number" id="numVariables" [(ngModel)]="numVariables" (change)="generateVariableInputs()" min="1" />
+  </div>
 
-     <!-- Ausgabe des Ergebnisses als JSON -->
+  <!-- Loop to create inputs for variables -->
+  <div *ngFor="let variable of variables; let i = index; trackBy: trackByIndex">
+    <label for="variable{{i}}"> Variable {{i + 1}}:</label>
+    <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="z.B. x{{i + 1}}" />
+  </div>
+
+  <!-- Container for optimization type (radio buttons) -->
+  <fieldset class="optimization-type-container">
+    <legend>{{ translationService.getTranslation('optimizationType') }}</legend>
+    <label>
+      <input type="radio" id="optimizeMaximize" name="optimizationType" [(ngModel)]="optimizationType" value="Maximize" />
+      {{ translationService.getTranslation('maximize') }}
+    </label>
+    <label>
+      <input type="radio" id="optimizeMinimize" name="optimizationType" [(ngModel)]="optimizationType" value="Minimize" />
+      {{ translationService.getTranslation('minimize') }}
+    </label>
+  </fieldset>
+
+  <!-- Container for objective function input -->
+  <div class="objective-function-container">
+    <label for="objectiveFunction">{{ translationService.getTranslation('objectivefunction') }}</label>
+    <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="z.B. x1 + 2*x2" />
+  </div>
+
+  <!-- Constraints container -->
+  <div class="constraints-container">
+    <h3>{{ translationService.getTranslation('constraints') }}</h3>
+    <div *ngFor="let constraint of constraints; let j = index; trackBy: trackByIndex">
+      <label for="constraint{{j}}">{{ translationService.getTranslation('constraint') }} {{j + 1}}:</label>
+      <input type="text" id="constraint{{j}}" [(ngModel)]="constraints[j]" placeholder="z.B. x1 + 2*x2 <= 15" />
+      <button (click)="removeConstraint(j)" class="remove-button" [attr.title]="translationService.getTranslation('removeconstraint')">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+    <button (click)="addConstraint()">{{ translationService.getTranslation('addadditionalconstraints') }}</button>
+  </div>
+
+  <br>
+
+  <!-- Button to solve the problem -->
+  <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
+
+  <!-- Display result if available -->
   <div *ngIf="result">
     <h3>{{ translationService.getTranslation('solution') }}</h3>
-    
-    <!-- Tabelle für die Variablen (Columns) -->
+
+    <!-- Table for variables (columns) -->
     <h3>{{ translationService.getTranslation('variables') }}</h3>
     <table id="loesungstabelle">
       <thead>
@@ -66,32 +81,25 @@
         </tr>
       </tbody>
     </table>
-    
-    <!-- Zielwert (Objective Value) -->
+
+    <!-- Display objective value -->
     <h3>{{ translationService.getTranslation('objectiveValue') }}</h3>
     <p>{{ result.ObjectiveValue }}</p>
 
-    <!-- Laufzeitanalyse -->
- <h3>Laufzeitanalyse</h3>
- <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
-<p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
-
-
-    <app-model *ngIf="isValidInput()" [xWert]="xWert" [yWert]="yWert"></app-model>
+    <!-- Time analysis -->
+    <h3>Laufzeitanalyse</h3>
+    <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
+    <p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
   </div>
 </div>
 
+<!-- Error message container -->
 <div *ngIf="errorMessage" class="error-message">
   {{ errorMessage }}
 </div>
 
+<!-- Export buttons container -->
 <div class="export-buttons-container">
-  <button id="export_MPS" (click)="downloadMPS()">
-      {{ translationService.getTranslation('exportMPS') }}
-  </button>
-  <button id="export_LP" (click)="downloadLP()">
-      {{ translationService.getTranslation('exportLP') }}
-  </button>
+  <button id="export_MPS" (click)="downloadMPS()">{{ translationService.getTranslation('exportMPS') }}</button>
+  <button id="export_LP" (click)="downloadLP()">{{ translationService.getTranslation('exportLP') }}</button>
 </div>
-
-
