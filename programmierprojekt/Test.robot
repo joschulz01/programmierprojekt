@@ -109,25 +109,25 @@ Lösung Prüfen
 Menüleiste Prüfen
     Click    id=menue_startseite
     ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/
+    Should Be Equal    ${URL}    http://localhost:4200/
     Click    id=menue_HiGHS
     ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/highs
+    Should Be Equal    ${URL}    http://localhost:4200/highs
     #Click    id=menue_GLPK
     #${URL}=     Get Url
-    #Should Be Equal    ${URL}    https://or-tool.de/glpk
+    #Should Be Equal    ${URL}    http://localhost:4200/glpk
     Click    id=menue_Feedback
     ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/feedback
+    Should Be Equal    ${URL}    http://localhost:4200/feedback
 
 Footer Prüfen
     [Documentation]    Testet, ob alle Footer Routing Seiten vorhanden sind
     Click    id=datenschutz
     ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/datenschutz
+    Should Be Equal    ${URL}    http://localhost:4200/datenschutz
     Click    id=impressum
     ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/impressum
+    Should Be Equal    ${URL}    http://localhost:4200/impressum
     Click    id=ueberUns
     ${URL}=     Get Url
-    Should Be Equal    ${URL}    https://or-tool.de/about-us
+    Should Be Equal    ${URL}    http://localhost:4200/about-us
