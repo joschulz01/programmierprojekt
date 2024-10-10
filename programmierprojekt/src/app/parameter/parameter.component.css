@@ -14,6 +14,7 @@
 .objective-function-container {
   margin-top: 30px; /* Abstand oberhalb der Zielfunktion */
   margin-bottom: 30px; /* Abstand unterhalb der Zielfunktion */
+    padding: 5px;
 }
 
 /* Allgemeine Textarea-Stile */
@@ -117,7 +118,7 @@ h3 {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 127px;
+  margin-bottom: 116px;
 }
 
 /* Fehlermeldungen */
