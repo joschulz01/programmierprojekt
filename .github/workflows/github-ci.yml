@@ -95,7 +95,7 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          node-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python-version }}
 
       # Set up Node.js environment
       - name: Set up Node.js ${{ matrix.node-version }}
@@ -103,19 +103,18 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Stage: Install Robot Framework
+      # Stage: Install Robot Framework with needed libary
       - name: Install Robot Framework
-        run: pip install robotframework
-
-      - name: Install Robot Framework browser libary
-        run: pip install robotframework-browser
+        run: |
+          pip install robotframework
+          pip install robotframework-browser
 
       # Install Dependencies
       - name: Install Dependencies
         run: |
           npm install
           npm install -g @angular/cli@18
-          pip install tk
+          apt install python3-tk
 
       # Stage: Serve localhost
       - name: Serve website
