@@ -1,7 +1,7 @@
 export const EN_TRANSLATIONS: Record<string, string> = {
   title: 'Operations Research Tool',
   subtitle: 'Programming Project 2024',
-  switchLanguage: 'Switch Language',
+  switchLanguage: 'DE',
   feedbackTitle: 'Feedback on the Application',
   feedbackDescription: 'Please share your thoughts, suggestions, or improvements with us. Your feedback is very important to us!',
   feedbackPlaceholder: 'Here you have the opportunity to provide your feedback...',
@@ -102,5 +102,4 @@ runtimeanalysis: "Runtime Analysis",
 elapsedtime: "Elapsed Time:",
 preparationtime:"Preparationtime:",
 allfields: "Please fill out all fields",
-
 };
