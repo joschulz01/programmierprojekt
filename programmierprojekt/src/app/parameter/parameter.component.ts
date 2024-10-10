@@ -298,36 +298,4 @@ private downloadFile(data: string, filename: string, type: string) {
   a.click();
   document.body.removeChild(a); 
 }
-
-//Import
-importFile(): void {
-const input = document.createElement('input');
-input.type = 'file';
-input.accept = '.mps, .lp, .gmu, .glpk';
-input.onchange = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  if (target.files && target.files.length > 0) {
-    const selectedFile = target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e: ProgressEvent<FileReader>) => {
-      this.problemInput = (e.target?.result as string) || ''; // Speichere den Inhalt der Datei
-    };
-    reader.readAsText(selectedFile); // Lese die Datei als Text
-  } else {
-    alert('Keine Datei ausgewählt.'); // Warnung, wenn keine Datei ausgewählt ist
-  }
-};
-input.click(); // Öffne den Dateiauswahldialog
-
-}
-isValidInput(): boolean {
-const Reihe = this.result?.Rows.length || 0;  // Anzahl der Rows in das Variable Reihe speichern
-
-if (Reihe <= 2) {
-  return true;  // G�ltig, wenn 2 oder weniger Reihen vorhanden sind
-} else {
-  return false; // Ung�ltig, wenn mehr als 2 Reihen vorhanden sind
-}
-}
-
 }
