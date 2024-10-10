@@ -8,6 +8,7 @@ textarea {
   width: 100%;
   max-width: 600px;
   margin-top: 10px;
+  height: 340px;
 }
 
 /* Button-Styling */
@@ -138,8 +139,8 @@ h3 {
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: absolute;
-  top: 40%; /* Positioniere den Tooltip direkt unter dem Button */
-  left: 75%; /* Zentriere den Tooltip relativ zum Button */
+  top: 30%; /* Positioniere den Tooltip direkt unter dem Button */
+  left: 67%; /* Zentriere den Tooltip relativ zum Button */
   transform: translateX(-50%); /* Verschiebe den Tooltip nach links, um ihn zu zentrieren */
   z-index: 1000;
   width: auto; /* Dynamische Breite */
@@ -169,11 +170,51 @@ pre {
   margin-bottom: 20px; /* Abstand zum nächsten Element */
 }
 
-/* Medienabfragen für responsive Design */
-@media (max-width: 768px) {
+/* Anpassung für kleinere Bildschirmgrößen */
+@media (max-width: 960px) {
   .tooltip {
-    max-width: 60%; /* Tooltip auf 80% der Bildschirmbreite bei kleineren Bildschirmen */
-    left: 85%; /* Bleibe zentriert */
-    transform: translateX(-50%); /* Zentrierung beibehalten */
+    top: 60px; /* Position weiter unter dem Button */
+    left: 50%;
+    max-width: 240px;
+    font-size: 11px;
+    padding: 8px;
   }
+}
+
+@media (max-width: 600px) {
+  .tooltip {
+    top: 70px; /* Position weiter unter dem Button */
+    left: 50%;
+    max-width: 200px;
+    font-size: 10px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .tooltip {
+    top: 80px; /* Position weiter unter dem Button */
+    left: 50%;
+    max-width: 160px;
+    font-size: 9px;
+    padding: 4px;
+  }
+}
+
+/* Anpassung für Zoom-Stufen 110% bis 175% */
+@media (min-resolution: 105dpi) and (max-resolution: 175dpi) {
+  .tooltip {
+    top: 90px; /* Position unter dem Button */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 220px;
+    font-size: 11px;
+    padding: 6px;
+  }}
+
+  /* Fehlermeldungen */
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
 }

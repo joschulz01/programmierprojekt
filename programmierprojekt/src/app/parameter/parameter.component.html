@@ -1,35 +1,40 @@
 <div class="solver-container">
-  <h1>{{ translationService.getTranslation('highsSolver') }}
-    <button id="info-button" class="info-button" (click)="showInfo = !showInfo">?</button>
-  </h1>
+  
+    <div class="input-container">
+      <label for="numVariables">{{ translationService.getTranslation('numbervariables') }}</label>
+      <br>
+      <input type="number" id="numVariables" [(ngModel)]="numVariables" (change)="generateVariableInputs()" min="1" />
+    </div>
+  
+    <div *ngFor="let variable of variables; let i = index; trackBy: trackByIndex">
+      <label for="variable{{i}}"> Variable {{i + 1}}:</label>
+  
+      <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="z.B. x{{i + 1}}" />
+    </div>
+  
+    <div class="objective-function-container">
+      <label for="objectiveFunction">{{ translationService.getTranslation('objectivefunction') }}</label>
+      <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="z.B. maximize x1 + 2*x2" />
+    </div>
+  
+    <div class="constraints-container">
+      <h3>{{ translationService.getTranslation('constraints') }}</h3>
+      <div *ngFor="let constraint of constraints; let j = index trackBy: trackByIndex">
+        <label for="constraint{{j}}">{{ translationService.getTranslation('constraint') }}  {{j + 1}}:</label>
+        <input type="text" id="constraint{{j}}" [(ngModel)]="constraints[j]" placeholder="z.B. x1 + 2*x2 <= 15" />
+        <button (click)="removeConstraint(j)" class="remove-button" [attr.title]="translationService.getTranslation('removeconstraint')">
+          <i class="fas fa-trash"></i> <!-- Mülltonnen-Icon -->
+        </button>
+        
+      </div>
+      <button (click)="addConstraint()">{{ translationService.getTranslation('addadditionalconstraints') }}</button>
+    </div>
+    
 
-  <!-- Tooltip-Information wird bei Hover angezeigt -->
-  <div *ngIf="showInfo" id="hilfeInformation" class="tooltip">
-    <strong>{{ translationService.getTranslation('furtherInfos') }}</strong>
-    <p>
-      {{ translationService.getTranslation('example') }}
-    </p>
-    <pre>
-      var x1 >= 0;
-      var x2 >= 0;
-      maximize Objective: x1 + x2;
-      s.t. Constraint1:
-        x1 + 2*x2 <= 15;
-      s.t. Constraint2:
-        3*x1 + x2 <= 20; 
-    </pre>
-</div>
+    <br>
+    <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
 
-  <div>
-    <button id="importFile" (click)="importFile()">{{ translationService.getTranslation('importFile') }}</button>
-  </div>
-
-  <textarea id="problemInput" [(ngModel)]="problemInput" placeholder="{{ translationService.getTranslation('inputPlaceholder') }}" rows="10" cols="50"></textarea>
-
-  <br>
-  <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
-
-  <!-- Ausgabe des Ergebnisses als JSON -->
+     <!-- Ausgabe des Ergebnisses als JSON -->
   <div *ngIf="result">
     <h3>{{ translationService.getTranslation('solution') }}</h3>
     
@@ -67,9 +72,9 @@
     <p>{{ result.ObjectiveValue }}</p>
 
     <!-- Laufzeitanalyse -->
- <h3>{{ translationService.getTranslation('runtimeanalysis') }}</h3>
- <p>{{ translationService.getTranslation('elapsedtime') }} {{ elapsedTime | number: '1.0-2' }} ms</p>
- <p>{{ translationService.getTranslation('preparationtime') }} {{ preparationTime | number: '1.0-2' }} ms</p>
+ <h3>Laufzeitanalyse</h3>
+ <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
+<p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
 
 
     <app-model *ngIf="isValidInput()" [xWert]="xWert" [yWert]="yWert"></app-model>
@@ -90,4 +95,3 @@
 </div>
 
 
- 

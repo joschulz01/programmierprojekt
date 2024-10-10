@@ -6,6 +6,8 @@
     display: flex;
     flex-direction: column; /* Elemente in einer Spalte anordnen */
     gap: 15px; /* Abstand zwischen den Elementen */
+    min-height: calc(100vh - [Footer-Höhe]); /* Fußzeile abziehen, um Platz zu schaffen */
+  padding-bottom: [Footer-Höhe]; /* Platz für den Footer schaffen */
 }
 
 /* Überschrift */
@@ -51,7 +53,7 @@ form button:hover {
 
 textarea {
     width: 100%;
-    height: 200px;
+    height: 375px;
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;

@@ -11,7 +11,7 @@ import { TranslationService } from '../translationservice';
 interface Column {
   Name: string;
   Index: number;
-  Status: string;
+  Status: string; 
   Lower: number;
   Upper?: number;
   Primal?: number; // Optional
@@ -50,6 +50,12 @@ export class HighsSolverComponent {
   showInfo = false; //Kontrolliert das Anzeigen des Tooltips
   elapsedTime: number | null = null;
   preparationTime: number | null = null;
+  errorMessage: string | null = null;  // Fehlernachricht
+  numVariables = 0;
+  variables: string[] = [];
+  objectiveFunction = '';
+  constraints: string[] = [];
+
 
   switchLanguage() {
     this.translationService.switchLanguage();
@@ -68,7 +74,16 @@ export class HighsSolverComponent {
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
       locateFile: (file: string) => `highs/${file}` // Zeigt auf den Ordner, wo die WASM-Datei liegt
-    };
+    }
+    if (!this.objectiveFunction || this.constraints.length === 0) {
+      this.errorMessage = 'Bitte geben Sie das Optimierungsproblem ein/Please enter the optimization problem';
+      return;
+  };
+
+  if (!this.numVariables || this.variables.some(v => !v) || !this.objectiveFunction || this.constraints.some(c => !c)) {
+    this.errorMessage = 'Bitte alle Felder ausf√ºllen/Please fill out all fields';
+    return;
+  }
 
     const preparationStartTime = performance.now();
     const preparationEndTime = performance.now();
@@ -261,7 +276,7 @@ export class HighsSolverComponent {
     a.download = filename;
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
+    document.body.removeChild(a); 
   }
 
 //Import
@@ -289,9 +304,9 @@ isValidInput(): boolean {
   const Reihe = this.result?.Rows.length || 0;  // Anzahl der Rows in das Variable Reihe speichern
   
   if (Reihe <= 2) {
-    return true;  // G¸ltig, wenn 2 oder weniger Reihen vorhanden sind
+    return true;  // GÔøΩltig, wenn 2 oder weniger Reihen vorhanden sind
   } else {
-    return false; // Ung¸ltig, wenn mehr als 2 Reihen vorhanden sind
+    return false; // UngÔøΩltig, wenn mehr als 2 Reihen vorhanden sind
   }
 }
 }

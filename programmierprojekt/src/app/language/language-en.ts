@@ -87,11 +87,20 @@ projectLead: "Project Lead",
 team: "Team",
 menuHome: "Home",
 menuHiGHS: "HiGHS",
-menuGLPK: "GLPK",
+menuGLPK: "GLPK/Parameter",
 menuFeedback: "Feedback",
 license: "License GMPL:",
 example: "Example of an optimization problem:",
-furtherInfos: "Further information:"
-
+furtherInfos: "Further information:",
+numbervariables: "Number of Variables:",
+objectivefunction: "Objective Function",
+constraints: "Constraints",
+constraint: "Constraint",
+addadditionalconstraints: "Add additional Constraints",
+removeconstraint: "Remove Constraint",
+runtimeanalysis: "Runtime Analysis",
+elapsedtime: "Elapsed Time:",
+preparationtime:"Preparationtime:",
+allfields: "Please fill out all fields",
 
 };
