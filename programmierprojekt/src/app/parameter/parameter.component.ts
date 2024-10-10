@@ -136,6 +136,12 @@ export class ParameterComponent {
   }
 
   async solveProblem(): Promise<void> {
+    this.errorMessage = ''
+    this.solution = '';
+    this.result = null;
+    this.xWert = undefined;
+    this.yWert = undefined;
+
     if (!this.objectiveFunction || this.constraints.length === 0) {
       this.errorMessage = 'Bitte geben Sie eine Zielfunktion und mindestens eine Nebenbedingung ein.';
       return;
