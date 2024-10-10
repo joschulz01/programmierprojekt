@@ -11,7 +11,7 @@ import { TranslationService } from '../translationservice';
 interface Column {
   Name: string;
   Index: number;
-  Status: string; 
+  Status: string;
   Lower: number;
   Upper?: number;
   Primal?: number; // Optional
@@ -46,15 +46,11 @@ export class HighsSolverComponent {
   problemInput = '';  // Eingabefeld f�r das Problem, standardm��ig leer
   solution = '';  // Variable zur Anzeige der L�sung
   result: Result | null = null; // Verwendung des definierten Result Interfaces
-  selectedFile: File | null = null; // Hier wird die ausgewählte Datei 
+  selectedFile: File | null = null; // Hier wird die ausgewählte Datei
   showInfo = false; //Kontrolliert das Anzeigen des Tooltips
   elapsedTime: number | null = null;
   preparationTime: number | null = null;
   errorMessage: string | null = null;  // Fehlernachricht
-  numVariables = 0;
-  variables: string[] = [];
-  objectiveFunction = '';
-  constraints: string[] = [];
 
 
   switchLanguage() {
@@ -63,8 +59,8 @@ export class HighsSolverComponent {
 
   xWert?: number;
   yWert?: number;
-  
- 
+
+
 
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
 
@@ -75,22 +71,17 @@ export class HighsSolverComponent {
     const highs_settings = {
       locateFile: (file: string) => `highs/${file}` // Zeigt auf den Ordner, wo die WASM-Datei liegt
     }
-    if (!this.objectiveFunction || this.constraints.length === 0) {
+    if (!this.problemInput) {
       this.errorMessage = 'Bitte geben Sie das Optimierungsproblem ein/Please enter the optimization problem';
       return;
   };
-
-  if (!this.numVariables || this.variables.some(v => !v) || !this.objectiveFunction || this.constraints.some(c => !c)) {
-    this.errorMessage = 'Bitte alle Felder ausfüllen/Please fill out all fields';
-    return;
-  }
 
     const preparationStartTime = performance.now();
     const preparationEndTime = performance.now();
     this.preparationTime = preparationEndTime - preparationStartTime;
 
     const startTime = performance.now();
-    
+
     try {
       // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
@@ -109,7 +100,7 @@ export class HighsSolverComponent {
 
       // Konvertiere das HiGHS-Ergebnis in dein Result-Format
       this.result = this.convertToResult(highsResult);
-      
+
       // F�ge die Constraints in den ConstraintsService hinzu
       this.constraintsService.setConstraints(constraints);
       this.constraintsService.constraintsUpdated.next();
@@ -120,7 +111,7 @@ export class HighsSolverComponent {
  // Laufzeitanalyse
  const endTime = performance.now(); // Endzeit für die Laufzeitanalyse
  this.elapsedTime = endTime - startTime; // Berechne die Laufzeit
- 
+
       // Werte f�r x und y ermitteln
       this.WerteErmitteln(this.result);
     } catch (error) {
@@ -186,7 +177,7 @@ export class HighsSolverComponent {
     if (VariableX && 'Primal' in VariableX) {
       this.xWert = VariableX.Primal; // Setze den Wert f�r xWert
     }
-    
+
     const VariableY = result.Columns['y'] || result.Columns['x2'];
     if (VariableY && 'Primal' in VariableY) {
       this.yWert = VariableY.Primal; // Setze den Wert f�r yWert
@@ -238,7 +229,7 @@ export class HighsSolverComponent {
   private normalizeVariableNames(expression: string): string {
     return expression.replace(/\s+(\d+)/g, '$1');  // Entfernt Leerzeichen zwischen Variablen und Zahlen, z.B. "x 1" wird zu "x1"
   }
-  
+
   // Hilfsmethode zum Parsen der Terme einer Constraint
   private parseTerms(lhs: string): { name: string; coef: number }[] {
     const terms: { name: string; coef: number }[] = [];
@@ -276,7 +267,7 @@ export class HighsSolverComponent {
     a.download = filename;
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a); 
+    document.body.removeChild(a);
   }
 
 //Import
@@ -298,11 +289,11 @@ importFile(): void {
     }
   };
   input.click(); // Öffne den Dateiauswahldialog
-  
+
 }
 isValidInput(): boolean {
   const Reihe = this.result?.Rows.length || 0;  // Anzahl der Rows in das Variable Reihe speichern
-  
+
   if (Reihe <= 2) {
     return true;  // G�ltig, wenn 2 oder weniger Reihen vorhanden sind
   } else {
