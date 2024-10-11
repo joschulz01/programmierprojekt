@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { HighsSolverComponent } from './highs-solver/highs-solver.component'; // Standalone-Komponente
+import { HighsSolverComponent } from './highs-solver/highs-solver.component';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,7 @@ import { HighsSolverComponent } from './highs-solver/highs-solver.component'; //
   ],
   imports: [
     BrowserModule,
-    HighsSolverComponent // Standalone-Komponente hier importieren
+    HighsSolverComponent 
   ],
   providers: [],
   bootstrap: [AppComponent]

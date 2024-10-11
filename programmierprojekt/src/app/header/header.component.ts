@@ -10,7 +10,6 @@ import { TranslationService } from '../translationservice';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  // Ändere hier die Sichtbarkeit
   constructor(public translationService: TranslationService) {}
 
   switchLanguage() {

@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core'; // OnInit importieren
+import { Component, Input, OnInit } from '@angular/core';
 import { Chart, LinearScale, Title, PointElement, LineElement, Filler, LineController, ChartDataset } from 'chart.js';
 import { ConstraintsService } from '../constraints.service';
 
 interface Constraint {
-  name: string; // Name des Constraints (wird z.B. als Label in den Chart-Datasets verwendet)
-  terms: { name: string; coef: number }[]; // Array von Terme mit Variablenname und Koeffizienten
-  relation: string; // Relation des Constraints (z.B. '<=', '>=', '=')
-  rhs: number; // Rechte Seite des Constraints (Wert, mit dem verglichen wird)
+  name: string;
+  terms: { name: string; coef: number }[];
+  relation: string;
+  rhs: number;
 }
 
 interface ChartDataPoint {
@@ -20,41 +20,37 @@ interface ChartDataPoint {
   templateUrl: './model.component.html',
   styleUrls: ['./model.component.css'],
 })
-export class ModelComponent implements OnInit { // Implementiere OnInit
-  @Input() xWert?: number;  // Input Property für X-Wert
-  @Input() yWert?: number;  // Input Property für Y-Wert
+export class ModelComponent implements OnInit { 
+  @Input() xWert?: number;
+  @Input() yWert?: number;
   constraints!: Constraint[];
-  chart!: Chart; // Typ für das Chart hinzufügen
+  chart!: Chart;
 
   constructor(private constraintsService: ConstraintsService) {}
 
   ngOnInit() {
     Chart.register(LineController, LinearScale, Title, PointElement, LineElement, Filler);
     
-    // Abonnieren der constraintsUpdated-Benachrichtigung
     this.constraintsService.constraintsUpdated.subscribe(() => this.onSolve());
     
-    // Sofortige Aktualisierung des Charts
-    this.onSolve(); // Aufruf hier, um sofort zu aktualisieren
+    this.onSolve();
   }
 
-  // Methode zur Überprüfung der Anzahl der übergebenen Input-Variablen
   checkInputCount(): boolean {
     const inputs = [this.xWert, this.yWert];
     const definedInputs = inputs.filter(input => input !== undefined);
     
     if (definedInputs.length > 2) {
-      console.error('Mehr als 2 Eingabewerte übergeben.');
-      return false; // Mehr als 2 Variablen, also nicht ausführen
+      console.error('Mehr als 2 Eingabewerte ï¿½bergeben.');
+      return false;
     }
     
-    return true; // Weniger oder genau 2 Variablen, also ausführen
+    return true;
   }
 
   onSolve() {
-    // Überprüfe die Anzahl der Input-Variablen
     if (!this.checkInputCount()) {
-      return; // Falls mehr als 2 Eingabewerte übergeben wurden, Abbruch
+      return;
     }
 
     this.constraints = this.constraintsService.getConstraints();
@@ -67,12 +63,12 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
     }
 
     if (this.chart) {
-      this.chart.destroy(); // Das vorhandene Chart wird zerstört
+      this.chart.destroy();
     }
 
     const datasets: ChartDataset<'line'>[] = this.constraints.map(constraint => {
       const equation = this.constraintsService.convertConstraintToEquation(constraint);
-      const constraintData: ChartDataPoint[] = []; // Typ festlegen
+      const constraintData: ChartDataPoint[] = [];
       const variableNames = this.getVariableNames(constraint);
 
       for (let xValue = 0; xValue <= 10; xValue += 0.1) {
@@ -87,7 +83,7 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
         } else {
           const coefY = constraint.terms.find(term => term.name === variableNames[1])?.coef || 1;
 
-          let yValue: number; // yValue als number deklarieren
+          let yValue: number;
 
           if (constraint.relation === '<=') {
             yValue = (constraint.rhs - lhs) / coefY;
@@ -118,22 +114,21 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
       };
     });
 
-    // Dynamisch Min/Max für die Achsen berechnen
     const xValues = datasets.flatMap(dataset => 
       dataset.data.map(point => {
-        if (point) { // Überprüfen, ob point nicht null ist
-          return (point as ChartDataPoint).x; // Typassertion verwenden
+        if (point) { 
+          return (point as ChartDataPoint).x;
         }
-        return 0; // Standardwert falls null
+        return 0;
       })
     );
 
     const yValues = datasets.flatMap(dataset => 
       dataset.data.map(point => {
-        if (point) { // Überprüfen, ob point nicht null ist
-          return (point as ChartDataPoint).y; // Typassertion verwenden
+        if (point) { 
+          return (point as ChartDataPoint).y;
         }
-        return 0; // Standardwert falls null
+        return 0;
       })
     );
 
@@ -153,9 +148,9 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
               : [],
             borderColor: 'rgba(255, 0, 0, 1)',
             fill: false,
-            pointRadius: 7.5, // Erhöhe die Punktgröße für bessere Sichtbarkeit
+            pointRadius: 7.5,
           },
-          ...datasets // Hier kommen die Constraints-Datensätze hinzu
+          ...datasets
         ]
       },
       options: {
@@ -163,7 +158,7 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
           x: {
             type: 'linear',
             position: 'bottom',
-            suggestedMin: xMin, // Dynamisch berechnet auf Basis der Daten
+            suggestedMin: xMin,
             suggestedMax: xMax,
             ticks: {
               stepSize: 1
@@ -171,7 +166,7 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
           },
           y: {
             beginAtZero: true,
-            min: yMin, // Dynamisch berechnet auf Basis der Daten
+            min: yMin,
             max: yMax,
             ticks: {
               stepSize: 1
@@ -182,15 +177,13 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
     });
   }
 
-  // Hilfsmethode zur Erkennung der Variablennamen aus den Constraints
   getVariableNames(constraint: Constraint): string[] {
     const variableNames = new Set<string>();
 
-    // Iteriere durch die terms im Constraint und füge die Variablennamen hinzu
     constraint.terms.forEach(term => {
       variableNames.add(term.name);
     });
 
-    return Array.from(variableNames); // Rückgabe von z.B. ['x', 'y'] oder ['x1', 'x2']
+    return Array.from(variableNames);
   }
 }

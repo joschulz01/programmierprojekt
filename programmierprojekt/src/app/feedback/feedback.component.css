@@ -1,33 +1,32 @@
-/* Container Styling */
 .container {
-    max-width: 800px; /* Container Breite */
+    max-width: 800px;
     margin: 0 auto;
-    padding: 5px; /* Innenabstand oben verringert */
+    padding: 5px; 
     display: flex;
-    flex-direction: column; /* Elemente in einer Spalte anordnen */
-    gap: 15px; /* Abstand zwischen den Elementen */
-    min-height: calc(100vh - [Footer-Höhe]); /* Fußzeile abziehen, um Platz zu schaffen */
-  padding-bottom: [Footer-Höhe]; /* Platz für den Footer schaffen */
+    flex-direction: column;
+    gap: 15px;
+    min-height: calc(100vh - [Footer-Höhe]);
+  padding-bottom: [Footer-Höhe]; 
 }
 
-/* Überschrift */
+
 h1 {
-    text-align: center; /* Text zentrieren */
-    color: #2c3e50; /* Dunkles Blau für den Text */
-    margin: -20px 0 0 0; /* Abstand oben verringert, unten ggf. erhöhen */
-    font-size: 3em; /* Schriftgröße anpassen für mehr Sichtbarkeit */
-    line-height: 1.2; /* Zeilenhöhe anpassen */
-    animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
-    position: relative; /* Für die Positionierung des Unterstrichs */
+    text-align: center; 
+    color: #2c3e50; 
+    margin: -20px 0 0 0; 
+    font-size: 3em; 
+    line-height: 1.2; 
+    animation: fadeInDown 1s ease-out; 
+    position: relative; 
 }
 
 h1::after {
     content: '';
     display: block;
-    width: 60px; /* Breite der Linie unter dem H1 */
-    height: 4px; /* Höhe der Linie */
-    background-color: #708090; /* Farbe der Linie */
-    margin: 0.25rem auto; /* Abstand um die Linie (z.B. 15px oben und unten) */
+    width: 60px; 
+    height: 4px; 
+    background-color: #708090; 
+    margin: 0.25rem auto; 
 }
 
 form {
@@ -36,7 +35,7 @@ form {
 }
 
 form button {
-    align-self: flex-end; /* Platziert den Button rechts */
+    align-self: flex-end; 
     padding: 10px 20px;
     background-color: #708090;
     color: white;

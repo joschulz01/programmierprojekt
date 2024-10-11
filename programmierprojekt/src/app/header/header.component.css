@@ -1,5 +1,5 @@
 header {
-  justify-content: space-between; /* Platz zwischen Header-Elementen */
+  justify-content: space-between; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,84 +31,79 @@ p {
   text-wrap: balance;
 }
 
-/* Button für Sprachwechsel */
+
 #sprache-aendern {
-  background: linear-gradient(to bottom, #c0c0c0, #c0c0c0); /* Farbverlauf passend zu deinem Header */
-  color: black; /* Weißer Text für guten Kontrast */
-  border: none; /* Kein Rahmen */
-  padding: 0.5vh 1vw; /* Kleinere Innenabstände in Viewport-Einheiten */
-  font-size: 0.8vw; /* Kleinere Schriftgröße in Viewport-Einheiten */
-  border-radius: 3px; /* Abgerundete Ecken */
-  cursor: pointer; /* Zeigeranzeige bei Hover */
-  transition: background 0.3s ease, transform 0.2s ease; /* Sanfter Übergang für Hover-Effekte */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Leichter Schatten für 3D-Effekt */
-  position: absolute; /* Macht die Positionierung relativ zum Header */
-  bottom: 10px; /* Abstand vom unteren Rand */
-  right: 15px; /* Abstand vom rechten Rand */
+  background: linear-gradient(to bottom, #c0c0c0, #c0c0c0); 
+  color: black; 
+  border: none; 
+  padding: 0.5vh 1vw; 
+  font-size: 0.8vw; 
+  border-radius: 3px; 
+  cursor: pointer; 
+  transition: background 0.3s ease, transform 0.2s ease; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+  position: absolute; 
+  bottom: 10px; 
+  right: 15px; 
 }
 
-/* Hover-Effekte */
 #sprache-aendern:hover {
-  background: linear-gradient(to bottom, #c0c0c0, #c0c0c0); /* Dunklerer Farbverlauf bei Hover */
-  transform: scale(1.05); /* Leichte Vergrößerung bei Hover */
+  background: linear-gradient(to bottom, #c0c0c0, #c0c0c0); 
+  transform: scale(1.05); 
 }
 
 #sprache-aendern:active {
-  transform: scale(0.95); /* Kleinere Größe beim Klicken */
+  transform: scale(0.95); 
 }
 
 header {
-  position: relative; /* Ermöglicht absolute Positionierung der Kinder */
+  position: relative; 
 }
 
 #home-icon {
-  position: absolute; /* Macht die Positionierung relativ zum Header */
-  bottom: 10px; /* Abstand vom unteren Rand */
-  left: 10px; /* Abstand vom linken Rand */
-  font-size: 1.5rem; /* Größe des Icons */
-  color: #c0c0c0; /* Farbe des Icons */
-  transition: color 0.3s; /* Übergangseffekt für Hover */
+  position: absolute; 
+  bottom: 10px; 
+  left: 10px; 
+  font-size: 1.5rem; 
+  color: #c0c0c0; 
+  transition: color 0.3s;
 }
 
 #home-icon:hover {
-  color: #c0c0c0; /* Farbe beim Hover */
+  color: #c0c0c0; 
 }
 
-/* Media Query für kleinere Bildschirme */
 @media (max-width: 480px) {
   #sprache-aendern {
-    padding: 0.5vh 3vw; /* Kleinere Innenabstände */
-    font-size: 3vw; /* Kleinere Schriftgröße */
+    padding: 0.5vh 3vw; 
+    font-size: 3vw; 
   }
 }
 
-/* Zusätzliche Media Queries für hohe Zoomstufen */
-@media (min-width: 2000px) { /* Ab einer Breite von 2000px */
+@media (min-width: 2000px) { 
   #sprache-aendern {
-    padding: 1vh 1.5vw; /* Weitere Anpassung der Innenabstände */
-    font-size: 1.5vw; /* Schriftgröße anpassen */
+    padding: 1vh 1.5vw; 
+    font-size: 1.5vw; 
   }
 }
 
-@media (min-width: 2500px) { /* Ab einer Breite von 2500px */
+@media (min-width: 2500px) { 
   #sprache-aendern {
-    padding: 1vh 1.2vw; /* Weiter reduzieren */
-    font-size: 1.2vw; /* Weiter verkleinern */
+    padding: 1vh 1.2vw; 
+    font-size: 1.2vw;
   }
 }
 
-/* Anpassung für 400% Zoom */
-@media (min-width: 4000px) { /* Ab einer Breite von 4000px */
+@media (min-width: 4000px) { 
   #sprache-aendern {
-    padding: 1vh 1.4vw; /* Innenabstände für 400% Zoom */
-    font-size: 1.4vw; /* Schriftgröße für 400% Zoom */
+    padding: 1vh 1.4vw; 
+    font-size: 1.4vw; 
   }
 }
 
-/* Anpassung für 500% Zoom */
-@media (min-width: 5000px) { /* Ab einer Breite von 5000px */
+@media (min-width: 5000px) { 
   #sprache-aendern {
-    padding: 1.5vh 1.6vw; /* Innenabstände für 500% Zoom */
-    font-size: 1.6vw; /* Schriftgröße für 500% Zoom */
+    padding: 1.5vh 1.6vw; 
+    font-size: 1.6vw;
   }
 }

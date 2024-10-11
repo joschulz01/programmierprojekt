@@ -1,82 +1,81 @@
-/* Container Styling */
 .container {
-  max-width: 800px; /* Maximalbreite anpassen */
-  margin: 0 auto; /* Zentriert den Container */
-  padding: 20px; /* Innenabstand */
+  max-width: 800px; 
+  margin: 0 auto; 
+  padding: 20px; 
 }
 
-/* Sektionen */
+
 h1 {
-  text-align: center; /* Text zentrieren */
-  color: #2c3e50; /* Dunkles Blau für den Text */
-  margin: -20px 0 0 0; /* Abstand oben und unten */
-  font-size: 3em; /* Schriftgröße anpassen */
-  line-height: 1.2; /* Zeilenhöhe anpassen */
-  animation: fadeInDown 1s ease-out; /* Fade-In-Effekt */
-  position: relative; /* Für die Positionierung des Unterstrichs */
+  text-align: center; 
+  color: #2c3e50; 
+  margin: -20px 0 0 0; 
+  font-size: 3em; 
+  line-height: 1.2; 
+  animation: fadeInDown 1s ease-out; 
+  position: relative; 
 }
 
 h1::after {
   content: '';
   display: block;
-  width: 60px; /* Breite der Linie unter dem H1 */
-  height: 4px; /* Höhe der Linie */
-  background-color: #708090; /* Farbe der Linie */
-  margin: 0.25rem auto; /* Abstand um die Linie */
+  width: 60px; 
+  height: 4px; 
+  background-color: #708090; 
+  margin: 0.25rem auto; 
 }
 
 h2, h3 {
-  color: #2c3e50; /* Dunkles Blau für Überschriften */
+  color: #2c3e50; 
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  text-align: center; /* Zentriert die Überschriften */
+  text-align: center; 
   margin-top: 0 px auto;
   position: relative;
-  animation: fadeInDown 1s ease-out; /* Fade-In-Effekt */
+  animation: fadeInDown 1s ease-out; 
 }
 
 h2::after, h3::after {
   content: '';
   width: 60px;
   height: 4px;
-  background-color: #708090; /* Blaue Linie unter Überschrift */
+  background-color: #708090; 
   display: block;
-  margin: 1rem auto; /* Abstand um die Linie */
+  margin: 1rem auto; 
 }
 
-/* Parallax-Effekt für Absätze */
+
 p {
-  font-size: 1.1rem; /* Schriftgröße */
-  line-height: 1.6; /* Zeilenhöhe für bessere Lesbarkeit */
-  text-align: justify; /* Text zentrieren */
-  margin: 20px 0; /* Einheitlicher Abstand oben und unten */
-  animation: fadeInUp 1s ease-out; /* Sanfter Fade-Up */
-  max-width: 800px; /* Maximale Breite des Absatzes auf 800px setzen */
-  margin-left: auto; /* Zentriert den Absatz */
-  margin-right: auto; /* Zentriert den Absatz */
+  font-size: 1.1rem; 
+  line-height: 1.6; 
+  text-align: justify; 
+  margin: 20px 0; 
+  animation: fadeInUp 1s ease-out; 
+  max-width: 800px; 
+  margin-left: auto; 
+  margin-right: auto;
 }
 
-/* Entfernt die Punkte vor den Listenelementen */
+
 ul {
-  list-style-type: none; /* Entfernt die Standardpunkte */
-  padding-left: 0; /* Entfernt den Standard-Einzug */
-  max-width: 100%; /* Maximale Breite auf 100% setzen */
+  list-style-type: none;
+  padding-left: 0; 
+  max-width: 100%; 
 }
 
-/* Listen-Items mit Icons */
+
 ul li {
-  font-size: 1.1rem; /* Schriftgröße */
-  line-height: 1.8; /* Zeilenhöhe */
-  margin: 1rem 0; /* Abstand oben und unten */
+  font-size: 1.1rem; 
+  line-height: 1.8; 
+  margin: 1rem 0; 
   position: relative;
-  padding-left: 2rem; /* Abstand für das Häkchen */
+  padding-left: 2rem; 
 }
 
 ul li::before {
-  content: "✔"; /* Häkchen-Icon */
+  content: "✔"; 
   position: absolute;
-  left: 0; /* Positionierung des Häkchens */
+  left: 0; 
   top: 0;
-  font-size: 1.2rem; /* Häkchen-Größe */
-  color: #708090; /* Häkchen-Farbe */
+  font-size: 1.2rem; 
+  color: #708090; 
 }

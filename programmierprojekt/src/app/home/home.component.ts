@@ -46,14 +46,13 @@ import { CommonModule } from '@angular/common';
   startSlideShow(): void {
     this.slideInterval = setInterval(() => {
       this.currentSlide = (this.currentSlide + 1) % this.values.length;
-    }, 5000); // Wechsel alle 5 Sekunden
+    }, 5000);
   }
 
-  // Diese Methode wechselt manuell zum gewünschten Slide
   goToSlide(index: number): void {
     this.currentSlide = index;
-    clearInterval(this.slideInterval); // Reset the interval after manual change
-    this.startSlideShow(); // Restart the interval
+    clearInterval(this.slideInterval);
+    this.startSlideShow();
   }
 
   switchLanguage() {

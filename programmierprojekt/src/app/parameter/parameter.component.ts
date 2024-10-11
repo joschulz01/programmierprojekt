@@ -65,12 +65,10 @@ export class ParameterComponent {
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
 
   ngOnInit(): void {
-    // Sicherstellen, dass mindestens ein Variablenfeld vorhanden ist
     if (this.variables.length === 0) {
       this.variables.push('');
     }
 
-    // Sicherstellen, dass mindestens ein Nebenbedingungenfeld vorhanden ist
     if (this.constraints.length === 0) {
       this.constraints.push('');
     }
@@ -97,44 +95,30 @@ export class ParameterComponent {
     return index;
   }
 
-  // Angepasste Methode zum Erstellen der Problemdefinition
   private buildProblemInput() {
     let problemStr = '';
 
-    // Bereinige die Zielfunktion
     let cleanedObjective = this.objectiveFunction.trim();
 
-    // Entferne 'maximize', 'minimize' und 'Objective:' aus der Zielfunktion
     cleanedObjective = cleanedObjective.replace(/(maximize|minimize)/i, '');
     cleanedObjective = cleanedObjective.replace(/Objective:/i, '');
-    // Entferne alle '*' Zeichen
     cleanedObjective = cleanedObjective.replace(/\*/g, '');
-    // Entferne Leerzeichen zwischen Zahlen und Variablen
     cleanedObjective = cleanedObjective.replace(/(\d)\s+([a-zA-Z])/g, '$1$2');
-    // Entferne doppelte Leerzeichen
     cleanedObjective = cleanedObjective.replace(/\s+/g, ' ').trim();
 
-    // Füge den Optimierungstyp hinzu ('Maximize' oder 'Minimize')
     problemStr += this.optimizationType + '\n';
     problemStr += ' obj: ' + cleanedObjective + '\n';
 
-    // Constraints
     problemStr += 'Subject To\n';
-    // Anpassung der Schleife: Verwenden von 'for-of' mit 'entries()' um Index und Wert zu erhalten
     for (const [index, constraintRaw] of this.constraints.entries()) {
       let constraint = constraintRaw.trim();
-      // Entferne '*' Zeichen
       constraint = constraint.replace(/\*/g, '');
-      // Entferne Leerzeichen zwischen Zahlen und Variablen
       constraint = constraint.replace(/(\d)\s*([a-zA-Z])/g, '$1$2');
-      // Entferne doppelte Leerzeichen
       constraint = constraint.replace(/\s+/g, ' ').trim();
       problemStr += ' c' + (index + 1) + ': ' + constraint + '\n';
     }
 
-    // Bounds
     problemStr += 'Bounds\n';
-    // Anpassung der Schleife: Verwenden von 'for-of'
     for (const variable of this.variables) {
       const varName = variable.trim();
       if (varName) {
@@ -142,7 +126,6 @@ export class ParameterComponent {
       }
     }
 
-    // End
     problemStr += 'End\n';
 
     this.problemInput = problemStr;
@@ -174,13 +157,10 @@ export class ParameterComponent {
       this.constraints.push('');
     }
 
-    // Erstelle die Problemdefinition basierend auf den Benutzereingaben
     this.buildProblemInput();
 
-    // Hier können Sie die Problemdefinition prüfen
     console.log('Erstellte Problemdefinition:', this.problemInput);
 
-    // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
       locateFile: (file: string) => `highs/${file}`
     };
@@ -192,12 +172,10 @@ export class ParameterComponent {
     const startTime = performance.now();
 
     try {
-      // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
       console.log("HiGHS initialisiert");
       let highsResult: HighsSolution;
 
-      // Lösen des vom Benutzer eingegebenen Problems
       let constraints;
       try {
         console.log("Probleminput:", this.problemInput);
@@ -211,22 +189,17 @@ export class ParameterComponent {
         constraints = this.extractConstraints(LP);
       }
 
-      // Konvertiere das HiGHS-Ergebnis in dein Result-Format
       this.result = this.convertToResult(highsResult);
       console.log("Ergebnis in Result konvertieren");
 
-      // Füge die Constraints in den ConstraintsService hinzu
       this.constraintsService.setConstraints(constraints);
       this.constraintsService.constraintsUpdated.next();
 
-      // Ergebnis als JSON speichern und anzeigen
       this.solution = JSON.stringify(this.result, null, 2);
 
-      // Laufzeitanalyse
       const endTime = performance.now();
       this.elapsedTime = endTime - startTime;
 
-      // Werte für x und y ermitteln
       this.WerteErmitteln(this.result);
     } catch (error) {
       console.error('Fehler beim Lösen des Problems:', error);
@@ -238,7 +211,6 @@ export class ParameterComponent {
     const columns: Record<string, Column> = {};
     const rows: Row[] = [];
 
-    // Verarbeitung der Spalten
     for (const [name, column] of Object.entries(highsResult.Columns)) {
       columns[name] = {
         Name: name,
@@ -252,7 +224,6 @@ export class ParameterComponent {
       };
     }
 
-    // Verarbeitung der Zeilen
     for (const row of highsResult.Rows) {
       const newRow: Row = {
         Name: `Row ${row.Index}`,
@@ -293,7 +264,6 @@ export class ParameterComponent {
     }
   }
 
-  // Methode zum Extrahieren der Constraints aus dem Problemstring
   private extractConstraints(problem: string): { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] {
     const constraints: { name: string; terms: { name: string; coef: number }[]; relation: string; rhs: number; }[] = [];
     const lines = problem.split('\n').filter(line => line.trim() !== '');
@@ -338,7 +308,6 @@ export class ParameterComponent {
     return expression.replace(/\s+(\d+)/g, '$1');
   }
 
-  // Angepasste Methode zum Parsen der Terme einer Constraint
   private parseTerms(lhs: string): { name: string; coef: number }[] {
     const terms: { name: string; coef: number }[] = [];
     const termRegex = /([-+]?\d*\.?\d*)([a-zA-Z]\w*)/g;
@@ -352,8 +321,6 @@ export class ParameterComponent {
 
     return terms;
   }
-
-  // === EXPORT FUNCTIONALITY ===
 
   downloadLP() {
     if (!this.problemInput) {
