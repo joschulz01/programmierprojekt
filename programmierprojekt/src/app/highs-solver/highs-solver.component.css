@@ -184,7 +184,7 @@ pre {
 /* Anpassung für Tablet-Bildschirmgrößen (600px - 960px) */
 @media (min-width: 600px) and (max-width: 960px) {
   .tooltip {
-    top: 600px; /* Weiter nach unten verschoben für Tablets */
+    top: 700px; /* Weiter nach unten verschoben für Tablets */
     left: 60%; /* Zentriere den Tooltip besser für Tablet-Bildschirme */
     max-width: 260px; /* Etwas größere maximale Breite für Tablets */
     font-size: 12px; /* Etwas größere Schriftgröße für Tablets */
