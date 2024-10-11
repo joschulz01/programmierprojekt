@@ -184,10 +184,10 @@ pre {
 /* Anpassung für Tablet-Bildschirmgrößen (600px - 960px) */
 @media (min-width: 600px) and (max-width: 960px) {
   .tooltip {
-    top: 700px; /* Weiter nach unten verschoben für Tablets */
+    top: 400px; /* Weiter nach unten verschoben für Tablets */
     left: 60%; /* Zentriere den Tooltip besser für Tablet-Bildschirme */
-    max-width: 260px; /* Etwas größere maximale Breite für Tablets */
-    font-size: 12px; /* Etwas größere Schriftgröße für Tablets */
+    max-width: 240px; /* Etwas größere maximale Breite für Tablets */
+    font-size: 11px; /* Etwas größere Schriftgröße für Tablets */
     padding: 8px; /* Passende Polsterung */
   }
 }
@@ -205,13 +205,23 @@ pre {
 /* Anpassung für Zoom-Stufen 110% bis 175% */
 @media (min-resolution: 105dpi) and (max-resolution: 175dpi) {
   .tooltip {
-    top: 400px; /* Position unter dem Button */
+    top: 450px; /* Position unter dem Button */
     left: 60%;
     transform: translateX(-50%);
     max-width: 220px;
     font-size: 11px;
     padding: 6px;
   }}
+
+  @media (min-resolution: 150dpi) {
+    .tooltip {
+      top: 450px; /* Position unter dem Button */
+      left: 60%;
+      transform: translateX(-50%);
+      max-width: 220px;
+      font-size: 11px;
+      padding: 6px;
+    }} 
 
   /* Fehlermeldungen */
 .error-message {
