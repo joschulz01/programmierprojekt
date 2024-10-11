@@ -1,5 +1,4 @@
 <div class="solver-container">
-  <!-- Container for optimization type (radio buttons) -->
   <fieldset class="optimization-type-container">
     <legend>{{ translationService.getTranslation('optimizationType') }}</legend>
     <label>
@@ -11,26 +10,23 @@
       {{ translationService.getTranslation('minimize') }}
     </label>
   </fieldset>
-  <!-- Input container for number of variables -->
+
   <div class="input-container">
     <label for="numVariables">{{ translationService.getTranslation('numbervariables') }}</label>
     <br>
     <input type="number" id="numVariables" [(ngModel)]="numVariables" (change)="generateVariableInputs()" min="1" />
   </div>
 
-  <!-- Loop to create inputs for variables -->
   <div *ngFor="let variable of variables; let i = index; trackBy: trackByIndex">
     <label for="variable{{i}}"> Variable {{i + 1}}:</label>
     <input type="text" id="variable{{i}}" [(ngModel)]="variables[i]" placeholder="x{{i + 1}}" />
   </div>
 
-  <!-- Container for objective function input -->
   <div class="objective-function-container">
     <label for="objectiveFunction">{{ translationService.getTranslation('objectivefunction') }}</label>
     <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="x1 + 2*x2" />
   </div> 
 
-  <!-- Constraints container -->
   <div class="constraints-container">
     <h3>{{ translationService.getTranslation('constraints') }}</h3>
     <div *ngFor="let constraint of constraints; let j = index; trackBy: trackByIndex">
@@ -44,15 +40,9 @@
   </div>
 
   <br>
-
-  <!-- Button to solve the problem -->
   <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
-
-  <!-- Display result if available -->
   <div *ngIf="result">
     <h3>{{ translationService.getTranslation('solution') }}</h3>
-
-    <!-- Table for variables (columns) -->
     <h3>{{ translationService.getTranslation('variables') }}</h3>
     <table id="loesungstabelle">
       <thead>
@@ -81,23 +71,18 @@
       </tbody>
     </table>
 
-    <!-- Display objective value -->
     <h3>{{ translationService.getTranslation('objectiveValue') }}</h3>
     <p>{{ result.ObjectiveValue }}</p>
-
-    <!-- Time analysis -->
     <h3>{{ translationService.getTranslation('runtimeanalysis') }}</h3>
     <p>{{ translationService.getTranslation('elapsedtime') }} {{ elapsedTime | number: '1.0-2' }} ms</p>
     <p>{{ translationService.getTranslation('preparationtime') }} {{ preparationTime | number: '1.0-2' }} ms</p>
   </div>
 </div>
 
-<!-- Error message container -->
 <div *ngIf="errorMessage" class="error-message">
   {{ errorMessage }}
 </div>
 
-<!-- Export buttons container -->
 <div class="export-buttons-container">
   <button id="export_MPS" (click)="downloadMPS()">{{ translationService.getTranslation('exportMPS') }}</button>
   <button id="export_LP" (click)="downloadLP()">{{ translationService.getTranslation('exportLP') }}</button>
