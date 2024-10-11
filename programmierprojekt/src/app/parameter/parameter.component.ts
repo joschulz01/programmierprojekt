@@ -64,6 +64,19 @@ export class ParameterComponent {
 
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
 
+  ngOnInit(): void {
+    // Sicherstellen, dass mindestens ein Variablenfeld vorhanden ist
+    if (this.variables.length === 0) {
+      this.variables.push('');
+    }
+
+    // Sicherstellen, dass mindestens ein Nebenbedingungenfeld vorhanden ist
+    if (this.constraints.length === 0) {
+      this.constraints.push('');
+    }
+  }
+
+
   switchLanguage() {
     this.translationService.switchLanguage();
   }
@@ -143,13 +156,22 @@ export class ParameterComponent {
     this.yWert = undefined;
 
     if (!this.objectiveFunction || this.constraints.length === 0) {
-      this.errorMessage = 'Bitte geben Sie eine Zielfunktion und mindestens eine Nebenbedingung ein.';
+      this.errorMessage = this.translationService.getTranslation('enterObjectiveAndConstraint');
+
       return;
     }
 
     if (!this.numVariables || this.variables.some(v => !v.trim()) || !this.objectiveFunction || this.constraints.some(c => !c.trim())) {
-      this.errorMessage = 'Bitte alle Felder ausfüllen';
+      this.errorMessage = this.translationService.getTranslation('allfields');
       return;
+    }
+
+    if (this.variables.length === 0) {
+      this.variables.push('');
+    }
+
+    if (this.constraints.length === 0) {
+      this.constraints.push('');
     }
 
     // Erstelle die Problemdefinition basierend auf den Benutzereingaben

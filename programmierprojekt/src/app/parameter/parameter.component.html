@@ -28,7 +28,7 @@
   <div class="objective-function-container">
     <label for="objectiveFunction">{{ translationService.getTranslation('objectivefunction') }}</label>
     <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="x1 + 2*x2" />
-  </div>
+  </div> 
 
   <!-- Constraints container -->
   <div class="constraints-container">
@@ -86,9 +86,9 @@
     <p>{{ result.ObjectiveValue }}</p>
 
     <!-- Time analysis -->
-    <h3>Laufzeitanalyse</h3>
-    <p>Gesamtzeit (Elapsed Time): {{ elapsedTime | number: '1.0-2' }} ms</p>
-    <p>Vorbereitungszeit (Preparationtime): {{ preparationTime | number: '1.0-2' }} ms</p>
+    <h3>{{ translationService.getTranslation('runtimeanalysis') }}</h3>
+    <p>{{ translationService.getTranslation('elapsedtime') }} {{ elapsedTime | number: '1.0-2' }} ms</p>
+    <p>{{ translationService.getTranslation('preparationtime') }} {{ preparationTime | number: '1.0-2' }} ms</p>
   </div>
 </div>
 
