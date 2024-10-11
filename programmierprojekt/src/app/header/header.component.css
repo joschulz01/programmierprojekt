@@ -104,6 +104,6 @@ header {
 @media (min-width: 5000px) { 
   #sprache-aendern {
     padding: 1.5vh 1.6vw; 
-    font-size: 1.6vw; /
+    font-size: 1.6vw;
   }
 }
