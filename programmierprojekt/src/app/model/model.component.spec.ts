@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModelComponent } from './model.component';
 import { ConstraintsService } from '../constraints.service';
 import { of } from 'rxjs';
-import { Chart } from 'chart.js';
+import { Chart, ChartConfiguration } from 'chart.js';
 
 interface Constraint {
   name: string;
@@ -19,8 +19,8 @@ class MockConstraintsService {
       { name: 'constraint2', terms: [{ name: 'x1', coef: 2 }, { name: 'x2', coef: 1 }], relation: '>=', rhs: 6 },
     ];
   }
-  convertConstraintToEquation(constraint: Constraint): (values: Record<string, number>) => number {
-    return (values) => values['x1'] * 1;
+  convertConstraintToEquation(_constraint: Constraint): (values: Record<string, number>) => number {
+    return (values: Record<string, number>) => values['x1'] * 1;
   }
 }
 
@@ -56,7 +56,7 @@ describe('ModelComponent', () => {
   it('should return false for invalid input count', () => {
     component.xWert = 5;
     component.yWert = 3;
-    (component as any)['extraInput'] = 2;
+    (component as unknown as { extraInput: number }).extraInput = 2;
     expect(component.checkInputCount()).toBeFalse();
   });
 
@@ -74,7 +74,7 @@ describe('ModelComponent', () => {
   // Test 4: Überprüfen, dass der Chart zerstört wird, wenn er existiert
   it('should destroy the previous chart before creating a new one', () => {
     spyOn(component, 'checkInputCount').and.returnValue(true);
-    component.chart = new Chart('myChart', {} as any);
+    component.chart = new Chart('myChart', {} as ChartConfiguration);
     spyOn(component.chart, 'destroy');
 
     component.onSolve();
