@@ -105,6 +105,8 @@ export const EN_TRANSLATIONS: Record<string, string> = {
   enterObjectiveAndConstraint: "Please enter an objective function and at least one constraint",
   optimizationType: "Optimization Type",
   maximize: "Maximize",
-  minimize: "Minimize"
+  minimize: "Minimize",
+  error1: "The problem must start with Maximize or Minimize or with var",
+  error2: "Please enter the optimization problem"
 
 };
