@@ -29,11 +29,11 @@
   <br>
   <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
 
-  <!-- Ausgabe des Ergebnisses als JSON -->
+  
   <div *ngIf="result">
     <h3>{{ translationService.getTranslation('solution') }}</h3>
     
-    <!-- Tabelle für die Variablen (Columns) -->
+    
     <h3>{{ translationService.getTranslation('variables') }}</h3>
     <table id="loesungstabelle">
       <thead>
@@ -62,11 +62,11 @@
       </tbody>
     </table>
     
-    <!-- Zielwert (Objective Value) -->
+    
     <h3>{{ translationService.getTranslation('objectiveValue') }}</h3>
     <p>{{ result.ObjectiveValue }}</p>
 
-    <!-- Laufzeitanalyse -->
+   
  <h3>{{ translationService.getTranslation('runtimeanalysis') }}</h3>
  <p>{{ translationService.getTranslation('elapsedtime') }} {{ elapsedTime | number: '1.0-2' }} ms</p>
  <p>{{ translationService.getTranslation('preparationtime') }} {{ preparationTime | number: '1.0-2' }} ms</p>
