@@ -36,15 +36,15 @@ p {
   background: linear-gradient(to bottom, #c0c0c0, #c0c0c0); /* Farbverlauf passend zu deinem Header */
   color: black; /* Weißer Text für guten Kontrast */
   border: none; /* Kein Rahmen */
-  padding: 0.8vh 1.8vw; /* Kleinere Innenabstände in Viewport-Einheiten */
-  font-size: 1.0vw; /* Kleinere Schriftgröße in Viewport-Einheiten */
-  border-radius: 5px; /* Abgerundete Ecken */
+  padding: 0.5vh 1vw; /* Kleinere Innenabstände in Viewport-Einheiten */
+  font-size: 0.8vw; /* Kleinere Schriftgröße in Viewport-Einheiten */
+  border-radius: 3px; /* Abgerundete Ecken */
   cursor: pointer; /* Zeigeranzeige bei Hover */
   transition: background 0.3s ease, transform 0.2s ease; /* Sanfter Übergang für Hover-Effekte */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Leichter Schatten für 3D-Effekt */
   position: absolute; /* Macht die Positionierung relativ zum Header */
   bottom: 10px; /* Abstand vom unteren Rand */
-  right: 10px; /* Abstand vom rechten Rand */
+  right: 15px; /* Abstand vom rechten Rand */
 }
 
 /* Hover-Effekte */
@@ -94,5 +94,21 @@ header {
   #sprache-aendern {
     padding: 1vh 1.2vw; /* Weiter reduzieren */
     font-size: 1.2vw; /* Weiter verkleinern */
+  }
+}
+
+/* Anpassung für 400% Zoom */
+@media (min-width: 4000px) { /* Ab einer Breite von 4000px */
+  #sprache-aendern {
+    padding: 1vh 1.4vw; /* Innenabstände für 400% Zoom */
+    font-size: 1.4vw; /* Schriftgröße für 400% Zoom */
+  }
+}
+
+/* Anpassung für 500% Zoom */
+@media (min-width: 5000px) { /* Ab einer Breite von 5000px */
+  #sprache-aendern {
+    padding: 1.5vh 1.6vw; /* Innenabstände für 500% Zoom */
+    font-size: 1.6vw; /* Schriftgröße für 500% Zoom */
   }
 }

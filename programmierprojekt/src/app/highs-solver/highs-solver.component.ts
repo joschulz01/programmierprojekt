@@ -66,6 +66,12 @@ export class HighsSolverComponent {
 
   // Methode zur L�sung des Benutzerproblems
   async solveProblem(): Promise<void> {
+    this.errorMessage = ''
+    this.solution = '';
+    this.result = null;
+    this.xWert = undefined;
+    this.yWert = undefined;
+
     const LP = this.umformungService.umformen(this.problemInput);
     const LP_neu=this.umformungService.umformenxy(this.problemInput);
     // Initialisiere den HiGHS Solver und passe locateFile an
