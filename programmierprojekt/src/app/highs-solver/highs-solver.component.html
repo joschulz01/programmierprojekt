@@ -16,7 +16,7 @@
       s.t. Constraint1:
         x1 + 2*x2 <= 15;
       s.t. Constraint2:
-        3*x1 + x2 <= 20; 
+        3*x1 + x2 <= 20;
     </pre>
 </div>
 
@@ -32,7 +32,7 @@
   <!-- Ausgabe des Ergebnisses als JSON -->
   <div *ngIf="result">
     <h3>{{ translationService.getTranslation('solution') }}</h3>
-    
+
     <!-- Tabelle für die Variablen (Columns) -->
     <h3>{{ translationService.getTranslation('variables') }}</h3>
     <table id="loesungstabelle">
@@ -61,7 +61,7 @@
         </tr>
       </tbody>
     </table>
-    
+
     <!-- Zielwert (Objective Value) -->
     <h3>{{ translationService.getTranslation('objectiveValue') }}</h3>
     <p>{{ result.ObjectiveValue }}</p>
@@ -90,4 +90,3 @@
 </div>
 
 
- 

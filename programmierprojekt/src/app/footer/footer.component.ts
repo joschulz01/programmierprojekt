@@ -16,3 +16,4 @@ export class FooterComponent {
     this.translationService.switchLanguage();
   }
 }
+

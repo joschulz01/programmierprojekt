@@ -14,9 +14,9 @@ import { CommonModule } from '@angular/common';
 
   export class HomeComponent implements OnInit, OnDestroy {
     public currentSlide = 0;
-    private slideInterval: number | undefined;
-  
-    public values = [
+    private slideInterval: ReturnType<typeof setInterval> | undefined;
+
+  public values = [
       {
         title: "Intuitive Benutzeroberfläche",
         description: "Ein einfaches Design ermöglicht Ihnen einen schnellen Einstieg, ohne dass Sie viel Zeit mit dem Lernen verbringen müssen."
@@ -29,7 +29,7 @@ import { CommonModule } from '@angular/common';
         title: "Praxiserfahrung",
         description: "Übertragen Sie Ihr theoretisches Wissen in echte Anwendungen und entwickeln Sie Fähigkeiten, die Ihnen im Berufsleben helfen."
       }
-    ];  
+    ];
 
   constructor(public translationService: TranslationService) {}
 
