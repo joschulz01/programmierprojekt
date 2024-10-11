@@ -73,6 +73,7 @@ export class HighsSolverComponent {
     this.yWert = undefined;
 
     const LP = this.umformungService.umformen(this.problemInput);
+    const LP_neu=this.umformungService.umformenxy(this.problemInput);
     // Initialisiere den HiGHS Solver und passe locateFile an
     const highs_settings = {
       locateFile: (file: string) => `highs/${file}` // Zeigt auf den Ordner, wo die WASM-Datei liegt
@@ -101,7 +102,7 @@ export class HighsSolverComponent {
       } catch (error) {
         console.log('Fehler beim L�sen des Problems:', error, "\nMit umgeformtem Input");
         highsResult = await highsSolver.solve(LP); // Async-Funktion aufrufen
-        constraints = this.extractConstraints(LP);
+        constraints = this.extractConstraints(LP_neu);
       }
 
       // Konvertiere das HiGHS-Ergebnis in dein Result-Format
