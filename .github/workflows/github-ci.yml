@@ -76,9 +76,39 @@ jobs:
 
       - name: Transfer results
         run: snyk monitor
-        
-  test:
-    name: Test der Angular App
+
+  unit-test:
+    name: Unit Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 22.x ]
+
+    steps:
+      # Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Set up Node.js environment
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Install Dependencies
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm install -g @angular/cli@18
+          npm install jest jest-preset-angular @types/jest ts-jest
+
+      # Stage: Run unit test
+      - name: Run Linter
+        run: npm test
+
+  robot-test:
+    name: Integrationtest / E2E-Test
     runs-on: ubuntu-latest
 
     strategy:
