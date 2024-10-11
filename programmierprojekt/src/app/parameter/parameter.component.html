@@ -24,7 +24,7 @@
   <div class="objective-function-container">
     <label for="objectiveFunction">{{ translationService.getTranslation('objectivefunction') }}</label>
     <input type="text" id="objectiveFunction" [(ngModel)]="objectiveFunction" placeholder="x1 + 2*x2" />
-  </div> 
+  </div>
 
   <div class="constraints-container">
     <h3>{{ translationService.getTranslation('constraints') }}</h3>
@@ -87,6 +87,5 @@
 </div>
 
 <div class="export-buttons-container">
-  <button id="export_MPS" (click)="downloadMPS()">{{ translationService.getTranslation('exportMPS') }}</button>
   <button id="export_LP" (click)="downloadLP()">{{ translationService.getTranslation('exportLP') }}</button>
 </div>

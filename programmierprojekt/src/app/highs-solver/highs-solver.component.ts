@@ -13,7 +13,7 @@ interface Column {
   Status: string;
   Lower: number;
   Upper?: number;
-  Primal?: number; 
+  Primal?: number;
   Dual?: number;
   Type: string;
 }
@@ -164,7 +164,7 @@ export class HighsSolverComponent {
     };
 }
 
-  WerteErmitteln(result: Result) { 
+  WerteErmitteln(result: Result) {
     const VariableX = result.Columns['x'] || result.Columns['x1'];
     if (VariableX && 'Primal' in VariableX) {
       this.xWert = VariableX.Primal;
@@ -237,11 +237,6 @@ export class HighsSolverComponent {
   downloadLP() {
     const lpData = this.problemInput;
     this.downloadFile(lpData, 'model.lp', 'text/plain');
-  }
-
-  downloadMPS() {
-    const mpsData = this.problemInput;
-    this.downloadFile(mpsData, 'model.mps', 'text/plain');
   }
 
   private downloadFile(data: string, filename: string, type: string) {
