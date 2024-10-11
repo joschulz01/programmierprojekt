@@ -2,22 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModelComponent } from './model.component';
 import { ConstraintsService } from '../constraints.service';
 import { of } from 'rxjs';
-<<<<<<< Updated upstream
-
-jest.mock('chart.js', () => {
-  return {
-    Chart: Object.assign(
-      jest.fn().mockImplementation(() => ({
-        destroy: jest.fn(),
-      })),
-      {
-        register: jest.fn(),
-      }
-    ),
-  };
-});
-
-=======
 import { Chart } from 'chart.js';
 
 // Mock für den ConstraintsService
@@ -33,21 +17,10 @@ class MockConstraintsService {
     return (values: any) => values['x1'] * 1;
   }
 }
->>>>>>> Stashed changes
 
 describe('ModelComponent', () => {
   let component: ModelComponent;
   let fixture: ComponentFixture<ModelComponent>;
-<<<<<<< Updated upstream
-  let constraintsServiceMock: any;
-
-  beforeEach(async () => {
-    constraintsServiceMock = {
-      constraintsUpdated: of(),
-      getConstraints: jest.fn().mockReturnValue([]),
-      convertConstraintToEquation: jest.fn().mockReturnValue(() => 0),
-    };
-=======
   let constraintsService: ConstraintsService;
 
   beforeEach(async () => {
@@ -56,7 +29,6 @@ describe('ModelComponent', () => {
       providers: [{ provide: ConstraintsService, useClass: MockConstraintsService }]
     })
     .compileComponents();
->>>>>>> Stashed changes
 
     await TestBed.configureTestingModule({
       imports: [ModelComponent],

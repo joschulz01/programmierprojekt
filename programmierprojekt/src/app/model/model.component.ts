@@ -20,58 +20,26 @@ interface ChartDataPoint {
   templateUrl: './model.component.html',
   styleUrls: ['./model.component.css'],
 })
-<<<<<<< Updated upstream
-export class ModelComponent implements OnInit { // Implementiere OnInit
-  @Input() xWert?: number;  // Input Property f�r X-Wert
-  @Input() yWert?: number;  // Input Property f�r Y-Wert
-  constraints!: Constraint[];
-  chart!: Chart; // Typ f�r das Chart hinzuf�gen
-=======
 export class ModelComponent implements OnInit { 
   @Input() xWert?: number;  
   @Input() yWert?: number;  
   constraints!: Constraint[];
   chart!: Chart; 
->>>>>>> Stashed changes
 
   constructor(private constraintsService: ConstraintsService) {}
 
   ngOnInit() {
     Chart.register(LineController, LinearScale, Title, PointElement, LineElement, Filler);
-<<<<<<< Updated upstream
-
-    // Abonnieren der constraintsUpdated-Benachrichtigung
-    this.constraintsService.constraintsUpdated.subscribe(() => this.onSolve());
-
-    // Sofortige Aktualisierung des Charts
-    this.onSolve(); // Aufruf hier, um sofort zu aktualisieren
-  }
-
-  // Methode zur �berpr�fung der Anzahl der �bergebenen Input-Variablen
-=======
     this.constraintsService.constraintsUpdated.subscribe(() => this.onSolve());
     this.onSolve();
   }
 
->>>>>>> Stashed changes
   checkInputCount(): boolean {
     const inputs = [this.xWert, this.yWert];
     const definedInputs = inputs.filter(input => input !== undefined);
 
     if (definedInputs.length > 2) {
       console.error('Mehr als 2 Eingabewerte �bergeben.');
-<<<<<<< Updated upstream
-      return false; // Mehr als 2 Variablen, also nicht ausf�hren
-    }
-
-    return true; // Weniger oder genau 2 Variablen, also ausf�hren
-  }
-
-  onSolve() {
-    // �berpr�fe die Anzahl der Input-Variablen
-    if (!this.checkInputCount()) {
-      return; // Falls mehr als 2 Eingabewerte �bergeben wurden, Abbruch
-=======
       return false; 
     }
     return true;
@@ -80,7 +48,6 @@ export class ModelComponent implements OnInit {
   onSolve() {
     if (!this.checkInputCount()) {
       return; 
->>>>>>> Stashed changes
     }
 
     this.constraints = this.constraintsService.getConstraints();
@@ -93,11 +60,7 @@ export class ModelComponent implements OnInit {
     }
 
     if (this.chart) {
-<<<<<<< Updated upstream
-      this.chart.destroy(); // Das vorhandene Chart wird zerst�rt
-=======
       this.chart.destroy();
->>>>>>> Stashed changes
     }
 
     const datasets: ChartDataset<'line'>[] = this.constraints.map(constraint => {
@@ -148,18 +111,10 @@ export class ModelComponent implements OnInit {
       };
     });
 
-<<<<<<< Updated upstream
-    // Dynamisch Min/Max f�r die Achsen berechnen
-    const xValues = datasets.flatMap(dataset =>
-      dataset.data.map(point => {
-        if (point) { // �berpr�fen, ob point nicht null ist
-          return (point as ChartDataPoint).x; // Typassertion verwenden
-=======
     const xValues = datasets.flatMap(dataset => 
       dataset.data.map(point => {
         if (point) { 
           return (point as ChartDataPoint).x; 
->>>>>>> Stashed changes
         }
         return 0;
       })
@@ -167,13 +122,8 @@ export class ModelComponent implements OnInit {
 
     const yValues = datasets.flatMap(dataset =>
       dataset.data.map(point => {
-<<<<<<< Updated upstream
-        if (point) { // �berpr�fen, ob point nicht null ist
-          return (point as ChartDataPoint).y; // Typassertion verwenden
-=======
         if (point) { 
           return (point as ChartDataPoint).y; 
->>>>>>> Stashed changes
         }
         return 0;
       })
@@ -195,15 +145,9 @@ export class ModelComponent implements OnInit {
               : [],
             borderColor: 'rgba(255, 0, 0, 1)',
             fill: false,
-<<<<<<< Updated upstream
-            pointRadius: 7.5, // Erh�he die Punktgr��e f�r bessere Sichtbarkeit
-          },
-          ...datasets // Hier kommen die Constraints-Datens�tze hinzu
-=======
             pointRadius: 7.5, 
           },
           ...datasets
->>>>>>> Stashed changes
         ]
       },
       options: {
@@ -231,19 +175,9 @@ export class ModelComponent implements OnInit {
   }
   getVariableNames(constraint: Constraint): string[] {
     const variableNames = new Set<string>();
-<<<<<<< Updated upstream
-
-    // Iteriere durch die terms im Constraint und f�ge die Variablennamen hinzu
-    constraint.terms.forEach(term => {
-      variableNames.add(term.name);
-    });
-
-    return Array.from(variableNames); // R�ckgabe von z.B. ['x', 'y'] oder ['x1', 'x2']
-=======
     constraint.terms.forEach(term => {
       variableNames.add(term.name);
     });
     return Array.from(variableNames); 
->>>>>>> Stashed changes
   }
 }
