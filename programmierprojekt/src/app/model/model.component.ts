@@ -21,40 +21,40 @@ interface ChartDataPoint {
   styleUrls: ['./model.component.css'],
 })
 export class ModelComponent implements OnInit { // Implementiere OnInit
-  @Input() xWert?: number;  // Input Property für X-Wert
-  @Input() yWert?: number;  // Input Property für Y-Wert
+  @Input() xWert?: number;  // Input Property fï¿½r X-Wert
+  @Input() yWert?: number;  // Input Property fï¿½r Y-Wert
   constraints!: Constraint[];
-  chart!: Chart; // Typ für das Chart hinzufügen
+  chart!: Chart; // Typ fï¿½r das Chart hinzufï¿½gen
 
   constructor(private constraintsService: ConstraintsService) {}
 
   ngOnInit() {
     Chart.register(LineController, LinearScale, Title, PointElement, LineElement, Filler);
-    
+
     // Abonnieren der constraintsUpdated-Benachrichtigung
     this.constraintsService.constraintsUpdated.subscribe(() => this.onSolve());
-    
+
     // Sofortige Aktualisierung des Charts
     this.onSolve(); // Aufruf hier, um sofort zu aktualisieren
   }
 
-  // Methode zur Überprüfung der Anzahl der übergebenen Input-Variablen
+  // Methode zur ï¿½berprï¿½fung der Anzahl der ï¿½bergebenen Input-Variablen
   checkInputCount(): boolean {
     const inputs = [this.xWert, this.yWert];
     const definedInputs = inputs.filter(input => input !== undefined);
-    
+
     if (definedInputs.length > 2) {
-      console.error('Mehr als 2 Eingabewerte übergeben.');
-      return false; // Mehr als 2 Variablen, also nicht ausführen
+      console.error('Mehr als 2 Eingabewerte ï¿½bergeben.');
+      return false; // Mehr als 2 Variablen, also nicht ausfï¿½hren
     }
-    
-    return true; // Weniger oder genau 2 Variablen, also ausführen
+
+    return true; // Weniger oder genau 2 Variablen, also ausfï¿½hren
   }
 
   onSolve() {
-    // Überprüfe die Anzahl der Input-Variablen
+    // ï¿½berprï¿½fe die Anzahl der Input-Variablen
     if (!this.checkInputCount()) {
-      return; // Falls mehr als 2 Eingabewerte übergeben wurden, Abbruch
+      return; // Falls mehr als 2 Eingabewerte ï¿½bergeben wurden, Abbruch
     }
 
     this.constraints = this.constraintsService.getConstraints();
@@ -67,7 +67,7 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
     }
 
     if (this.chart) {
-      this.chart.destroy(); // Das vorhandene Chart wird zerstört
+      this.chart.destroy(); // Das vorhandene Chart wird zerstï¿½rt
     }
 
     const datasets: ChartDataset<'line'>[] = this.constraints.map(constraint => {
@@ -111,26 +111,26 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
       return {
         label: constraint.name,
         data: constraintData,
-        borderColor: 'rgba(75, 192, 192, 1)', 
+        borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderWidth: 1,
         pointRadius: 0,
       };
     });
 
-    // Dynamisch Min/Max für die Achsen berechnen
-    const xValues = datasets.flatMap(dataset => 
+    // Dynamisch Min/Max fï¿½r die Achsen berechnen
+    const xValues = datasets.flatMap(dataset =>
       dataset.data.map(point => {
-        if (point) { // Überprüfen, ob point nicht null ist
+        if (point) { // ï¿½berprï¿½fen, ob point nicht null ist
           return (point as ChartDataPoint).x; // Typassertion verwenden
         }
         return 0; // Standardwert falls null
       })
     );
 
-    const yValues = datasets.flatMap(dataset => 
+    const yValues = datasets.flatMap(dataset =>
       dataset.data.map(point => {
-        if (point) { // Überprüfen, ob point nicht null ist
+        if (point) { // ï¿½berprï¿½fen, ob point nicht null ist
           return (point as ChartDataPoint).y; // Typassertion verwenden
         }
         return 0; // Standardwert falls null
@@ -141,21 +141,21 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
     const xMax = Math.max(10, Math.max(...xValues));
     const yMin = Math.min(0, Math.min(...yValues));
     const yMax = Math.max(10, Math.max(...yValues));
-    
+
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
         datasets: [
           {
             label: 'Maximal/Minimal Punkt',
-            data: this.xWert !== undefined && this.yWert !== undefined 
-              ? [{ x: this.xWert, y: this.yWert }] 
+            data: this.xWert !== undefined && this.yWert !== undefined
+              ? [{ x: this.xWert, y: this.yWert }]
               : [],
             borderColor: 'rgba(255, 0, 0, 1)',
             fill: false,
-            pointRadius: 7.5, // Erhöhe die Punktgröße für bessere Sichtbarkeit
+            pointRadius: 7.5, // Erhï¿½he die Punktgrï¿½ï¿½e fï¿½r bessere Sichtbarkeit
           },
-          ...datasets // Hier kommen die Constraints-Datensätze hinzu
+          ...datasets // Hier kommen die Constraints-Datensï¿½tze hinzu
         ]
       },
       options: {
@@ -186,11 +186,11 @@ export class ModelComponent implements OnInit { // Implementiere OnInit
   getVariableNames(constraint: Constraint): string[] {
     const variableNames = new Set<string>();
 
-    // Iteriere durch die terms im Constraint und füge die Variablennamen hinzu
+    // Iteriere durch die terms im Constraint und fï¿½ge die Variablennamen hinzu
     constraint.terms.forEach(term => {
       variableNames.add(term.name);
     });
 
-    return Array.from(variableNames); // Rückgabe von z.B. ['x', 'y'] oder ['x1', 'x2']
+    return Array.from(variableNames); // Rï¿½ckgabe von z.B. ['x', 'y'] oder ['x1', 'x2']
   }
 }

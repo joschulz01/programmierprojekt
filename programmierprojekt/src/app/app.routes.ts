@@ -39,5 +39,5 @@ export const routes: Routes = [
   {
     path: 'parameter', //or-tool.de/parameter
     component: ParameterComponent
-  } 
+  },
 ];

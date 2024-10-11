@@ -1,89 +1,83 @@
-/* Container Styling */
 .container {
-    max-width: 800px; /* Container Breite */
-    margin: auto; /* Zentriert den Container */
-    padding: 5px; /* Innenabstand oben verringert */
+    max-width: 800px;
+    margin: auto;
+    padding: 5px;
     display: flex;
-    flex-direction: column; /* Elemente in einer Spalte anordnen */
-    gap: 15px; /* Abstand zwischen den Elementen */
+    flex-direction: column;
+    gap: 15px;
 }
 
-/* Überschrift */
 h1.page-title {
-    text-align: center; /* Text zentrieren */
+    text-align: center;
     color: #2c3e50; /* Dunkles Blau für den Text */
-    margin: -20px 0 0 0; /* Abstand oben verringert, unten ggf. erhöhen */
-    font-size: 3em; /* Schriftgröße anpassen für mehr Sichtbarkeit */
-    line-height: 1.2; /* Zeilenhöhe anpassen */
-    animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
-    position: relative; /* Für die Positionierung des Unterstrichs */
+    margin: -20px 0 0 0;
+    font-size: 3em;
+    line-height: 1.2;
+    animation: fadeInDown 1s ease-out;
+    position: relative;
 }
 
 h1.page-title::after {
     content: '';
     display: block;
-    width: 60px; /* Breite der Linie unter dem H1 */
-    height: 4px; /* Höhe der Linie */
-    background-color: #708090; /* Farbe der Linie */
-    margin: 0.25rem auto; /* Abstand um die Linie (z.B. 15px oben und unten) */
+    width: 60px;
+    height: 4px;
+    background-color: #708090;
+    margin: 0.25rem auto;
 }
 
-/* Allgemeine Überschrift */
 h2, h3 {
-    color: #2c3e50; /* Dunkles Blau für Überschriften */
+    color: #2c3e50;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     text-align: center;
-    margin-top: 0.5 rem; /* Abstand oben und unten verringert */
+    margin-top: 0.5 rem;
     position: relative;
-    animation: fadeInDown 1s ease-out; /* Fade-In-Effekt von oben */
+    animation: fadeInDown 1s ease-out;
 }
 
 h2::after, h3::after {
     content: '';
     width: 60px;
     height: 4px;
-    background-color: #708090; /* Blaue Linie unter Überschrift */
+    background-color: #708090;
     display: block;
-    margin: 0.25rem auto; /* Abstand unter der Linie verringert */
+    margin: 0.25rem auto;
 }
 
-/* Parallax-Effekt für Absätze */
 p {
     font-size: 1.1rem;
-    line-height: 1.6; /* Zeilenhöhe für den Fließtext */
-    text-align: justify; /* Textbegründung */
-    padding: 0 10%; /* Innenabstand */
-    margin: 2px 0; 
+    line-height: 1.6;
+    text-align: justify;
+    padding: 0 10%;
+    margin: 2px 0;
 }
 
-/* Zentrale Mehrwerte */
 .value-container {
-    display: flex; /* Flexbox aktivieren für die Wertboxen */
-    justify-content: space-between; /* Abstand zwischen den Boxen */
-    margin-top: 20px; /* Abstand oben verringert */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 .value-box {
-    flex: 1; /* Gleiche Breite für alle Boxen */
-    margin: 0 5px; /* Abstand zwischen den Boxen verringert */
-    padding: 20px; /* Innenabstand */
-    background-color: #c0c0c0; /* Helle Hintergrundfarbe */
-    border-radius: 8px; /* Abgerundete Ecken */
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Sanfter Schatten */
-    text-align: center; /* Text zentrieren */
+    flex: 1;
+    margin: 0 5px;
+    padding: 20px;
+    background-color: #c0c0c0;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .value-box h3 {
-    color: #333; /* Dunkle Farbe für die Überschrift der Box */
-    margin-bottom: 5px; /* Abstand nach unten verringert */
+    color: #333;
+    margin-bottom: 5px;
 }
 
 .value-box p {
-    color: #555; /* Helle Farbe für den Text in den Boxen */
+    color: #555;
 }
 
-/* Slider-Container */
 .slider-container {
     position: relative;
     width: 100%;
@@ -105,10 +99,9 @@ p {
     opacity: 1;
 }
 
-/* Styling für die Dots unter dem Slider */
 .dot-container {
     text-align: center;
-    margin-top: 10px; /* Abstand oben verringert */
+    margin-top: 10px;
 }
 
 .dot {
@@ -126,7 +119,6 @@ p {
     background-color: #333;
 }
 
-/* Optional: Animation for dot changes */
 .dot-container .dot.active {
     animation: dotBounce 0.6s;
 }
@@ -140,51 +132,46 @@ p {
     }
 }
 
-/* Hauptinhalt */
 .main-content {
     padding: 20px;
     max-width: 800px;
     margin: 0 auto;
 }
 
-/* Hero Section */
 .hero-section {
-    background-color: #708090; /* Farben nach Wunsch anpassen */
+    background-color: #708090;
     color: white;
-    padding: 40px 20px; /* Padding oben verringert */
+    padding: 40px 20px;
     text-align: center;
     border-radius: 10px;
 }
 
 .hero-title {
     font-size: 2.5em;
-    margin-bottom: 10px; /* Abstand nach unten verringert */
+    margin-bottom: 10px;
 }
 
-/* Button Container Styling */
 .button-container {
-    display: flex; /* Flexbox aktivieren */
-    justify-content: center; /* Buttons in der Mitte ausrichten */
-    gap: 30px; /* Abstand zwischen den Buttons verringert */
-    margin-top: 20px; /* Abstand nach oben verringert */
-    padding-left: 40px; /* Linke Auffüllung verringert */
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    padding-left: 40px;
 }
 
-/* Button-Styling */
 .cta-button {
-    padding: 10px 20px; /* Padding für den Button */
-    background-color: #708090; /* Hintergrundfarbe für den Button */
-    color: white; /* Textfarbe */
-    border: none; /* Kein Rahmen */
-    border-radius: 6px; /* Abgerundete Ecken */
-    cursor: pointer; /* Zeiger-Cursor */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Leichter Schatten für den Button */
-    margin: 5px; /* Horizontale Margen für Abstand verringert */
+    padding: 10px 20px;
+    background-color: #708090;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 5px;
 }
 
-/* Hover-Effekt für den Button */
 .cta-button:hover {
-    background-color: #c0c0c0; /* Hintergrundfarbe bei Hover */
-    transform: scale(1.05); /* Leichte Vergrößerung bei Hover */
-    color: black; /* Textfarbe bei Hover */
+    background-color: #c0c0c0;
+    transform: scale(1.05);
+    color: black;
 }
