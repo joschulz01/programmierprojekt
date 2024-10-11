@@ -8,14 +8,14 @@ describe('DatenschutzComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DatenschutzComponent], 
+      imports: [DatenschutzComponent],
       providers: [TranslationService]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(DatenschutzComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges(); 
+    fixture.detectChanges();
   });
 
   // Testet, ob die Komponente erfolgreich erstellt wurde
@@ -37,16 +37,16 @@ describe('DatenschutzComponent', () => {
 
   // Testet, ob der Wechsel der Sprache funktioniert
   it('should switch language', () => {
-    const initialLanguage = component.translationService.getCurrentLanguage(); 
-    component.switchLanguage(); 
-    expect(component.translationService.getCurrentLanguage()).not.toBe(initialLanguage); 
+    const initialLanguage = component.translationService.getCurrentLanguage();
+    component.switchLanguage();
+    expect(component.translationService.getCurrentLanguage()).not.toBe(initialLanguage);
   });
 
   // Testet, ob die Anschrift korrekt angezeigt wird
   it('should display institution address correctly', () => {
-    const address = fixture.nativeElement.querySelector('address'); 
+    const address = fixture.nativeElement.querySelector('address');
     expect(address).toBeTruthy();
-    expect(address.textContent).toContain('hs-osnabrueck.de'); 
+    expect(address.textContent).toContain('hs-osnabrueck.de');
   });
 });
 

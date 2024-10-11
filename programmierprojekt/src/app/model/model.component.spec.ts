@@ -2,19 +2,25 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModelComponent } from './model.component';
 import { ConstraintsService } from '../constraints.service';
 import { of } from 'rxjs';
-import { Chart } from 'chart.js';
+import { Chart, ChartConfiguration } from 'chart.js';
 
-// Mock für den ConstraintsService
+interface Constraint {
+  name: string;
+  terms: { name: string; coef: number }[];
+  relation: string;
+  rhs: number;
+}
+
 class MockConstraintsService {
   constraintsUpdated = of(null);
-  getConstraints() {
+  getConstraints(): Constraint[] {
     return [
       { name: 'constraint1', terms: [{ name: 'x1', coef: 1 }], relation: '<=', rhs: 4 },
-      { name: 'constraint2', terms: [{ name: 'x1', coef: 2 }, { name: 'x2', coef: 1 }], relation: '>=', rhs: 6 }
+      { name: 'constraint2', terms: [{ name: 'x1', coef: 2 }, { name: 'x2', coef: 1 }], relation: '>=', rhs: 6 },
     ];
   }
-  convertConstraintToEquation(constraint: any) {
-    return (values: any) => values['x1'] * 1;
+  convertConstraintToEquation(): (values: Record<string, number>) => number {
+    return (values: Record<string, number>) => values['x1'] * 1;
   }
 }
 
@@ -25,20 +31,10 @@ describe('ModelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ModelComponent],
-      providers: [{ provide: ConstraintsService, useClass: MockConstraintsService }]
-    })
-    .compileComponents();
-
-    await TestBed.configureTestingModule({
       imports: [ModelComponent],
-      providers: [
-        { provide: ConstraintsService, useValue: constraintsServiceMock },
-      ],
+      providers: [{ provide: ConstraintsService, useClass: MockConstraintsService }],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ModelComponent);
     component = fixture.componentInstance;
     constraintsService = TestBed.inject(ConstraintsService);
@@ -60,7 +56,7 @@ describe('ModelComponent', () => {
   it('should return false for invalid input count', () => {
     component.xWert = 5;
     component.yWert = 3;
-    component['extraInput'] = 2;
+    (component as unknown as { extraInput: number }).extraInput = 2;
     expect(component.checkInputCount()).toBeFalse();
   });
 
@@ -78,7 +74,7 @@ describe('ModelComponent', () => {
   // Test 4: Überprüfen, dass der Chart zerstört wird, wenn er existiert
   it('should destroy the previous chart before creating a new one', () => {
     spyOn(component, 'checkInputCount').and.returnValue(true);
-    component.chart = new Chart('myChart', {} as any);
+    component.chart = new Chart('myChart', {} as ChartConfiguration);
     spyOn(component.chart, 'destroy');
 
     component.onSolve();
@@ -99,7 +95,15 @@ describe('ModelComponent', () => {
 
   // Test 6: Überprüfen der Funktionalität von getVariableNames
   it('should extract correct variable names from the constraint', () => {
-    const constraint = { name: 'constraint1', terms: [{ name: 'x1', coef: 1 }, { name: 'x2', coef: 2 }], relation: '<=', rhs: 4 };
+    const constraint: Constraint = {
+      name: 'constraint1',
+      terms: [
+        { name: 'x1', coef: 1 },
+        { name: 'x2', coef: 2 },
+      ],
+      relation: '<=',
+      rhs: 4,
+    };
     const variableNames = component.getVariableNames(constraint);
     expect(variableNames).toEqual(['x1', 'x2']);
   });

@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+
 import { HomeComponent } from './home.component';
 import { TranslationService } from '../translationservice';
-import { of } from 'rxjs';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -58,7 +57,7 @@ describe('HomeComponent', () => {
 
     expect(component.currentSlide).toBe(1);
     jasmine.clock().tick(5000);
-    
+
     expect(component.currentSlide).toBe(2);
     jasmine.clock().tick(5000);
 
