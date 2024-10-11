@@ -19,7 +19,7 @@ class MockConstraintsService {
       { name: 'constraint2', terms: [{ name: 'x1', coef: 2 }, { name: 'x2', coef: 1 }], relation: '>=', rhs: 6 },
     ];
   }
-  convertConstraintToEquation(_constraint: Constraint): (values: Record<string, number>) => number {
+  convertConstraintToEquation(): (values: Record<string, number>) => number {
     return (values: Record<string, number>) => values['x1'] * 1;
   }
 }
