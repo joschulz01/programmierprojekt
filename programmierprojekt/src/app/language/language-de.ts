@@ -105,6 +105,8 @@ export const DE_TRANSLATIONS: Record<string, string> = {
   allfields: "Bitte füllen Sie alle Felder aus",
   optimizationType: "Optimierungstyp",
   maximize: "Maximierung",
-  minimize: "Minimierung"
+  minimize: "Minimierung",
+  error1: "Das Problem muss mit Maximize oder Minimize oder mit Var beginnen",
+  error2: "Bitte geben Sie das Optimierungsproblem ein"
 
 };
