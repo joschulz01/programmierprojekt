@@ -1,17 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomeComponent } from './home.component';
 import { TranslationService } from '../translationservice';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let translationServiceMock: jasmine.SpyObj<TranslationService>;
+  let translationServiceMock: jest.Mocked<TranslationService>;
 
   beforeEach(async () => {
-    translationServiceMock = jasmine.createSpyObj('TranslationService', ['getTranslation', 'switchLanguage']);
-    translationServiceMock.getTranslation.and.callFake((key: string) => {
-      const translations = {
+    // Erstellen eines Mocks für den TranslationService
+    translationServiceMock = {
+      getTranslation: jest.fn(),
+      switchLanguage: jest.fn(),
+      getCurrentLanguage: jest.fn(),
+      getTranslations: jest.fn(),
+      currentLanguage: 'de',
+      translations: {},
+    } as jest.Mocked<TranslationService>;
+
+    translationServiceMock.getTranslation.mockImplementation((key: string) => {
+      const translations: Record<string, string> = {
         welcomeTitle: 'Willkommen',
         introText: 'Einführungstext',
         whyOurTool: 'Warum unser Tool?',
@@ -23,13 +32,13 @@ describe('HomeComponent', () => {
         parameterButton: 'Parameter',
         highsSolverButton: 'Hochs Solver',
       };
-      return translations[key];
+      return translations[key] || key;
     });
 
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [HomeComponent],
-      providers: [{ provide: TranslationService, useValue: translationServiceMock }]
+      providers: [{ provide: TranslationService, useValue: translationServiceMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
@@ -49,20 +58,20 @@ describe('HomeComponent', () => {
 
   // 3. Test the slide show functionality
   it('should automatically transition to the next slide after 5 seconds', (done) => {
-    jasmine.clock().install();
+    jest.useFakeTimers();
     component.startSlideShow();
 
     expect(component.currentSlide).toBe(0);
-    jasmine.clock().tick(5000);
+    jest.advanceTimersByTime(5000);
 
     expect(component.currentSlide).toBe(1);
-    jasmine.clock().tick(5000);
+    jest.advanceTimersByTime(5000);
 
     expect(component.currentSlide).toBe(2);
-    jasmine.clock().tick(5000);
+    jest.advanceTimersByTime(5000);
 
     expect(component.currentSlide).toBe(0);
-    jasmine.clock().uninstall();
+    jest.useRealTimers();
     done();
   });
 

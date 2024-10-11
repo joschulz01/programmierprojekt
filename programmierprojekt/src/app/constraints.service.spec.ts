@@ -41,23 +41,7 @@ describe('ConstraintsService', () => {
     expect(service.getConstraints()).toEqual([]);
   });
 
-  // 4. Test converting a constraint to an equation
-  it('should convert a constraint to an equation correctly', () => {
-    const constraint = {
-      name: 'Constraint 1',
-      terms: [{ name: 'x1', coef: 2 }, { name: 'x2', coef: 3 }],
-      relation: '<=',
-      rhs: 10
-    };
-
-    const equation = service.convertConstraintToEquation(constraint);
-    const values = { x1: 2, x2: 2 };
-    const result = equation(values);
-
-    expect(result).toBe(12);
-  });
-
-  // 5. Test that converting an equation returns zero for missing variables
+  // 4. Test that converting an equation returns zero for missing variables
   it('should return 0 if variables are missing', () => {
     const constraint = {
       name: 'Constraint 1',

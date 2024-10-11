@@ -1,27 +1,34 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MenuComponent } from './menu.component';
 import { TranslationService } from '../translationservice';
-import { Router} from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
-  let translationServiceSpy: jasmine.SpyObj<TranslationService>;
+  let translationServiceMock: jest.Mocked<TranslationService>;
 
   beforeEach(async () => {
-    const translationSpy = jasmine.createSpyObj('TranslationService', ['getTranslation', 'switchLanguage']);
+    // Erstellen eines vollständigen Mocks für den TranslationService
+    const translationSpy = {
+      getTranslation: jest.fn(),
+      switchLanguage: jest.fn(),
+      getTranslations: jest.fn(),
+      getCurrentLanguage: jest.fn(),
+      currentLanguage: 'en',
+      translations: {},
+    } as jest.Mocked<TranslationService>;
 
     await TestBed.configureTestingModule({
-      imports: [Router],  
-      declarations: [MenuComponent],
-      providers: [{ provide: TranslationService, useValue: translationSpy }]
+      imports: [MenuComponent, RouterTestingModule],
+      providers: [{ provide: TranslationService, useValue: translationSpy }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
-    translationServiceSpy = TestBed.inject(TranslationService) as jasmine.SpyObj<TranslationService>;
+    translationServiceMock = TestBed.inject(TranslationService) as jest.Mocked<TranslationService>;
     fixture.detectChanges();
   });
 
@@ -32,7 +39,7 @@ describe('MenuComponent', () => {
 
   // Test 2: Überprüfen, ob die Übersetzungen korrekt abgerufen werden
   it('should display correct menu translations', () => {
-    translationServiceSpy.getTranslation.and.callFake((key: string) => {
+    translationServiceMock.getTranslation.mockImplementation((key: string) => {
       switch (key) {
         case 'menuHome': return 'Home';
         case 'menuHiGHS': return 'HiGHS';
@@ -54,14 +61,14 @@ describe('MenuComponent', () => {
   it('should have correct routerLinks', () => {
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button'));
     expect(buttons[0].attributes['ng-reflect-router-link']).toBe('');
-    expect(buttons[1].attributes['ng-reflect-router-link']).toBe('/highs');   
-    expect(buttons[2].attributes['ng-reflect-router-link']).toBe('/parameter'); 
-    expect(buttons[3].attributes['ng-reflect-router-link']).toBe('/feedback'); 
+    expect(buttons[1].attributes['ng-reflect-router-link']).toBe('/highs');
+    expect(buttons[2].attributes['ng-reflect-router-link']).toBe('/parameter');
+    expect(buttons[3].attributes['ng-reflect-router-link']).toBe('/feedback');
   });
 
   // Test 4: Überprüfen der Sprachwechselmethode
   it('should call switchLanguage when language change is requested', () => {
     component.switchLanguage();
-    expect(translationServiceSpy.switchLanguage).toHaveBeenCalled();
+    expect(translationServiceMock.switchLanguage).toHaveBeenCalled();
   });
 });
