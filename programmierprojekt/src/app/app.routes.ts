@@ -13,31 +13,31 @@ import { ParameterComponent } from './parameter/parameter.component';
 
 export const routes: Routes = [
   {
-    path: '', //or.tool.de
+    path: '',
     component: HomeComponent,
   },
   {
-    path: 'highs', //or-tool.de/highs
+    path: 'highs',
     component: HighsSolverComponent
   },
   {
-    path: 'datenschutz', //or-tool.de/datenschutz
+    path: 'datenschutz',
     component: DatenschutzComponent
   },
   {
-    path: 'impressum', //or-tool.de/impressum
+    path: 'impressum',
     component: ImpressumComponent
   },
   {
-    path: 'about-us', //or-tool.de/ueber-uns
+    path: 'about-us',
     component: AboutUsComponent
   },
   {
-    path: 'feedback', //or-tool.de/feedback
+    path: 'feedback',
     component: FeedbackComponent
   },
   {
-    path: 'parameter', //or-tool.de/parameter
+    path: 'parameter',
     component: ParameterComponent
   } 
 ];
