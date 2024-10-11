@@ -78,10 +78,15 @@ export class HighsSolverComponent {
     const highs_settings = {
       locateFile: (file: string) => `highs/${file}` // Zeigt auf den Ordner, wo die WASM-Datei liegt
     }
-    if (!this.problemInput) {
+    if (!this.problemInput ) {
       this.errorMessage = 'Bitte geben Sie das Optimierungsproblem ein/Please enter the optimization problem';
       return;
   };
+  const trimmedInput = this.problemInput.trim();
+    if (!trimmedInput.startsWith('Maximize') && !trimmedInput.startsWith('Minimize') && !trimmedInput.startsWith('var')) {
+        this.errorMessage = 'Das Problem muss mit "Maximize" oder "Minimize" oder mit "Var" beginnen / The problem must start with "Maximize" or "Minimize" or with "var"';
+        return;
+    }
 
     const preparationStartTime = performance.now();
     const preparationEndTime = performance.now();
