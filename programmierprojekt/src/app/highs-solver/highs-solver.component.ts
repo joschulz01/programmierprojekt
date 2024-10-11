@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import highs, { HighsSolution } from 'highs'; // Importiere HighsSolution
+import highs, { HighsSolution } from 'highs';
 import { ConstraintsService } from '../constraints.service';
 import { UmformungService } from '../umformung.service';
 import { ModelComponent } from '../model/model.component';
 import { TranslationService } from '../translationservice';
 
-// Definition der Interfaces f�r den Resultattyp
 interface Column {
   Name: string;
   Index: number;
   Status: string;
   Lower: number;
   Upper?: number;
-  Primal?: number; // Optional
-  Dual?: number; // Optional
+  Primal?: number; 
+  Dual?: number; 
   Type: string;
 }
 
@@ -23,14 +22,14 @@ interface Row {
   Name: string;
   Index: number;
   Status: string;
-  Lower?: number; // Optional
-  Upper: number; // Muss vorhanden sein
-  Primal?: number; // Optional
-  Dual?: number; // Optional
+  Lower?: number; 
+  Upper: number; 
+  Primal?: number; 
+  Dual?: number; 
 }
 
 interface Result {
-  Columns: Record<string, Column>; // Verwendung von Record anstelle von Indexsignatur
+  Columns: Record<string, Column>; 
   Rows: Row[];
   ObjectiveValue: number;
 }
@@ -42,16 +41,16 @@ interface Result {
   templateUrl: './highs-solver.component.html',
   styleUrls: ['./highs-solver.component.css']
 })
+
 export class HighsSolverComponent {
-  problemInput = '';  // Eingabefeld f�r das Problem, standardm��ig leer
-  solution = '';  // Variable zur Anzeige der L�sung
-  result: Result | null = null; // Verwendung des definierten Result Interfaces
-  selectedFile: File | null = null; // Hier wird die ausgewählte Datei
-  showInfo = false; //Kontrolliert das Anzeigen des Tooltips
+  problemInput = '';  
+  solution = '';  
+  result: Result | null = null; 
+  selectedFile: File | null = null; 
+  showInfo = false;
   elapsedTime: number | null = null;
   preparationTime: number | null = null;
-  errorMessage: string | null = null;  // Fehlernachricht
-
+  errorMessage: string | null = null;
 
   switchLanguage() {
     this.translationService.switchLanguage();
@@ -60,11 +59,8 @@ export class HighsSolverComponent {
   xWert?: number;
   yWert?: number;
 
-
-
   constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
-
-  // Methode zur L�sung des Benutzerproblems
+  
   async solveProblem(): Promise<void> {
     this.errorMessage = ''
     this.solution = '';
@@ -74,9 +70,9 @@ export class HighsSolverComponent {
 
     const LP = this.umformungService.umformen(this.problemInput);
     const LP_neu=this.umformungService.umformenxy(this.problemInput);
-    // Initialisiere den HiGHS Solver und passe locateFile an
+ 
     const highs_settings = {
-      locateFile: (file: string) => `highs/${file}` // Zeigt auf den Ordner, wo die WASM-Datei liegt
+      locateFile: (file: string) => `highs/${file}` 
     }
     if (!this.problemInput ) {
       this.errorMessage = this.translationService.getTranslation('error2');
@@ -91,45 +87,34 @@ export class HighsSolverComponent {
     const preparationStartTime = performance.now();
     const preparationEndTime = performance.now();
     this.preparationTime = preparationEndTime - preparationStartTime;
-
     const startTime = performance.now();
 
     try {
-      // HiGHS-Solver mit den definierten Einstellungen laden
       const highsSolver = await highs(highs_settings);
-      let highsResult: HighsSolution; // Typ f�r das HiGHS-Ergebnis festlegen
-
-      // L�sen des vom Benutzer eingegebenen Problems
+      let highsResult: HighsSolution; 
       let constraints;
       try {
-        highsResult = await highsSolver.solve(this.problemInput); // Async-Funktion aufrufen
+        highsResult = await highsSolver.solve(this.problemInput); 
         constraints = this.extractConstraints(this.problemInput);
       } catch (error) {
         console.log('Fehler beim L�sen des Problems:', error, "\nMit umgeformtem Input");
-        highsResult = await highsSolver.solve(LP); // Async-Funktion aufrufen
+        highsResult = await highsSolver.solve(LP); 
         constraints = this.extractConstraints(LP_neu);
       }
 
-      // Konvertiere das HiGHS-Ergebnis in dein Result-Format
       this.result = this.convertToResult(highsResult);
-
-      // F�ge die Constraints in den ConstraintsService hinzu
       this.constraintsService.setConstraints(constraints);
-      this.constraintsService.constraintsUpdated.next();
-
-      // Ergebnis als JSON speichern und anzeigen
+      this.constraintsService.constraintsUpdated.next()
       this.solution = JSON.stringify(this.result, null, 2);
 
- // Laufzeitanalyse
- const endTime = performance.now(); // Endzeit für die Laufzeitanalyse
- this.elapsedTime = endTime - startTime; // Berechne die Laufzeit
+      // Laufzeitanalyse
+      const endTime = performance.now();
+      this.elapsedTime = endTime - startTime; 
 
-      // Werte f�r x und y ermitteln
       this.WerteErmitteln(this.result);
     } catch (error) {
-      // Fehlerbehandlung
-      console.error('Fehler beim L�sen des Problems:', error);
-      this.solution = 'Fehler beim L�sen des Problems: ' + error;
+      console.error('Fehler beim Lösen des Problems:', error);
+      this.solution = 'Fehler beim Lösen des Problems: ' + error;
     }
   }
 
@@ -143,10 +128,10 @@ export class HighsSolverComponent {
             Name: name,
             Index: column.Index,
             Status: column.Status,
-            Lower: column.Lower ?? 0, // Setze einen Standardwert, falls null
-            Upper: column.Upper ?? Infinity, // Setze einen Standardwert, falls null
-            Primal: column.Primal ?? undefined, // Setze auf undefined, wenn null
-            Dual: column.Dual ?? undefined, // Setze auf undefined, wenn null
+            Lower: column.Lower ?? 0, 
+            Upper: column.Upper ?? Infinity, 
+            Primal: column.Primal ?? undefined, 
+            Dual: column.Dual ?? undefined, 
             Type: column.Type,
         };
     }
@@ -154,16 +139,14 @@ export class HighsSolverComponent {
     // Verarbeitung der Zeilen
     for (const row of highsResult.Rows) {
         const newRow: Row = {
-            Name: `Row ${row.Index}`, // Standardname verwenden
+            Name: `Row ${row.Index}`, 
             Index: row.Index,
-            Status: 'Status' in row ? row.Status : 'Unknown', // Setze auf 'Unknown' wenn Status nicht existiert
-            Lower: row.Lower ?? 0, // Setze einen Standardwert, falls null
-            Upper: row.Upper ?? Infinity, // Setze einen Standardwert, falls null
-            Primal: undefined, // Setze auf undefined, weil nicht immer verf�gbar
-            Dual: undefined, // Setze auf undefined, weil nicht immer verf�gbar
+            Status: 'Status' in row ? row.Status : 'Unknown', 
+            Lower: row.Lower ?? 0, 
+            Upper: row.Upper ?? Infinity, 
+            Primal: undefined, 
+            Dual: undefined, 
         };
-
-        // �berpr�fung auf die Existenz von Primal und Dual
         if ('Primal' in row) {
             newRow.Primal = row.Primal;
         }
@@ -181,18 +164,15 @@ export class HighsSolverComponent {
     };
 }
 
-
-
-
-  WerteErmitteln(result: Result) { // Typ f�r result festlegen
+  WerteErmitteln(result: Result) { 
     const VariableX = result.Columns['x'] || result.Columns['x1'];
     if (VariableX && 'Primal' in VariableX) {
-      this.xWert = VariableX.Primal; // Setze den Wert f�r xWert
+      this.xWert = VariableX.Primal;
     }
 
     const VariableY = result.Columns['y'] || result.Columns['x2'];
     if (VariableY && 'Primal' in VariableY) {
-      this.yWert = VariableY.Primal; // Setze den Wert f�r yWert
+      this.yWert = VariableY.Primal; 
     }
   }
 

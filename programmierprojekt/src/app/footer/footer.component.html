@@ -1,12 +1,21 @@
 <footer>
   <div class="footer-container">
+    <!-- Button für den Link zur Datenschutzseite -->
+    <!-- Verwendet Angulars RouterLink, um den Benutzer zur Datenschutzseite zu navigieren -->
     <button id="datenschutz" class="footer-button" routerLink="/datenschutz">
+      <!-- Übersetzter Text für 'Datenschutz' mittels TranslationService -->
       {{ translationService.getTranslation('footerDatenschutz') }}
     </button>
+    <!-- Button für den Link zum Impressum -->
+    <!-- Navigiert zur Impressumsseite mit Angular RouterLink -->
     <button id="impressum" class="footer-button" routerLink="/impressum">
+      <!-- Übersetzter Text für 'Impressum' mittels TranslationService -->
       {{ translationService.getTranslation('footerImpressum') }}
     </button>
+     <!-- Button für den Link zur 'Über uns'-Seite -->
+    <!-- Navigiert zur 'Über uns'-Seite mit Angular RouterLink -->
     <button id="ueberUns" class="footer-button" routerLink="/about-us">
+      <!-- Übersetzter Text für 'Über Uns' mittels TranslationService -->
       {{ translationService.getTranslation('footerUeberUns') }}
     </button>
   </div>
