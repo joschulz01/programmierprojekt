@@ -1,4 +1,3 @@
-/* Container Styling */
 .container {
     max-width: 800px; /* Container Breite */
     margin: 0 auto;
@@ -7,7 +6,7 @@
     flex-direction: column; /* Elemente in einer Spalte anordnen */
     gap: 15px; /* Abstand zwischen den Elementen */
     min-height: calc(100vh - [Footer-Höhe]); /* Fußzeile abziehen, um Platz zu schaffen */
-  padding-bottom: [Footer-Höhe]; /* Platz für den Footer schaffen */
+  padding-bottom: [Footer-Höhe]; 
 }
 
 /* Überschrift */
@@ -24,10 +23,10 @@ h1 {
 h1::after {
     content: '';
     display: block;
-    width: 60px; /* Breite der Linie unter dem H1 */
-    height: 4px; /* Höhe der Linie */
-    background-color: #708090; /* Farbe der Linie */
-    margin: 0.25rem auto; /* Abstand um die Linie (z.B. 15px oben und unten) */
+    width: 60px; 
+    height: 4px;
+    background-color: #708090; 
+    margin: 0.25rem auto;
 }
 
 form {
@@ -36,7 +35,7 @@ form {
 }
 
 form button {
-    align-self: flex-end; /* Platziert den Button rechts */
+    align-self: flex-end; 
     padding: 10px 20px;
     background-color: #708090;
     color: white;

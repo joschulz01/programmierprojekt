@@ -23,9 +23,7 @@
   <div>
     <button id="importFile" (click)="importFile()">{{ translationService.getTranslation('importFile') }}</button>
   </div>
-
   <textarea id="problemInput" [(ngModel)]="problemInput" placeholder="{{ translationService.getTranslation('inputPlaceholder') }}" rows="10" cols="50"></textarea>
-
   <br>
   <button id="problemSolve" (click)="solveProblem()">{{ translationService.getTranslation('solveProblem') }}</button>
 
@@ -67,11 +65,9 @@
     <p>{{ result.ObjectiveValue }}</p>
 
     <!-- Laufzeitanalyse -->
- <h3>{{ translationService.getTranslation('runtimeanalysis') }}</h3>
- <p>{{ translationService.getTranslation('elapsedtime') }} {{ elapsedTime | number: '1.0-2' }} ms</p>
- <p>{{ translationService.getTranslation('preparationtime') }} {{ preparationTime | number: '1.0-2' }} ms</p>
-
-
+    <h3>{{ translationService.getTranslation('runtimeanalysis') }}</h3>
+    <p>{{ translationService.getTranslation('elapsedtime') }} {{ elapsedTime | number: '1.0-2' }} ms</p>
+    <p>{{ translationService.getTranslation('preparationtime') }} {{ preparationTime | number: '1.0-2' }} ms</p>
     <app-model *ngIf="isValidInput()" [xWert]="xWert" [yWert]="yWert"></app-model>
   </div>
 </div>
@@ -88,6 +84,3 @@
       {{ translationService.getTranslation('exportLP') }}
   </button>
 </div>
-
-
- 
