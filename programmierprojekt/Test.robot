@@ -131,7 +131,6 @@ Lösung Prüfen
     ${primal_value1}=    Get Text    xpath=//td[@id='tabelle_primal_1']
     Should Be Equal As Numbers    ${primal_value0}    5
     Should Be Equal As Numbers    ${primal_value1}    5
-    Click    id=export_MPS
     Click    id=export_LP
 
 Menüleiste Prüfen

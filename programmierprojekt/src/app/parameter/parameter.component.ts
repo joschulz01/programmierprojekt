@@ -330,14 +330,6 @@ export class ParameterComponent {
     this.downloadFile(lpData, 'model.lp', 'text/plain');
   }
 
-  downloadMPS() {
-    if (!this.problemInput) {
-      this.buildProblemInput();
-    }
-    const mpsData = this.problemInput;
-    this.downloadFile(mpsData, 'model.mps', 'text/plain');
-  }
-
   private downloadFile(data: string, filename: string, type: string) {
     const blob = new Blob([data], { type: type });
     const a = document.createElement('a');
