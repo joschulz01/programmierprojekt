@@ -10,6 +10,7 @@ The HiGHS Solver was integrated into the Single Page Application (SPA) to solve 
 - [@Fabiennepri](https://github.com/Fabiennepri)
 - [@NadineArning](https://github.com/NadineArning)
 - [@Christianvoss2002](https://github.com/Christianvoss2002)
+- [@mina-kut](https://github.com/mina-kut)
 
 ## Demo
 
