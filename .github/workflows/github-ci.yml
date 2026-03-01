@@ -33,7 +33,7 @@ jobs:
 
       # Install Dependencies
       - name: Install Dependencies
-        run: npm install -g @angular/cli@18
+        run: npm install -g @angular/cli@19
 
       # Stage: Linting
       - name: Install ESLint
@@ -100,7 +100,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          npm install -g @angular/cli@18
+          npm install -g @angular/cli@19
           npm install jest jest-preset-angular @types/jest ts-jest
 
       # Stage: Run unit test
@@ -143,7 +143,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          npm install -g @angular/cli@18
+          npm install -g @angular/cli@19
           sudo apt-get install python3-tk
 
       # Stage: Serve localhost
