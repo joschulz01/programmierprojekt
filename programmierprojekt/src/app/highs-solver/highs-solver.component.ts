@@ -35,11 +35,10 @@ interface Result {
 }
 
 @Component({
-  selector: 'app-highs-solver',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ModelComponent],
-  templateUrl: './highs-solver.component.html',
-  styleUrls: ['./highs-solver.component.css']
+    selector: 'app-highs-solver',
+    imports: [CommonModule, FormsModule, ModelComponent],
+    templateUrl: './highs-solver.component.html',
+    styleUrls: ['./highs-solver.component.css']
 })
 export class HighsSolverComponent {
   problemInput = '';

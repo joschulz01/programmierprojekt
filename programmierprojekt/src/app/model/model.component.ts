@@ -20,7 +20,7 @@ interface ChartDataPoint {
   templateUrl: './model.component.html',
   styleUrls: ['./model.component.css'],
 })
-export class ModelComponent implements OnInit { 
+export class ModelComponent implements OnInit {
   @Input() xWert?: number;
   @Input() yWert?: number;
   constraints!: Constraint[];
@@ -30,21 +30,21 @@ export class ModelComponent implements OnInit {
 
   ngOnInit() {
     Chart.register(LineController, LinearScale, Title, PointElement, LineElement, Filler);
-    
+
     this.constraintsService.constraintsUpdated.subscribe(() => this.onSolve());
-    
+
     this.onSolve();
   }
 
   checkInputCount(): boolean {
     const inputs = [this.xWert, this.yWert];
     const definedInputs = inputs.filter(input => input !== undefined);
-    
+
     if (definedInputs.length > 2) {
       console.error('Mehr als 2 Eingabewerte �bergeben.');
       return false;
     }
-    
+
     return true;
   }
 
@@ -107,25 +107,25 @@ export class ModelComponent implements OnInit {
       return {
         label: constraint.name,
         data: constraintData,
-        borderColor: 'rgba(75, 192, 192, 1)', 
+        borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderWidth: 1,
         pointRadius: 0,
       };
     });
 
-    const xValues = datasets.flatMap(dataset => 
+    const xValues = datasets.flatMap(dataset =>
       dataset.data.map(point => {
-        if (point) { 
+        if (point) {
           return (point as ChartDataPoint).x;
         }
         return 0;
       })
     );
 
-    const yValues = datasets.flatMap(dataset => 
+    const yValues = datasets.flatMap(dataset =>
       dataset.data.map(point => {
-        if (point) { 
+        if (point) {
           return (point as ChartDataPoint).y;
         }
         return 0;
@@ -136,15 +136,15 @@ export class ModelComponent implements OnInit {
     const xMax = Math.max(10, Math.max(...xValues));
     const yMin = Math.min(0, Math.min(...yValues));
     const yMax = Math.max(10, Math.max(...yValues));
-    
+
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
         datasets: [
           {
             label: 'Maximal/Minimal Punkt',
-            data: this.xWert !== undefined && this.yWert !== undefined 
-              ? [{ x: this.xWert, y: this.yWert }] 
+            data: this.xWert !== undefined && this.yWert !== undefined
+              ? [{ x: this.xWert, y: this.yWert }]
               : [],
             borderColor: 'rgba(255, 0, 0, 1)',
             fill: false,

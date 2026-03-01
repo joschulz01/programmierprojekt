@@ -5,11 +5,10 @@ import { MENU_ITEMS } from "../menu-items";
 import { TranslationService } from '../translationservice';
 
 @Component({
-  selector: 'app-menu',
-  standalone: true,
-  imports: [RouterLink],
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css'
+    selector: 'app-menu',
+    imports: [RouterLink],
+    templateUrl: './menu.component.html',
+    styleUrl: './menu.component.css'
 })
 export class MenuComponent {
   Menu1 = MENU_ITEMS[0]

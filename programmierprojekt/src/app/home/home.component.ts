@@ -5,11 +5,10 @@ import { CommonModule } from '@angular/common';
 
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [RouterLink, CommonModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    selector: 'app-home',
+    imports: [RouterLink, CommonModule],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
 
   export class HomeComponent implements OnInit, OnDestroy {

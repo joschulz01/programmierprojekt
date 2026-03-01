@@ -35,11 +35,10 @@ interface Result {
 }
 
 @Component({
-  selector: 'app-highs-solver',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ModelComponent],
-  templateUrl: './parameter.component.html',
-  styleUrls: ['./parameter.component.css']
+    selector: 'app-highs-solver',
+    imports: [CommonModule, FormsModule, ModelComponent],
+    templateUrl: './parameter.component.html',
+    styleUrls: ['./parameter.component.css']
 })
 
 export class ParameterComponent {
