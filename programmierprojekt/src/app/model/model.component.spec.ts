@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModelComponent } from './model.component';
 
-// mock ResizeObserver for Jest / Node environment
-global.ResizeObserver = class {
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+window.ResizeObserver = class {
   observe() {}
   unobserve() {}
   disconnect() {}

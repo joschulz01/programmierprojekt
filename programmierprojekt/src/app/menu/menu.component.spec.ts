@@ -1,5 +1,5 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { MenuComponent } from './Menu.component';
+import { MenuComponent } from './menu.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MenuComponent', () => {
