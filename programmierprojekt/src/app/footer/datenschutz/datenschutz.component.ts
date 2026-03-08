@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslationService } from '../../translationservice';
 
 @Component({
-  selector: 'app-datenschutz',
-  standalone: true,
-  imports: [],
-  templateUrl: './datenschutz.component.html',
-  styleUrl: './datenschutz.component.css'
+    selector: 'app-datenschutz',
+    imports: [],
+    templateUrl: './datenschutz.component.html',
+    styleUrl: './datenschutz.component.css'
 })
 export class DatenschutzComponent {
-  constructor(public translationService: TranslationService) {}
+  translationService = inject(TranslationService);
 
   switchLanguage() {
     this.translationService.switchLanguage();

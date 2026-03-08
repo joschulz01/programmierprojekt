@@ -1,21 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslationService } from '../translationservice';
 import { CommonModule } from '@angular/common';
 
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [RouterLink, CommonModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    selector: 'app-home',
+    imports: [RouterLink, CommonModule],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
 
   export class HomeComponent implements OnInit, OnDestroy {
+    translationService = inject(TranslationService);
+
     public currentSlide = 0;
     private slideInterval: number | undefined;
-  
+
     public values = [
       {
         title: "Intuitive Benutzeroberfläche",
@@ -29,9 +30,7 @@ import { CommonModule } from '@angular/common';
         title: "Praxiserfahrung",
         description: "Übertragen Sie Ihr theoretisches Wissen in echte Anwendungen und entwickeln Sie Fähigkeiten, die Ihnen im Berufsleben helfen."
       }
-    ];  
-
-  constructor(public translationService: TranslationService) {}
+    ];
 
   ngOnInit(): void {
     this.startSlideShow();

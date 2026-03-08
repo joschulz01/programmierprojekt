@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ConstraintsService } from '../constraints.service';
@@ -35,14 +35,17 @@ interface Result {
 }
 
 @Component({
-  selector: 'app-highs-solver',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ModelComponent],
-  templateUrl: './parameter.component.html',
-  styleUrls: ['./parameter.component.css']
+    selector: 'app-highs-solver',
+    imports: [CommonModule, FormsModule, ModelComponent],
+    templateUrl: './parameter.component.html',
+    styleUrls: ['./parameter.component.css']
 })
 
-export class ParameterComponent {
+export class ParameterComponent implements OnInit {
+  private constraintsService = inject(ConstraintsService);
+  private umformungService = inject(UmformungService);
+  translationService = inject(TranslationService);
+
 
   errorMessage: string | null = null;
   numVariables = 0;
@@ -61,8 +64,6 @@ export class ParameterComponent {
 
   xWert?: number;
   yWert?: number;
-
-  constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
 
   ngOnInit(): void {
     if (this.variables.length === 0) {

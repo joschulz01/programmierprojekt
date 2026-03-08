@@ -1,43 +1,47 @@
 <div class="container">
-    <h1 class="page-title">{{ translationService.getTranslation('welcomeTitle') }}</h1>
-    <p class="intro-text">{{ translationService.getTranslation('introText') }}</p>
+  <h1 class="page-title">{{ translationService.getTranslation('welcomeTitle') }}</h1>
+  <p class="intro-text">{{ translationService.getTranslation('introText') }}</p>
 
-    <h2>{{ translationService.getTranslation('whyOurTool') }}</h2>
-    <p>{{ translationService.getTranslation('whyOurToolDescription1') }}</p>
-    <p>{{ translationService.getTranslation('whyOurToolDescription2') }}</p>
-    <p>{{ translationService.getTranslation('whyOurToolDescription3') }}</p>
+  <h2>{{ translationService.getTranslation('whyOurTool') }}</h2>
+  <p>{{ translationService.getTranslation('whyOurToolDescription1') }}</p>
+  <p>{{ translationService.getTranslation('whyOurToolDescription2') }}</p>
+  <p>{{ translationService.getTranslation('whyOurToolDescription3') }}</p>
 
-    <h2>{{ translationService.getTranslation('ourCoreValues') }}</h2>
-    <p>{{ translationService.getTranslation('ourCoreValuesDescription') }}</p>
+  <h2>{{ translationService.getTranslation('ourCoreValues') }}</h2>
+  <p>{{ translationService.getTranslation('ourCoreValuesDescription') }}</p>
 
-    <div class="slider-container">
-        <!-- Slide-Boxen -->
-        <div class="value-box" *ngFor="let value of values; let i = index" [ngClass]="{'active': currentSlide === i}">
-          <h3>{{ value.title }}</h3>
-          <p>{{ value.description }}</p>
-        </div>
+  <div class="slider-container">
+    <!-- Slide-Boxen -->
+    @for (value of values; track value; let i = $index) {
+      <div class="value-box" [ngClass]="{'active': currentSlide === i}">
+        <h3>{{ value.title }}</h3>
+        <p>{{ value.description }}</p>
       </div>
-  
+    }
+  </div>
+
   <div class="dot-container">
-    <span *ngFor="let value of values; let i = index"
+    @for (value of values; track value; let i = $index) {
+      <span
         class="dot"
         [ngClass]="{'active': currentSlide === i}"
         (click)="goToSlide(i)"
         (keydown.enter)="goToSlide(i)"
         tabindex="0"
         role="button"
-        [attr.aria-label]="'Go to slide ' + (i + 1)"> 
-    </span>
-  </div>   
+        [attr.aria-label]="'Go to slide ' + (i + 1)">
+      </span>
+    }
+  </div>
 
-<div class="container">
+  <div class="container">
     <section class="cta-section">
-        <h2>{{ translationService.getTranslation('ctaTitle') }}</h2>
-        <p>{{ translationService.getTranslation('ctaDescription') }}</p>
-        <div class="button-container">
-            <button class="cta-button" routerLink="/parameter">{{ translationService.getTranslation('parameterButton') }}</button>
-            <button class="cta-button" routerLink="/highs">{{ translationService.getTranslation('highsSolverButton') }}</button>
-        </div>
+      <h2>{{ translationService.getTranslation('ctaTitle') }}</h2>
+      <p>{{ translationService.getTranslation('ctaDescription') }}</p>
+      <div class="button-container">
+        <button class="cta-button" routerLink="/parameter">{{ translationService.getTranslation('parameterButton') }}</button>
+        <button class="cta-button" routerLink="/highs">{{ translationService.getTranslation('highsSolverButton') }}</button>
+      </div>
     </section>
-</div> 
+  </div>
 
