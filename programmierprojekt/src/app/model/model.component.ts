@@ -28,10 +28,6 @@ export class ModelComponent implements OnInit {
   constraints!: Constraint[];
   chart!: Chart;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 
   ngOnInit() {
     Chart.register(LineController, LinearScale, Title, PointElement, LineElement, Filler);

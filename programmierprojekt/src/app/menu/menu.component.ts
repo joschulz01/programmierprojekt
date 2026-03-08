@@ -18,11 +18,6 @@ export class MenuComponent {
   Menu3 = MENU_ITEMS[2]
   Menu4 = MENU_ITEMS[3]
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   switchLanguage() {
     this.translationService.switchLanguage();
   }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ConstraintsService } from '../constraints.service';
@@ -41,7 +41,7 @@ interface Result {
     styleUrls: ['./parameter.component.css']
 })
 
-export class ParameterComponent {
+export class ParameterComponent implements OnInit {
   private constraintsService = inject(ConstraintsService);
   private umformungService = inject(UmformungService);
   translationService = inject(TranslationService);
@@ -64,11 +64,6 @@ export class ParameterComponent {
 
   xWert?: number;
   yWert?: number;
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 
   ngOnInit(): void {
     if (this.variables.length === 0) {

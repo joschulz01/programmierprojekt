@@ -61,11 +61,6 @@ export class HighsSolverComponent {
   xWert?: number;
   yWert?: number;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   async solveProblem(): Promise<void> {
     this.errorMessage = ''
     this.solution = '';

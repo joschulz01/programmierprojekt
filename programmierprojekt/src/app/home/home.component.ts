@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 
     public currentSlide = 0;
     private slideInterval: number | undefined;
-  
+
     public values = [
       {
         title: "Intuitive Benutzeroberfläche",
@@ -31,11 +31,6 @@ import { CommonModule } from '@angular/common';
         description: "Übertragen Sie Ihr theoretisches Wissen in echte Anwendungen und entwickeln Sie Fähigkeiten, die Ihnen im Berufsleben helfen."
       }
     ];
-
-    /** Inserted by Angular inject() migration for backwards compatibility */
-    constructor(...args: unknown[]);  
-
-  constructor() {}
 
   ngOnInit(): void {
     this.startSlideShow();
