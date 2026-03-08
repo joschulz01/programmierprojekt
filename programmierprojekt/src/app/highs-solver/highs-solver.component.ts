@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import highs, { HighsSolution } from 'highs';
@@ -41,6 +41,10 @@ interface Result {
     styleUrls: ['./highs-solver.component.css']
 })
 export class HighsSolverComponent {
+  private constraintsService = inject(ConstraintsService);
+  private umformungService = inject(UmformungService);
+  translationService = inject(TranslationService);
+
   problemInput = '';
   solution = '';
   result: Result | null = null;
@@ -57,7 +61,10 @@ export class HighsSolverComponent {
   xWert?: number;
   yWert?: number;
 
-  constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   async solveProblem(): Promise<void> {
     this.errorMessage = ''

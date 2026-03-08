@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router'
 import { TranslationService } from '../translationservice';
 
@@ -9,7 +9,12 @@ import { TranslationService } from '../translationservice';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(public translationService: TranslationService) {}
+  translationService = inject(TranslationService);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   switchLanguage() {
     this.translationService.switchLanguage();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ConstraintsService } from '../constraints.service';
@@ -42,6 +42,10 @@ interface Result {
 })
 
 export class ParameterComponent {
+  private constraintsService = inject(ConstraintsService);
+  private umformungService = inject(UmformungService);
+  translationService = inject(TranslationService);
+
 
   errorMessage: string | null = null;
   numVariables = 0;
@@ -61,7 +65,10 @@ export class ParameterComponent {
   xWert?: number;
   yWert?: number;
 
-  constructor(private constraintsService: ConstraintsService, private umformungService: UmformungService, public translationService: TranslationService) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     if (this.variables.length === 0) {

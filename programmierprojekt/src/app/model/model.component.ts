@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { Chart, LinearScale, Title, PointElement, LineElement, Filler, LineController, ChartDataset } from 'chart.js';
 import { ConstraintsService } from '../constraints.service';
 
@@ -21,12 +21,17 @@ interface ChartDataPoint {
   styleUrls: ['./model.component.css'],
 })
 export class ModelComponent implements OnInit {
+  private constraintsService = inject(ConstraintsService);
+
   @Input() xWert?: number;
   @Input() yWert?: number;
   constraints!: Constraint[];
   chart!: Chart;
 
-  constructor(private constraintsService: ConstraintsService) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit() {
     Chart.register(LineController, LinearScale, Title, PointElement, LineElement, Filler);

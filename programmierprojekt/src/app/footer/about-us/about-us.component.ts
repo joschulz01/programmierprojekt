@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslationService } from '../../translationservice';
 
 @Component({
@@ -8,7 +8,12 @@ import { TranslationService } from '../../translationservice';
     styleUrl: './about-us.component.css'
 })
 export class AboutUsComponent {
-  constructor(public translationService: TranslationService) {}
+  translationService = inject(TranslationService);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   switchLanguage() {
     this.translationService.switchLanguage();

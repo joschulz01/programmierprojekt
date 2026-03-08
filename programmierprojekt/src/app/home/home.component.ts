@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslationService } from '../translationservice';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 })
 
   export class HomeComponent implements OnInit, OnDestroy {
+    translationService = inject(TranslationService);
+
     public currentSlide = 0;
     private slideInterval: number | undefined;
   
@@ -28,9 +30,12 @@ import { CommonModule } from '@angular/common';
         title: "Praxiserfahrung",
         description: "Übertragen Sie Ihr theoretisches Wissen in echte Anwendungen und entwickeln Sie Fähigkeiten, die Ihnen im Berufsleben helfen."
       }
-    ];  
+    ];
 
-  constructor(public translationService: TranslationService) {}
+    /** Inserted by Angular inject() migration for backwards compatibility */
+    constructor(...args: unknown[]);  
+
+  constructor() {}
 
   ngOnInit(): void {
     this.startSlideShow();
